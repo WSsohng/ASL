@@ -91,19 +91,39 @@ updateSpectralFx();
 const researchWrap = document.querySelector("#researchCards");
 if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
   const cards = [...researchWrap.querySelectorAll(".research-card")];
+  const setActiveProfile = (xRatio) => {
+    const sigma = 0.17;
+    let peakIndex = 0;
+    let peakWeight = -1;
+
+    cards.forEach((card, index) => {
+      const center = (index + 0.5) / cards.length;
+      const distance = xRatio - center;
+      const weight = Math.exp(-(distance * distance) / (2 * sigma * sigma));
+      const grow = 1 + weight * 2.4;
+      card.style.flexGrow = grow.toFixed(3);
+      if (weight > peakWeight) {
+        peakWeight = weight;
+        peakIndex = index;
+      }
+    });
+
+    cards.forEach((card, index) => {
+      card.classList.toggle("is-active", index === peakIndex);
+    });
+  };
+
+  setActiveProfile(0.12);
+
   researchWrap.addEventListener("mousemove", (event) => {
     const rect = researchWrap.getBoundingClientRect();
     const px = (event.clientX - rect.left) / rect.width;
-    const py = (event.clientY - rect.top) / rect.height;
-    cards.forEach((card) => {
-      const depth = Number(card.dataset.depth || "1");
-      const rotateY = (px - 0.5) * 10 * depth;
-      const rotateX = (0.5 - py) * 8 * depth;
-      const translateY = (0.5 - py) * 6 * depth;
-      card.style.transform = `translateY(${translateY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
+    const clampedX = Math.min(Math.max(px, 0.02), 0.98);
+    setActiveProfile(clampedX);
   });
+
   researchWrap.addEventListener("mouseleave", () => {
+    setActiveProfile(0.12);
     cards.forEach((card) => {
       card.style.transform = "";
     });
