@@ -1888,7 +1888,7 @@
       "authors": "Hyang Kim, Seongsoo Jeong, Hoeil Chung*, Sang-Ho Nam**, Yonghoon Lee**",
       "pdf": "./assets/pdfs/2023/file1688605252.pdf",
       "images": [
-        "https://ars.els-cdn.com/content/image/1-s2.0-S0889157523003757-gr1.jpg"
+        "./assets/publications/2023/els_S0889157523003757_gr1.jpg"
       ],
       "authors_marked": "Hyang Kim, Seongsoo Jeong, Hoeil Chung*, Sang-Ho Nam **, Yonghoon Lee **"
     },
@@ -1938,7 +1938,7 @@
       "authors": "Seongsoo Jeong, Daun Seol, Hyang Kim, Yonghoon Lee, Sang-Ho Nam*, Jae-Min An, Hoeil Chung*",
       "pdf": "./assets/pdfs/2023/file1661330588.pdf",
       "images": [
-        "https://ars.els-cdn.com/content/image/1-s2.0-S0308814622019185-gr1.jpg"
+        "./assets/publications/2023/els_S0308814622019185_gr1.jpg"
       ],
       "authors_marked": "Seongsoo Jeong, Daun Seol, Hyang Kim, Yonghoon Lee, Sang-Ho Nam*, Jae-Min An, Hoeil Chung*"
     }
