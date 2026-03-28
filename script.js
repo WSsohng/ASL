@@ -68,14 +68,15 @@ const updateSpectralFx = () => {
   });
 
   const trailProgress = Math.min(Math.max((easedProgress - 0.015) / 0.97, 0), 1);
-  const dispersionProgress = Math.min(Math.max((trailProgress - 0.14) / 0.82, 0), 1);
-  const dispersionAlpha = Math.min(Math.max((trailProgress - 0.18) / 0.2, 0), 1);
+  const splitProgress = trailProgress;
+  const diffractionProgress = Math.min(Math.max((trailProgress - 0.22) / 0.72, 0), 1);
+  const diffractionAlpha = Math.min(Math.max((trailProgress - 0.24) / 0.2, 0), 1);
   const intensity = Math.min(1, 0.18 + sectionBoost * 0.82 + easedProgress * 0.15);
 
   root.style.setProperty("--scroll-p", progress.toFixed(4));
-  root.style.setProperty("--trail-p", trailProgress.toFixed(4));
-  root.style.setProperty("--disp-p", dispersionProgress.toFixed(4));
-  root.style.setProperty("--disp-alpha", dispersionAlpha.toFixed(4));
+  root.style.setProperty("--split-p", splitProgress.toFixed(4));
+  root.style.setProperty("--diff-p", diffractionProgress.toFixed(4));
+  root.style.setProperty("--diff-alpha", diffractionAlpha.toFixed(4));
   root.style.setProperty("--section-boost", intensity.toFixed(3));
 };
 
