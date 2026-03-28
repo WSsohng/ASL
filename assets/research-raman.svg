@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" fill="none">
+  <rect width="800" height="420" fill="#0F1320"/>
+  <rect x="36" y="36" width="728" height="348" stroke="#2F364B" stroke-width="2"/>
+  <line x1="92" y1="308" x2="708" y2="308" stroke="#526089" stroke-width="2"/>
+  <line x1="92" y1="102" x2="92" y2="308" stroke="#526089" stroke-width="2"/>
+  <path d="M110 292C140 286 166 184 198 178C230 172 258 280 294 276C330 272 348 138 382 134C416 130 438 248 474 244C510 240 530 162 562 158C594 154 620 224 650 220" stroke="#BFD1FF" stroke-width="4"/>
+  <circle cx="198" cy="178" r="7" fill="#BFD1FF"/>
+  <circle cx="382" cy="134" r="7" fill="#BFD1FF"/>
+  <circle cx="562" cy="158" r="7" fill="#BFD1FF"/>
+  <text x="98" y="84" fill="#CED6F3" font-family="Arial, sans-serif" font-size="22">Raman Shift vs Intensity</text>
+  <text x="620" y="336" fill="#8F9BC0" font-family="Arial, sans-serif" font-size="16">cm⁻¹</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" fill="none">
+  <rect width="800" height="420" fill="#0E1422"/>
+  <rect x="44" y="44" width="712" height="332" stroke="#303A54" stroke-width="2"/>
+  <rect x="92" y="134" width="140" height="170" rx="8" fill="#202A41"/>
+  <rect x="570" y="118" width="140" height="186" rx="8" fill="#202A41"/>
+  <rect x="326" y="154" width="140" height="126" rx="8" fill="#27324B"/>
+  <path d="M232 220H326" stroke="#AFC2FF" stroke-width="4"/>
+  <path d="M466 220H570" stroke="#AFC2FF" stroke-width="4"/>
+  <polygon points="310,208 326,220 310,232" fill="#AFC2FF"/>
+  <polygon points="554,208 570,220 554,232" fill="#AFC2FF"/>
+  <text x="106" y="200" fill="#D6DDF6" font-family="Arial, sans-serif" font-size="20">Sample</text>
+  <text x="352" y="214" fill="#D6DDF6" font-family="Arial, sans-serif" font-size="20">NIR</text>
+  <text x="594" y="200" fill="#D6DDF6" font-family="Arial, sans-serif" font-size="20">Model</text>
+  <text x="106" y="86" fill="#CED6F3" font-family="Arial, sans-serif" font-size="22">Non-destructive Quantitative Workflow</text>
+</svg>
