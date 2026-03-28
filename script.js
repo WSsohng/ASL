@@ -183,7 +183,6 @@ if (memberCarousel) {
   const profHIndexEl = document.getElementById("profHIndex");
   const profWorksEl = document.getElementById("profWorks");
   const profCitationsEl = document.getElementById("profCitations");
-  const profChartEl = document.getElementById("profPublicationChart");
 
   const esc = (value = "") =>
     String(value)
@@ -192,6 +191,7 @@ if (memberCarousel) {
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#39;");
+  const fmt = (v) => (Number.isFinite(Number(v)) ? Number(v).toLocaleString() : v);
   const normalizeName = (s = "") =>
     String(s)
       .toLowerCase()
@@ -305,52 +305,6 @@ if (memberCarousel) {
     }
   };
 
-  const drawProfessorPublicationChart = () => {
-    if (!profChartEl || !publicationData || !publicationData["1995-1999"]) return;
-    const ctx = profChartEl.getContext("2d");
-    if (!ctx) return;
-
-    const years = Object.keys(publicationData)
-      .filter((y) => y !== "1995-1999")
-      .sort((a, b) => Number(a) - Number(b));
-    const counts = years.map((y) => (publicationData[y] || []).length);
-    if (!years.length) return;
-    const max = Math.max(...counts, 1);
-    const width = profChartEl.width;
-    const height = profChartEl.height;
-    const padX = 30;
-    const padY = 24;
-    const plotW = width - padX * 2;
-    const plotH = height - padY * 2;
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "#0f1420";
-    ctx.fillRect(0, 0, width, height);
-    ctx.strokeStyle = "rgba(180, 202, 248, 0.35)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(padX, height - padY);
-    ctx.lineTo(width - padX, height - padY);
-    ctx.stroke();
-
-    ctx.strokeStyle = "rgba(140, 170, 242, 0.95)";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    counts.forEach((count, i) => {
-      const x = padX + (i / Math.max(counts.length - 1, 1)) * plotW;
-      const y = height - padY - (count / max) * plotH;
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-
-    ctx.fillStyle = "#dae6ff";
-    ctx.font = "12px Manrope";
-    ctx.fillText(`${years[0]}`, padX, height - 6);
-    ctx.fillText(`${years[years.length - 1]}`, width - padX - 30, height - 6);
-    ctx.fillText(`max ${max} papers/year`, padX, 14);
-  };
-
   const renderMemberModal = async (name) => {
     const rows = (authorToPapers.get(name) || []).sort((a, b) => Number(b.year) - Number(a.year));
     modalTitleEl.textContent = `${name} - Publications`;
@@ -369,8 +323,9 @@ if (memberCarousel) {
         .map(
           (row) => `
             <article class="author-paper-item">
+              <a class="author-paper-jump" href="./publication.html#${esc(row.year)}" aria-label="Go to publication">↗</a>
               <h3>${esc(row.title)}</h3>
-              <a class="author-paper-journal" href="./publication.html#${esc(row.year)}">${esc(row.journal || "Journal information")}</a>
+              <p class="author-paper-journal">${esc(row.journal || "Journal information")}</p>
               <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
               <p>${esc(row.authors || "")}</p>
             </article>
@@ -380,9 +335,9 @@ if (memberCarousel) {
     }
     if (!modalEl.open) modalEl.showModal();
     const metrics = await fetchAuthorMetrics(name);
-    profileHIndexEl.textContent = `H-index: ${metrics.hIndex}`;
-    profileWorksEl.textContent = `Works: ${metrics.works}`;
-    profileCitationsEl.textContent = `Citations: ${metrics.citations}`;
+    profileHIndexEl.textContent = `H-index: ${fmt(metrics.hIndex)}`;
+    profileWorksEl.textContent = `Works: ${fmt(metrics.works)}`;
+    profileCitationsEl.textContent = `Citations: ${fmt(metrics.citations)}`;
     profileAffilEl.textContent = metrics.affiliation || "Hanyang University";
   };
 
@@ -410,13 +365,12 @@ if (memberCarousel) {
       });
 
       const profMetrics = await fetchAuthorMetrics("Hoeil Chung");
-      if (profHIndexEl) profHIndexEl.textContent = `H-index: ${profMetrics.hIndex}`;
-      if (profWorksEl) profWorksEl.textContent = `Total Works: ${profMetrics.works}`;
-      if (profCitationsEl) profCitationsEl.textContent = `Total Citations: ${profMetrics.citations}`;
-      drawProfessorPublicationChart();
+      if (profHIndexEl) profHIndexEl.textContent = `${fmt(profMetrics.hIndex)}`;
+      if (profWorksEl) profWorksEl.textContent = `${fmt(profMetrics.works)}`;
+      if (profCitationsEl) profCitationsEl.textContent = `${fmt(profMetrics.citations)}`;
     })
     .catch(() => {
-      if (profHIndexEl) profHIndexEl.textContent = "H-index: unavailable";
+      if (profHIndexEl) profHIndexEl.textContent = "-";
     });
 
   document.querySelectorAll(".member-card[data-member-name]").forEach((card) => {

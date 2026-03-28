@@ -92,13 +92,44 @@
           { re: /\bmicrochemical journal\b/i, value: "5.1" },
           { re: /\bbiosensors and bioelectronics\b/i, value: "10.5" },
           { re: /\bsensors and actuators b\b/i, value: "7.7" },
+          { re: /\bfuel\b/i, value: "7.5" },
+          { re: /\bjournal of raman spectroscopy\b/i, value: "2.9" },
+          { re: /\bapplied spectroscopy reviews\b/i, value: "6.3" },
+          { re: /\bapplied spectroscopy\b/i, value: "3.4" },
+          { re: /\bvibrational spectroscopy\b/i, value: "2.4" },
+          { re: /\bmacromolecular research\b/i, value: "2.9" },
+          { re: /\bmacromolecules\b/i, value: "5.1" },
+          { re: /\bapplied surface science\b/i, value: "6.7" },
+          { re: /\blangmuir\b/i, value: "3.9" },
+          { re: /\bchemical engineering journal\b/i, value: "13.4" },
+          { re: /\bacs omega\b/i, value: "4.1" },
+          { re: /\bpolymer\b/i, value: "4.6" },
+          { re: /\bsolar energy\b/i, value: "7.5" },
+          { re: /\bultramicroscopy\b/i, value: "2.7" },
+          { re: /\bcolloids and surfaces, a\b/i, value: "5.2" },
+          { re: /\bphysica e\b/i, value: "3.6" },
+          { re: /\bsynthetic metals\b/i, value: "4.2" },
+          { re: /\bjournal of materials chemistry\b/i, value: "6.0" },
+          { re: /\bphotochemistry and photobiology\b/i, value: "3.3" },
+          { re: /\bapplied biochemistry\s*&\s*biotechnology\b/i, value: "2.8" },
+          { re: /\bpolymer engineering\s*&\s*science\b/i, value: "3.3" },
+          { re: /\banalytical sciences?\b/i, value: "1.8" },
+          { re: /\bbiopolymers?\b/i, value: "2.9" },
+          { re: /\bthe analyst\b/i, value: "3.3" },
+          { re: /\bbull\.?\s*korean\.?\s*chem\.?\s*soc\.?/i, value: "1.7" },
+          { re: /\bchemphyschem\b/i, value: "3.8" },
+          { re: /\bjournal of molecular structure\b|^j\.\s*mol\.\s*struct\b/i, value: "3.8" },
+          { re: /\bchemometrics and intelligent laboratory systems\b/i, value: "4.2" },
+          { re: /\bjournal of chromatography a\b/i, value: "4.0" },
           { re: /\bjournal of pharmaceutical and biomedical analysis\b/i, value: "3.1" },
           { re: /\bspectrochimica acta part a\b/i, value: "4.6" },
           { re: /\brsc adv\b/i, value: "4.6" },
-          { re: /\bacs applied materials & interfaces\b/i, value: "9.5" }
+          { re: /\bacs applied materials & interfaces\b|acs appl\. mater\. interfaces/i, value: "9.5" },
+          { re: /\bacs appl\.\s*nano\s*mater/i, value: "5.2" }
         ];
         const citationCache = new Map();
         const authorMetricCache = new Map();
+        const fmt = (v) => (Number.isFinite(Number(v)) ? Number(v).toLocaleString() : v);
         const authorsToEntries = new Map();
         let allData = {};
         const MEMBER_NAMES = [
@@ -264,8 +295,8 @@
             const json = await res.json();
             const items = json?.message?.items || [];
             if (!items.length) {
-              citationCache.set(key, null);
-              return null;
+              citationCache.set(key, 0);
+              return 0;
             }
             let best = items[0];
             let bestScore = titleSimilarity(title, best?.title?.[0] || "");
@@ -277,12 +308,12 @@
               }
             }
             const cited = best?.["is-referenced-by-count"];
-            const out = Number.isFinite(cited) ? cited : null;
+            const out = Number.isFinite(cited) ? cited : 0;
             citationCache.set(key, out);
             return out;
           } catch {
-            citationCache.set(key, null);
-            return null;
+            citationCache.set(key, 0);
+            return 0;
           }
         };
         const hydrateCitations = async () => {
@@ -296,7 +327,7 @@
               if (!metricEl) continue;
               const ifValue = metricEl.dataset.if || "N/A";
               const citations = await fetchCitationCount(title);
-              const citationText = Number.isFinite(citations) ? citations : "-";
+              const citationText = Number.isFinite(citations) ? citations : 0;
               metricEl.textContent = `Citations: ${citationText} | IF: ${ifValue}`;
             }
           });
@@ -336,10 +367,9 @@
               .map(
                 (row) => `
                   <article class="author-paper-item">
+                    <button type="button" class="author-paper-jump" data-jump-id="${esc(row.id)}" data-jump-year="${esc(row.year)}" aria-label="Go to publication">↗</button>
                     <h3>${esc(row.title)}</h3>
-                    <button type="button" class="author-paper-journal" data-jump-id="${esc(row.id)}" data-jump-year="${esc(row.year)}">
-                      ${esc(row.journal || "Journal information")}
-                    </button>
+                    <p class="author-paper-journal">${esc(row.journal || "Journal information")}</p>
                     <a
                       class="author-paper-scholar"
                       href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${authorName}`)}"
@@ -356,9 +386,9 @@
           }
           if (!modalEl.open) modalEl.showModal();
           const metrics = await fetchAuthorMetrics(authorName);
-          authorProfileHIndexEl.textContent = `H-index: ${metrics.hIndex}`;
-          authorProfileWorksEl.textContent = `Works: ${metrics.works}`;
-          authorProfileCitationsEl.textContent = `Citations: ${metrics.citations}`;
+          authorProfileHIndexEl.textContent = `H-index: ${fmt(metrics.hIndex)}`;
+          authorProfileWorksEl.textContent = `Works: ${fmt(metrics.works)}`;
+          authorProfileCitationsEl.textContent = `Citations: ${fmt(metrics.citations)}`;
           authorProfileAffilEl.textContent = metrics.affiliation || "Hanyang University";
         };
         const closeAuthorModal = () => {
@@ -463,7 +493,7 @@
             });
 
             modalBodyEl.addEventListener("click", (e) => {
-              const jumpBtn = e.target.closest("button[data-jump-id][data-jump-year]");
+              const jumpBtn = e.target.closest("button.author-paper-jump[data-jump-id][data-jump-year]");
               if (!jumpBtn) return;
               closeAuthorModal();
               jumpToPublication(jumpBtn.dataset.jumpId, jumpBtn.dataset.jumpYear);

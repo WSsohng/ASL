@@ -808,9 +808,10 @@ h2 {
 }
 
 .author-paper-item {
+  position: relative;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.7rem;
-  padding: 0.75rem 0.85rem;
+  padding: 0.75rem 2.2rem 0.85rem 0.85rem;
   margin-bottom: 0.72rem;
   background: rgba(255, 255, 255, 0.02);
 }
@@ -829,15 +830,25 @@ h2 {
 }
 
 .author-paper-journal {
-  margin-top: 0.48rem;
-  border: 0;
-  background: none;
+  margin: 0.48rem 0 0;
   color: #d9e5ff;
-  text-align: left;
-  cursor: pointer;
   font-size: 0.9rem;
-  padding: 0;
-  text-decoration: underline;
+  line-height: 1.4;
+}
+
+.author-paper-jump {
+  position: absolute;
+  right: 0.62rem;
+  top: 0.56rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(176, 197, 241, 0.42);
+  border-radius: 0.35rem;
+  color: #e7efff;
+  text-decoration: none;
+  font-size: 0.85rem;
 }
 
 .author-paper-scholar {
@@ -941,31 +952,32 @@ h2 {
 }
 
 .professor-metrics {
-  margin-top: 0.8rem;
-  display: grid;
-  gap: 0.3rem;
-  color: #d4def6;
-  font-size: 0.93rem;
-}
-
-.professor-chart-wrap {
   margin-top: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 0.7rem;
-  padding: 0.7rem 0.8rem;
-  background: rgba(255, 255, 255, 0.02);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
 }
 
-.professor-chart-wrap h3 {
-  margin: 0 0 0.45rem;
-  font-size: 0.9rem;
-  color: #c7d3ef;
+.prof-metric-card {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.72rem;
+  padding: 0.62rem 0.7rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(144, 169, 224, 0.08));
 }
 
-.professor-chart-wrap canvas {
-  width: 100%;
-  height: auto;
-  display: block;
+.prof-metric-value {
+  margin: 0;
+  color: #eef4ff;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 700;
+}
+
+.prof-metric-label {
+  margin: 0.22rem 0 0;
+  color: #b8c8ea;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .professor-links a {
@@ -1250,6 +1262,10 @@ h2 {
 
   .research-pattern {
     height: 220px;
+  }
+
+  .professor-metrics {
+    grid-template-columns: 1fr;
   }
 
   .card-copy {
