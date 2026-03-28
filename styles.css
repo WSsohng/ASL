@@ -800,13 +800,25 @@ h2 {
 }
 
 .pub-entry-link {
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1px solid rgba(222, 232, 255, 0.95);
+  background: linear-gradient(180deg, #f8fbff 0%, #e9f1ff 100%);
+  color: #111a2e;
   padding: 0.25rem 0.55rem;
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
   align-self: flex-start;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(8, 14, 28, 0.18);
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.pub-entry-link:hover {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: transparent;
+  color: #e6eefc;
+  box-shadow: none;
 }
 
 .pub-entry-media {
