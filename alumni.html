@@ -63,18 +63,16 @@
             .replaceAll('"', "&quot;")
             .replaceAll("'", "&#39;");
 
-        const cleanText = (value = "") =>
-          String(value)
-            .replace(/\?/g, "")
-            .replace(/\s+/g, " ")
-            .trim();
+        const cleanText = (value = "") => String(value).replace(/\s+/g, " ").trim();
 
-        const cleanCareer = (value = "") => {
-          const normalized = cleanText(value);
-          if (!normalized) return "";
-          const englishHead = normalized.split("(")[0].trim();
-          if (englishHead.length >= 4) return englishHead;
-          return normalized;
+        const composeCareer = (person) => {
+          const careerEn = cleanText(person.career_en || "");
+          const careerKo = cleanText(person.career_ko || "");
+          const careerRaw = cleanText(person.career || "");
+          if (careerEn && careerKo) return `${careerEn} (${careerKo})`;
+          if (careerEn) return careerEn;
+          if (careerKo) return careerKo;
+          return careerRaw;
         };
 
         fetch("./assets/member-data.json")
@@ -89,9 +87,11 @@
             grid.innerHTML = alumni
               .map((person) => {
                 const name = cleanText(person.name || "ASL Alumni");
-                const career = cleanCareer(person.career || "");
+                const nameKo = cleanText(person.name_ko || "");
+                const career = composeCareer(person);
                 const email = cleanText(person.email || "");
                 const image = person.image || "./assets/publication-placeholder.svg";
+                const nameKoHtml = nameKo ? `<p class="alumni-role">${esc(nameKo)}</p>` : "";
                 const careerHtml = career ? `<p class="alumni-career">${esc(career)}</p>` : "";
                 const emailHtml = email
                   ? `<a class="alumni-email" href="mailto:${esc(email)}">${esc(email)}</a>`
@@ -104,6 +104,7 @@
                     </div>
                     <div class="alumni-meta">
                       <h3>${esc(name)}</h3>
+                      ${nameKoHtml}
                       ${careerHtml}
                       ${emailHtml}
                     </div>
