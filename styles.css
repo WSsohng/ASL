@@ -23,6 +23,33 @@ body {
 
 body {
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(155, 176, 232, 0.08), rgba(0, 0, 0, 0) 35%),
+    radial-gradient(circle at 82% 18%, rgba(170, 192, 255, 0.08), rgba(0, 0, 0, 0) 42%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 42px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 42px
+    );
+  z-index: -2;
 }
 
 a {
@@ -94,6 +121,37 @@ a {
   min-height: calc(88vh - 72px);
   display: grid;
   align-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: 50px;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(183, 201, 248, 0.18);
+  transform: rotate(22deg);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(197, 213, 255, 0.09), rgba(0, 0, 0, 0) 62%),
+    linear-gradient(135deg, rgba(116, 134, 179, 0.07), rgba(0, 0, 0, 0));
+  clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: -120px;
+  bottom: -140px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 1px solid rgba(173, 194, 246, 0.12);
+  box-shadow: 0 0 0 42px rgba(175, 196, 247, 0.04), 0 0 0 84px rgba(175, 196, 247, 0.03);
+  pointer-events: none;
 }
 
 .eyebrow {
@@ -238,37 +296,105 @@ h2 {
   font-size: 0.92rem;
 }
 
-.publication-list {
-  border-top: 1px solid var(--line);
+.pub-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+}
+
+.pub-year-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 0.42rem 0.82rem;
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-family: inherit;
+}
+
+.pub-year-btn.is-active {
+  background: #f2f4fa;
+  color: #0a0b0f;
+  border-color: #f2f4fa;
+}
+
+.pub-board {
+  border-top: 2px solid #7f89a6;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.pub-head {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 1px solid var(--line);
+  color: #c8d0e6;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.col-no {
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--line);
+  height: 100%;
+}
+
+.col-title {
+  padding: 0 0.95rem;
+}
+
+.pub-year-group {
+  display: none;
+}
+
+.pub-year-group.is-active {
+  display: block;
+}
+
+.pub-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
   border-bottom: 1px solid var(--line);
 }
 
-.publication-item {
-  padding: 1.1rem 0.45rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.publication-item:last-child {
+.pub-row:last-child {
   border-bottom: 0;
 }
 
-.publication-journal {
-  margin: 0 0 0.35rem;
-  color: var(--muted);
-  font-size: 0.88rem;
+.pub-no {
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--line);
+  color: #9fa9c3;
+  font-family: "Space Grotesk", sans-serif;
 }
 
-.publication-item h3 {
-  font-size: 1.02rem;
-  line-height: 1.52;
-  margin-bottom: 0.35rem;
+.pub-body {
+  padding: 0.9rem 0.95rem;
+}
+
+.pub-body h3 {
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.publication-journal {
+  margin: 0;
+  color: #b5bfd8;
+  font-size: 0.9rem;
 }
 
 .publication-authors {
-  margin: 0;
-  color: #b9c1d4;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  margin: 0.18rem 0 0;
+  color: #909bb7;
+  font-size: 0.86rem;
 }
 
 .member-stats {
@@ -382,6 +508,20 @@ h2 {
   .cards-3 {
     grid-template-columns: 1fr;
   }
+
+  .hero::before {
+    width: 280px;
+    height: 280px;
+    right: -90px;
+    top: 30px;
+  }
+
+  .hero::after {
+    width: 300px;
+    height: 300px;
+    left: -120px;
+    bottom: -80px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -395,5 +535,18 @@ h2 {
 
   .member-stats {
     grid-template-columns: 1fr;
+  }
+
+  .pub-head,
+  .pub-row {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .pub-body {
+    padding: 0.75rem 0.7rem;
+  }
+
+  .pub-body h3 {
+    font-size: 0.93rem;
   }
 }
