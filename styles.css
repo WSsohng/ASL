@@ -577,6 +577,45 @@ h2 {
   font-size: 0.86rem;
 }
 
+.pub-legacy-frame-wrap {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  min-height: 70vh;
+}
+
+.pub-legacy-frame-wrap iframe {
+  width: 100%;
+  min-height: 70vh;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+
+.pub-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1rem;
+}
+
+.pub-year-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  color: #cfd8ed;
+  min-height: 2.1rem;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pub-year-btn.is-active {
+  background: #dfe7fa;
+  color: #111720;
+  border-color: #dfe7fa;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
