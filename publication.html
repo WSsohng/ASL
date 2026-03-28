@@ -37,60 +37,101 @@
         <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/02.php?sub=2">Original Board</a>
       </div>
 
-      <div class="pub-years" role="tablist" aria-label="Publication years">
-        <button class="pub-year-btn is-active" data-src="./publication-years/2026.html" role="tab" aria-selected="true">2026</button>
-        <button class="pub-year-btn" data-src="./publication-years/2025.html" role="tab" aria-selected="false">2025</button>
-        <button class="pub-year-btn" data-src="./publication-years/2024.html" role="tab" aria-selected="false">2024</button>
-        <button class="pub-year-btn" data-src="./publication-years/2023.html" role="tab" aria-selected="false">2023</button>
-        <button class="pub-year-btn" data-src="./publication-years/2022.html" role="tab" aria-selected="false">2022</button>
-        <button class="pub-year-btn" data-src="./publication-years/2021.html" role="tab" aria-selected="false">2021</button>
-        <button class="pub-year-btn" data-src="./publication-years/2020.html" role="tab" aria-selected="false">2020</button>
-        <button class="pub-year-btn" data-src="./publication-years/2019.html" role="tab" aria-selected="false">2019</button>
-        <button class="pub-year-btn" data-src="./publication-years/2018.html" role="tab" aria-selected="false">2018</button>
-        <button class="pub-year-btn" data-src="./publication-years/2017.html" role="tab" aria-selected="false">2017</button>
-        <button class="pub-year-btn" data-src="./publication-years/2016.html" role="tab" aria-selected="false">2016</button>
-        <button class="pub-year-btn" data-src="./publication-years/2015.html" role="tab" aria-selected="false">2015</button>
-        <button class="pub-year-btn" data-src="./publication-years/2014.html" role="tab" aria-selected="false">2014</button>
-        <button class="pub-year-btn" data-src="./publication-years/2013.html" role="tab" aria-selected="false">2013</button>
-        <button class="pub-year-btn" data-src="./publication-years/2012.html" role="tab" aria-selected="false">2012</button>
-        <button class="pub-year-btn" data-src="./publication-years/2011.html" role="tab" aria-selected="false">2011</button>
-        <button class="pub-year-btn" data-src="./publication-years/2010.html" role="tab" aria-selected="false">2010</button>
-        <button class="pub-year-btn" data-src="./publication-years/2009.html" role="tab" aria-selected="false">2009</button>
-        <button class="pub-year-btn" data-src="./publication-years/2008.html" role="tab" aria-selected="false">2008</button>
-        <button class="pub-year-btn" data-src="./publication-years/2007.html" role="tab" aria-selected="false">2007</button>
-        <button class="pub-year-btn" data-src="./publication-years/2006.html" role="tab" aria-selected="false">2006</button>
-        <button class="pub-year-btn" data-src="./publication-years/2005.html" role="tab" aria-selected="false">2005</button>
-        <button class="pub-year-btn" data-src="./publication-years/2004.html" role="tab" aria-selected="false">2004</button>
-        <button class="pub-year-btn" data-src="./publication-years/2003.html" role="tab" aria-selected="false">2003</button>
-        <button class="pub-year-btn" data-src="./publication-years/2002.html" role="tab" aria-selected="false">2002</button>
-        <button class="pub-year-btn" data-src="./publication-years/2001.html" role="tab" aria-selected="false">2001</button>
-        <button class="pub-year-btn" data-src="./publication-years/2000.html" role="tab" aria-selected="false">2000</button>
-        <button class="pub-year-btn" data-src="./publication-years/1995_-_1999.html" role="tab" aria-selected="false">1995-1999</button>
-      </div>
+      <div id="pubFilter" class="pub-years" aria-label="Publication years"></div>
 
-      <section class="pub-legacy-frame-wrap">
-        <iframe id="pubLegacyFrame" src="./publication-years/2026.html" title="ASL Publication Year Content" loading="lazy"></iframe>
+      <section class="pub-catalog" id="pubCatalog" aria-live="polite">
+        <p class="publication-authors">Loading publication records...</p>
       </section>
     </main>
 
-    <script src="./script.js"></script>
     <script>
       (() => {
-        const frame = document.getElementById("pubLegacyFrame");
-        const buttons = [...document.querySelectorAll(".pub-year-btn[data-src]")];
-        if (!frame || !buttons.length) return;
-        buttons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const src = btn.getAttribute("data-src");
-            if (!src) return;
-            frame.src = src;
-            buttons.forEach((b) => {
-              const active = b === btn;
-              b.classList.toggle("is-active", active);
-              b.setAttribute("aria-selected", active ? "true" : "false");
-            });
+        const filterEl = document.getElementById("pubFilter");
+        const catalogEl = document.getElementById("pubCatalog");
+        const esc = (value = "") =>
+          String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+        const orderForYear = (year) => {
+          if (year === "1995-1999") return 0;
+          const n = Number(year);
+          return Number.isFinite(n) ? n : -1;
+        };
+
+        const renderEntries = (year, entries) => {
+          if (!entries || !entries.length) {
+            catalogEl.innerHTML = `<p class="publication-authors">No publication entries found for ${year}.</p>`;
+            return;
+          }
+
+          const rows = entries
+            .map((item, idx) => {
+              const no = esc(item.no || String(entries.length - idx).padStart(2, "0"));
+              const title = esc(item.title || "Untitled record");
+              const journal = esc(item.journal || "");
+              const authors = esc(item.authors || "");
+              const pdf = item.pdf || "";
+              const img = item.images && item.images.length ? item.images[0] : "";
+              const imgHtml = img
+                ? `<figure class="pub-entry-media"><img src="${esc(img)}" alt="Graphical abstract for ${title}" loading="lazy" /></figure>`
+                : "";
+              const pdfHtml = pdf
+                ? `<a class="pub-entry-link" href="${esc(pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`
+                : "";
+
+              return `
+                <article class="pub-entry">
+                  <div class="pub-entry-no">${no}</div>
+                  <div class="pub-entry-main">
+                    <h3 class="pub-entry-title">${title}</h3>
+                    <p class="pub-entry-journal">${journal}</p>
+                    <p class="pub-entry-authors">${authors}</p>
+                    <div class="pub-entry-actions">${pdfHtml}</div>
+                  </div>
+                  ${imgHtml}
+                </article>
+              `;
+            })
+            .join("");
+
+          catalogEl.innerHTML = rows;
+        };
+
+        const setActive = (year, allData) => {
+          [...filterEl.querySelectorAll("button")].forEach((btn) => {
+            const active = btn.dataset.year === year;
+            btn.classList.toggle("is-active", active);
+            btn.setAttribute("aria-selected", active ? "true" : "false");
           });
-        });
+          renderEntries(year, allData[year] || []);
+        };
+
+        fetch("./assets/publication-data.json")
+          .then((r) => r.json())
+          .then((allData) => {
+            const years = Object.keys(allData).sort((a, b) => orderForYear(b) - orderForYear(a));
+            filterEl.innerHTML = years
+              .map(
+                (y, i) =>
+                  `<button class="pub-year-btn ${i === 0 ? "is-active" : ""}" data-year="${y}" role="tab" aria-selected="${i === 0 ? "true" : "false"}">${y}</button>`
+              )
+              .join("");
+
+            filterEl.addEventListener("click", (e) => {
+              const btn = e.target.closest("button[data-year]");
+              if (!btn) return;
+              setActive(btn.dataset.year, allData);
+            });
+
+            if (years.length) setActive(years[0], allData);
+          })
+          .catch(() => {
+            catalogEl.innerHTML =
+              '<p class="publication-authors">Failed to load publication data.</p>';
+          });
       })();
     </script>
   </body>

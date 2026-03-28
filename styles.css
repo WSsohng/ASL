@@ -616,6 +616,72 @@ h2 {
   border-color: #dfe7fa;
 }
 
+.pub-catalog {
+  border-top: 1px solid var(--line);
+}
+
+.pub-entry {
+  display: grid;
+  grid-template-columns: 64px 1fr 220px;
+  gap: 1rem;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.pub-entry-no {
+  font-family: "Space Grotesk", sans-serif;
+  color: #93a1bf;
+  font-size: 0.95rem;
+  text-align: center;
+  padding-top: 0.2rem;
+}
+
+.pub-entry-title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.pub-entry-journal {
+  margin: 0.35rem 0 0;
+  color: #c1cbe4;
+  font-size: 0.92rem;
+}
+
+.pub-entry-authors {
+  margin: 0.35rem 0 0;
+  color: #9ca9c7;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.pub-entry-actions {
+  margin-top: 0.55rem;
+}
+
+.pub-entry-link {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  padding: 0.25rem 0.55rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pub-entry-media {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pub-entry-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -947,6 +1013,15 @@ h2 {
   .alumni-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .pub-entry {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .pub-entry-media {
+    grid-column: 2;
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -997,6 +1072,21 @@ h2 {
 
   .alumni-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pub-entry {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 0.9rem 0.2rem;
+  }
+
+  .pub-entry-no {
+    text-align: left;
+  }
+
+  .pub-entry-media {
+    grid-column: auto;
+    max-width: none;
   }
 
   .spectral-beam {
