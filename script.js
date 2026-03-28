@@ -268,9 +268,11 @@ if (memberCarousel) {
   const profileCitationsEl = document.getElementById("memberProfileCitations");
   const profileScholarLinkEl = document.getElementById("memberProfileScholarLink");
   const profileScopusLinkEl = document.getElementById("memberProfileScopusLink");
+  const profileImageEl = document.getElementById("memberProfileImage");
   const profHIndexEl = document.getElementById("profHIndex");
   const profWorksEl = document.getElementById("profWorks");
   const profCitationsEl = document.getElementById("profCitations");
+  const PROFILE_FALLBACK_IMAGE = "./assets/publication-placeholder.svg";
 
   const esc = (value = "") =>
     String(value)
@@ -391,7 +393,40 @@ if (memberCarousel) {
   const memberIndex = memberNames.map((name) => ({ name, aliases: makeAliases(name) }));
   const metricCache = new Map();
   const authorToPapers = new Map();
+  const memberPhotoMap = new Map();
   let publicationData = {};
+
+  const putMemberPhoto = (name, image) => {
+    const key = normalizeName(name);
+    if (!key || !image || memberPhotoMap.has(key)) return;
+    memberPhotoMap.set(key, image);
+  };
+  const buildMemberPhotoMap = (memberPayload) => {
+    memberPhotoMap.clear();
+    const currentMembers = Array.isArray(memberPayload?.current_members) ? memberPayload.current_members : [];
+    const alumniMembers = Array.isArray(memberPayload?.alumni) ? memberPayload.alumni : [];
+    [...currentMembers, ...alumniMembers].forEach((member) => {
+      const image = String(member?.image || "").trim();
+      if (!image) return;
+      putMemberPhoto(member.name, image);
+      makeAliases(member.name).forEach((alias) => {
+        if (!alias || memberPhotoMap.has(alias)) return;
+        memberPhotoMap.set(alias, image);
+      });
+    });
+  };
+  const getMemberProfileImage = (name = "", preferredImage = "") => {
+    if (preferredImage) return preferredImage;
+    const key = normalizeName(name);
+    const direct = memberPhotoMap.get(key);
+    if (direct) return direct;
+    const resolved = resolveMember(name);
+    if (resolved) {
+      const matched = memberPhotoMap.get(normalizeName(resolved.name));
+      if (matched) return matched;
+    }
+    return PROFILE_FALLBACK_IMAGE;
+  };
 
   const resolveMember = (authorToken = "") => {
     const normalized = normalizeName(authorToken);
@@ -486,10 +521,14 @@ if (memberCarousel) {
     }
   };
 
-  const renderMemberModal = async (name) => {
+  const renderMemberModal = async (name, preferredImage = "") => {
     const rows = (authorToPapers.get(name) || []).sort((a, b) => Number(b.year) - Number(a.year));
     modalTitleEl.textContent = `${name} - Publications`;
     profileNameEl.textContent = name;
+    if (profileImageEl) {
+      profileImageEl.src = getMemberProfileImage(name, preferredImage);
+      profileImageEl.alt = `${name} profile image`;
+    }
     profileAffilEl.textContent = "Hanyang University";
     profileHIndexEl.textContent = "H-index: loading...";
     profileWorksEl.textContent = "Works: -";
@@ -522,10 +561,13 @@ if (memberCarousel) {
     profileAffilEl.textContent = metrics.affiliation || "Hanyang University";
   };
 
-  fetch("./assets/publication-data.json")
-    .then((r) => r.json())
-    .then(async (data) => {
+  Promise.all([
+    fetch("./assets/publication-data.json").then((r) => r.json()),
+    fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
+  ])
+    .then(async ([data, memberPayload]) => {
       publicationData = data;
+      buildMemberPhotoMap(memberPayload);
       setupRecentPublicationCarousel(data);
       Object.keys(data).forEach((year) => {
         (data[year] || []).forEach((item) => {
@@ -560,7 +602,8 @@ if (memberCarousel) {
     card.addEventListener("click", () => {
       const name = card.getAttribute("data-member-name");
       if (!name) return;
-      renderMemberModal(name);
+      const preferredImage = card.querySelector("img")?.getAttribute("src") || "";
+      renderMemberModal(name, preferredImage);
     });
   });
 
