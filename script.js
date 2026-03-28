@@ -55,7 +55,7 @@ const spectralSections = [...document.querySelectorAll("main .section")];
 const updateSpectralFx = () => {
   const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
   const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
-  const easedProgress = 1 - Math.pow(1 - progress, 1.25);
+  const easedProgress = 1 - Math.pow(1 - progress, 1.18);
   const viewportCenter = window.scrollY + window.innerHeight * 0.5;
 
   let sectionBoost = 0;
@@ -67,14 +67,16 @@ const updateSpectralFx = () => {
     sectionBoost = Math.max(sectionBoost, normalized);
   });
 
-  const trailProgress = Math.min(Math.max((easedProgress - 0.015) / 0.97, 0), 1);
-  const splitProgress = trailProgress;
-  const diffractionProgress = Math.min(Math.max((trailProgress - 0.22) / 0.72, 0), 1);
-  const diffractionAlpha = Math.min(Math.max((trailProgress - 0.24) / 0.2, 0), 1);
+  const pathProgress = Math.min(Math.max(easedProgress * 1.95 + 0.045, 0), 1);
+  const splitFixed = 0.34;
+  const beamProgress = Math.min(pathProgress, splitFixed);
+  const diffractionProgress = Math.min(Math.max((pathProgress - splitFixed) / (1 - splitFixed), 0), 1);
+  const diffractionAlpha = Math.min(Math.max((pathProgress - splitFixed - 0.03) / 0.12, 0), 1);
   const intensity = Math.min(1, 0.18 + sectionBoost * 0.82 + easedProgress * 0.15);
 
   root.style.setProperty("--scroll-p", progress.toFixed(4));
-  root.style.setProperty("--split-p", splitProgress.toFixed(4));
+  root.style.setProperty("--beam-p", beamProgress.toFixed(4));
+  root.style.setProperty("--split-p", splitFixed.toFixed(4));
   root.style.setProperty("--diff-p", diffractionProgress.toFixed(4));
   root.style.setProperty("--diff-alpha", diffractionAlpha.toFixed(4));
   root.style.setProperty("--section-boost", intensity.toFixed(3));
