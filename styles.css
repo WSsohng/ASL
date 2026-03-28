@@ -737,10 +737,20 @@ h2 {
   padding-top: 0.2rem;
 }
 
+.pub-title-row {
+  margin-top: 0.72rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
 .pub-entry-title {
-  margin: 0.72rem 0 0;
+  margin: 0;
   font-size: 1.14rem;
   line-height: 1.52;
+  flex: 1 1 420px;
+  min-width: 240px;
 }
 
 .pub-entry-journal {
@@ -812,6 +822,10 @@ h2 {
   text-decoration: none;
   box-shadow: 0 8px 18px rgba(8, 14, 28, 0.18);
   transition: background 140ms ease, color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.pub-title-row .pub-entry-link {
+  flex: 0 0 auto;
 }
 
 .pub-entry-link:hover {
