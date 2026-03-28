@@ -1868,7 +1868,7 @@
       "authors": "Thu Thuy Bui, Eunjin Jang, Ji Hyun Shin, Tae Hun Kim, Hayoon Kim, Dongho Choi, Tung Duy Vu, Hoeil Chung*",
       "pdf": "./assets/pdfs/2023/file1690532972.pdf",
       "images": [
-        "./assets/publications/2023/aaag1690533169_1.png"
+        "./assets/publications/2023/aaaG1690602980_1.png"
       ],
       "authors_marked": "Thu Thuy Bui, Eunjin Jang, Ji Hyun Shin, Tae Hun Kim, Hayoon Kim, Dongho Choi, Tung Duy Vu, Hoeil Chung*"
     },
@@ -1878,7 +1878,7 @@
       "authors": "Yunjung Kim, Eunjin Jang, Ji Hyun Shin, Min Kim, Dongho Choi, Hoeil Chung*",
       "pdf": "./assets/pdfs/2023/file1689580378.pdf",
       "images": [
-        "./assets/publication-placeholder.svg"
+        "./assets/publications/2023/aaag1690533169_1.png"
       ],
       "authors_marked": "Yunjung Kim, Eunjin Jang, Ji Hyun Shin, Min Kim, Dongho Choi, Hoeil Chung*"
     },
@@ -1887,7 +1887,9 @@
       "journal": "Journal of Food Composition, Analysis 123 (2023) 105501",
       "authors": "Hyang Kim, Seongsoo Jeong, Hoeil Chung*, Sang-Ho Nam**, Yonghoon Lee**",
       "pdf": "./assets/pdfs/2023/file1688605252.pdf",
-      "images": [],
+      "images": [
+        "./assets/publication-placeholder.svg"
+      ],
       "authors_marked": "Hyang Kim, Seongsoo Jeong, Hoeil Chung*, Sang-Ho Nam **, Yonghoon Lee **"
     },
     {
