@@ -591,37 +591,132 @@ h2 {
   font-size: 0.9rem;
 }
 
-.member-roster {
+.members-section .section-head {
+  margin-bottom: 1rem;
+}
+
+.member-carousel {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: auto 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.member-nav {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(14, 18, 27, 0.8);
+  color: #dfe6f7;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.member-nav:hover {
+  background: rgba(32, 40, 57, 0.92);
+  border-color: rgba(199, 219, 255, 0.6);
+}
+
+.member-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.member-viewport {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.member-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.member-track {
+  display: flex;
+  gap: 1rem;
+  padding: 0.25rem;
+}
+
+.member-card {
+  flex: 0 0 calc((100% - 3rem) / 4);
+  min-width: 230px;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(24, 30, 43, 0.95), rgba(14, 18, 27, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  scroll-snap-align: start;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.member-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(181, 206, 255, 0.45);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+.member-avatar {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  letter-spacing: 0.08em;
+  color: rgba(245, 248, 255, 0.93);
+  background: linear-gradient(135deg, #1f293e 0%, #30476d 100%);
+}
+
+.member-card:nth-child(3n + 1) .member-avatar {
+  background: linear-gradient(135deg, #1e2b45 0%, #34527d 100%);
+}
+
+.member-card:nth-child(3n + 2) .member-avatar {
+  background: linear-gradient(135deg, #1f3640 0%, #3c6c7a 100%);
+}
+
+.member-card:nth-child(3n) .member-avatar {
+  background: linear-gradient(135deg, #3b2b31 0%, #71556b 100%);
+}
+
+.member-card h3 {
+  margin: 0;
+  padding: 0.85rem 0.9rem 0.18rem;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.member-card p {
+  margin: 0;
+  padding: 0 0.9rem 0.95rem;
+  font-size: 0.84rem;
+  color: #b4c0d8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.alumni-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
-.member-group {
+.alumni-item {
   border: 1px solid var(--line);
-  padding: 1rem;
-  background: var(--panel);
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.member-group h3 {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 0 0 0.65rem;
-}
-
-.member-group ul {
-  list-style: none;
+.alumni-item h3 {
+  font-size: 0.92rem;
   margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.35rem;
-}
-
-.member-group li {
-  color: var(--muted);
-  line-height: 1.45;
+  color: #ccd5ea;
+  line-height: 1.4;
 }
 
 .site-footer {
@@ -717,6 +812,19 @@ h2 {
     width: calc(var(--diff-p) * 38vw);
     height: 50px;
   }
+
+  .member-card {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+
+  .member-nav {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .alumni-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -751,8 +859,22 @@ h2 {
     grid-template-columns: 56px 1fr;
   }
 
-  .member-roster {
+  .member-carousel {
     grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .member-nav {
+    display: none;
+  }
+
+  .member-card {
+    flex-basis: calc((100% - 1rem) / 2);
+    min-width: 210px;
+  }
+
+  .alumni-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .spectral-beam {
@@ -774,5 +896,9 @@ h2 {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .member-card {
+    transition: none;
   }
 }

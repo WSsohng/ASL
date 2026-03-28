@@ -139,3 +139,29 @@ if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
     requestCardProfileUpdate();
   });
 }
+
+const memberCarousel = document.querySelector("[data-member-carousel]");
+if (memberCarousel) {
+  const viewport = memberCarousel.querySelector("[data-member-viewport]");
+  const prevBtn = memberCarousel.querySelector(".member-nav.prev");
+  const nextBtn = memberCarousel.querySelector(".member-nav.next");
+
+  if (viewport && prevBtn && nextBtn) {
+    const updateNavState = () => {
+      const maxLeft = Math.max(viewport.scrollWidth - viewport.clientWidth, 0);
+      prevBtn.disabled = viewport.scrollLeft <= 2;
+      nextBtn.disabled = viewport.scrollLeft >= maxLeft - 2;
+    };
+
+    const scrollByPage = (direction) => {
+      const amount = viewport.clientWidth * 0.86 * direction;
+      viewport.scrollBy({ left: amount, behavior: "smooth" });
+    };
+
+    prevBtn.addEventListener("click", () => scrollByPage(-1));
+    nextBtn.addEventListener("click", () => scrollByPage(1));
+    viewport.addEventListener("scroll", updateNavState, { passive: true });
+    window.addEventListener("resize", updateNavState);
+    updateNavState();
+  }
+}
