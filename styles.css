@@ -737,10 +737,19 @@ h2 {
   padding-top: 0.2rem;
 }
 
+.pub-title-row {
+  margin-top: 0.72rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
 .pub-entry-title {
-  margin: 0.72rem 0 0;
+  margin: 0;
   font-size: 1.14rem;
   line-height: 1.52;
+  flex: 1;
 }
 
 .pub-entry-journal {
@@ -805,6 +814,8 @@ h2 {
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
+  align-self: flex-start;
 }
 
 .pub-entry-media {
@@ -1466,6 +1477,10 @@ h2 {
     grid-template-columns: 1fr;
     gap: 0.55rem;
     padding: 0.9rem 0.2rem;
+  }
+
+  .pub-title-row {
+    gap: 0.55rem;
   }
 
   .pub-entry-no {

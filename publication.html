@@ -582,7 +582,10 @@
                   <div class="pub-entry-no">${no}</div>
                   <div class="pub-entry-main">
                     ${imgHtml}
-                    <h3 class="pub-entry-title">${title}</h3>
+                    <div class="pub-title-row">
+                      <h3 class="pub-entry-title">${title}</h3>
+                      ${pdfHtml}
+                    </div>
                     <div class="pub-journal-row">
                       <p class="pub-entry-journal">${journal}</p>
                       <div class="pub-entry-metrics" data-if="${esc(ifValue)}">
@@ -591,7 +594,6 @@
                       </div>
                     </div>
                     <p class="pub-entry-authors">${authorsHtml}</p>
-                    <div class="pub-entry-actions">${pdfHtml}</div>
                   </div>
                 </article>
               `;
