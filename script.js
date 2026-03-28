@@ -42,6 +42,94 @@ yearButtons.forEach((button) => {
   });
 });
 
+const escHtml = (value = "") =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const normalizeRecentAuthor = (author = "") =>
+  String(author)
+    .replaceAll("†", "")
+    .replaceAll("‡", "")
+    .replace(/\^1/g, "")
+    .replace(/\*/g, "")
+    .trim();
+
+const setupRecentPublicationCarousel = (publicationData = {}) => {
+  const carousel = document.querySelector("[data-recent-pub-carousel]");
+  if (!carousel) return;
+  const viewport = carousel.querySelector("[data-recent-pub-viewport]");
+  const track = document.getElementById("recentPubTrack");
+  const prevBtn = carousel.querySelector(".recent-pub-nav.prev");
+  const nextBtn = carousel.querySelector(".recent-pub-nav.next");
+  if (!viewport || !track || !prevBtn || !nextBtn) return;
+
+  const flattened = Object.entries(publicationData)
+    .flatMap(([year, items]) =>
+      (items || []).map((item, order) => ({
+        year,
+        yearNum: Number.parseInt(String(year).slice(0, 4), 10) || 0,
+        order,
+        ...item
+      }))
+    )
+    .filter((item) => item.yearNum > 0)
+    .sort((a, b) => {
+      if (b.yearNum !== a.yearNum) return b.yearNum - a.yearNum;
+      return a.order - b.order;
+    })
+    .slice(0, 8);
+
+  if (!flattened.length) {
+    track.innerHTML = '<article class="recent-pub-card is-loading"><p class="publication-authors">No recent publication data.</p></article>';
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    return;
+  }
+
+  track.innerHTML = flattened
+    .map((item) => {
+      const image = item?.images?.[0] || "./assets/research-raman.svg";
+      const authors = String(item.authors_marked || item.authors || "")
+        .split(",")
+        .map((t) => normalizeRecentAuthor(t))
+        .filter(Boolean);
+      const leadAuthor = authors[0] || "ASL Team";
+      const authorLine = authors.length > 1 ? `${leadAuthor} et al.` : leadAuthor;
+      return `
+        <article class="recent-pub-card">
+          <figure class="recent-pub-figure">
+            <img src="${escHtml(image)}" alt="Graphical abstract for ${escHtml(item.title || "publication")}" loading="lazy" />
+          </figure>
+          <div class="recent-pub-body">
+            <h3 class="recent-pub-title">${escHtml(item.title || "Untitled publication")}</h3>
+            <p class="recent-pub-meta">${escHtml(item.journal || "")}</p>
+            <p class="publication-authors">${escHtml(authorLine)} · ${escHtml(item.year || "")}</p>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+  const updateNavState = () => {
+    const maxLeft = Math.max(viewport.scrollWidth - viewport.clientWidth, 0);
+    prevBtn.disabled = viewport.scrollLeft <= 2;
+    nextBtn.disabled = viewport.scrollLeft >= maxLeft - 2;
+  };
+  const scrollByPage = (direction) => {
+    const amount = viewport.clientWidth * 0.92 * direction;
+    viewport.scrollBy({ left: amount, behavior: "smooth" });
+  };
+  prevBtn.addEventListener("click", () => scrollByPage(-1));
+  nextBtn.addEventListener("click", () => scrollByPage(1));
+  viewport.addEventListener("scroll", updateNavState, { passive: true });
+  window.addEventListener("resize", updateNavState);
+  updateNavState();
+};
+
 const root = document.documentElement;
 const spectralSections = [...document.querySelectorAll("main .section")];
 
@@ -250,6 +338,14 @@ if (memberCarousel) {
       affiliation: "Hanyang University, Seoul, South Korea",
       scopusId: "57224628166",
       source: "scopus-verified"
+    },
+    {
+      name: "Yoonji Kim",
+      hIndex: "-",
+      works: "-",
+      citations: "-",
+      affiliation: "Hanyang University, Seoul, South Korea",
+      source: "manual-review-required"
     }
   ];
   const getAuthorOverride = (name = "") => {
@@ -430,6 +526,7 @@ if (memberCarousel) {
     .then((r) => r.json())
     .then(async (data) => {
       publicationData = data;
+      setupRecentPublicationCarousel(data);
       Object.keys(data).forEach((year) => {
         (data[year] || []).forEach((item) => {
           const tokens = splitAuthors(getDisplayAuthors(item));

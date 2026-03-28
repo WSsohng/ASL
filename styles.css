@@ -321,6 +321,18 @@ h2 {
   color: var(--text);
 }
 
+.btn-contrast {
+  border: 1px solid rgba(218, 230, 255, 0.95);
+  background: linear-gradient(180deg, #f9fbff 0%, #ebf1ff 100%);
+  color: #10182b;
+  box-shadow: 0 10px 24px rgba(13, 23, 45, 0.24);
+}
+
+.btn-contrast:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
 .split {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -513,6 +525,94 @@ h2 {
   border-top: 2px solid #7f89a6;
   border-bottom: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.01);
+}
+
+.recent-pub-carousel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.recent-pub-nav {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(200, 216, 255, 0.5);
+  background: rgba(22, 33, 58, 0.8);
+  color: #f3f7ff;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.recent-pub-nav:hover {
+  transform: translateY(-1px);
+  border-color: rgba(228, 238, 255, 0.92);
+  background: rgba(47, 74, 125, 0.92);
+}
+
+.recent-pub-nav:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+
+.recent-pub-viewport {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.recent-pub-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-pub-track {
+  display: flex;
+  gap: 1rem;
+}
+
+.recent-pub-card {
+  flex: 0 0 calc((100% - 2rem) / 3);
+  min-width: 260px;
+  border: 1px solid rgba(176, 193, 229, 0.2);
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.recent-pub-card.is-loading {
+  min-height: 210px;
+  display: grid;
+  place-items: center;
+}
+
+.recent-pub-figure {
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  background: rgba(8, 13, 24, 0.48);
+}
+
+.recent-pub-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.recent-pub-body {
+  padding: 0.8rem 0.85rem 0.95rem;
+}
+
+.recent-pub-title {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.45;
+}
+
+.recent-pub-meta {
+  margin: 0.45rem 0 0;
+  color: #b8c4e0;
+  font-size: 0.86rem;
 }
 
 .pub-head {
@@ -1325,6 +1425,20 @@ h2 {
   .pub-head,
   .pub-row {
     grid-template-columns: 56px 1fr;
+  }
+
+  .recent-pub-carousel {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .recent-pub-nav {
+    display: none;
+  }
+
+  .recent-pub-card {
+    flex-basis: calc((100% - 0.8rem) / 1.2);
+    min-width: 260px;
   }
 
   .member-carousel {

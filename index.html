@@ -38,10 +38,10 @@
       <nav class="nav">
         <a href="#about">About</a>
         <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
+        <a href="./publication.html">Publications</a>
         <a href="#professor">Professor</a>
         <a href="#members">Members</a>
-        <a href="#gallery">Gallery</a>
+        <a href="./gallery.html">Gallery</a>
       </nav>
       <a class="header-cta" href="#contact">Contact</a>
     </header>
@@ -136,37 +136,18 @@
             <p class="eyebrow">Publications</p>
             <h2>Recent Entries</h2>
           </div>
-          <a class="btn btn-ghost" href="./publication.html">Open Full Archive</a>
+          <a class="btn btn-contrast" href="./publication.html">Open Full Publication</a>
         </div>
-        <div class="pub-board">
-          <div class="pub-head">
-            <span class="col-no">No</span>
-            <span class="col-title">Title / Journal / Authors</span>
+        <div class="recent-pub-carousel" data-recent-pub-carousel>
+          <button class="recent-pub-nav prev" type="button" aria-label="Previous publication">&#10094;</button>
+          <div class="recent-pub-viewport" data-recent-pub-viewport>
+            <div class="recent-pub-track" id="recentPubTrack">
+              <article class="recent-pub-card is-loading">
+                <p class="publication-authors">Loading recent publications...</p>
+              </article>
+            </div>
           </div>
-          <article class="pub-row">
-            <span class="pub-no">05</span>
-            <div class="pub-body">
-              <h3>Nanostructures of tetra-arm Poly(ethylene glycol) networks by Iron(III)-Catechol coordinative crosslinking units</h3>
-              <p class="publication-journal">Polymer 348 (2026) 173117</p>
-              <p class="publication-authors">Jungju Ryu et al.</p>
-            </div>
-          </article>
-          <article class="pub-row">
-            <span class="pub-no">04</span>
-            <div class="pub-body">
-              <h3>Electrochemical separation-enhanced SERS signals of urinary metabolites for improved pancreatic cancer detection</h3>
-              <p class="publication-journal">Chemical Engineering Journal 529 (2026)</p>
-              <p class="publication-authors">Woosuk Sohng et al.</p>
-            </div>
-          </article>
-          <article class="pub-row">
-            <span class="pub-no">03</span>
-            <div class="pub-body">
-              <h3>Noninvasive Nicotine Quantitation and Flavor Differentiation of on! Nicotine Pouches Using Raman Spectroscopy</h3>
-              <p class="publication-journal">ACS Omega 11(3), 3866-3874 (2026)</p>
-              <p class="publication-authors">Yoonji Kim et al.</p>
-            </div>
-          </article>
+          <button class="recent-pub-nav next" type="button" aria-label="Next publication">&#10095;</button>
         </div>
       </section>
 
@@ -176,7 +157,6 @@
             <p class="eyebrow">Professor</p>
             <h2>Hoeil Chung</h2>
           </div>
-          <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/01.php?sub=1">Original Profile</a>
         </div>
         <article class="professor-card">
           <img src="./assets/prof-hoeil-chung-portrait.jpg" alt="Professor Hoeil Chung portrait" />
@@ -222,7 +202,7 @@
             <p class="eyebrow">Members</p>
             <h2>Team</h2>
           </div>
-          <a class="btn btn-ghost" href="./alumni.html">Alumni Archive</a>
+          <a class="btn btn-contrast" href="./alumni.html">Alumni Archive</a>
         </div>
 
         <div class="member-carousel" data-member-carousel>
@@ -250,7 +230,7 @@
             <p class="eyebrow">Gallery</p>
             <h2>Lab Activities</h2>
           </div>
-          <a class="btn btn-ghost" href="./gallery.html">Open Full Gallery</a>
+          <a class="btn btn-contrast" href="./gallery.html">Open Full Gallery</a>
         </div>
         <div class="gallery-grid">
           <figure><img src="./assets/gallery-1.svg" alt="ASL Gallery Preview 1" /><figcaption>2026 Commencement</figcaption></figure>
