@@ -55,7 +55,9 @@
       </div>
       <div class="author-modal-layout">
         <aside class="author-profile">
-          <div class="author-photo-slot" aria-label="Profile image placeholder">Profile Image</div>
+          <div class="author-photo-slot">
+            <img id="authorProfileImage" class="author-photo" src="./assets/publication-placeholder.svg" alt="Author profile image" loading="lazy" />
+          </div>
           <p class="author-profile-name" id="authorProfileName">-</p>
           <p class="author-profile-affil" id="authorProfileAffil">Hanyang University</p>
           <div class="author-profile-metrics">
@@ -85,6 +87,7 @@
         const authorProfileCitationsEl = document.getElementById("authorProfileCitations");
         const authorProfileScholarLinkEl = document.getElementById("authorProfileScholarLink");
         const authorProfileScopusLinkEl = document.getElementById("authorProfileScopusLink");
+        const authorProfileImageEl = document.getElementById("authorProfileImage");
         const JOURNAL_IF_RULES = [
           { re: /\banalytica chimica acta\b/i, value: "6.0" },
           { re: /\btalanta\b/i, value: "6.1" },
@@ -165,6 +168,8 @@
         ];
         const citationCache = new Map();
         const authorMetricCache = new Map();
+        const memberPhotoMap = new Map();
+        const PROFILE_FALLBACK_IMAGE = "./assets/publication-placeholder.svg";
         const fmt = (v) => (Number.isFinite(Number(v)) ? Number(v).toLocaleString() : v);
         const authorsToEntries = new Map();
         let allData = {};
@@ -200,6 +205,35 @@
           return [...aliases].filter(Boolean);
         };
         const MEMBER_INDEX = MEMBER_NAMES.map((name) => ({ name, aliases: makeNameAliases(name) }));
+        const putMemberPhoto = (name, image) => {
+          const key = normalizeName(name);
+          if (!key || !image || memberPhotoMap.has(key)) return;
+          memberPhotoMap.set(key, image);
+        };
+        const buildMemberPhotoMap = (memberPayload) => {
+          memberPhotoMap.clear();
+          const currentMembers = Array.isArray(memberPayload?.current_members) ? memberPayload.current_members : [];
+          const alumniMembers = Array.isArray(memberPayload?.alumni) ? memberPayload.alumni : [];
+          [...currentMembers, ...alumniMembers].forEach((member) => {
+            const image = String(member?.image || "").trim();
+            if (!image) return;
+            putMemberPhoto(member.name, image);
+            makeNameAliases(member.name).forEach((alias) => {
+              if (!alias || memberPhotoMap.has(alias)) return;
+              memberPhotoMap.set(alias, image);
+            });
+          });
+        };
+        const getMemberProfileImage = (authorName = "") => {
+          const exact = memberPhotoMap.get(normalizeName(authorName));
+          if (exact) return exact;
+          const resolved = resolveMember(authorName);
+          if (resolved) {
+            const matched = memberPhotoMap.get(normalizeName(resolved.name));
+            if (matched) return matched;
+          }
+          return PROFILE_FALLBACK_IMAGE;
+        };
         const esc = (value = "") =>
           String(value)
             .replaceAll("&", "&amp;")
@@ -487,6 +521,9 @@
           );
           modalTitleEl.textContent = `${authorName} - Publications`;
           authorProfileNameEl.textContent = authorName;
+          const profileImage = getMemberProfileImage(authorName);
+          authorProfileImageEl.src = profileImage;
+          authorProfileImageEl.alt = `${authorName} profile image`;
           authorProfileHIndexEl.textContent = "H-index: loading...";
           authorProfileWorksEl.textContent = "Works: -";
           authorProfileCitationsEl.textContent = "Citations: -";
@@ -614,10 +651,13 @@
           renderEntries(year, allData[year] || []);
         };
 
-        fetch("./assets/publication-data.json")
-          .then((r) => r.json())
-          .then((payload) => {
+        Promise.all([
+          fetch("./assets/publication-data.json").then((r) => r.json()),
+          fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
+        ])
+          .then(([payload, memberPayload]) => {
             allData = payload;
+            buildMemberPhotoMap(memberPayload);
             Object.keys(allData).forEach((year) => {
               allData[year].forEach((item, idx) => {
                 item.year = year;

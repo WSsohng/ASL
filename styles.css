@@ -940,6 +940,16 @@ h2 {
   color: #a8b9df;
   font-size: 0.86rem;
   letter-spacing: 0.03em;
+  overflow: hidden;
+  background: rgba(10, 18, 36, 0.35);
+}
+
+.author-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 170px;
+  object-fit: cover;
+  display: block;
 }
 
 .author-profile-name {
