@@ -10,6 +10,8 @@
   --glow-b: rgba(112, 149, 236, 0.11);
   --scroll-p: 0;
   --trail-p: 0;
+  --disp-p: 0;
+  --disp-alpha: 0;
   --section-boost: 0.25;
 }
 
@@ -92,11 +94,11 @@ body::after {
 
 .spectral-path {
   position: absolute;
-  left: 10%;
-  top: 16%;
+  left: 4%;
+  top: 8%;
   width: 112vw;
   height: 0;
-  transform: rotate(-14deg);
+  transform: rotate(23deg);
   transform-origin: left center;
 }
 
@@ -145,9 +147,9 @@ body::after {
 
 .spectral-dispersion {
   position: absolute;
-  left: calc(var(--trail-p) * 74vw);
+  left: calc(var(--disp-p) * 74vw);
   top: -2px;
-  width: calc((0.08 + var(--trail-p)) * 34vw);
+  width: calc((0.04 + var(--disp-p)) * 28vw);
   height: 230px;
   transform: rotate(16deg);
   transform-origin: left top;
@@ -163,7 +165,7 @@ body::after {
     rgba(255, 95, 125, 0.28) 100%
   );
   filter: blur(11px) saturate(1.16);
-  opacity: calc(0.08 + var(--section-boost) * 0.24);
+  opacity: calc(var(--disp-alpha) * (0.22 + var(--section-boost) * 0.22));
 }
 
 .spectral-peaks {
@@ -725,7 +727,7 @@ h2 {
   }
 
   .spectral-dispersion {
-    width: calc((0.08 + var(--trail-p)) * 32vw);
+    width: calc((0.04 + var(--disp-p)) * 24vw);
     height: 180px;
   }
 
@@ -770,7 +772,7 @@ h2 {
   }
 
   .spectral-dispersion {
-    width: calc((0.08 + var(--trail-p)) * 26vw);
+    width: calc((0.04 + var(--disp-p)) * 22vw);
     height: 140px;
   }
 
