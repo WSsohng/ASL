@@ -403,6 +403,11 @@ h2 {
   color: #13151a;
 }
 
+.rc-5 {
+  background: #8b9aac;
+  color: #111924;
+}
+
 .card-no {
   margin: 0;
   justify-self: center;
@@ -476,6 +481,12 @@ h2 {
     radial-gradient(circle at 52% 52%, rgba(17, 18, 22, 0.2), transparent 65%);
 }
 
+.p-lattice {
+  background:
+    repeating-linear-gradient(60deg, rgba(19, 26, 37, 0.48) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(-60deg, rgba(19, 26, 37, 0.48) 0 2px, transparent 2px 13px);
+}
+
 .rc-1 h3 {
   color: #f3f6ff;
 }
@@ -486,13 +497,15 @@ h2 {
 
 .rc-2 h3,
 .rc-3 h3,
-.rc-4 h3 {
+.rc-4 h3,
+.rc-5 h3 {
   color: rgba(12, 15, 20, 0.92);
 }
 
 .rc-2 p,
 .rc-3 p,
-.rc-4 p {
+.rc-4 p,
+.rc-5 p {
   color: rgba(17, 21, 29, 0.88);
 }
 
