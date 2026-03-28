@@ -591,6 +591,66 @@ h2 {
   font-size: 0.9rem;
 }
 
+.professor-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(18, 23, 33, 0.94), rgba(10, 13, 19, 0.94));
+}
+
+.professor-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 340px;
+}
+
+.professor-meta {
+  padding: 1.1rem 1.2rem;
+}
+
+.professor-role {
+  margin: 0;
+  font-size: 0.96rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #c5d1eb;
+}
+
+.professor-copy {
+  margin: 0.75rem 0 0;
+  line-height: 1.7;
+  color: #d7deef;
+}
+
+.professor-list {
+  margin: 0.85rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: #b5c1db;
+  line-height: 1.55;
+}
+
+.professor-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.professor-links a {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.38rem 0.6rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #dee7ff;
+}
+
 .members-section .section-head {
   margin-bottom: 1rem;
 }
@@ -811,6 +871,15 @@ h2 {
   .spectral-diffraction {
     width: calc(var(--diff-p) * 38vw);
     height: 50px;
+  }
+
+  .professor-card {
+    grid-template-columns: 1fr;
+  }
+
+  .professor-card img {
+    min-height: 280px;
+    max-height: 360px;
   }
 
   .member-card {
