@@ -759,6 +759,54 @@ h2 {
   max-height: calc(78vh - 60px);
 }
 
+.author-modal-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 360px;
+}
+
+.author-profile {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.95rem 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.author-photo-slot {
+  border: 1px dashed rgba(173, 192, 235, 0.5);
+  border-radius: 0.6rem;
+  min-height: 170px;
+  display: grid;
+  place-items: center;
+  color: #a8b9df;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+}
+
+.author-profile-name {
+  margin: 0.6rem 0 0;
+  font-size: 1rem;
+  color: #ecf2ff;
+}
+
+.author-profile-affil {
+  margin: 0.3rem 0 0;
+  color: #a9b8da;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.author-profile-metrics {
+  margin-top: 0.55rem;
+  display: grid;
+  gap: 0.24rem;
+}
+
+.author-profile-metrics p {
+  margin: 0;
+  color: #d6e1fb;
+  font-size: 0.88rem;
+}
+
 .author-paper-item {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.7rem;
@@ -892,6 +940,34 @@ h2 {
   gap: 0.55rem;
 }
 
+.professor-metrics {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.3rem;
+  color: #d4def6;
+  font-size: 0.93rem;
+}
+
+.professor-chart-wrap {
+  margin-top: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.professor-chart-wrap h3 {
+  margin: 0 0 0.45rem;
+  font-size: 0.9rem;
+  color: #c7d3ef;
+}
+
+.professor-chart-wrap canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .professor-links a {
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.38rem 0.6rem;
@@ -961,6 +1037,7 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.12);
   scroll-snap-align: start;
   transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  cursor: pointer;
 }
 
 .member-card:hover {
@@ -1221,6 +1298,15 @@ h2 {
   .pub-entry-media img {
     min-height: 170px;
     max-height: none;
+  }
+
+  .author-modal-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .author-profile {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .spectral-beam {

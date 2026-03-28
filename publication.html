@@ -52,7 +52,21 @@
         <h2 id="authorModalTitle">Author</h2>
         <button id="authorModalClose" type="button" aria-label="Close">x</button>
       </div>
-      <div id="authorModalBody" class="author-modal-body"></div>
+      <div class="author-modal-layout">
+        <aside class="author-profile">
+          <div class="author-photo-slot" aria-label="Profile image placeholder">Profile Image</div>
+          <p class="author-profile-name" id="authorProfileName">-</p>
+          <p class="author-profile-affil" id="authorProfileAffil">Hanyang University</p>
+          <div class="author-profile-metrics">
+            <p id="authorProfileHIndex">H-index: loading...</p>
+            <p id="authorProfileWorks">Works: -</p>
+            <p id="authorProfileCitations">Citations: -</p>
+          </div>
+          <a id="authorProfileScholarLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Open Google Scholar Query</a>
+          <a id="authorProfileScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Check on Scopus Author Search</a>
+        </aside>
+        <div id="authorModalBody" class="author-modal-body"></div>
+      </div>
     </dialog>
 
     <script>
@@ -63,6 +77,13 @@
         const modalTitleEl = document.getElementById("authorModalTitle");
         const modalBodyEl = document.getElementById("authorModalBody");
         const modalCloseBtn = document.getElementById("authorModalClose");
+        const authorProfileNameEl = document.getElementById("authorProfileName");
+        const authorProfileAffilEl = document.getElementById("authorProfileAffil");
+        const authorProfileHIndexEl = document.getElementById("authorProfileHIndex");
+        const authorProfileWorksEl = document.getElementById("authorProfileWorks");
+        const authorProfileCitationsEl = document.getElementById("authorProfileCitations");
+        const authorProfileScholarLinkEl = document.getElementById("authorProfileScholarLink");
+        const authorProfileScopusLinkEl = document.getElementById("authorProfileScopusLink");
         const JOURNAL_IF_RULES = [
           { re: /\banalytica chimica acta\b/i, value: "6.0" },
           { re: /\btalanta\b/i, value: "6.1" },
@@ -77,6 +98,7 @@
           { re: /\bacs applied materials & interfaces\b/i, value: "9.5" }
         ];
         const citationCache = new Map();
+        const authorMetricCache = new Map();
         const authorsToEntries = new Map();
         let allData = {};
         const MEMBER_NAMES = [
@@ -135,6 +157,60 @@
             .split(",")
             .map((v) => v.trim())
             .filter(Boolean);
+        const splitName = (name = "") => {
+          const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
+          return { first: parts[0] || "", last: parts[parts.length - 1] || "" };
+        };
+        const getScopusSearchUrl = (name = "") => {
+          const { first, last } = splitName(name);
+          const query = `${last} ${first} hanyang`;
+          return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
+        };
+        const fetchAuthorMetrics = async (authorName) => {
+          if (authorMetricCache.has(authorName)) return authorMetricCache.get(authorName);
+          const url = `https://api.openalex.org/authors?search=${encodeURIComponent(authorName)}&per-page=25`;
+          const fallback = { hIndex: "-", works: "-", citations: "-", affiliation: "Hanyang University", source: "fallback" };
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("openalex_fetch_failed");
+            const data = await res.json();
+            const candidates = Array.isArray(data?.results) ? data.results : [];
+            if (!candidates.length) {
+              authorMetricCache.set(authorName, fallback);
+              return fallback;
+            }
+            const nameNorm = normalizeName(authorName);
+            const scoreCandidate = (candidate) => {
+              const display = normalizeName(candidate?.display_name || "");
+              const inst = (candidate?.last_known_institutions || [])
+                .map((x) => x?.display_name || "")
+                .join(" ")
+                .toLowerCase();
+              let score = 0;
+              if (display === nameNorm) score += 5;
+              if (display.includes(nameNorm) || nameNorm.includes(display)) score += 3;
+              if (inst.includes("hanyang")) score += 4;
+              return score;
+            };
+            candidates.sort((a, b) => scoreCandidate(b) - scoreCandidate(a));
+            const best = candidates[0];
+            const affiliation =
+              (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") ||
+              "Hanyang University";
+            const out = {
+              hIndex: best?.summary_stats?.h_index ?? "-",
+              works: best?.works_count ?? "-",
+              citations: best?.cited_by_count ?? "-",
+              affiliation,
+              source: "openalex"
+            };
+            authorMetricCache.set(authorName, out);
+            return out;
+          } catch {
+            authorMetricCache.set(authorName, fallback);
+            return fallback;
+          }
+        };
         const resolveMember = (authorToken = "") => {
           const normalized = normalizeName(authorToken);
           if (!normalized) return null;
@@ -153,6 +229,13 @@
               return `<button class="author-chip" type="button" data-author="${esc(member.name)}">${esc(token)}</button>`;
             })
             .join('<span class="author-sep">, </span>');
+        };
+        const getDisplayAuthors = (item) => {
+          const candidate = (item.authors_marked || "").trim();
+          if (!candidate) return item.authors || "";
+          if (/\b(19|20)\d{2}\b/.test(candidate)) return item.authors || "";
+          if (candidate.length > 420) return item.authors || "";
+          return candidate;
         };
         const normalizeTitle = (title = "") =>
           title
@@ -234,11 +317,18 @@
             window.setTimeout(() => target.classList.remove("is-flash"), 1300);
           });
         };
-        const openAuthorModal = (authorName) => {
+        const openAuthorModal = async (authorName) => {
           const rows = (authorsToEntries.get(authorName) || []).sort(
             (a, b) => orderForYear(b.year) - orderForYear(a.year)
           );
           modalTitleEl.textContent = `${authorName} - Publications`;
+          authorProfileNameEl.textContent = authorName;
+          authorProfileHIndexEl.textContent = "H-index: loading...";
+          authorProfileWorksEl.textContent = "Works: -";
+          authorProfileCitationsEl.textContent = "Citations: -";
+          authorProfileAffilEl.textContent = "Hanyang University";
+          authorProfileScholarLinkEl.href = `https://scholar.google.com/scholar?q=${encodeURIComponent(`${authorName} hanyang`)}`;
+          authorProfileScopusLinkEl.href = getScopusSearchUrl(authorName);
           if (!rows.length) {
             modalBodyEl.innerHTML = '<p class="publication-authors">No entries found.</p>';
           } else {
@@ -265,12 +355,17 @@
               .join("");
           }
           if (!modalEl.open) modalEl.showModal();
+          const metrics = await fetchAuthorMetrics(authorName);
+          authorProfileHIndexEl.textContent = `H-index: ${metrics.hIndex}`;
+          authorProfileWorksEl.textContent = `Works: ${metrics.works}`;
+          authorProfileCitationsEl.textContent = `Citations: ${metrics.citations}`;
+          authorProfileAffilEl.textContent = metrics.affiliation || "Hanyang University";
         };
         const closeAuthorModal = () => {
           if (modalEl.open) modalEl.close();
         };
         const indexAuthors = (entry) => {
-          const tokens = splitAuthors(entry.authors || "");
+          const tokens = splitAuthors(getDisplayAuthors(entry));
           const seen = new Set();
           tokens.forEach((token) => {
             const member = resolveMember(token);
@@ -293,7 +388,8 @@
               const title = esc(item.title || "Untitled record");
               const journalRaw = item.journal || "";
               const journal = esc(journalRaw);
-              const authorsHtml = renderAuthors(item.authors || "");
+              const authorsDisplay = getDisplayAuthors(item);
+              const authorsHtml = renderAuthors(authorsDisplay);
               const pdf = item.pdf || "";
               const img = item.images && item.images.length ? item.images[0] : "";
               const ifValue = getJournalIF(journalRaw);

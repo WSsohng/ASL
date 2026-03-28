@@ -193,6 +193,15 @@
               <li>Professor at Hanyang University since 2002</li>
               <li>200+ peer-reviewed publications; ICNIRS PAC Elected Member (2023-2027)</li>
             </ul>
+            <div class="professor-metrics" id="professorMetrics">
+              <p id="profHIndex">H-index: loading...</p>
+              <p id="profWorks">Total Works: -</p>
+              <p id="profCitations">Total Citations: -</p>
+            </div>
+            <div class="professor-chart-wrap">
+              <h3>Publication Trend by Year</h3>
+              <canvas id="profPublicationChart" width="760" height="220" aria-label="Professor publication trend chart"></canvas>
+            </div>
             <div class="professor-links">
               <a href="https://chem.hanyang.ac.kr/%EA%B5%90%EC%88%98_%EC%86%8C%EA%B0%9C">Department Profile</a>
               <a href="https://icnirs.org/overview/advisory-committee/">ICNIRS PAC</a>
@@ -215,15 +224,15 @@
           <button class="member-nav prev" type="button" aria-label="Previous members">&#10094;</button>
           <div class="member-viewport" data-member-viewport>
             <div class="member-track">
-              <article class="member-card"><div class="member-avatar">BT</div><h3>Bui Thu Thuy</h3><p>Postdoctoral Researcher</p></article>
-              <article class="member-card"><div class="member-avatar">YK</div><h3>Yunjung Kim</h3><p>Postdoctoral Researcher</p></article>
-              <article class="member-card"><div class="member-avatar">HJ</div><h3>Haeseong Jeong</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">SJ</div><h3>Seongsoo Jeong</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">EJ</div><h3>Eunbi Jang</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">SK</div><h3>Sangjae Kim</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">JP</div><h3>Juyoung Park</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">JK</div><h3>Junhee Kim</h3><p>Ph.D. Candidate</p></article>
-              <article class="member-card"><div class="member-avatar">YC</div><h3>Younghum Cho</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Bui Thu Thuy"><div class="member-avatar">BT</div><h3>Bui Thu Thuy</h3><p>Postdoctoral Researcher</p></article>
+              <article class="member-card" data-member-name="Yunjung Kim"><div class="member-avatar">YK</div><h3>Yunjung Kim</h3><p>Postdoctoral Researcher</p></article>
+              <article class="member-card" data-member-name="Haeseong Jeong"><div class="member-avatar">HJ</div><h3>Haeseong Jeong</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Seongsoo Jeong"><div class="member-avatar">SJ</div><h3>Seongsoo Jeong</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Eunbi Jang"><div class="member-avatar">EJ</div><h3>Eunbi Jang</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Sangjae Kim"><div class="member-avatar">SK</div><h3>Sangjae Kim</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Juyoung Park"><div class="member-avatar">JP</div><h3>Juyoung Park</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Junhee Kim"><div class="member-avatar">JK</div><h3>Junhee Kim</h3><p>Ph.D. Candidate</p></article>
+              <article class="member-card" data-member-name="Younghum Cho"><div class="member-avatar">YC</div><h3>Younghum Cho</h3><p>Ph.D. Candidate</p></article>
             </div>
           </div>
           <button class="member-nav next" type="button" aria-label="Next members">&#10095;</button>
@@ -257,6 +266,27 @@
       </p>
       <a href="mailto:hoeil@hanyang.ac.kr">hoeil@hanyang.ac.kr</a>
     </footer>
+    <dialog id="memberAuthorModal" class="author-modal">
+      <div class="author-modal-head">
+        <h2 id="memberAuthorModalTitle">Author</h2>
+        <button id="memberAuthorModalClose" type="button" aria-label="Close">x</button>
+      </div>
+      <div class="author-modal-layout">
+        <aside class="author-profile">
+          <div class="author-photo-slot" aria-label="Profile image placeholder">Profile Image</div>
+          <p class="author-profile-name" id="memberProfileName">-</p>
+          <p class="author-profile-affil" id="memberProfileAffil">Hanyang University</p>
+          <div class="author-profile-metrics">
+            <p id="memberProfileHIndex">H-index: loading...</p>
+            <p id="memberProfileWorks">Works: -</p>
+            <p id="memberProfileCitations">Citations: -</p>
+          </div>
+          <a id="memberProfileScholarLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Open Google Scholar Query</a>
+          <a id="memberProfileScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Check on Scopus Author Search</a>
+        </aside>
+        <div id="memberAuthorModalBody" class="author-modal-body"></div>
+      </div>
+    </dialog>
 
     <script src="./script.js"></script>
   </body>

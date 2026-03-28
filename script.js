@@ -165,3 +165,272 @@ if (memberCarousel) {
     updateNavState();
   }
 }
+
+(() => {
+  const modalEl = document.getElementById("memberAuthorModal");
+  if (!modalEl) return;
+
+  const modalTitleEl = document.getElementById("memberAuthorModalTitle");
+  const modalCloseBtn = document.getElementById("memberAuthorModalClose");
+  const modalBodyEl = document.getElementById("memberAuthorModalBody");
+  const profileNameEl = document.getElementById("memberProfileName");
+  const profileAffilEl = document.getElementById("memberProfileAffil");
+  const profileHIndexEl = document.getElementById("memberProfileHIndex");
+  const profileWorksEl = document.getElementById("memberProfileWorks");
+  const profileCitationsEl = document.getElementById("memberProfileCitations");
+  const profileScholarLinkEl = document.getElementById("memberProfileScholarLink");
+  const profileScopusLinkEl = document.getElementById("memberProfileScopusLink");
+  const profHIndexEl = document.getElementById("profHIndex");
+  const profWorksEl = document.getElementById("profWorks");
+  const profCitationsEl = document.getElementById("profCitations");
+  const profChartEl = document.getElementById("profPublicationChart");
+
+  const esc = (value = "") =>
+    String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  const normalizeName = (s = "") =>
+    String(s)
+      .toLowerCase()
+      .replace(/[\u2020*]/g, "")
+      .replace(/\d+/g, "")
+      .replace(/[^a-z]/g, "");
+  const splitAuthors = (authorText = "") =>
+    authorText
+      .split(",")
+      .map((v) => v.trim())
+      .filter(Boolean);
+  const getDisplayAuthors = (item) => {
+    const candidate = (item.authors_marked || "").trim();
+    if (!candidate) return item.authors || "";
+    if (/\b(19|20)\d{2}\b/.test(candidate)) return item.authors || "";
+    if (candidate.length > 420) return item.authors || "";
+    return candidate;
+  };
+  const splitName = (name = "") => {
+    const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
+    return { first: parts[0] || "", last: parts[parts.length - 1] || "" };
+  };
+  const getScopusSearchUrl = (name = "") => {
+    const { first, last } = splitName(name);
+    const query = `${last} ${first} hanyang`;
+    return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
+  };
+
+  const memberNames = [
+    "Hoeil Chung",
+    "Bui Thu Thuy", "Yunjung Kim", "Haeseong Jeong", "Seongsoo Jeong", "Eunbi Jang",
+    "Sangjae Kim", "Juyoung Park", "Junhee Kim", "Younghum Cho",
+    "Su-youn Han", "Minsik Hwang", "Soohwa Cho", "Seungjae Lee", "Young su Kim", "Youngbok Lee",
+    "Sanghee Nah", "Chulwon Kwak", "Jintae Han", "Seokchan Park", "Minjung Kim", "Kyungtag Ryu",
+    "Jiyoung Park", "Yongdan Kim", "Changyong Oh", "Jaejin Kim", "Hankyu Namkung", "Yeojin Lee",
+    "Mooeung Kim", "Tran Ngoc Huan", "Jihye Yoon", "Sanguk Lee", "Kayeong Shin", "Jinah Lee",
+    "Saetbyeol Kim", "Jinyoung Hwang", "Pham Khac Duy", "Seul-a Jeon", "Dong-hwi Kim",
+    "Dong-hyun Ryoo", "Rehab Eid Al-Rashidy", "Chang Kyeol", "Tshishimbi Muya, Jules C",
+    "Daun Seol", "Vu Duy Tung", "Youngtaek Ma", "Chang Hwan Eum", "Yoonjeong Lee",
+    "Euna Chong", "Eunjin Jang", "Woosuk Sohng", "Sang hoon Cho", "Yoonji Kim"
+  ];
+
+  const makeAliases = (name) => {
+    const clean = name.replace(",", " ").replace(/\s+/g, " ").trim();
+    const tokens = clean.split(" ").filter(Boolean);
+    const aliases = new Set([normalizeName(clean), normalizeName(name)]);
+    if (tokens.length >= 2) {
+      aliases.add(normalizeName(`${tokens[0]} ${tokens[tokens.length - 1]}`));
+      aliases.add(normalizeName(`${tokens[tokens.length - 1]} ${tokens[0]}`));
+      aliases.add(normalizeName(`${tokens[0][0]} ${tokens[tokens.length - 1]}`));
+    }
+    if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
+    return [...aliases].filter(Boolean);
+  };
+  const memberIndex = memberNames.map((name) => ({ name, aliases: makeAliases(name) }));
+  const metricCache = new Map();
+  const authorToPapers = new Map();
+  let publicationData = {};
+
+  const resolveMember = (authorToken = "") => {
+    const normalized = normalizeName(authorToken);
+    if (!normalized) return null;
+    return (
+      memberIndex.find((member) =>
+        member.aliases.some((alias) => alias === normalized || normalized.includes(alias))
+      ) || null
+    );
+  };
+
+  const fetchAuthorMetrics = async (authorName) => {
+    if (metricCache.has(authorName)) return metricCache.get(authorName);
+    const url = `https://api.openalex.org/authors?search=${encodeURIComponent(authorName)}&per-page=25`;
+    const fallback = { hIndex: "-", works: "-", citations: "-", affiliation: "Hanyang University" };
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("openalex_fetch_failed");
+      const data = await res.json();
+      const results = Array.isArray(data?.results) ? data.results : [];
+      if (!results.length) {
+        metricCache.set(authorName, fallback);
+        return fallback;
+      }
+      const nameNorm = normalizeName(authorName);
+      const score = (candidate) => {
+        const display = normalizeName(candidate?.display_name || "");
+        const inst = (candidate?.last_known_institutions || [])
+          .map((x) => x?.display_name || "")
+          .join(" ")
+          .toLowerCase();
+        let s = 0;
+        if (display === nameNorm) s += 5;
+        if (display.includes(nameNorm) || nameNorm.includes(display)) s += 3;
+        if (inst.includes("hanyang")) s += 4;
+        return s;
+      };
+      results.sort((a, b) => score(b) - score(a));
+      const best = results[0];
+      const metrics = {
+        hIndex: best?.summary_stats?.h_index ?? "-",
+        works: best?.works_count ?? "-",
+        citations: best?.cited_by_count ?? "-",
+        affiliation:
+          (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") ||
+          "Hanyang University"
+      };
+      metricCache.set(authorName, metrics);
+      return metrics;
+    } catch {
+      metricCache.set(authorName, fallback);
+      return fallback;
+    }
+  };
+
+  const drawProfessorPublicationChart = () => {
+    if (!profChartEl || !publicationData || !publicationData["1995-1999"]) return;
+    const ctx = profChartEl.getContext("2d");
+    if (!ctx) return;
+
+    const years = Object.keys(publicationData)
+      .filter((y) => y !== "1995-1999")
+      .sort((a, b) => Number(a) - Number(b));
+    const counts = years.map((y) => (publicationData[y] || []).length);
+    if (!years.length) return;
+    const max = Math.max(...counts, 1);
+    const width = profChartEl.width;
+    const height = profChartEl.height;
+    const padX = 30;
+    const padY = 24;
+    const plotW = width - padX * 2;
+    const plotH = height - padY * 2;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#0f1420";
+    ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = "rgba(180, 202, 248, 0.35)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padX, height - padY);
+    ctx.lineTo(width - padX, height - padY);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(140, 170, 242, 0.95)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    counts.forEach((count, i) => {
+      const x = padX + (i / Math.max(counts.length - 1, 1)) * plotW;
+      const y = height - padY - (count / max) * plotH;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    ctx.fillStyle = "#dae6ff";
+    ctx.font = "12px Manrope";
+    ctx.fillText(`${years[0]}`, padX, height - 6);
+    ctx.fillText(`${years[years.length - 1]}`, width - padX - 30, height - 6);
+    ctx.fillText(`max ${max} papers/year`, padX, 14);
+  };
+
+  const renderMemberModal = async (name) => {
+    const rows = (authorToPapers.get(name) || []).sort((a, b) => Number(b.year) - Number(a.year));
+    modalTitleEl.textContent = `${name} - Publications`;
+    profileNameEl.textContent = name;
+    profileAffilEl.textContent = "Hanyang University";
+    profileHIndexEl.textContent = "H-index: loading...";
+    profileWorksEl.textContent = "Works: -";
+    profileCitationsEl.textContent = "Citations: -";
+    profileScholarLinkEl.href = `https://scholar.google.com/scholar?q=${encodeURIComponent(`${name} hanyang`)}`;
+    profileScopusLinkEl.href = getScopusSearchUrl(name);
+
+    if (!rows.length) {
+      modalBodyEl.innerHTML = '<p class="publication-authors">No publication entries matched for this member.</p>';
+    } else {
+      modalBodyEl.innerHTML = rows
+        .map(
+          (row) => `
+            <article class="author-paper-item">
+              <h3>${esc(row.title)}</h3>
+              <a class="author-paper-journal" href="./publication.html#${esc(row.year)}">${esc(row.journal || "Journal information")}</a>
+              <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
+              <p>${esc(row.authors || "")}</p>
+            </article>
+          `
+        )
+        .join("");
+    }
+    if (!modalEl.open) modalEl.showModal();
+    const metrics = await fetchAuthorMetrics(name);
+    profileHIndexEl.textContent = `H-index: ${metrics.hIndex}`;
+    profileWorksEl.textContent = `Works: ${metrics.works}`;
+    profileCitationsEl.textContent = `Citations: ${metrics.citations}`;
+    profileAffilEl.textContent = metrics.affiliation || "Hanyang University";
+  };
+
+  fetch("./assets/publication-data.json")
+    .then((r) => r.json())
+    .then(async (data) => {
+      publicationData = data;
+      Object.keys(data).forEach((year) => {
+        (data[year] || []).forEach((item) => {
+          const tokens = splitAuthors(getDisplayAuthors(item));
+          const seen = new Set();
+          tokens.forEach((token) => {
+            const member = resolveMember(token);
+            if (!member || seen.has(member.name)) return;
+            seen.add(member.name);
+            if (!authorToPapers.has(member.name)) authorToPapers.set(member.name, []);
+            authorToPapers.get(member.name).push({
+              year,
+              title: item.title || "",
+              journal: item.journal || "",
+              authors: getDisplayAuthors(item)
+            });
+          });
+        });
+      });
+
+      const profMetrics = await fetchAuthorMetrics("Hoeil Chung");
+      if (profHIndexEl) profHIndexEl.textContent = `H-index: ${profMetrics.hIndex}`;
+      if (profWorksEl) profWorksEl.textContent = `Total Works: ${profMetrics.works}`;
+      if (profCitationsEl) profCitationsEl.textContent = `Total Citations: ${profMetrics.citations}`;
+      drawProfessorPublicationChart();
+    })
+    .catch(() => {
+      if (profHIndexEl) profHIndexEl.textContent = "H-index: unavailable";
+    });
+
+  document.querySelectorAll(".member-card[data-member-name]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const name = card.getAttribute("data-member-name");
+      if (!name) return;
+      renderMemberModal(name);
+    });
+  });
+
+  modalCloseBtn.addEventListener("click", () => {
+    if (modalEl.open) modalEl.close();
+  });
+  modalEl.addEventListener("click", (e) => {
+    if (e.target === modalEl) modalEl.close();
+  });
+})();
