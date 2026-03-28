@@ -387,6 +387,16 @@ if (memberCarousel) {
       aliases.add(normalizeName(`${tokens[tokens.length - 1]} ${tokens[0]}`));
       aliases.add(normalizeName(`${tokens[0][0]} ${tokens[tokens.length - 1]}`));
     }
+    if (tokens.length === 3) {
+      const [a, b, c] = tokens;
+      [
+        `${a} ${c} ${b}`,
+        `${b} ${a} ${c}`,
+        `${b} ${c} ${a}`,
+        `${c} ${a} ${b}`,
+        `${c} ${b} ${a}`
+      ].forEach((variant) => aliases.add(normalizeName(variant)));
+    }
     if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
     return [...aliases].filter(Boolean);
   };
@@ -431,11 +441,16 @@ if (memberCarousel) {
   const resolveMember = (authorToken = "") => {
     const normalized = normalizeName(authorToken);
     if (!normalized) return null;
-    return (
-      memberIndex.find((member) =>
-        member.aliases.some((alias) => alias === normalized || normalized.includes(alias))
-      ) || null
+    const exact = memberIndex.find((member) => member.aliases.some((alias) => alias === normalized));
+    if (exact) return exact;
+    const near = memberIndex.find((member) =>
+      member.aliases.some((alias) => {
+        if (!alias || alias.length < 5) return false;
+        const delta = Math.abs(alias.length - normalized.length);
+        return delta <= 1 && (normalized.startsWith(alias) || alias.startsWith(normalized));
+      })
     );
+    return near || null;
   };
 
   const fetchAuthorMetrics = async (authorName) => {
