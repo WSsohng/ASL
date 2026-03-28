@@ -33,6 +33,9 @@
         <div>
           <p class="eyebrow">Publications</p>
           <h1>Publication Archive (1995-2026)</h1>
+          <p class="publication-authors">
+            Records are normalized with authorship-focused curation (Hoeil Chung-included entries).
+          </p>
         </div>
         <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/02.php?sub=2">Original Board</a>
       </div>
@@ -86,12 +89,12 @@
                 <article class="pub-entry">
                   <div class="pub-entry-no">${no}</div>
                   <div class="pub-entry-main">
+                    ${imgHtml}
                     <h3 class="pub-entry-title">${title}</h3>
                     <p class="pub-entry-journal">${journal}</p>
                     <p class="pub-entry-authors">${authors}</p>
                     <div class="pub-entry-actions">${pdfHtml}</div>
                   </div>
-                  ${imgHtml}
                 </article>
               `;
             })

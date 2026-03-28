@@ -622,9 +622,9 @@ h2 {
 
 .pub-entry {
   display: grid;
-  grid-template-columns: 64px 1fr 220px;
+  grid-template-columns: 64px 1fr;
   gap: 1rem;
-  padding: 1rem 0.75rem;
+  padding: 1.15rem 0.75rem 1.25rem;
   border-bottom: 1px solid var(--line);
   align-items: start;
 }
@@ -638,9 +638,9 @@ h2 {
 }
 
 .pub-entry-title {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.45;
+  margin: 0.7rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
 }
 
 .pub-entry-journal {
@@ -657,7 +657,7 @@ h2 {
 }
 
 .pub-entry-actions {
-  margin-top: 0.55rem;
+  margin-top: 0.7rem;
 }
 
 .pub-entry-link {
@@ -671,14 +671,18 @@ h2 {
 .pub-entry-media {
   margin: 0;
   border: 1px solid var(--line);
-  border-radius: 0.45rem;
+  border-radius: 0.6rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
 }
 
 .pub-entry-media img {
   width: 100%;
-  height: auto;
+  min-height: 260px;
+  max-height: 460px;
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -1020,7 +1024,6 @@ h2 {
 
   .pub-entry-media {
     grid-column: 2;
-    max-width: 300px;
   }
 }
 
@@ -1086,7 +1089,11 @@ h2 {
 
   .pub-entry-media {
     grid-column: auto;
-    max-width: none;
+  }
+
+  .pub-entry-media img {
+    min-height: 210px;
+    max-height: none;
   }
 
   .spectral-beam {
