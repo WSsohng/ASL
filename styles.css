@@ -591,27 +591,37 @@ h2 {
   font-size: 0.9rem;
 }
 
-.member-stats {
+.member-roster {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
-.member-stats div {
+.member-group {
   border: 1px solid var(--line);
   padding: 1rem;
   background: var(--panel);
 }
 
-.member-stats strong {
+.member-group h3 {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.65rem;
 }
 
-.member-stats span {
+.member-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.member-group li {
   color: var(--muted);
-  display: block;
-  margin-top: 0.2rem;
+  line-height: 1.45;
 }
 
 .site-footer {
@@ -741,7 +751,7 @@ h2 {
     grid-template-columns: 56px 1fr;
   }
 
-  .member-stats {
+  .member-roster {
     grid-template-columns: 1fr;
   }
 
