@@ -228,6 +228,29 @@
             .split(",")
             .map((v) => v.trim())
             .filter(Boolean);
+        const parseAuthorToken = (token = "") => {
+          let raw = String(token).replace(/\s+/g, " ").trim();
+          raw = raw
+            .replaceAll("†", "^1")
+            .replaceAll("‡", "^1")
+            .replace(/\s+1$/, "^1")
+            .replace(/\s+\*$/, "*")
+            .replace(/\s+\^1$/, "^1");
+          const markerMatch = raw.match(/(\^1|\*)+$/);
+          const markers = markerMatch ? markerMatch[0] : "";
+          const base = markers ? raw.slice(0, -markers.length).trim() : raw;
+          return {
+            base,
+            hasEqualContribution: markers.includes("^1"),
+            hasCorresponding: markers.includes("*")
+          };
+        };
+        const renderAuthorLabel = (token = "") => {
+          const parsed = parseAuthorToken(token);
+          const eq = parsed.hasEqualContribution ? "<sup>1</sup>" : "";
+          const corr = parsed.hasCorresponding ? "<sup>*</sup>" : "";
+          return `${esc(parsed.base)}${eq}${corr}`;
+        };
         const splitName = (name = "") => {
           const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
           return { first: parts[0] || "", last: parts[parts.length - 1] || "" };
@@ -353,9 +376,11 @@
           const tokens = splitAuthors(authorText);
           return tokens
             .map((token) => {
-              const member = resolveMember(token);
-              if (!member) return `<span class="author-plain">${esc(token)}</span>`;
-              return `<button class="author-chip" type="button" data-author="${esc(member.name)}">${esc(token)}</button>`;
+              const parsed = parseAuthorToken(token);
+              const member = resolveMember(parsed.base);
+              const label = renderAuthorLabel(token);
+              if (!member) return `<span class="author-plain">${label}</span>`;
+              return `<button class="author-chip" type="button" data-author="${esc(member.name)}">${label}</button>`;
             })
             .join('<span class="author-sep">, </span>');
         };
@@ -497,7 +522,8 @@
           const tokens = splitAuthors(getDisplayAuthors(entry));
           const seen = new Set();
           tokens.forEach((token) => {
-            const member = resolveMember(token);
+            const parsed = parseAuthorToken(token);
+            const member = resolveMember(parsed.base);
             if (!member || seen.has(member.name)) return;
             seen.add(member.name);
             if (!authorsToEntries.has(member.name)) authorsToEntries.set(member.name, []);

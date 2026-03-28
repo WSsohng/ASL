@@ -203,6 +203,33 @@ if (memberCarousel) {
       .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
+  const parseAuthorToken = (token = "") => {
+    let raw = String(token).replace(/\s+/g, " ").trim();
+    raw = raw
+      .replaceAll("†", "^1")
+      .replaceAll("‡", "^1")
+      .replace(/\s+1$/, "^1")
+      .replace(/\s+\*$/, "*")
+      .replace(/\s+\^1$/, "^1");
+    const markerMatch = raw.match(/(\^1|\*)+$/);
+    const markers = markerMatch ? markerMatch[0] : "";
+    const base = markers ? raw.slice(0, -markers.length).trim() : raw;
+    return {
+      base,
+      hasEqualContribution: markers.includes("^1"),
+      hasCorresponding: markers.includes("*")
+    };
+  };
+  const renderAuthorToken = (token = "") => {
+    const parsed = parseAuthorToken(token);
+    const eq = parsed.hasEqualContribution ? "<sup>1</sup>" : "";
+    const corr = parsed.hasCorresponding ? "<sup>*</sup>" : "";
+    return `${esc(parsed.base)}${eq}${corr}`;
+  };
+  const renderAuthorsInline = (authorText = "") =>
+    splitAuthors(authorText)
+      .map((token) => renderAuthorToken(token))
+      .join('<span class="author-sep">, </span>');
   const getDisplayAuthors = (item) => {
     const candidate = (item.authors_marked || "").trim();
     if (!candidate) return item.authors || "";
@@ -385,7 +412,7 @@ if (memberCarousel) {
               <h3>${esc(row.title)}</h3>
               <p class="author-paper-journal">${esc(row.journal || "Journal information")}</p>
               <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
-              <p>${esc(row.authors || "")}</p>
+              <p>${renderAuthorsInline(row.authors || "")}</p>
             </article>
           `
         )
@@ -408,7 +435,8 @@ if (memberCarousel) {
           const tokens = splitAuthors(getDisplayAuthors(item));
           const seen = new Set();
           tokens.forEach((token) => {
-            const member = resolveMember(token);
+            const parsed = parseAuthorToken(token);
+            const member = resolveMember(parsed.base);
             if (!member || seen.has(member.name)) return;
             seen.add(member.name);
             if (!authorToPapers.has(member.name)) authorToPapers.set(member.name, []);
