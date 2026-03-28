@@ -36,6 +36,7 @@
           <p class="publication-authors">
             Records are normalized with authorship-focused curation (Hoeil Chung-included entries).
           </p>
+          <p class="publication-authors">Citation counts are live from Crossref; IF values are journal-level public metrics.</p>
         </div>
         <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/02.php?sub=2">Original Board</a>
       </div>
@@ -46,11 +47,70 @@
         <p class="publication-authors">Loading publication records...</p>
       </section>
     </main>
+    <dialog id="authorModal" class="author-modal">
+      <div class="author-modal-head">
+        <h2 id="authorModalTitle">Author</h2>
+        <button id="authorModalClose" type="button" aria-label="Close">x</button>
+      </div>
+      <div id="authorModalBody" class="author-modal-body"></div>
+    </dialog>
 
     <script>
       (() => {
         const filterEl = document.getElementById("pubFilter");
         const catalogEl = document.getElementById("pubCatalog");
+        const modalEl = document.getElementById("authorModal");
+        const modalTitleEl = document.getElementById("authorModalTitle");
+        const modalBodyEl = document.getElementById("authorModalBody");
+        const modalCloseBtn = document.getElementById("authorModalClose");
+        const JOURNAL_IF_RULES = [
+          { re: /\banalytica chimica acta\b/i, value: "6.0" },
+          { re: /\btalanta\b/i, value: "6.1" },
+          { re: /\banalyst\b/i, value: "3.3" },
+          { re: /\banalytical chemistry\b|^anal\.\s*chem\b/i, value: "6.7" },
+          { re: /\bmicrochemical journal\b/i, value: "5.1" },
+          { re: /\bbiosensors and bioelectronics\b/i, value: "10.5" },
+          { re: /\bsensors and actuators b\b/i, value: "7.7" },
+          { re: /\bjournal of pharmaceutical and biomedical analysis\b/i, value: "3.1" },
+          { re: /\bspectrochimica acta part a\b/i, value: "4.6" },
+          { re: /\brsc adv\b/i, value: "4.6" },
+          { re: /\bacs applied materials & interfaces\b/i, value: "9.5" }
+        ];
+        const citationCache = new Map();
+        const authorsToEntries = new Map();
+        let allData = {};
+        const MEMBER_NAMES = [
+          "Hoeil Chung",
+          "Bui Thu Thuy", "Yunjung Kim", "Haeseong Jeong", "Seongsoo Jeong", "Eunbi Jang",
+          "Sangjae Kim", "Juyoung Park", "Junhee Kim", "Younghum Cho",
+          "Su-youn Han", "Minsik Hwang", "Soohwa Cho", "Seungjae Lee", "Young su Kim", "Youngbok Lee",
+          "Sanghee Nah", "Chulwon Kwak", "Jintae Han", "Seokchan Park", "Minjung Kim", "Kyungtag Ryu",
+          "Jiyoung Park", "Yongdan Kim", "Changyong Oh", "Jaejin Kim", "Hankyu Namkung", "Yeojin Lee",
+          "Mooeung Kim", "Tran Ngoc Huan", "Jihye Yoon", "Sanguk Lee", "Kayeong Shin", "Jinah Lee",
+          "Saetbyeol Kim", "Jinyoung Hwang", "Pham Khac Duy", "Seul-a Jeon", "Dong-hwi Kim",
+          "Dong-hyun Ryoo", "Rehab Eid Al-Rashidy", "Chang Kyeol", "Tshishimbi Muya, Jules C",
+          "Daun Seol", "Vu Duy Tung", "Youngtaek Ma", "Chang Hwan Eum", "Yoonjeong Lee",
+          "Euna Chong", "Eunjin Jang", "Woosuk Sohng", "Sang hoon Cho", "Yoonji Kim"
+        ];
+        const normalizeName = (s = "") =>
+          String(s)
+            .toLowerCase()
+            .replace(/[\u2020*]/g, "")
+            .replace(/\d+/g, "")
+            .replace(/[^a-z]/g, "");
+        const makeNameAliases = (name) => {
+          const clean = name.replace(",", " ").replace(/\s+/g, " ").trim();
+          const tokens = clean.split(" ").filter(Boolean);
+          const aliases = new Set([normalizeName(clean), normalizeName(name)]);
+          if (tokens.length >= 2) {
+            aliases.add(normalizeName(`${tokens[0]} ${tokens[tokens.length - 1]}`));
+            aliases.add(normalizeName(`${tokens[tokens.length - 1]} ${tokens[0]}`));
+            aliases.add(normalizeName(`${tokens[0][0]} ${tokens[tokens.length - 1]}`));
+          }
+          if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
+          return [...aliases].filter(Boolean);
+        };
+        const MEMBER_INDEX = MEMBER_NAMES.map((name) => ({ name, aliases: makeNameAliases(name) }));
         const esc = (value = "") =>
           String(value)
             .replaceAll("&", "&amp;")
@@ -58,10 +118,167 @@
             .replaceAll(">", "&gt;")
             .replaceAll('"', "&quot;")
             .replaceAll("'", "&#39;");
+        const normalizeJournalKey = (journal = "") =>
+          journal
+            .toLowerCase()
+            .replace(/\([^)]*\)/g, " ")
+            .replace(/\d{4}/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+        const getJournalIF = (journal = "") => {
+          const key = normalizeJournalKey(journal);
+          const matched = JOURNAL_IF_RULES.find((rule) => rule.re.test(key));
+          return matched ? matched.value : "N/A";
+        };
+        const splitAuthors = (authorText = "") =>
+          authorText
+            .split(",")
+            .map((v) => v.trim())
+            .filter(Boolean);
+        const resolveMember = (authorToken = "") => {
+          const normalized = normalizeName(authorToken);
+          if (!normalized) return null;
+          return (
+            MEMBER_INDEX.find((member) =>
+              member.aliases.some((alias) => alias === normalized || normalized.includes(alias))
+            ) || null
+          );
+        };
+        const renderAuthors = (authorText = "") => {
+          const tokens = splitAuthors(authorText);
+          return tokens
+            .map((token) => {
+              const member = resolveMember(token);
+              if (!member) return `<span class="author-plain">${esc(token)}</span>`;
+              return `<button class="author-chip" type="button" data-author="${esc(member.name)}">${esc(token)}</button>`;
+            })
+            .join('<span class="author-sep">, </span>');
+        };
+        const normalizeTitle = (title = "") =>
+          title
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+        const titleSimilarity = (a, b) => {
+          const as = new Set(normalizeTitle(a).split(" ").filter((t) => t.length > 2));
+          const bs = new Set(normalizeTitle(b).split(" ").filter((t) => t.length > 2));
+          if (!as.size || !bs.size) return 0;
+          let overlap = 0;
+          as.forEach((t) => {
+            if (bs.has(t)) overlap += 1;
+          });
+          return overlap / Math.max(as.size, bs.size);
+        };
+        const fetchCitationCount = async (title) => {
+          const key = normalizeTitle(title);
+          if (!key) return null;
+          if (citationCache.has(key)) return citationCache.get(key);
+          const url = `https://api.crossref.org/works?query.title=${encodeURIComponent(title)}&rows=3`;
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("crossref_fetch_failed");
+            const json = await res.json();
+            const items = json?.message?.items || [];
+            if (!items.length) {
+              citationCache.set(key, null);
+              return null;
+            }
+            let best = items[0];
+            let bestScore = titleSimilarity(title, best?.title?.[0] || "");
+            for (const item of items.slice(1)) {
+              const score = titleSimilarity(title, item?.title?.[0] || "");
+              if (score > bestScore) {
+                best = item;
+                bestScore = score;
+              }
+            }
+            const cited = best?.["is-referenced-by-count"];
+            const out = Number.isFinite(cited) ? cited : null;
+            citationCache.set(key, out);
+            return out;
+          } catch {
+            citationCache.set(key, null);
+            return null;
+          }
+        };
+        const hydrateCitations = async () => {
+          const cards = [...catalogEl.querySelectorAll(".pub-entry[data-title]")];
+          const workers = Array.from({ length: 4 }, async () => {
+            while (cards.length) {
+              const card = cards.shift();
+              if (!card) return;
+              const title = card.dataset.title || "";
+              const metricEl = card.querySelector(".pub-entry-metrics");
+              if (!metricEl) continue;
+              const ifValue = metricEl.dataset.if || "N/A";
+              const citations = await fetchCitationCount(title);
+              const citationText = Number.isFinite(citations) ? citations : "-";
+              metricEl.textContent = `Citations: ${citationText} | IF: ${ifValue}`;
+            }
+          });
+          await Promise.all(workers);
+        };
         const orderForYear = (year) => {
           if (year === "1995-1999") return 0;
           const n = Number(year);
           return Number.isFinite(n) ? n : -1;
+        };
+        const jumpToPublication = (id, year) => {
+          setActive(year);
+          requestAnimationFrame(() => {
+            const target = document.querySelector(`[data-pub-id="${id}"]`);
+            if (!target) return;
+            target.scrollIntoView({ behavior: "smooth", block: "center" });
+            target.classList.add("is-flash");
+            window.setTimeout(() => target.classList.remove("is-flash"), 1300);
+          });
+        };
+        const openAuthorModal = (authorName) => {
+          const rows = (authorsToEntries.get(authorName) || []).sort(
+            (a, b) => orderForYear(b.year) - orderForYear(a.year)
+          );
+          modalTitleEl.textContent = `${authorName} - Publications`;
+          if (!rows.length) {
+            modalBodyEl.innerHTML = '<p class="publication-authors">No entries found.</p>';
+          } else {
+            modalBodyEl.innerHTML = rows
+              .map(
+                (row) => `
+                  <article class="author-paper-item">
+                    <h3>${esc(row.title)}</h3>
+                    <button type="button" class="author-paper-journal" data-jump-id="${esc(row.id)}" data-jump-year="${esc(row.year)}">
+                      ${esc(row.journal || "Journal information")}
+                    </button>
+                    <a
+                      class="author-paper-scholar"
+                      href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${authorName}`)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Verify on Google Scholar
+                    </a>
+                    <p>${esc(row.authors || "")}</p>
+                  </article>
+                `
+              )
+              .join("");
+          }
+          if (!modalEl.open) modalEl.showModal();
+        };
+        const closeAuthorModal = () => {
+          if (modalEl.open) modalEl.close();
+        };
+        const indexAuthors = (entry) => {
+          const tokens = splitAuthors(entry.authors || "");
+          const seen = new Set();
+          tokens.forEach((token) => {
+            const member = resolveMember(token);
+            if (!member || seen.has(member.name)) return;
+            seen.add(member.name);
+            if (!authorsToEntries.has(member.name)) authorsToEntries.set(member.name, []);
+            authorsToEntries.get(member.name).push(entry);
+          });
         };
 
         const renderEntries = (year, entries) => {
@@ -74,25 +291,29 @@
             .map((item, idx) => {
               const no = esc(item.no || String(entries.length - idx).padStart(2, "0"));
               const title = esc(item.title || "Untitled record");
-              const journal = esc(item.journal || "");
-              const authors = esc(item.authors || "");
+              const journalRaw = item.journal || "";
+              const journal = esc(journalRaw);
+              const authorsHtml = renderAuthors(item.authors || "");
               const pdf = item.pdf || "";
               const img = item.images && item.images.length ? item.images[0] : "";
+              const ifValue = getJournalIF(journalRaw);
               const imgHtml = img
                 ? `<figure class="pub-entry-media"><img src="${esc(img)}" alt="Graphical abstract for ${title}" loading="lazy" /></figure>`
                 : "";
               const pdfHtml = pdf
                 ? `<a class="pub-entry-link" href="${esc(pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`
                 : "";
+              const pubId = esc(item.id || `${year}-${idx + 1}`);
 
               return `
-                <article class="pub-entry">
+                <article class="pub-entry" data-pub-id="${pubId}" data-title="${title}">
                   <div class="pub-entry-no">${no}</div>
                   <div class="pub-entry-main">
                     ${imgHtml}
                     <h3 class="pub-entry-title">${title}</h3>
                     <p class="pub-entry-journal">${journal}</p>
-                    <p class="pub-entry-authors">${authors}</p>
+                    <p class="pub-entry-metrics" data-if="${esc(ifValue)}">Citations: ... | IF: ${esc(ifValue)}</p>
+                    <p class="pub-entry-authors">${authorsHtml}</p>
                     <div class="pub-entry-actions">${pdfHtml}</div>
                   </div>
                 </article>
@@ -101,9 +322,10 @@
             .join("");
 
           catalogEl.innerHTML = rows;
+          hydrateCitations();
         };
 
-        const setActive = (year, allData) => {
+        const setActive = (year) => {
           [...filterEl.querySelectorAll("button")].forEach((btn) => {
             const active = btn.dataset.year === year;
             btn.classList.toggle("is-active", active);
@@ -114,7 +336,15 @@
 
         fetch("./assets/publication-data.json")
           .then((r) => r.json())
-          .then((allData) => {
+          .then((payload) => {
+            allData = payload;
+            Object.keys(allData).forEach((year) => {
+              allData[year].forEach((item, idx) => {
+                item.year = year;
+                item.id = `${year}-${idx + 1}`;
+                indexAuthors(item);
+              });
+            });
             const years = Object.keys(allData).sort((a, b) => orderForYear(b) - orderForYear(a));
             filterEl.innerHTML = years
               .map(
@@ -126,10 +356,28 @@
             filterEl.addEventListener("click", (e) => {
               const btn = e.target.closest("button[data-year]");
               if (!btn) return;
-              setActive(btn.dataset.year, allData);
+              setActive(btn.dataset.year);
             });
 
-            if (years.length) setActive(years[0], allData);
+            catalogEl.addEventListener("click", (e) => {
+              const chip = e.target.closest(".author-chip[data-author]");
+              if (chip) {
+                openAuthorModal(chip.dataset.author);
+              }
+            });
+
+            modalBodyEl.addEventListener("click", (e) => {
+              const jumpBtn = e.target.closest("button[data-jump-id][data-jump-year]");
+              if (!jumpBtn) return;
+              closeAuthorModal();
+              jumpToPublication(jumpBtn.dataset.jumpId, jumpBtn.dataset.jumpYear);
+            });
+            modalCloseBtn.addEventListener("click", closeAuthorModal);
+            modalEl.addEventListener("click", (e) => {
+              if (e.target === modalEl) closeAuthorModal();
+            });
+
+            if (years.length) setActive(years[0]);
           })
           .catch(() => {
             catalogEl.innerHTML =
