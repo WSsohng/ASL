@@ -48,3 +48,40 @@ yearButtons.forEach((button) => {
     });
   });
 });
+
+const root = document.documentElement;
+const spectralSections = [...document.querySelectorAll("main .section")];
+
+const updateSpectralFx = () => {
+  const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+  const viewportCenter = window.scrollY + window.innerHeight * 0.5;
+
+  let sectionBoost = 0;
+  spectralSections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionCenter = sectionTop + section.offsetHeight * 0.5;
+    const dist = Math.abs(sectionCenter - viewportCenter);
+    const normalized = 1 - Math.min(dist / (window.innerHeight * 0.85), 1);
+    sectionBoost = Math.max(sectionBoost, normalized);
+  });
+
+  root.style.setProperty("--scroll-p", progress.toFixed(4));
+  root.style.setProperty("--beam-x", `${(10 + progress * 80).toFixed(2)}%`);
+  root.style.setProperty("--beam-y", `${(12 + progress * 72).toFixed(2)}%`);
+  root.style.setProperty("--section-boost", (0.22 + sectionBoost * 0.78).toFixed(3));
+};
+
+let isTicking = false;
+const requestSpectralUpdate = () => {
+  if (isTicking) return;
+  isTicking = true;
+  window.requestAnimationFrame(() => {
+    updateSpectralFx();
+    isTicking = false;
+  });
+};
+
+window.addEventListener("scroll", requestSpectralUpdate, { passive: true });
+window.addEventListener("resize", requestSpectralUpdate);
+updateSpectralFx();
