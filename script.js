@@ -28,3 +28,23 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });
+
+const yearButtons = document.querySelectorAll(".pub-year-btn");
+const yearGroups = document.querySelectorAll(".pub-year-group");
+
+yearButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetYear = button.dataset.year;
+    if (!targetYear) return;
+
+    yearButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("is-active", isActive);
+      item.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    yearGroups.forEach((group) => {
+      group.classList.toggle("is-active", group.dataset.yearList === targetYear);
+    });
+  });
+});
