@@ -8,6 +8,10 @@
   --accent-dark: #0a0b0f;
   --glow-a: rgba(174, 197, 255, 0.14);
   --glow-b: rgba(112, 149, 236, 0.11);
+  --scroll-p: 0;
+  --beam-x: 14%;
+  --beam-y: 18%;
+  --section-boost: 0.25;
 }
 
 * {
@@ -77,6 +81,99 @@ body::after {
   opacity: 0.42;
   z-index: -1;
   animation: bgDrift 24s ease-in-out infinite alternate;
+}
+
+.spectral-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.spectral-beam {
+  position: absolute;
+  top: var(--beam-y);
+  left: var(--beam-x);
+  width: min(52vw, 700px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(214, 226, 255, 0.45);
+  transform: rotate(-13deg) translateX(-45%);
+  opacity: calc(0.18 + var(--section-boost) * 0.46);
+}
+
+.spectral-beam::after {
+  content: "";
+  position: absolute;
+  right: -38%;
+  top: -120px;
+  width: 58%;
+  height: 240px;
+  transform: rotate(13deg);
+  transform-origin: left center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(119, 174, 255, 0) 0%,
+      rgba(119, 174, 255, 0.26) 18%,
+      rgba(80, 247, 220, 0.26) 36%,
+      rgba(170, 255, 126, 0.24) 54%,
+      rgba(255, 221, 95, 0.24) 70%,
+      rgba(255, 151, 86, 0.24) 84%,
+      rgba(255, 95, 125, 0.22) 100%
+    );
+  filter: blur(10px);
+  clip-path: polygon(0 48%, 100% 0, 100% 100%, 0 52%);
+}
+
+.spectral-dispersion {
+  position: absolute;
+  inset: 0;
+  background:
+    conic-gradient(
+      from 338deg at var(--beam-x) var(--beam-y),
+      rgba(96, 165, 250, 0.12),
+      rgba(45, 212, 191, 0.1),
+      rgba(163, 230, 53, 0.08),
+      rgba(250, 204, 21, 0.09),
+      rgba(248, 113, 113, 0.1),
+      rgba(96, 165, 250, 0)
+    );
+  mix-blend-mode: screen;
+  opacity: calc(0.08 + var(--section-boost) * 0.2);
+}
+
+.spectral-peaks {
+  position: absolute;
+  left: -8%;
+  bottom: -5%;
+  width: 116%;
+  height: 42%;
+  opacity: calc(0.1 + var(--section-boost) * 0.2);
+  transform: translateX(calc(var(--scroll-p) * -4.5%));
+  transition: opacity 300ms ease;
+}
+
+.spectral-peaks path {
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(173, 201, 255, 0.35));
+}
+
+.spectral-peaks path:nth-child(1) {
+  stroke: rgba(166, 193, 255, 0.58);
+}
+
+.spectral-peaks path:nth-child(2) {
+  stroke: rgba(116, 232, 215, 0.45);
+}
+
+.spectral-peaks path:nth-child(3) {
+  stroke: rgba(250, 185, 106, 0.45);
 }
 
 a {
@@ -596,6 +693,16 @@ h2 {
   body::after {
     opacity: 0.3;
   }
+
+  .spectral-beam {
+    width: min(66vw, 520px);
+    opacity: calc(0.14 + var(--section-boost) * 0.34);
+  }
+
+  .spectral-peaks {
+    height: 34%;
+    opacity: calc(0.08 + var(--section-boost) * 0.16);
+  }
 }
 
 @media (max-width: 600px) {
@@ -623,6 +730,21 @@ h2 {
   .pub-body h3 {
     font-size: 0.93rem;
   }
+
+  .spectral-beam {
+    width: min(74vw, 400px);
+  }
+
+  .spectral-beam::after {
+    height: 180px;
+    top: -90px;
+    right: -24%;
+    width: 50%;
+  }
+
+  .spectral-peaks {
+    height: 30%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -630,5 +752,9 @@ h2 {
   .hero::before,
   .hero::after {
     animation: none;
+  }
+
+  .spectral-peaks {
+    transform: none;
   }
 }
