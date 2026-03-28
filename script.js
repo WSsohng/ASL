@@ -91,6 +91,9 @@ updateSpectralFx();
 const researchWrap = document.querySelector("#researchCards");
 if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
   const cards = [...researchWrap.querySelectorAll(".research-card")];
+  let activeX = 0.12;
+  let cardTicking = false;
+
   const setActiveProfile = (xRatio) => {
     const sigma = 0.17;
     let peakIndex = 0;
@@ -113,19 +116,26 @@ if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
     });
   };
 
-  setActiveProfile(0.12);
+  const requestCardProfileUpdate = () => {
+    if (cardTicking) return;
+    cardTicking = true;
+    window.requestAnimationFrame(() => {
+      setActiveProfile(activeX);
+      cardTicking = false;
+    });
+  };
+
+  requestCardProfileUpdate();
 
   researchWrap.addEventListener("mousemove", (event) => {
     const rect = researchWrap.getBoundingClientRect();
     const px = (event.clientX - rect.left) / rect.width;
-    const clampedX = Math.min(Math.max(px, 0.02), 0.98);
-    setActiveProfile(clampedX);
+    activeX = Math.min(Math.max(px, 0.02), 0.98);
+    requestCardProfileUpdate();
   });
 
   researchWrap.addEventListener("mouseleave", () => {
-    setActiveProfile(0.12);
-    cards.forEach((card) => {
-      card.style.transform = "";
-    });
+    activeX = 0.12;
+    requestCardProfileUpdate();
   });
 }
