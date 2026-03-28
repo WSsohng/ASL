@@ -573,7 +573,7 @@
               const imageSrc = pickGraphicalAbstractSrc(item, fallbackImg);
               const imgHtml = `<figure class="pub-entry-media"><img src="${esc(imageSrc)}" alt="Graphical abstract for ${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImg}'" /></figure>`;
               const pdfHtml = pdf
-                ? `<a class="pub-entry-link" href="${esc(pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`
+                ? `<a class="pub-entry-link" href="${esc(pdf)}" download>PDF</a>`
                 : "";
               const pubId = esc(item.id || `${year}-${idx + 1}`);
 
