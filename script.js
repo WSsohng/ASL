@@ -69,7 +69,7 @@ const updateSpectralFx = () => {
   root.style.setProperty("--scroll-p", progress.toFixed(4));
   root.style.setProperty("--beam-x", `${(10 + progress * 80).toFixed(2)}%`);
   root.style.setProperty("--beam-y", `${(12 + progress * 72).toFixed(2)}%`);
-  root.style.setProperty("--section-boost", (0.22 + sectionBoost * 0.78).toFixed(3));
+  root.style.setProperty("--section-boost", (0.48 + sectionBoost * 0.92).toFixed(3));
 };
 
 let isTicking = false;
