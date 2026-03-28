@@ -343,44 +343,125 @@ h2 {
 
 .research-cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(230px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 0;
   perspective: 1200px;
   align-items: stretch;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .research-card {
-  min-height: 500px;
-  padding: 1.6rem 1.2rem 1.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 1.1rem;
-  background: linear-gradient(170deg, rgba(216, 232, 255, 0.11), rgba(12, 14, 20, 0.42) 44%), rgba(14, 17, 26, 0.85);
+  min-height: 620px;
+  padding: 2rem 1.4rem 1.4rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
   transform-style: preserve-3d;
   transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  display: grid;
+  align-content: start;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 1rem;
+}
+
+.research-card:last-child {
+  border-right: 0;
 }
 
 .research-card:hover {
   border-color: rgba(177, 202, 255, 0.48);
-  box-shadow: 0 18px 44px rgba(24, 36, 69, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(177, 202, 255, 0.2);
+}
+
+.rc-1 {
+  background: #0a0b11;
+}
+
+.rc-2 {
+  background: #6fadb9;
+  color: #0f1820;
+}
+
+.rc-3 {
+  background: #ec6d3d;
+  color: #1b140f;
+}
+
+.rc-4 {
+  background: #d7d7d9;
+  color: #13151a;
 }
 
 .card-no {
-  margin: 0 0 0.9rem;
-  color: #c8d1e7;
+  margin: 0;
+  justify-self: center;
   letter-spacing: 0.08em;
-  font-size: 0.86rem;
+  font-size: 1rem;
+  opacity: 0.86;
 }
 
 .research-card h3 {
-  font-size: 1.35rem;
-  margin-bottom: 1.05rem;
+  font-size: clamp(1.8rem, 2.1vw, 2.35rem);
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1.03;
 }
 
 .research-card p {
   margin: 0;
-  color: #d7deee;
-  line-height: 1.66;
+  line-height: 1.45;
   font-size: 0.98rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.research-pattern {
+  width: 100%;
+  height: 270px;
+  align-self: center;
+  opacity: 0.68;
+}
+
+.p-grid {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.95) 2px, transparent 3px) 0 0 / 20px 20px,
+    linear-gradient(130deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.2) 46%, rgba(255, 255, 255, 0) 63%);
+}
+
+.p-wave {
+  background:
+    repeating-radial-gradient(ellipse at 15% 65%, rgba(18, 28, 34, 0.5) 0 1px, transparent 1px 10px),
+    radial-gradient(circle at 70% 20%, rgba(17, 28, 39, 0.35), transparent 70%);
+}
+
+.p-ray {
+  background: repeating-conic-gradient(from -20deg at 50% 50%, rgba(34, 24, 18, 0.58) 0deg 1.5deg, transparent 1.5deg 9deg);
+}
+
+.p-loop {
+  background:
+    repeating-radial-gradient(circle at 55% 50%, rgba(23, 24, 27, 0.46) 0 1px, transparent 1px 9px),
+    radial-gradient(circle at 52% 52%, rgba(17, 18, 22, 0.2), transparent 65%);
+}
+
+.rc-1 h3 {
+  color: #f3f6ff;
+}
+
+.rc-1 p {
+  color: rgba(236, 242, 255, 0.83);
+}
+
+.rc-2 h3,
+.rc-3 h3,
+.rc-4 h3 {
+  color: rgba(12, 15, 20, 0.92);
+}
+
+.rc-2 p,
+.rc-3 p,
+.rc-4 p {
+  color: rgba(17, 21, 29, 0.88);
 }
 
 .pub-board {
@@ -548,6 +629,18 @@ h2 {
 @media (max-width: 1200px) {
   .research-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    border: 0;
+  }
+
+  .research-card {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1rem;
+    min-height: 520px;
+  }
+
+  .research-card:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
   }
 }
 
@@ -594,6 +687,10 @@ h2 {
 
   .research-card {
     min-height: 360px;
+  }
+
+  .research-pattern {
+    height: 190px;
   }
 
   .pub-head,
