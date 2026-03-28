@@ -538,6 +538,20 @@
             authorsToEntries.get(member.name).push(entry);
           });
         };
+        const isLikelyIconPlaceholder = (src = "") => {
+          const v = String(src || "").trim().toLowerCase();
+          if (!v) return true;
+          if (/\.(pdf)(\?|$)/i.test(v)) return true;
+          if (v.includes("icon_pdf") || v.includes("pdficon") || v.includes("/skin/") || v.includes("doc.gif")) return true;
+          // tiny inlined images are usually board icons, not graphical abstracts
+          if (v.startsWith("data:image") && v.length < 10000) return true;
+          return false;
+        };
+        const pickGraphicalAbstractSrc = (item, fallbackImg) => {
+          const candidates = Array.isArray(item?.images) ? item.images : [];
+          const valid = candidates.find((src) => !isLikelyIconPlaceholder(src));
+          return valid || fallbackImg;
+        };
 
         const renderEntries = (year, entries) => {
           if (!entries || !entries.length) {
@@ -554,10 +568,9 @@
               const authorsDisplay = getDisplayAuthors(item);
               const authorsHtml = renderAuthors(authorsDisplay);
               const pdf = item.pdf || "";
-              const img = item.images && item.images.length ? item.images[0] : "";
               const fallbackImg = "./assets/publication-placeholder.svg";
               const ifValue = getJournalIF(journalRaw);
-              const imageSrc = img || fallbackImg;
+              const imageSrc = pickGraphicalAbstractSrc(item, fallbackImg);
               const imgHtml = `<figure class="pub-entry-media"><img src="${esc(imageSrc)}" alt="Graphical abstract for ${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImg}'" /></figure>`;
               const pdfHtml = pdf
                 ? `<a class="pub-entry-link" href="${esc(pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`
