@@ -37,51 +37,84 @@
         <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/03.php?sub=1&ss=4">Original Board</a>
       </div>
 
-      <div class="alumni-grid">
-        <article class="alumni-item"><h3>Su-youn Han</h3></article>
-        <article class="alumni-item"><h3>Minsik Hwang</h3></article>
-        <article class="alumni-item"><h3>Soohwa Cho</h3></article>
-        <article class="alumni-item"><h3>Seungjae Lee</h3></article>
-        <article class="alumni-item"><h3>Young su Kim</h3></article>
-        <article class="alumni-item"><h3>Youngbok Lee</h3></article>
-        <article class="alumni-item"><h3>Sanghee Nah</h3></article>
-        <article class="alumni-item"><h3>Chulwon Kwak</h3></article>
-        <article class="alumni-item"><h3>Jintae Han</h3></article>
-        <article class="alumni-item"><h3>Seokchan Park</h3></article>
-        <article class="alumni-item"><h3>Minjung Kim</h3></article>
-        <article class="alumni-item"><h3>Kyungtag Ryu</h3></article>
-        <article class="alumni-item"><h3>Jiyoung Park</h3></article>
-        <article class="alumni-item"><h3>Yongdan Kim</h3></article>
-        <article class="alumni-item"><h3>Changyong Oh</h3></article>
-        <article class="alumni-item"><h3>Jaejin Kim</h3></article>
-        <article class="alumni-item"><h3>Hankyu Namkung</h3></article>
-        <article class="alumni-item"><h3>Yeojin Lee</h3></article>
-        <article class="alumni-item"><h3>Mooeung Kim</h3></article>
-        <article class="alumni-item"><h3>Tran Ngoc Huan</h3></article>
-        <article class="alumni-item"><h3>Jihye Yoon</h3></article>
-        <article class="alumni-item"><h3>Sanguk Lee</h3></article>
-        <article class="alumni-item"><h3>Kayeong Shin</h3></article>
-        <article class="alumni-item"><h3>Jinah Lee</h3></article>
-        <article class="alumni-item"><h3>Saetbyeol Kim</h3></article>
-        <article class="alumni-item"><h3>Jinyoung Hwang</h3></article>
-        <article class="alumni-item"><h3>Pham Khac Duy</h3></article>
-        <article class="alumni-item"><h3>Seul-a Jeon</h3></article>
-        <article class="alumni-item"><h3>Dong-hwi Kim</h3></article>
-        <article class="alumni-item"><h3>Dong-hyun Ryoo</h3></article>
-        <article class="alumni-item"><h3>Rehab Eid Al-Rashidy</h3></article>
-        <article class="alumni-item"><h3>Chang Kyeol</h3></article>
-        <article class="alumni-item"><h3>Tshishimbi Muya, Jules C</h3></article>
-        <article class="alumni-item"><h3>Daun Seol</h3></article>
-        <article class="alumni-item"><h3>Vu Duy Tung</h3></article>
-        <article class="alumni-item"><h3>Youngtaek Ma</h3></article>
-        <article class="alumni-item"><h3>Chang Hwan Eum</h3></article>
-        <article class="alumni-item"><h3>Yoonjeong Lee</h3></article>
-        <article class="alumni-item"><h3>Euna Chong</h3></article>
-        <article class="alumni-item"><h3>Eunjin Jang</h3></article>
-        <article class="alumni-item"><h3>Woosuk Sohng</h3></article>
-        <article class="alumni-item"><h3>Sang hoon Cho</h3></article>
-        <article class="alumni-item"><h3>Yoonji Kim</h3></article>
+      <div class="alumni-grid" id="alumniGrid">
+        <article class="alumni-item">
+          <div class="alumni-photo-wrap">
+            <img class="alumni-photo" src="./assets/publication-placeholder.svg" alt="Loading alumni profile" loading="lazy" />
+          </div>
+          <div class="alumni-meta">
+            <h3>Loading alumni records...</h3>
+          </div>
+        </article>
       </div>
     </main>
+
+    <script>
+      (() => {
+        const grid = document.getElementById("alumniGrid");
+        if (!grid) return;
+
+        const esc = (value = "") =>
+          String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+
+        const cleanText = (value = "") =>
+          String(value)
+            .replace(/\?/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+        const cleanCareer = (value = "") => {
+          const normalized = cleanText(value);
+          if (!normalized) return "";
+          const englishHead = normalized.split("(")[0].trim();
+          if (englishHead.length >= 4) return englishHead;
+          return normalized;
+        };
+
+        fetch("./assets/member-data.json")
+          .then((r) => r.json())
+          .then((payload) => {
+            const alumni = Array.isArray(payload?.alumni) ? payload.alumni : [];
+            if (!alumni.length) {
+              grid.innerHTML = '<article class="alumni-item"><div class="alumni-meta"><h3>No alumni records found.</h3></div></article>';
+              return;
+            }
+
+            grid.innerHTML = alumni
+              .map((person) => {
+                const name = cleanText(person.name || "ASL Alumni");
+                const career = cleanCareer(person.career || "");
+                const email = cleanText(person.email || "");
+                const image = person.image || "./assets/publication-placeholder.svg";
+                const careerHtml = career ? `<p class="alumni-career">${esc(career)}</p>` : "";
+                const emailHtml = email
+                  ? `<a class="alumni-email" href="mailto:${esc(email)}">${esc(email)}</a>`
+                  : '<p class="alumni-email alumni-email-empty">No public email listed</p>';
+
+                return `
+                  <article class="alumni-item">
+                    <div class="alumni-photo-wrap">
+                      <img class="alumni-photo" src="${esc(image)}" alt="${esc(name)} profile photo" loading="lazy" onerror="this.onerror=null;this.src='./assets/publication-placeholder.svg'" />
+                    </div>
+                    <div class="alumni-meta">
+                      <h3>${esc(name)}</h3>
+                      ${careerHtml}
+                      ${emailHtml}
+                    </div>
+                  </article>
+                `;
+              })
+              .join("");
+          })
+          .catch(() => {
+            grid.innerHTML = '<article class="alumni-item"><div class="alumni-meta"><h3>Failed to load alumni data.</h3></div></article>';
+          });
+      })();
+    </script>
   </body>
 </html>
