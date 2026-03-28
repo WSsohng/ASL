@@ -232,20 +232,59 @@
           const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
           return { first: parts[0] || "", last: parts[parts.length - 1] || "" };
         };
+        const AUTHOR_METRIC_OVERRIDES = [
+          {
+            name: "Haeseong Jeong",
+            hIndex: 3,
+            works: 10,
+            citations: 28,
+            affiliation: "Hanyang University, Seoul, South Korea",
+            scopusId: "57224628166",
+            source: "scopus-verified"
+          }
+        ];
+        const getAuthorOverride = (name = "") => {
+          const key = normalizeName(name);
+          return AUTHOR_METRIC_OVERRIDES.find((item) => normalizeName(item.name) === key) || null;
+        };
         const getScopusSearchUrl = (name = "") => {
+          const override = getAuthorOverride(name);
+          if (override?.scopusId) {
+            return `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(override.scopusId)}`;
+          }
           const { first, last } = splitName(name);
           const query = `${last} ${first} hanyang`;
           return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
         };
         const fetchAuthorMetrics = async (authorName) => {
           if (authorMetricCache.has(authorName)) return authorMetricCache.get(authorName);
-          const url = `https://api.openalex.org/authors?search=${encodeURIComponent(authorName)}&per-page=25`;
+          const override = getAuthorOverride(authorName);
+          if (override) {
+            authorMetricCache.set(authorName, override);
+            return override;
+          }
           const fallback = { hIndex: "-", works: "-", citations: "-", affiliation: "Hanyang University", source: "fallback" };
           try {
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("openalex_fetch_failed");
-            const data = await res.json();
-            const candidates = Array.isArray(data?.results) ? data.results : [];
+            const { first, last } = splitName(authorName);
+            const queries = [...new Set([
+              authorName,
+              `${last} ${first}`.trim(),
+              `${first} ${last}`.trim(),
+              `${authorName} hanyang`.trim()
+            ])].filter(Boolean);
+            const byId = new Map();
+            for (const q of queries) {
+              const url = `https://api.openalex.org/authors?search=${encodeURIComponent(q)}&per-page=25`;
+              const res = await fetch(url);
+              if (!res.ok) continue;
+              const data = await res.json();
+              const rows = Array.isArray(data?.results) ? data.results : [];
+              rows.forEach((row) => {
+                const id = row?.id || `${row?.display_name || ""}:${row?.works_count || 0}`;
+                if (!byId.has(id)) byId.set(id, row);
+              });
+            }
+            const candidates = [...byId.values()];
             if (!candidates.length) {
               authorMetricCache.set(authorName, fallback);
               return fallback;
@@ -257,14 +296,33 @@
                 .map((x) => x?.display_name || "")
                 .join(" ")
                 .toLowerCase();
+              const h = Number(candidate?.summary_stats?.h_index ?? 0);
+              const w = Number(candidate?.works_count ?? 0);
+              const c = Number(candidate?.cited_by_count ?? 0);
               let score = 0;
-              if (display === nameNorm) score += 5;
-              if (display.includes(nameNorm) || nameNorm.includes(display)) score += 3;
-              if (inst.includes("hanyang")) score += 4;
+              if (display === nameNorm) score += 8;
+              if (display.includes(nameNorm) || nameNorm.includes(display)) score += 4;
+              if (inst.includes("hanyang")) score += 6;
+              if (h > 0) score += 3;
+              if (w > 0) score += 2;
+              if (c > 0) score += 1;
+              if (h === 0 && w === 0 && c === 0) score -= 4;
               return score;
             };
             candidates.sort((a, b) => scoreCandidate(b) - scoreCandidate(a));
-            const best = candidates[0];
+            let best = candidates[0];
+            const bestNonZero = candidates.find((x) => {
+              const h = Number(x?.summary_stats?.h_index ?? 0);
+              const w = Number(x?.works_count ?? 0);
+              const c = Number(x?.cited_by_count ?? 0);
+              return h > 0 || w > 0 || c > 0;
+            });
+            const bestH = Number(best?.summary_stats?.h_index ?? 0);
+            const bestW = Number(best?.works_count ?? 0);
+            const bestC = Number(best?.cited_by_count ?? 0);
+            if (bestNonZero && bestH === 0 && bestW === 0 && bestC === 0) {
+              best = bestNonZero;
+            }
             const affiliation =
               (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") ||
               "Hanyang University";

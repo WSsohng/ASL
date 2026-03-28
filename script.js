@@ -214,7 +214,26 @@ if (memberCarousel) {
     const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
     return { first: parts[0] || "", last: parts[parts.length - 1] || "" };
   };
+  const AUTHOR_METRIC_OVERRIDES = [
+    {
+      name: "Haeseong Jeong",
+      hIndex: 3,
+      works: 10,
+      citations: 28,
+      affiliation: "Hanyang University, Seoul, South Korea",
+      scopusId: "57224628166",
+      source: "scopus-verified"
+    }
+  ];
+  const getAuthorOverride = (name = "") => {
+    const key = normalizeName(name);
+    return AUTHOR_METRIC_OVERRIDES.find((item) => normalizeName(item.name) === key) || null;
+  };
   const getScopusSearchUrl = (name = "") => {
+    const override = getAuthorOverride(name);
+    if (override?.scopusId) {
+      return `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(override.scopusId)}`;
+    }
     const { first, last } = splitName(name);
     const query = `${last} ${first} hanyang`;
     return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
@@ -263,13 +282,33 @@ if (memberCarousel) {
 
   const fetchAuthorMetrics = async (authorName) => {
     if (metricCache.has(authorName)) return metricCache.get(authorName);
-    const url = `https://api.openalex.org/authors?search=${encodeURIComponent(authorName)}&per-page=25`;
+    const override = getAuthorOverride(authorName);
+    if (override) {
+      metricCache.set(authorName, override);
+      return override;
+    }
     const fallback = { hIndex: "-", works: "-", citations: "-", affiliation: "Hanyang University" };
     try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("openalex_fetch_failed");
-      const data = await res.json();
-      const results = Array.isArray(data?.results) ? data.results : [];
+      const { first, last } = splitName(authorName);
+      const queries = [...new Set([
+        authorName,
+        `${last} ${first}`.trim(),
+        `${first} ${last}`.trim(),
+        `${authorName} hanyang`.trim()
+      ])].filter(Boolean);
+      const byId = new Map();
+      for (const q of queries) {
+        const url = `https://api.openalex.org/authors?search=${encodeURIComponent(q)}&per-page=25`;
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const data = await res.json();
+        const rows = Array.isArray(data?.results) ? data.results : [];
+        rows.forEach((row) => {
+          const id = row?.id || `${row?.display_name || ""}:${row?.works_count || 0}`;
+          if (!byId.has(id)) byId.set(id, row);
+        });
+      }
+      const results = [...byId.values()];
       if (!results.length) {
         metricCache.set(authorName, fallback);
         return fallback;
@@ -282,13 +321,32 @@ if (memberCarousel) {
           .join(" ")
           .toLowerCase();
         let s = 0;
-        if (display === nameNorm) s += 5;
-        if (display.includes(nameNorm) || nameNorm.includes(display)) s += 3;
-        if (inst.includes("hanyang")) s += 4;
+        const h = Number(candidate?.summary_stats?.h_index ?? 0);
+        const w = Number(candidate?.works_count ?? 0);
+        const c = Number(candidate?.cited_by_count ?? 0);
+        if (display === nameNorm) s += 8;
+        if (display.includes(nameNorm) || nameNorm.includes(display)) s += 4;
+        if (inst.includes("hanyang")) s += 6;
+        if (h > 0) s += 3;
+        if (w > 0) s += 2;
+        if (c > 0) s += 1;
+        if (h === 0 && w === 0 && c === 0) s -= 4;
         return s;
       };
       results.sort((a, b) => score(b) - score(a));
-      const best = results[0];
+      let best = results[0];
+      const bestNonZero = results.find((x) => {
+        const h = Number(x?.summary_stats?.h_index ?? 0);
+        const w = Number(x?.works_count ?? 0);
+        const c = Number(x?.cited_by_count ?? 0);
+        return h > 0 || w > 0 || c > 0;
+      });
+      const bestH = Number(best?.summary_stats?.h_index ?? 0);
+      const bestW = Number(best?.works_count ?? 0);
+      const bestC = Number(best?.cited_by_count ?? 0);
+      if (bestNonZero && bestH === 0 && bestW === 0 && bestC === 0) {
+        best = bestNonZero;
+      }
       const metrics = {
         hIndex: best?.summary_stats?.h_index ?? "-",
         works: best?.works_count ?? "-",
