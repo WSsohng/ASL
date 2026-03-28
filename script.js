@@ -55,6 +55,7 @@ const spectralSections = [...document.querySelectorAll("main .section")];
 const updateSpectralFx = () => {
   const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
   const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+  const easedProgress = 1 - Math.pow(1 - progress, 1.25);
   const viewportCenter = window.scrollY + window.innerHeight * 0.5;
 
   let sectionBoost = 0;
@@ -66,10 +67,12 @@ const updateSpectralFx = () => {
     sectionBoost = Math.max(sectionBoost, normalized);
   });
 
+  const trailProgress = Math.min(Math.max((easedProgress - 0.015) / 0.97, 0), 1);
+  const intensity = Math.min(1, 0.18 + sectionBoost * 0.82 + easedProgress * 0.15);
+
   root.style.setProperty("--scroll-p", progress.toFixed(4));
-  root.style.setProperty("--beam-x", `${(10 + progress * 80).toFixed(2)}%`);
-  root.style.setProperty("--beam-y", `${(12 + progress * 72).toFixed(2)}%`);
-  root.style.setProperty("--section-boost", (0.48 + sectionBoost * 0.92).toFixed(3));
+  root.style.setProperty("--trail-p", trailProgress.toFixed(4));
+  root.style.setProperty("--section-boost", intensity.toFixed(3));
 };
 
 let isTicking = false;
