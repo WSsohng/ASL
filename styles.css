@@ -744,7 +744,7 @@ h2 {
 }
 
 .pub-entry-journal {
-  margin: 0.42rem 0 0;
+  margin: 0;
   color: #c1cbe4;
   font-size: 1rem;
   line-height: 1.48;
@@ -754,8 +754,8 @@ h2 {
   margin-top: 0.42rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -763,6 +763,8 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  margin-left: 0.1rem;
+  flex-wrap: wrap;
 }
 
 .metric-chip {
@@ -821,6 +823,7 @@ h2 {
   object-fit: contain;
   object-position: center;
   display: block;
+  background: rgba(8, 14, 28, 0.8);
 }
 
 .author-sep {

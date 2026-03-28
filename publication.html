@@ -555,10 +555,10 @@
               const authorsHtml = renderAuthors(authorsDisplay);
               const pdf = item.pdf || "";
               const img = item.images && item.images.length ? item.images[0] : "";
+              const fallbackImg = "./assets/publication-placeholder.svg";
               const ifValue = getJournalIF(journalRaw);
-              const imgHtml = img
-                ? `<figure class="pub-entry-media"><img src="${esc(img)}" alt="Graphical abstract for ${title}" loading="lazy" /></figure>`
-                : "";
+              const imageSrc = img || fallbackImg;
+              const imgHtml = `<figure class="pub-entry-media"><img src="${esc(imageSrc)}" alt="Graphical abstract for ${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImg}'" /></figure>`;
               const pdfHtml = pdf
                 ? `<a class="pub-entry-link" href="${esc(pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`
                 : "";
