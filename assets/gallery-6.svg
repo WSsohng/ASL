@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" fill="none">
+  <defs>
+    <linearGradient id="g6" x1="0" y1="0" x2="1200" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172338"/>
+      <stop offset="1" stop-color="#0E1420"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#g6)"/>
+  <g stroke="#BDD3FF" stroke-opacity="0.5">
+    <circle cx="600" cy="380" r="260"/>
+    <circle cx="600" cy="380" r="210"/>
+    <circle cx="600" cy="380" r="160"/>
+    <circle cx="600" cy="380" r="110"/>
+  </g>
+  <text x="80" y="680" fill="#EAF2FF" font-family="Arial, sans-serif" font-size="56">ASL Event Preview 06</text>
+</svg>

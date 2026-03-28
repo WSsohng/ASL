@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" fill="none">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1200" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#132033"/>
+      <stop offset="1" stop-color="#1F2F4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#g4)"/>
+  <rect x="130" y="140" width="940" height="420" rx="16" fill="#F5FAFF" fill-opacity="0.08"/>
+  <rect x="160" y="190" width="180" height="320" rx="10" fill="#9CC2FF" fill-opacity="0.3"/>
+  <rect x="380" y="230" width="180" height="280" rx="10" fill="#9CC2FF" fill-opacity="0.22"/>
+  <rect x="600" y="260" width="180" height="250" rx="10" fill="#9CC2FF" fill-opacity="0.18"/>
+  <rect x="820" y="300" width="180" height="210" rx="10" fill="#9CC2FF" fill-opacity="0.14"/>
+  <text x="80" y="680" fill="#EAF2FF" font-family="Arial, sans-serif" font-size="56">ASL Event Preview 04</text>
+</svg>

@@ -39,8 +39,8 @@
         <a href="#about">About</a>
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
-        <a href="#members">Members</a>
         <a href="#gallery">Gallery</a>
+        <a href="#members">Members</a>
       </nav>
       <a class="header-cta" href="#contact">Contact</a>
     </header>
@@ -61,8 +61,8 @@
           해결합니다.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#publications">Latest Publications</a>
-          <a class="btn btn-ghost" href="#members">Meet the Team</a>
+          <a class="btn btn-primary" href="./publication.html">Publication Archive</a>
+          <a class="btn btn-ghost" href="./gallery.html">Gallery Archive</a>
         </div>
       </section>
 
@@ -72,7 +72,7 @@
           <h2>Measurement, Modeling, Validation.</h2>
         </div>
         <p>
-          연구실은 Raman/NIR/SERS/초분광 이미징을 기반으로 측정-전처리-모델링-검증의 전 과정을
+          연구실은 Raman, NIR, SERS, 초분광 이미징을 기반으로 측정-전처리-모델링-검증의 전 과정을
           수행합니다. 각 연구는 오차 요인 분석, 교차검증, 외부 검체 검증을 포함해 분석화학적
           신뢰도를 확보하는 것을 목표로 합니다.
         </p>
@@ -80,43 +80,38 @@
 
       <section id="research" class="section">
         <p class="eyebrow">Research Focus</p>
-        <h2>학부생을 위한 연구 주제 안내</h2>
-        <div class="grid cards-4">
-          <article class="card">
-            <img src="./assets/research-raman.svg" alt="라만 분광 기반 분자 진동 분석 개념도" />
+        <h2>Research Themes</h2>
+        <div class="research-cards" id="researchCards">
+          <article class="research-card" data-depth="0.9">
             <p class="card-no">01</p>
             <h3>Raman & SERS</h3>
             <p>
               레이저 산란 스펙트럼으로 분자의 진동 모드를 읽어 물질을 식별합니다. SERS 기판을
-              이용하면 미량 성분(저농도 바이오마커, 대사체)의 신호를 증폭해 검출한계를 낮출 수
-              있습니다.
+              이용하면 저농도 바이오마커와 대사체의 검출한계를 낮출 수 있습니다.
             </p>
           </article>
-          <article class="card">
-            <img src="./assets/research-nir.svg" alt="근적외선 분광의 비파괴 분석 흐름도" />
+          <article class="research-card" data-depth="1.1">
             <p class="card-no">02</p>
             <h3>NIR Spectroscopy</h3>
             <p>
-              시료를 파괴하지 않고 짧은 시간 안에 조성 정보를 얻습니다. 농산물 품질, 원산지 판별,
-              공정 모니터링 등에서 다변량 회귀/분류 모델을 적용해 예측 정확도를 평가합니다.
+              비파괴·고속 측정으로 시료 조성 정보를 얻고, 회귀/분류 모델을 적용해 품질 및 원산지
+              판별 정확도를 검증합니다.
             </p>
           </article>
-          <article class="card">
-            <img src="./assets/research-hsi.svg" alt="하이퍼스펙트럴 이미징 데이터 큐브 개념도" />
+          <article class="research-card" data-depth="1.25">
             <p class="card-no">03</p>
             <h3>Hyperspectral Imaging</h3>
             <p>
-              픽셀마다 스펙트럼을 가지는 데이터 큐브를 구축해 공간 정보와 화학 정보를 동시에
-              해석합니다. 불균일 시료에서 위치별 조성 차이를 시각화하고 정량화할 수 있습니다.
+              픽셀 단위 스펙트럼 데이터 큐브를 구축해 공간 정보와 화학 정보를 동시 해석하고,
+              불균일 시료의 위치별 조성 차이를 정량화합니다.
             </p>
           </article>
-          <article class="card">
+          <article class="research-card" data-depth="1">
             <p class="card-no">04</p>
             <h3>Data-Driven Chemometrics</h3>
             <p>
-              PCA, PLS(-DA), SVM 등 화학계량학 기법을 사용해 고차원 스펙트럼을 해석합니다.
-              학부연구 단계에서는 전처리(정규화, baseline correction)와 모델 검증 지표의 의미를
-              이해하는 것이 핵심입니다.
+              PCA, PLS(-DA), SVM 기반의 화학계량학 파이프라인으로 고차원 스펙트럼을 해석하며,
+              전처리와 검증 지표의 신뢰도를 체계적으로 평가합니다.
             </p>
           </article>
         </div>
@@ -126,110 +121,75 @@
         <div class="section-head">
           <div>
             <p class="eyebrow">Publications</p>
-            <h2>Publication Archive</h2>
+            <h2>Recent Entries</h2>
           </div>
-          <a class="btn btn-ghost" href="http://asl.hanyang.ac.kr/02.php?sub=2">Original Board</a>
+          <a class="btn btn-ghost" href="./publication.html">Open Full Archive</a>
         </div>
-        <div class="pub-years" role="tablist" aria-label="Publication years">
-          <button class="pub-year-btn is-active" data-year="2026" role="tab" aria-selected="true">2026</button>
-          <button class="pub-year-btn" data-year="2025" role="tab" aria-selected="false">2025</button>
-          <button class="pub-year-btn" data-year="2024" role="tab" aria-selected="false">2024</button>
-        </div>
-
         <div class="pub-board">
           <div class="pub-head">
             <span class="col-no">No</span>
             <span class="col-title">Title / Journal / Authors</span>
           </div>
+          <article class="pub-row">
+            <span class="pub-no">05</span>
+            <div class="pub-body">
+              <h3>Nanostructures of tetra-arm Poly(ethylene glycol) networks by Iron(III)-Catechol coordinative crosslinking units</h3>
+              <p class="publication-journal">Polymer 348 (2026) 173117</p>
+              <p class="publication-authors">Jungju Ryu et al.</p>
+            </div>
+          </article>
+          <article class="pub-row">
+            <span class="pub-no">04</span>
+            <div class="pub-body">
+              <h3>Electrochemical separation-enhanced SERS signals of urinary metabolites for improved pancreatic cancer detection</h3>
+              <p class="publication-journal">Chemical Engineering Journal 529 (2026)</p>
+              <p class="publication-authors">Woosuk Sohng et al.</p>
+            </div>
+          </article>
+          <article class="pub-row">
+            <span class="pub-no">03</span>
+            <div class="pub-body">
+              <h3>Noninvasive Nicotine Quantitation and Flavor Differentiation of on! Nicotine Pouches Using Raman Spectroscopy</h3>
+              <p class="publication-journal">ACS Omega 11(3), 3866-3874 (2026)</p>
+              <p class="publication-authors">Yoonji Kim et al.</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-          <div class="pub-year-group is-active" data-year-list="2026">
-            <article class="pub-row">
-              <span class="pub-no">05</span>
-              <div class="pub-body">
-                <h3>Nanostructures of tetra-arm Poly(ethylene glycol) networks by Iron(III)-Catechol coordinative crosslinking units</h3>
-                <p class="publication-journal">Polymer 348 (2026) 173117</p>
-                <p class="publication-authors">Jungju Ryu et al.</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">04</span>
-              <div class="pub-body">
-                <h3>Electrochemical separation-enhanced SERS signals of urinary metabolites for improved pancreatic cancer detection</h3>
-                <p class="publication-journal">Chemical Engineering Journal 529 (2026)</p>
-                <p class="publication-authors">Woosuk Sohng et al.</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">03</span>
-              <div class="pub-body">
-                <h3>Noninvasive Nicotine Quantitation and Flavor Differentiation of on! Nicotine Pouches Using Raman Spectroscopy</h3>
-                <p class="publication-journal">ACS Omega 11(3), 3866-3874 (2026)</p>
-                <p class="publication-authors">Yoonji Kim et al.</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">02</span>
-              <div class="pub-body">
-                <h3>High-throughput identification of geographical origins of rubies using hyperspectral visible and fluorescence spectroscopy</h3>
-                <p class="publication-journal">Spectrochimica Acta Part A 350 (2026) 127405</p>
-                <p class="publication-authors">Jiwoo Cho et al.</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">01</span>
-              <div class="pub-body">
-                <h3>Combining near-infrared spectroscopic signatures and physical traits based on machine vision to enhance origin identification</h3>
-                <p class="publication-journal">Microchemical Journal 220 (2026) 116661</p>
-                <p class="publication-authors">Seongsoo Jeong et al.</p>
-              </div>
-            </article>
+      <section id="gallery" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Gallery</p>
+            <h2>Lab Activities</h2>
           </div>
-
-          <div class="pub-year-group" data-year-list="2025">
-            <article class="pub-row">
-              <span class="pub-no">03</span>
-              <div class="pub-body">
-                <h3>Representative publication entry (2025)</h3>
-                <p class="publication-journal">Journal Name, Volume(Issue), pages (2025)</p>
-                <p class="publication-authors">Author A, Author B, Hoeil Chung*</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">02</span>
-              <div class="pub-body">
-                <h3>Representative publication entry (2025)</h3>
-                <p class="publication-journal">Journal Name, Volume(Issue), pages (2025)</p>
-                <p class="publication-authors">Author A, Author B, Author C</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">01</span>
-              <div class="pub-body">
-                <h3>Representative publication entry (2025)</h3>
-                <p class="publication-journal">Journal Name, Volume(Issue), pages (2025)</p>
-                <p class="publication-authors">Author A, Author B</p>
-              </div>
-            </article>
-          </div>
-
-          <div class="pub-year-group" data-year-list="2024">
-            <article class="pub-row">
-              <span class="pub-no">02</span>
-              <div class="pub-body">
-                <h3>Representative publication entry (2024)</h3>
-                <p class="publication-journal">Journal Name, Volume(Issue), pages (2024)</p>
-                <p class="publication-authors">Author A, Author B</p>
-              </div>
-            </article>
-            <article class="pub-row">
-              <span class="pub-no">01</span>
-              <div class="pub-body">
-                <h3>Representative publication entry (2024)</h3>
-                <p class="publication-journal">Journal Name, Volume(Issue), pages (2024)</p>
-                <p class="publication-authors">Author A, Author B, Author C</p>
-              </div>
-            </article>
-          </div>
+          <a class="btn btn-ghost" href="./gallery.html">Open Full Gallery</a>
+        </div>
+        <div class="gallery-grid">
+          <figure>
+            <img src="./assets/gallery-1.svg" alt="ASL Gallery Preview 1" />
+            <figcaption>2026 Commencement</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/gallery-2.svg" alt="ASL Gallery Preview 2" />
+            <figcaption>ICAVS13</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/gallery-3.svg" alt="ASL Gallery Preview 3" />
+            <figcaption>ICML 2025</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/gallery-4.svg" alt="ASL Gallery Preview 4" />
+            <figcaption>KCS Spring</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/gallery-5.svg" alt="ASL Gallery Preview 5" />
+            <figcaption>ANS 2024</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/gallery-6.svg" alt="ASL Gallery Preview 6" />
+            <figcaption>SciX 2024</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -244,32 +204,6 @@
           <div><strong>Undergraduate</strong><span>Intern Track</span></div>
           <div><strong>Alumni</strong><span>Global Network</span></div>
         </div>
-      </section>
-
-      <section id="gallery" class="section">
-        <p class="eyebrow">Gallery</p>
-        <h2>Lab Life & Conferences</h2>
-        <div class="grid cards-3 gallery">
-          <article>2026 전기 졸업식</article>
-          <article>2025 ICAVS13</article>
-          <article>2025 ICML</article>
-          <article>2025 춘계 대한화학회</article>
-          <article>ANS-2024</article>
-          <article>2024 SciX</article>
-        </div>
-      </section>
-
-      <section class="section notice">
-        <div>
-          <p class="eyebrow">Lecture & Experiment</p>
-          <h2>Teaching Resources</h2>
-        </div>
-        <ul>
-          <li>[화학캡스톤 PBL] Material - 9</li>
-          <li>[화학캡스톤 PBL] Material - 8</li>
-          <li>[화학캡스톤 PBL] Material - 7</li>
-          <li>분석화학실험 OT 자료 및 영상</li>
-        </ul>
       </section>
     </main>
 
