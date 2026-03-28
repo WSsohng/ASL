@@ -3,9 +3,7 @@ const revealTargets = document.querySelectorAll(".section, .site-footer");
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-      }
+      if (entry.isIntersecting) entry.target.classList.add("in");
     });
   },
   { threshold: 0.12 }
@@ -20,10 +18,8 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
     const targetId = anchor.getAttribute("href");
     if (!targetId || targetId === "#") return;
-
     const target = document.querySelector(targetId);
     if (!target) return;
-
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -31,18 +27,15 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 const yearButtons = document.querySelectorAll(".pub-year-btn");
 const yearGroups = document.querySelectorAll(".pub-year-group");
-
 yearButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const targetYear = button.dataset.year;
     if (!targetYear) return;
-
     yearButtons.forEach((item) => {
       const isActive = item === button;
       item.classList.toggle("is-active", isActive);
       item.setAttribute("aria-selected", isActive ? "true" : "false");
     });
-
     yearGroups.forEach((group) => {
       group.classList.toggle("is-active", group.dataset.yearList === targetYear);
     });
@@ -60,8 +53,7 @@ const updateSpectralFx = () => {
 
   let sectionBoost = 0;
   spectralSections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionCenter = sectionTop + section.offsetHeight * 0.5;
+    const sectionCenter = section.offsetTop + section.offsetHeight * 0.5;
     const dist = Math.abs(sectionCenter - viewportCenter);
     const normalized = 1 - Math.min(dist / (window.innerHeight * 0.85), 1);
     sectionBoost = Math.max(sectionBoost, normalized);
@@ -70,28 +62,50 @@ const updateSpectralFx = () => {
   const pathProgress = Math.min(Math.max(easedProgress * 1.95 + 0.045, 0), 1);
   const splitFixed = 0.34;
   const beamProgress = Math.min(pathProgress, splitFixed);
-  const diffractionProgress = Math.min(Math.max((pathProgress - splitFixed) / (1 - splitFixed), 0), 1);
-  const diffractionAlpha = Math.min(Math.max((pathProgress - splitFixed - 0.03) / 0.12, 0), 1);
-  const intensity = Math.min(1, 0.18 + sectionBoost * 0.82 + easedProgress * 0.15);
+  const diffProgress = Math.min(Math.max((pathProgress - splitFixed) / (1 - splitFixed), 0), 1);
+  const diffAlpha = Math.min(Math.max((pathProgress - splitFixed - 0.03) / 0.12, 0), 1);
+  const intensity = Math.min(1, 0.22 + sectionBoost * 0.78 + easedProgress * 0.12);
 
   root.style.setProperty("--scroll-p", progress.toFixed(4));
   root.style.setProperty("--beam-p", beamProgress.toFixed(4));
   root.style.setProperty("--split-p", splitFixed.toFixed(4));
-  root.style.setProperty("--diff-p", diffractionProgress.toFixed(4));
-  root.style.setProperty("--diff-alpha", diffractionAlpha.toFixed(4));
+  root.style.setProperty("--diff-p", diffProgress.toFixed(4));
+  root.style.setProperty("--diff-alpha", diffAlpha.toFixed(4));
   root.style.setProperty("--section-boost", intensity.toFixed(3));
 };
 
-let isTicking = false;
+let ticking = false;
 const requestSpectralUpdate = () => {
-  if (isTicking) return;
-  isTicking = true;
+  if (ticking) return;
+  ticking = true;
   window.requestAnimationFrame(() => {
     updateSpectralFx();
-    isTicking = false;
+    ticking = false;
   });
 };
 
 window.addEventListener("scroll", requestSpectralUpdate, { passive: true });
 window.addEventListener("resize", requestSpectralUpdate);
 updateSpectralFx();
+
+const researchWrap = document.querySelector("#researchCards");
+if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
+  const cards = [...researchWrap.querySelectorAll(".research-card")];
+  researchWrap.addEventListener("mousemove", (event) => {
+    const rect = researchWrap.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width;
+    const py = (event.clientY - rect.top) / rect.height;
+    cards.forEach((card) => {
+      const depth = Number(card.dataset.depth || "1");
+      const rotateY = (px - 0.5) * 10 * depth;
+      const rotateX = (0.5 - py) * 8 * depth;
+      const translateY = (0.5 - py) * 6 * depth;
+      card.style.transform = `translateY(${translateY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+  });
+  researchWrap.addEventListener("mouseleave", () => {
+    cards.forEach((card) => {
+      card.style.transform = "";
+    });
+  });
+}

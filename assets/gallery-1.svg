@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" fill="none">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B2745"/>
+      <stop offset="1" stop-color="#0D1325"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#g1)"/>
+  <circle cx="220" cy="210" r="120" fill="#7FB2FF" fill-opacity="0.28"/>
+  <circle cx="920" cy="560" r="190" fill="#67F2E5" fill-opacity="0.2"/>
+  <text x="80" y="680" fill="#EAF2FF" font-family="Arial, sans-serif" font-size="56">ASL Event Preview 01</text>
+</svg>
