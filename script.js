@@ -132,6 +132,34 @@ const setupRecentPublicationCarousel = (publicationData = {}) => {
 
 const root = document.documentElement;
 const spectralSections = [...document.querySelectorAll("main .section")];
+const parseCssLengthToPx = (value, vw, vh) => {
+  const v = String(value || "").trim();
+  if (!v) return 0;
+  if (v.endsWith("vw")) return (Number.parseFloat(v) / 100) * vw;
+  if (v.endsWith("vh")) return (Number.parseFloat(v) / 100) * vh;
+  if (v.endsWith("px")) return Number.parseFloat(v);
+  const n = Number.parseFloat(v);
+  return Number.isFinite(n) ? n : 0;
+};
+const parseCssDeg = (value) => {
+  const v = String(value || "").trim();
+  if (v.endsWith("deg")) return Number.parseFloat(v);
+  const n = Number.parseFloat(v);
+  return Number.isFinite(n) ? n : 0;
+};
+const rayLengthToViewport = (x, y, angleDeg, vw, vh) => {
+  const r = (angleDeg * Math.PI) / 180;
+  const dx = Math.cos(r);
+  const dy = Math.sin(r);
+  const candidates = [];
+  if (dx > 0) candidates.push((vw - x) / dx);
+  if (dx < 0) candidates.push((0 - x) / dx);
+  if (dy > 0) candidates.push((vh - y) / dy);
+  if (dy < 0) candidates.push((0 - y) / dy);
+  const positive = candidates.filter((t) => Number.isFinite(t) && t > 0);
+  if (!positive.length) return 0;
+  return Math.min(...positive);
+};
 
 const updateSpectralFx = () => {
   const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
@@ -152,12 +180,32 @@ const updateSpectralFx = () => {
   const mirrorPoint = isMobileViewport ? 0.66 : 0.62;
   const incidenceRaw = Math.min(pathProgress / mirrorPoint, 1);
   const reflectedRaw = Math.min(Math.max((pathProgress - mirrorPoint) / (1 - mirrorPoint), 0), 1);
+  const reflectedForDiff = Math.min(Math.max((reflectedRaw - 0.2) / 0.8, 0), 1);
   const beamProgress = Math.pow(incidenceRaw, 0.94);
   const beamReflectProgress = Math.pow(reflectedRaw, 0.9);
-  const delayedDiff = Math.min(Math.max((reflectedRaw - 0.08) / 0.92, 0), 1);
-  const diffProgress = Math.pow(delayedDiff, 1.8);
-  const diffAlpha = Math.pow(Math.min(Math.max((reflectedRaw - 0.04) / 0.96, 0), 1), 1.12);
+  const diffProgress = Math.pow(reflectedForDiff, 1.6);
+  const diffAlpha = Math.pow(reflectedForDiff, 1.25);
   const intensity = Math.min(1, 0.22 + sectionBoost * 0.78 + easedProgress * 0.12);
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const css = window.getComputedStyle(root);
+  const sourceX = parseCssLengthToPx(css.getPropertyValue("--beam-source-x"), vw, vh);
+  const sourceY = parseCssLengthToPx(css.getPropertyValue("--beam-source-y"), vw, vh);
+  const branchX = parseCssLengthToPx(css.getPropertyValue("--branch-x"), vw, vh);
+  const branchY = parseCssLengthToPx(css.getPropertyValue("--branch-y"), vw, vh);
+  const beamAngle = parseCssDeg(css.getPropertyValue("--beam-angle"));
+  const returnAngle = 122;
+  const beamRad = (beamAngle * Math.PI) / 180;
+  const incidenceMax = Math.max(
+    0,
+    (branchX - sourceX) * Math.cos(beamRad) + (branchY - sourceY) * Math.sin(beamRad)
+  );
+  const returnMax = rayLengthToViewport(branchX, branchY, returnAngle, vw, vh);
+  root.style.setProperty("--beam-max", `${incidenceMax.toFixed(2)}px`);
+  root.style.setProperty("--beam2-max", `${(returnMax * 0.98).toFixed(2)}px`);
+  root.style.setProperty("--diff-max", `${(returnMax * 1.28).toFixed(2)}px`);
+  root.style.setProperty("--disp-max", `${(returnMax * 1.58).toFixed(2)}px`);
 
   root.style.setProperty("--scroll-p", progress.toFixed(4));
   root.style.setProperty("--beam-p", beamProgress.toFixed(4));
