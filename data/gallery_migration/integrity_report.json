@@ -1,0 +1,58 @@
+{
+  "source": "db-export",
+  "posts_fetched": 223,
+  "images_expected": 385,
+  "images_ok": 385,
+  "images_failed": 0,
+  "posts_with_zero_images": [],
+  "duplicate_hash_groups": [
+    {
+      "sha256": "b2ba5409e172b17172f537d4e7bf453c63dfa39d6317520c6a7b73c57a44d0b9",
+      "files": [
+        "assets/gallery/imported/634/01_img21564373139.jpg",
+        "assets/gallery/imported/634/02_img31564373091.jpg"
+      ]
+    },
+    {
+      "sha256": "0ca15d25f8785c4593bec054a1a0b239e9a40f898f9d5d1bcc9eb0447dd4208a",
+      "files": [
+        "assets/gallery/imported/74/01_img21358159466.jpg",
+        "assets/gallery/imported/74/02_img31358159466.jpg"
+      ]
+    }
+  ],
+  "recent_runs": [
+    {
+      "run_id": "20260329T051249Z",
+      "started_at": "2026-03-29T05:12:49.551667+00:00",
+      "finished_at": "2026-03-29T05:12:50.191020+00:00",
+      "posts_fetched": 0,
+      "images_ok": 0,
+      "images_failed": 0
+    },
+    {
+      "run_id": "20260329T050814Z",
+      "started_at": "2026-03-29T05:08:14.540358+00:00",
+      "finished_at": "2026-03-29T05:10:44.778773+00:00",
+      "posts_fetched": 223,
+      "images_ok": 29,
+      "images_failed": 0
+    },
+    {
+      "run_id": "20260329T050033Z",
+      "started_at": "2026-03-29T05:00:33.597076+00:00",
+      "finished_at": "2026-03-29T05:06:03.240707+00:00",
+      "posts_fetched": 223,
+      "images_ok": 385,
+      "images_failed": 0
+    },
+    {
+      "run_id": "20260329T045919Z",
+      "started_at": "2026-03-29T04:59:19.648041+00:00",
+      "finished_at": "2026-03-29T04:59:28.798997+00:00",
+      "posts_fetched": 223,
+      "images_ok": 0,
+      "images_failed": 0
+    }
+  ]
+}

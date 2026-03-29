@@ -53,18 +53,42 @@
           <h1>Gallery Archive</h1>
         </div>
       </div>
+      <section class="gallery-toolbar" aria-label="Gallery controls">
+        <p id="galleryCoverage" class="publication-authors">Loading migrated gallery coverage...</p>
+        <div class="gallery-toolbar-row">
+          <input id="gallerySearch" class="gallery-search" type="search" placeholder="Search title..." aria-label="Search gallery title" />
+          <div class="gallery-pager">
+            <button id="galleryPrev" class="btn btn-ghost" type="button">Prev</button>
+            <span id="galleryPageInfo" class="publication-authors">1 / 1</span>
+            <button id="galleryNext" class="btn btn-ghost" type="button">Next</button>
+          </div>
+        </div>
+      </section>
 
-      <div class="gallery-grid">
-        <figure><img src="./assets/gallery-1.svg" alt="ASL Gallery 1" /><figcaption>2026 Commencement</figcaption></figure>
-        <figure><img src="./assets/gallery-2.svg" alt="ASL Gallery 2" /><figcaption>ICAVS13</figcaption></figure>
-        <figure><img src="./assets/gallery-3.svg" alt="ASL Gallery 3" /><figcaption>ICML 2025</figcaption></figure>
-        <figure><img src="./assets/gallery-4.svg" alt="ASL Gallery 4" /><figcaption>KCS Spring 2025</figcaption></figure>
-        <figure><img src="./assets/gallery-5.svg" alt="ASL Gallery 5" /><figcaption>ANS 2024</figcaption></figure>
-        <figure><img src="./assets/gallery-6.svg" alt="ASL Gallery 6" /><figcaption>SciX 2024</figcaption></figure>
-        <figure><img src="./assets/gallery-2.svg" alt="ASL Gallery 7" /><figcaption>Lab Workshop</figcaption></figure>
-        <figure><img src="./assets/gallery-3.svg" alt="ASL Gallery 8" /><figcaption>Group Meeting</figcaption></figure>
-        <figure><img src="./assets/gallery-1.svg" alt="ASL Gallery 9" /><figcaption>Poster Session</figcaption></figure>
-      </div>
+      <div id="galleryGrid" class="gallery-grid gallery-grid-archive" aria-live="polite"></div>
     </main>
+
+    <dialog id="galleryPostModal" class="author-modal">
+      <div class="author-modal-head">
+        <div>
+          <h3 id="galleryModalTitle">Gallery Entry</h3>
+          <p id="galleryModalMeta" class="publication-authors">-</p>
+        </div>
+        <button id="galleryModalClose" class="modal-close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="gallery-modal-body">
+        <button id="galleryImagePrev" class="member-nav prev" type="button" aria-label="Previous image">‹</button>
+        <figure class="gallery-modal-figure">
+          <img id="galleryModalImage" src="./assets/publication-placeholder.svg" alt="Gallery image" loading="lazy" />
+          <figcaption id="galleryImageCounter">1 / 1</figcaption>
+        </figure>
+        <button id="galleryImageNext" class="member-nav next" type="button" aria-label="Next image">›</button>
+      </div>
+      <div class="author-modal-foot">
+        <a id="gallerySourceLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener noreferrer">Open Source Post</a>
+      </div>
+    </dialog>
+
+    <script src="./gallery-archive.js"></script>
   </body>
 </html>
