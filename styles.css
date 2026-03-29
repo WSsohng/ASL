@@ -1419,6 +1419,39 @@ h2 {
 }
 
 @media (max-width: 900px) {
+  .spectral-fx {
+    z-index: 2;
+    opacity: 0.9;
+    mix-blend-mode: screen;
+  }
+
+  .spectral-path {
+    left: -2%;
+    top: 12%;
+    width: 130vw;
+  }
+
+  .spectral-beam {
+    height: 4px;
+    opacity: calc(0.32 + var(--section-boost) * 0.38);
+  }
+
+  .spectral-diffraction {
+    width: calc(var(--diff-p) * 52vw);
+    height: 60px;
+    opacity: calc(var(--diff-alpha) * (0.34 + var(--section-boost) * 0.26));
+  }
+
+  .spectral-dispersion {
+    width: calc((0.06 + var(--diff-p)) * 36vw);
+    height: 118px;
+    opacity: calc(var(--diff-alpha) * 0.46);
+  }
+
+  .spectral-peaks {
+    opacity: calc(0.18 + var(--section-boost) * 0.2);
+  }
+
   .site-header {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -1504,6 +1537,10 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  .spectral-fx {
+    opacity: 0.95;
+  }
+
   .section {
     padding: 3.1rem 0;
   }
@@ -1624,17 +1661,17 @@ h2 {
   }
 
   .spectral-beam {
-    width: calc(var(--beam-p) * 82vw);
+    width: calc(var(--beam-p) * 92vw);
   }
 
   .spectral-diffraction {
-    width: calc(var(--diff-p) * 30vw);
-    height: 40px;
+    width: calc(var(--diff-p) * 46vw);
+    height: 52px;
   }
 
   .spectral-dispersion {
-    width: calc((0.02 + var(--diff-p)) * 20vw);
-    height: 84px;
+    width: calc((0.06 + var(--diff-p)) * 30vw);
+    height: 96px;
   }
 }
 
