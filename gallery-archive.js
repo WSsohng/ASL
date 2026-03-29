@@ -194,11 +194,26 @@
     }
   });
 
-  fetch("./data/gallery_migration/gallery-data.json")
-    .then((r) => {
-      if (!r.ok) throw new Error(`Failed to load gallery data: ${r.status}`);
-      return r.json();
-    })
+  const loadGalleryData = async () => {
+    const candidates = [
+      "./data/gallery_migration/gallery-data.runtime.json",
+      "./data/gallery_migration/gallery-data.supabase.json",
+      "./data/gallery_migration/gallery-data.json"
+    ];
+    let lastError = null;
+    for (const url of candidates) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) throw new Error(`Failed to load gallery data: ${r.status} (${url})`);
+        return await r.json();
+      } catch (err) {
+        lastError = err;
+      }
+    }
+    throw lastError || new Error("Failed to load gallery data");
+  };
+
+  loadGalleryData()
     .then((payload) => {
       allRows = normalizeRows(payload);
       filteredRows = [...allRows];
