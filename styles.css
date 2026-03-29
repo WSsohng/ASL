@@ -13,6 +13,11 @@
   --diff-p: 0;
   --diff-alpha: 0;
   --section-boost: 0.25;
+  --branch-x: 36.1vw;
+  --branch-y: 25.8vh;
+  --return-thickness: 3.5px;
+  --diff-h: 126px;
+  --disp-h: 230px;
 }
 
 * {
@@ -101,8 +106,8 @@ body::after {
 
 .spectral-mirror {
   position: absolute;
-  left: 35.4vw;
-  top: 25.4vh;
+  left: calc(var(--branch-x) - 0.7vw);
+  top: calc(var(--branch-y) - 0.4vh);
   width: 34px;
   height: 6px;
   border-radius: 999px;
@@ -114,10 +119,10 @@ body::after {
 
 .spectral-return {
   position: absolute;
-  left: 36.1vw;
-  top: 25.8vh;
+  left: var(--branch-x);
+  top: var(--branch-y);
   width: calc(var(--beam2-p) * 47vw);
-  height: 3.5px;
+  height: var(--return-thickness);
   transform: rotate(122deg);
   transform-origin: left center;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(216, 230, 255, 0.22) 48%, rgba(250, 252, 255, 0.96) 92%, rgba(255, 255, 255, 1) 100%);
@@ -127,10 +132,10 @@ body::after {
 
 .spectral-diffraction {
   position: absolute;
-  left: 35.8vw;
-  top: calc(25.5vh - 62px);
+  left: var(--branch-x);
+  top: calc(var(--branch-y) - (var(--diff-h) / 2) + (var(--return-thickness) / 2));
   width: calc(var(--diff-p) * 84vw);
-  height: 126px;
+  height: var(--diff-h);
   transform: rotate(122deg);
   transform-origin: left center;
   opacity: calc(var(--diff-alpha) * (0.38 + var(--section-boost) * 0.32));
@@ -152,12 +157,12 @@ body::after {
 
 .spectral-dispersion {
   position: absolute;
-  left: 35.8vw;
-  top: calc(25.5vh - 112px);
+  left: var(--branch-x);
+  top: calc(var(--branch-y) - (var(--disp-h) / 2) + (var(--return-thickness) / 2));
   width: calc((0.09 + var(--diff-p)) * 70vw);
-  height: 230px;
+  height: var(--disp-h);
   transform: rotate(122deg);
-  transform-origin: left top;
+  transform-origin: left center;
   clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 50%);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.21) 16%, rgba(255, 255, 255, 0.04) 100%);
   filter: blur(12px);
@@ -1443,6 +1448,13 @@ h2 {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --branch-x: 42.2vw;
+    --branch-y: 30.9vh;
+    --diff-h: 102px;
+    --disp-h: 188px;
+  }
+
   .spectral-fx {
     z-index: 2;
     opacity: 0.9;
@@ -1454,30 +1466,17 @@ h2 {
     opacity: calc(0.32 + var(--section-boost) * 0.38);
   }
 
-  .spectral-mirror {
-    left: 41.5vw;
-    top: 30.5vh;
-  }
-
   .spectral-return {
-    left: 42.2vw;
-    top: 30.9vh;
     width: calc(var(--beam2-p) * 54vw);
   }
 
   .spectral-diffraction {
-    left: 41.9vw;
-    top: calc(30.6vh - 50px);
     width: calc(var(--diff-p) * 74vw);
-    height: 102px;
     opacity: calc(var(--diff-alpha) * (0.4 + var(--section-boost) * 0.3));
   }
 
   .spectral-dispersion {
-    left: 41.9vw;
-    top: calc(30.6vh - 95px);
     width: calc((0.1 + var(--diff-p)) * 64vw);
-    height: 188px;
     opacity: calc(var(--diff-alpha) * 0.56);
   }
 
@@ -1570,6 +1569,13 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --branch-x: 46.6vw;
+    --branch-y: 33.4vh;
+    --diff-h: 84px;
+    --disp-h: 148px;
+  }
+
   .spectral-fx {
     opacity: 0.95;
   }
@@ -1697,30 +1703,18 @@ h2 {
     width: calc(var(--beam-p) * 92vw);
   }
 
-  .spectral-mirror {
-    left: 46vw;
-    top: 33vh;
-    width: 28px;
-  }
+  .spectral-mirror { width: 28px; }
 
   .spectral-return {
-    left: 46.6vw;
-    top: 33.4vh;
     width: calc(var(--beam2-p) * 56vw);
   }
 
   .spectral-diffraction {
-    left: 46.4vw;
-    top: calc(33.2vh - 42px);
     width: calc(var(--diff-p) * 68vw);
-    height: 84px;
   }
 
   .spectral-dispersion {
-    left: 46.4vw;
-    top: calc(33.2vh - 74px);
     width: calc((0.1 + var(--diff-p)) * 58vw);
-    height: 148px;
   }
 }
 
