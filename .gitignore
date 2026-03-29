@@ -1,2 +1,17 @@
 .DS_Store
 Thumbs.db
+_analysis/
+tools/gallery_migration/__pycache__/
+data/gallery_migration/gallery_archive.db
+data/gallery_migration/source_gallery_index.json
+data/gallery_migration/supabase_upload_manifest.json
+data/gallery_migration/gallery-data.supabase.json
+data/gallery_migration/gallery-data.runtime.json
+assets/_tmp_prof_crop_test.jpg
+assets/kakaotalk-thumb-source.jpg
+assets/og-prof-illustrated-v1.jpg
+assets/og-prof-illustrated-v2.jpg
+assets/og-prof-illustrated-v3.jpg
+assets/og-prof-illustrated-v4.jpg
+assets/og-prof-illustrated-v5.jpg
+assets/og-prof-illustrated-minimal-v1.jpg

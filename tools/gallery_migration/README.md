@@ -38,6 +38,47 @@ python tools/gallery_migration/export_from_db.py
 - Default `--min-posts-guard 100` prevents overwriting artifacts with partial crawls.
 - Set `--min-posts-guard 0` only for intentional partial tests.
 
+## Stable Ops Migration (Supabase Storage)
+1. Create a public storage bucket in Supabase (example: `asl-gallery`).
+2. Set environment variables:
+```powershell
+$env:SUPABASE_URL="https://<project-ref>.supabase.co"
+$env:SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"
+```
+3. Upload local gallery assets:
+```powershell
+python tools/gallery_migration/upload_gallery_to_supabase.py `
+  --bucket asl-gallery `
+  --gallery-json data/gallery_migration/gallery-data.json `
+  --manifest data/gallery_migration/supabase_upload_manifest.json
+```
+
+Dry-run URL simulation:
+```powershell
+python tools/gallery_migration/upload_gallery_to_supabase.py `
+  --bucket asl-gallery `
+  --gallery-json data/gallery_migration/gallery-data.json `
+  --manifest data/gallery_migration/supabase_upload_manifest.json `
+  --supabase-url https://<project-ref>.supabase.co `
+  --dry-run
+```
+4. Rewrite gallery data to remote URLs:
+```powershell
+python tools/gallery_migration/rewrite_gallery_urls.py `
+  --gallery-json data/gallery_migration/gallery-data.json `
+  --manifest data/gallery_migration/supabase_upload_manifest.json `
+  --out data/gallery_migration/gallery-data.supabase.json `
+  --strict
+```
+
+When rewriting from a dry-run manifest, add `--include-planned`.
+5. Runtime switchover:
+- `gallery-archive.js` automatically tries this order:
+  1) `gallery-data.runtime.json`
+  2) `gallery-data.supabase.json`
+  3) `gallery-data.json`
+- For production cutover, copy `gallery-data.supabase.json` to `gallery-data.runtime.json`.
+
 ## Integrity Criteria
 - All list pages reachable through pagination are discovered.
 - All detail links from list pages are collected (deduplicated by URL).
