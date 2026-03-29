@@ -40,6 +40,12 @@ const setStatus = (message, type = "info") => {
   statusEl.dataset.tone = type;
 };
 
+const requireClient = () => {
+  if (supabase) return true;
+  setStatus("Supabase client is not initialized. Check admin-config.js (url / anonKey).", "error");
+  return false;
+};
+
 const esc = (value = "") =>
   String(value)
     .replaceAll("&", "&amp;")
@@ -183,6 +189,7 @@ const initTabs = () => {
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (!requireClient()) return;
   try {
     const email = document.getElementById("adminEmail").value.trim();
     const password = document.getElementById("adminPassword").value;
@@ -203,6 +210,7 @@ loginForm.addEventListener("submit", async (event) => {
 });
 
 signOutBtn.addEventListener("click", async () => {
+  if (!requireClient()) return;
   await supabase.auth.signOut();
   setAdminVisible(false);
   resetPublicationFormState();
@@ -213,6 +221,7 @@ signOutBtn.addEventListener("click", async () => {
 
 publicationForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (!requireClient()) return;
   try {
     setStatus("Saving publication...", "info");
     const payload = {
@@ -249,6 +258,7 @@ publicationForm.addEventListener("submit", async (event) => {
 
 galleryForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (!requireClient()) return;
   try {
     setStatus("Saving gallery post...", "info");
     const title = document.getElementById("galTitle").value.trim();
@@ -324,6 +334,7 @@ galleryForm.addEventListener("submit", async (event) => {
 
 memberForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (!requireClient()) return;
   try {
     setStatus("Saving member...", "info");
     const payload = {
@@ -383,6 +394,7 @@ const fillMemberForm = (row) => {
 };
 
 const onAdminListAction = async (event) => {
+  if (!requireClient()) return;
   const button = event.target.closest("button[data-action][data-id][data-entity]");
   if (!button || !supabase) return;
   const { action, id, entity } = button.dataset;
