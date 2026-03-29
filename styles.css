@@ -1597,6 +1597,144 @@ h2 {
   font-size: clamp(1.5rem, 4.2vw, 3.5rem);
 }
 
+.admin-shell {
+  max-width: 1180px;
+}
+
+.admin-card {
+  border: 1px solid rgba(180, 204, 250, 0.22);
+  border-radius: 1rem;
+  background: linear-gradient(160deg, rgba(14, 22, 45, 0.78), rgba(10, 16, 34, 0.84));
+  padding: 1rem 1.1rem 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.admin-card h2,
+.admin-card h3 {
+  text-transform: none;
+}
+
+.admin-hidden {
+  display: none !important;
+}
+
+.admin-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.admin-form-grid label {
+  display: grid;
+  gap: 0.35rem;
+  color: #cfdbf6;
+  font-size: 0.89rem;
+}
+
+.admin-form-grid label span {
+  color: #cad5ef;
+}
+
+.admin-form-grid input,
+.admin-form-grid textarea,
+.admin-form-grid select {
+  width: 100%;
+  border: 1px solid rgba(180, 202, 246, 0.26);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #eef3ff;
+  padding: 0.58rem 0.68rem;
+  font: inherit;
+}
+
+.admin-form-grid textarea {
+  resize: vertical;
+  min-height: 86px;
+}
+
+.admin-form-grid button {
+  align-self: end;
+}
+
+.admin-tab-row {
+  margin-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-tab {
+  border: 1px solid rgba(180, 202, 246, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #dce6ff;
+  padding: 0.42rem 0.9rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-tab.is-active {
+  background: rgba(221, 233, 255, 0.94);
+  color: #142443;
+  border-color: rgba(221, 233, 255, 0.94);
+}
+
+.admin-pane {
+  display: none;
+  margin-top: 0.9rem;
+}
+
+.admin-pane.is-active {
+  display: block;
+}
+
+.admin-list {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.48rem;
+}
+
+.admin-list-item {
+  border: 1px solid rgba(180, 202, 246, 0.2);
+  border-radius: 0.8rem;
+  padding: 0.62rem 0.72rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-list-item h4 {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+.admin-list-item p {
+  margin: 0.28rem 0 0;
+  color: #c5d1ea;
+  font-size: 0.83rem;
+}
+
+.admin-status {
+  margin-top: 0.35rem;
+}
+
+.admin-status[data-tone="ok"] {
+  color: #9ff2b6;
+}
+
+.admin-status[data-tone="error"] {
+  color: #ffb3b3;
+}
+
 @media (max-width: 1200px) {
   .research-cards {
     display: grid;
@@ -1731,6 +1869,10 @@ h2 {
   .member-nav {
     width: 2.3rem;
     height: 2.3rem;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
   }
 
   .alumni-grid {

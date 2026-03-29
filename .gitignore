@@ -7,6 +7,7 @@ data/gallery_migration/source_gallery_index.json
 data/gallery_migration/supabase_upload_manifest.json
 data/gallery_migration/gallery-data.supabase.json
 data/gallery_migration/gallery-data.runtime.json
+data/gallery_migration/optimized_uploads/
 assets/_tmp_prof_crop_test.jpg
 assets/kakaotalk-thumb-source.jpg
 assets/og-prof-illustrated-v1.jpg
