@@ -55,6 +55,17 @@
       }))
       .sort((a, b) => toInt(b.source_present_num, -1) - toInt(a.source_present_num, -1));
 
+  const toGalleryThumbUrl = (rawUrl = "", width = 900, quality = 56) => {
+    const url = String(rawUrl || "").trim();
+    if (!url) return FALLBACK_IMG;
+    if (!url.includes("/storage/v1/object/public/")) return url;
+    const rendered = url.includes("/storage/v1/render/image/public/")
+      ? url
+      : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
+    const sep = rendered.includes("?") ? "&" : "?";
+    return `${rendered}${sep}width=${width}&quality=${quality}&resize=cover`;
+  };
+
   const getTotalPages = () => Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
 
   const updatePager = () => {
@@ -89,6 +100,7 @@
     gridEl.innerHTML = pageRows
       .map((row, idx) => {
         const cover = row.images[0] || FALLBACK_IMG;
+        const coverThumb = toGalleryThumbUrl(cover, 920, 54);
         const title = row.title || `Gallery #${esc(row.id)}`;
         const meta = [row.date, row.author].filter(Boolean).join(" · ");
         const ordinal = start + idx + 1;
@@ -96,7 +108,7 @@
         return `
           <figure class="gallery-card" data-gallery-id="${esc(row.id)}" tabindex="0" role="button" aria-label="${esc(title)}">
             <div class="gallery-card-media">
-              <img src="${esc(cover)}" alt="${esc(title)}" loading="lazy" />
+              <img src="${esc(coverThumb)}" alt="${esc(title)}" loading="lazy" />
               <span class="gallery-card-index">${ordinal.toString().padStart(2, "0")}</span>
               <span class="gallery-card-count">${esc(imageCountLabel)}</span>
             </div>

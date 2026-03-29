@@ -130,6 +130,54 @@ const setupRecentPublicationCarousel = (publicationData = {}) => {
   updateNavState();
 };
 
+const toGalleryThumbUrl = (rawUrl = "", width = 920, quality = 58) => {
+  const url = String(rawUrl || "").trim();
+  if (!url) return "./assets/publication-placeholder.svg";
+  if (!url.includes("/storage/v1/object/public/")) return url;
+  const rendered = url.includes("/storage/v1/render/image/public/")
+    ? url
+    : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
+  const sep = rendered.includes("?") ? "&" : "?";
+  return `${rendered}${sep}width=${width}&quality=${quality}&resize=cover`;
+};
+
+const setupGalleryPreview = async () => {
+  const grid = document.getElementById("galleryPreviewGrid");
+  if (!grid) return;
+  try {
+    const payload =
+      (await window.ASLData?.loadGalleryPosts?.()) ||
+      (await fetch("./data/gallery_migration/gallery-data.runtime.json", { cache: "no-store" }).then((r) =>
+        r.json()
+      ));
+    const rows = (Array.isArray(payload) ? payload : [])
+      .slice()
+      .sort((a, b) => Number.parseInt(b?.source_present_num || "0", 10) - Number.parseInt(a?.source_present_num || "0", 10))
+      .slice(0, 3);
+    if (!rows.length) {
+      grid.innerHTML =
+        '<figure><img src="./assets/publication-placeholder.svg" alt="No gallery entry" loading="lazy" /><figcaption>No recent gallery entries.</figcaption></figure>';
+      return;
+    }
+    grid.innerHTML = rows
+      .map((row) => {
+        const original = row?.images?.[0] || row?.thumbnail || "./assets/publication-placeholder.svg";
+        const thumb = toGalleryThumbUrl(original, 860, 56);
+        const title = escHtml(row?.title || "ASL Gallery");
+        return `
+          <figure>
+            <img src="${escHtml(thumb)}" alt="${title}" loading="lazy" />
+            <figcaption>${title}</figcaption>
+          </figure>
+        `;
+      })
+      .join("");
+  } catch {
+    grid.innerHTML =
+      '<figure><img src="./assets/publication-placeholder.svg" alt="Gallery preview unavailable" loading="lazy" /><figcaption>Gallery preview unavailable.</figcaption></figure>';
+  }
+};
+
 const root = document.documentElement;
 const spectralSections = [...document.querySelectorAll("main .section")];
 const parseCssLengthToPx = (value, vw, vh) => {
@@ -672,6 +720,7 @@ if (memberCarousel) {
     .catch(() => {
       if (profHIndexEl) profHIndexEl.textContent = "-";
     });
+  setupGalleryPreview();
 
   document.querySelectorAll(".member-card[data-member-name]").forEach((card) => {
     card.addEventListener("click", () => {
