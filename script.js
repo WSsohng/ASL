@@ -467,9 +467,10 @@ if (memberCarousel) {
   };
   const buildMemberPhotoMap = (memberPayload) => {
     memberPhotoMap.clear();
+    const facultyMembers = Array.isArray(memberPayload?.faculty) ? memberPayload.faculty : [];
     const currentMembers = Array.isArray(memberPayload?.current_members) ? memberPayload.current_members : [];
     const alumniMembers = Array.isArray(memberPayload?.alumni) ? memberPayload.alumni : [];
-    [...currentMembers, ...alumniMembers].forEach((member) => {
+    [...facultyMembers, ...currentMembers, ...alumniMembers].forEach((member) => {
       const image = String(member?.image || "").trim();
       if (!image) return;
       putMemberPhoto(member.name, image);

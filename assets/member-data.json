@@ -1,4 +1,15 @@
 {
+  "faculty": [
+    {
+      "id": "hoeil-chung",
+      "name": "Hoeil Chung",
+      "role": "Professor",
+      "email": "hoeil@hanyang.ac.kr",
+      "image": "./assets/members/faculty/hoeil-chung.jpg",
+      "source_image": "C:/Users/Sohng/Documents/카카오톡 받은 파일/KakaoTalk_20260329_130908503.jpg",
+      "source_section": "faculty"
+    }
+  ],
   "current_members": [
     {
       "name": "Bui Thu Thuy",
