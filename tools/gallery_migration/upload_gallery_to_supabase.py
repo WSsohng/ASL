@@ -25,6 +25,7 @@ from typing import Dict, List, Tuple
 from urllib.parse import quote
 
 import requests
+from PIL import Image
 
 
 @dataclass
@@ -95,6 +96,25 @@ def upload_one(
     return "error", last_error
 
 
+def optimize_image_to_jpeg(
+    local_abs: Path,
+    optimized_dir: Path,
+    max_side: int,
+    quality: int,
+) -> Path:
+    optimized_dir.mkdir(parents=True, exist_ok=True)
+    with Image.open(local_abs) as img:
+        img = img.convert("RGB")
+        w, h = img.size
+        scale = min(1.0, float(max_side) / float(max(w, h)))
+        if scale < 1.0:
+            img = img.resize((int(w * scale), int(h * scale)), Image.Resampling.LANCZOS)
+        out_name = f"{local_abs.stem}.optimized.jpg"
+        out_path = optimized_dir / out_name
+        img.save(out_path, format="JPEG", quality=quality, optimize=True, progressive=True)
+        return out_path
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Upload gallery images to Supabase Storage")
     p.add_argument("--bucket", required=True, help="Supabase storage bucket name")
@@ -105,6 +125,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--supabase-url", default="", help="Optional explicit Supabase URL (used in dry-run URL generation)")
     p.add_argument("--timeout", type=int, default=60)
     p.add_argument("--retries", type=int, default=3)
+    p.add_argument("--optimize-large", action="store_true", help="If upload returns 413, auto-convert to web JPEG and retry")
+    p.add_argument("--optimize-threshold-mb", type=int, default=45, help="Large-file threshold in MB for optimization retry")
+    p.add_argument("--optimize-max-side", type=int, default=3200, help="Max width/height for optimized image")
+    p.add_argument("--optimize-quality", type=int, default=86, help="JPEG quality for optimized image")
+    p.add_argument("--optimized-dir", default="data/gallery_migration/optimized_uploads", help="Temporary optimized image directory")
     p.add_argument("--dry-run", action="store_true", help="Do not upload, only emit planned manifest")
     return p
 
@@ -130,6 +155,9 @@ def main() -> int:
     ok = 0
     fail = 0
 
+    optimize_threshold_bytes = max(1, args.optimize_threshold_mb) * 1024 * 1024
+    optimized_dir = (repo_root / args.optimized_dir).resolve()
+
     for rel in local_paths:
         local_abs = (repo_root / rel).resolve()
         if not local_abs.exists():
@@ -149,7 +177,14 @@ def main() -> int:
         rel_after_assets = rel
         if rel_after_assets.startswith("assets/"):
             rel_after_assets = rel_after_assets[len("assets/") :]
-        bucket_path = f"{args.prefix.rstrip('/')}/{rel_after_assets.lstrip('/')}"
+        rel_after_assets = rel_after_assets.lstrip("/")
+        prefix = args.prefix.strip().strip("/")
+        if prefix and rel_after_assets.startswith(prefix + "/"):
+            bucket_path = rel_after_assets
+        elif prefix:
+            bucket_path = f"{prefix}/{rel_after_assets}"
+        else:
+            bucket_path = rel_after_assets
         public_url = (
             f"{supabase_url.rstrip('/')}/storage/v1/object/public/"
             f"{quote(args.bucket, safe='')}/{quote(bucket_path, safe='/')}"
@@ -170,16 +205,57 @@ def main() -> int:
             ok += 1
             continue
 
+        upload_path = local_abs
+        upload_bucket_path = bucket_path
+        upload_public_url = public_url
+
         status, error = upload_one(
             session=session,
             supabase_url=supabase_url,
             service_key=service_key,
             bucket=args.bucket,
-            local_abs=local_abs,
-            bucket_path=bucket_path,
+            local_abs=upload_path,
+            bucket_path=upload_bucket_path,
             timeout=args.timeout,
             retries=args.retries,
         )
+
+        # Retry with optimized JPEG when payload is too large.
+        if (
+            status == "error"
+            and args.optimize_large
+            and "Payload too large" in (error or "")
+            and local_abs.stat().st_size >= optimize_threshold_bytes
+        ):
+            try:
+                optimized = optimize_image_to_jpeg(
+                    local_abs=local_abs,
+                    optimized_dir=optimized_dir,
+                    max_side=args.optimize_max_side,
+                    quality=args.optimize_quality,
+                )
+                upload_path = optimized
+                upload_bucket_path = str(Path(bucket_path).with_suffix(".jpg")).replace("\\", "/")
+                upload_public_url = (
+                    f"{supabase_url.rstrip('/')}/storage/v1/object/public/"
+                    f"{quote(args.bucket, safe='')}/{quote(upload_bucket_path, safe='/')}"
+                )
+                status, error = upload_one(
+                    session=session,
+                    supabase_url=supabase_url,
+                    service_key=service_key,
+                    bucket=args.bucket,
+                    local_abs=upload_path,
+                    bucket_path=upload_bucket_path,
+                    timeout=args.timeout,
+                    retries=args.retries,
+                )
+                if status == "ok":
+                    error = f"optimized_from:{rel}"
+            except Exception as opt_exc:
+                status = "error"
+                error = f"{error} | optimize_failed:{opt_exc}"
+
         if status == "ok":
             ok += 1
         else:
@@ -187,10 +263,10 @@ def main() -> int:
         results.append(
             UploadResult(
                 local_path=rel,
-                bucket_path=bucket_path,
-                public_url=public_url,
+                bucket_path=upload_bucket_path,
+                public_url=upload_public_url,
                 status=status,
-                bytes_size=local_abs.stat().st_size,
+                bytes_size=upload_path.stat().st_size,
                 error=error,
             )
         )

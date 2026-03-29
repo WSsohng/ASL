@@ -39,6 +39,12 @@ python tools/gallery_migration/export_from_db.py
 - Set `--min-posts-guard 0` only for intentional partial tests.
 
 ## Stable Ops Migration (Supabase Storage)
+One-command PowerShell runner:
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/gallery_migration/run_supabase_migration.ps1 -SupabaseUrl "https://<project-ref>.supabase.co" -ServiceRoleKey "<service-role-key>" -Bucket "asl-gallery"
+```
+
+Manual steps:
 1. Create a public storage bucket in Supabase (example: `asl-gallery`).
 2. Set environment variables:
 ```powershell
@@ -78,6 +84,25 @@ When rewriting from a dry-run manifest, add `--include-planned`.
   2) `gallery-data.supabase.json`
   3) `gallery-data.json`
 - For production cutover, copy `gallery-data.supabase.json` to `gallery-data.runtime.json`.
+
+## Admin Console (Web Upload)
+- Page: `admin.html`
+- Client code: `admin.js`
+- Config file: `admin-config.js` (copy from `admin-config.example.js` and fill `url`, `anonKey`)
+
+Required schema/RLS:
+- Run `tools/gallery_migration/supabase_admin_console_schema.sql` in Supabase SQL editor.
+- In `profiles`, assign admin role to your account:
+```sql
+update public.profiles
+set role = 'admin'
+where email = 'your-admin-email@example.com';
+```
+
+Storage buckets used by admin page:
+- `asl-gallery`
+- `asl-publications`
+- `asl-members`
 
 ## Integrity Criteria
 - All list pages reachable through pagination are discovered.
