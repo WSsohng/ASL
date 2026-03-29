@@ -195,6 +195,7 @@
   });
 
   const loadGalleryData = async () => {
+    if (window.ASLData?.loadGalleryPosts) return window.ASLData.loadGalleryPosts();
     const candidates = [
       "./data/gallery_migration/gallery-data.runtime.json",
       "./data/gallery_migration/gallery-data.supabase.json",

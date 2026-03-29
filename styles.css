@@ -1723,6 +1723,31 @@ h2 {
   font-size: 0.83rem;
 }
 
+.admin-item-actions {
+  margin-top: 0.55rem;
+  display: flex;
+  gap: 0.45rem;
+}
+
+.admin-mini-btn {
+  min-height: 0;
+  padding: 0.34rem 0.66rem;
+  font-size: 0.76rem;
+  border-radius: 0.55rem;
+}
+
+.admin-mini-danger {
+  color: #ffbec3;
+  border-color: rgba(255, 163, 171, 0.5);
+}
+
+.admin-mini-danger:hover,
+.admin-mini-danger:focus-visible {
+  color: #210b0e;
+  background: #ffbec3;
+  border-color: #ffbec3;
+}
+
 .admin-status {
   margin-top: 0.35rem;
 }

@@ -104,6 +104,45 @@ Storage buckets used by admin page:
 - `asl-publications`
 - `asl-members`
 
+Public-site data source:
+- `public-data.js` reads Supabase first when `admin-config.js` has `url` and `anonKey`.
+- If not configured or request fails, pages automatically fall back to local JSON files.
+
+## Unified CRUD Migration (Publications / Members / Gallery)
+This is the next-step migration that moves all currently-served JSON data into Supabase tables so the admin console can become the single source of truth.
+
+1. Run the unified schema:
+```sql
+-- Supabase SQL editor
+-- file: tools/gallery_migration/supabase_crud_schema_v1.sql
+```
+
+2. Set environment variables:
+```powershell
+$env:SUPABASE_URL="https://<project-ref>.supabase.co"
+$env:SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"
+```
+
+3. Backfill all datasets:
+```powershell
+python tools/gallery_migration/backfill_supabase_from_json.py --only all
+```
+
+Optional scope runs:
+```powershell
+python tools/gallery_migration/backfill_supabase_from_json.py --only publications
+python tools/gallery_migration/backfill_supabase_from_json.py --only members
+python tools/gallery_migration/backfill_supabase_from_json.py --only gallery
+```
+
+4. Verify report:
+- `data/gallery_migration/backfill_report.json`
+
+5. Verify table counts vs local source datasets:
+```powershell
+python tools/gallery_migration/verify_supabase_backfill.py
+```
+
 ## Integrity Criteria
 - All list pages reachable through pagination are discovered.
 - All detail links from list pages are collected (deduplicated by URL).

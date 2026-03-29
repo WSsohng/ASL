@@ -632,8 +632,9 @@ if (memberCarousel) {
   };
 
   Promise.all([
-    fetch("./assets/publication-data.json").then((r) => r.json()),
-    fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
+    window.ASLData?.loadPublications?.() ?? fetch("./assets/publication-data.json").then((r) => r.json()),
+    window.ASLData?.loadMembers?.() ??
+      fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
   ])
     .then(async ([data, memberPayload]) => {
       publicationData = data;
