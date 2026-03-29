@@ -560,6 +560,7 @@ h2 {
 .recent-pub-viewport {
   overflow-x: auto;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
 }
 
 .recent-pub-viewport::-webkit-scrollbar {
@@ -578,6 +579,7 @@ h2 {
   border-radius: 0.95rem;
   background: rgba(255, 255, 255, 0.03);
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .recent-pub-card.is-loading {
@@ -750,7 +752,7 @@ h2 {
   font-size: 1.14rem;
   line-height: 1.52;
   flex: 1 1 420px;
-  min-width: 240px;
+  min-width: 0;
 }
 
 .pub-entry-journal {
@@ -1418,14 +1420,40 @@ h2 {
 
 @media (max-width: 900px) {
   .site-header {
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .brand-text {
+    display: none;
   }
 
   .nav {
     width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 0.9rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    white-space: nowrap;
+    padding-bottom: 0.15rem;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+  }
+
+  .header-cta {
+    display: none;
   }
 
   .split,
@@ -1510,6 +1538,7 @@ h2 {
   .recent-pub-carousel {
     grid-template-columns: 1fr;
     gap: 0.6rem;
+    position: relative;
   }
 
   .recent-pub-nav {
@@ -1517,13 +1546,14 @@ h2 {
   }
 
   .recent-pub-card {
-    flex-basis: calc((100% - 0.8rem) / 1.2);
-    min-width: 260px;
+    flex-basis: 84%;
+    min-width: 78vw;
   }
 
   .member-carousel {
     grid-template-columns: 1fr;
     gap: 0.6rem;
+    position: relative;
   }
 
   .member-nav {
@@ -1531,8 +1561,21 @@ h2 {
   }
 
   .member-card {
-    flex-basis: calc((100% - 1rem) / 2.4);
-    min-width: 180px;
+    flex-basis: 82%;
+    min-width: 72vw;
+  }
+
+  .recent-pub-carousel::after,
+  .member-carousel::after {
+    content: "Swipe";
+    position: absolute;
+    right: 0.25rem;
+    bottom: -1.1rem;
+    color: #8f9dbb;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
   }
 
   .alumni-grid {
