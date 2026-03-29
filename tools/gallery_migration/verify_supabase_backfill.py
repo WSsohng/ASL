@@ -64,6 +64,7 @@ def fetch_count(base_url: str, service_key: str, table: str, timeout: int) -> in
     headers = {
         "apikey": service_key,
         "Authorization": f"Bearer {service_key}",
+        "Prefer": "count=exact",
     }
     params = {"select": "id", "limit": 1}
     resp = requests.get(
@@ -78,7 +79,34 @@ def fetch_count(base_url: str, service_key: str, table: str, timeout: int) -> in
     # format: "0-0/223"
     if "/" not in count_header:
         return len(resp.json() or [])
-    return int(count_header.split("/")[-1])
+    suffix = count_header.split("/")[-1].strip()
+    if suffix and suffix != "*" and suffix.isdigit():
+        return int(suffix)
+
+    # Fallback when server returns unknown total, e.g. "0-0/*".
+    # Count rows by paging through ids.
+    page_size = 1000
+    offset = 0
+    total = 0
+    while True:
+        page_params = {"select": "id", "limit": page_size, "offset": offset}
+        page_resp = requests.get(
+            f"{base_url.rstrip('/')}/rest/v1/{table}",
+            headers=headers,
+            params=page_params,
+            timeout=timeout,
+        )
+        if page_resp.status_code >= 300:
+            raise RuntimeError(
+                f"fallback count query failed [{table}] {page_resp.status_code}: {page_resp.text[:400]}"
+            )
+        rows = page_resp.json() or []
+        n = len(rows)
+        total += n
+        if n < page_size:
+            break
+        offset += page_size
+    return total
 
 
 def main() -> int:
@@ -123,4 +151,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
