@@ -148,15 +148,21 @@ const updateSpectralFx = () => {
   });
 
   const pathProgress = Math.min(Math.max(easedProgress * 1.95 + 0.045, 0), 1);
-  const splitFixed = 0.34;
-  const beamProgress = Math.min(pathProgress, splitFixed);
-  const diffProgress = Math.min(Math.max((pathProgress - splitFixed) / (1 - splitFixed), 0), 1);
-  const diffAlpha = Math.min(Math.max((pathProgress - splitFixed - 0.03) / 0.12, 0), 1);
+  const isMobileViewport = window.matchMedia("(max-width: 900px)").matches;
+  const mirrorPoint = isMobileViewport ? 0.52 : 0.44;
+  const incidenceRaw = Math.min(pathProgress / mirrorPoint, 1);
+  const reflectedRaw = Math.min(Math.max((pathProgress - mirrorPoint) / (1 - mirrorPoint), 0), 1);
+  const beamProgress = Math.pow(incidenceRaw, 0.94);
+  const beamReflectProgress = Math.pow(reflectedRaw, 0.9);
+  const delayedDiff = Math.min(Math.max((reflectedRaw - 0.08) / 0.92, 0), 1);
+  const diffProgress = Math.pow(delayedDiff, 1.8);
+  const diffAlpha = Math.pow(Math.min(Math.max((reflectedRaw - 0.04) / 0.96, 0), 1), 1.12);
   const intensity = Math.min(1, 0.22 + sectionBoost * 0.78 + easedProgress * 0.12);
 
   root.style.setProperty("--scroll-p", progress.toFixed(4));
   root.style.setProperty("--beam-p", beamProgress.toFixed(4));
-  root.style.setProperty("--split-p", splitFixed.toFixed(4));
+  root.style.setProperty("--beam2-p", beamReflectProgress.toFixed(4));
+  root.style.setProperty("--split-p", mirrorPoint.toFixed(4));
   root.style.setProperty("--diff-p", diffProgress.toFixed(4));
   root.style.setProperty("--diff-alpha", diffAlpha.toFixed(4));
   root.style.setProperty("--section-boost", intensity.toFixed(3));
