@@ -1431,6 +1431,12 @@ h2 {
   margin-bottom: 1.6rem;
 }
 
+.archive-title-single-line {
+  max-width: none;
+  white-space: nowrap;
+  font-size: clamp(1.5rem, 4.2vw, 3.5rem);
+}
+
 @media (max-width: 1200px) {
   .research-cards {
     display: grid;
