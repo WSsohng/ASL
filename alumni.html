@@ -90,6 +90,8 @@
       </div>
     </dialog>
 
+    <script src="./admin-config.js"></script>
+    <script src="./public-data.js"></script>
     <script>
       (() => {
         const grid = document.getElementById("alumniGrid");
@@ -353,8 +355,8 @@
         };
 
         Promise.all([
-          fetch("./assets/member-data.json").then((r) => r.json()),
-          fetch("./assets/publication-data.json").then((r) => r.json())
+          window.ASLData?.loadMembers?.() ?? fetch("./assets/member-data.json").then((r) => r.json()),
+          window.ASLData?.loadPublications?.() ?? fetch("./assets/publication-data.json").then((r) => r.json())
         ])
           .then(([payload, publicationPayload]) => {
             const alumni = Array.isArray(payload?.alumni) ? payload.alumni : [];

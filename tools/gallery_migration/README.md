@@ -104,6 +104,10 @@ Storage buckets used by admin page:
 - `asl-publications`
 - `asl-members`
 
+Public-site data source:
+- `public-data.js` reads Supabase first when `admin-config.js` has `url` and `anonKey`.
+- If not configured or request fails, pages automatically fall back to local JSON files.
+
 ## Unified CRUD Migration (Publications / Members / Gallery)
 This is the next-step migration that moves all currently-served JSON data into Supabase tables so the admin console can become the single source of truth.
 

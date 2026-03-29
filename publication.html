@@ -84,6 +84,8 @@
       </div>
     </dialog>
 
+    <script src="./admin-config.js"></script>
+    <script src="./public-data.js"></script>
     <script>
       (() => {
         const filterEl = document.getElementById("pubFilter");
@@ -679,8 +681,9 @@
         };
 
         Promise.all([
-          fetch("./assets/publication-data.json").then((r) => r.json()),
-          fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
+          window.ASLData?.loadPublications?.() ?? fetch("./assets/publication-data.json").then((r) => r.json()),
+          window.ASLData?.loadMembers?.() ??
+            fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
         ])
           .then(([payload, memberPayload]) => {
             allData = payload;
