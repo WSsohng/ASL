@@ -149,7 +149,7 @@ const updateSpectralFx = () => {
 
   const pathProgress = Math.min(Math.max(easedProgress * 1.95 + 0.045, 0), 1);
   const isMobileViewport = window.matchMedia("(max-width: 900px)").matches;
-  const mirrorPoint = isMobileViewport ? 0.52 : 0.44;
+  const mirrorPoint = isMobileViewport ? 0.66 : 0.62;
   const incidenceRaw = Math.min(pathProgress / mirrorPoint, 1);
   const reflectedRaw = Math.min(Math.max((pathProgress - mirrorPoint) / (1 - mirrorPoint), 0), 1);
   const beamProgress = Math.pow(incidenceRaw, 0.94);
