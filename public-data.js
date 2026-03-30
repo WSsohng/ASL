@@ -182,6 +182,19 @@
   const loadGalleryPosts = async () => {
     if (cache.has("gallery")) return cache.get("gallery");
     const promise = (async () => {
+      const candidates = [
+        "./data/gallery_migration/gallery-data.runtime.json",
+        "./data/gallery_migration/gallery-data.supabase.json",
+        "./data/gallery_migration/gallery-data.json"
+      ];
+      let lastError = null;
+      for (const url of candidates) {
+        try {
+          return await safeJsonFetch(url);
+        } catch (err) {
+          lastError = err;
+        }
+      }
       if (isReady) {
         try {
           const [posts, images] = await Promise.all([
@@ -195,19 +208,6 @@
             )
           ]);
           return toGalleryPayload(posts, images);
-        } catch {
-          // fallback
-        }
-      }
-      const candidates = [
-        "./data/gallery_migration/gallery-data.runtime.json",
-        "./data/gallery_migration/gallery-data.supabase.json",
-        "./data/gallery_migration/gallery-data.json"
-      ];
-      let lastError = null;
-      for (const url of candidates) {
-        try {
-          return await safeJsonFetch(url);
         } catch (err) {
           lastError = err;
         }
