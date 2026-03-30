@@ -166,7 +166,13 @@ const setupGalleryPreview = async () => {
         const title = escHtml(row?.title || "ASL Gallery");
         return `
           <figure>
-            <img src="${escHtml(thumb)}" alt="${title}" loading="lazy" />
+            <img
+              src="${escHtml(thumb)}"
+              alt="${title}"
+              loading="lazy"
+              data-fallback-src="${escHtml(original)}"
+              onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
+            />
             <figcaption>${title}</figcaption>
           </figure>
         `;
