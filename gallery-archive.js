@@ -11,6 +11,7 @@
   const modalEl = document.getElementById("galleryPostModal");
   const modalTitleEl = document.getElementById("galleryModalTitle");
   const modalMetaEl = document.getElementById("galleryModalMeta");
+  const modalDescEl = document.getElementById("galleryModalDesc");
   const modalImageEl = document.getElementById("galleryModalImage");
   const modalCounterEl = document.getElementById("galleryImageCounter");
   const modalSourceEl = document.getElementById("gallerySourceLink");
@@ -44,14 +45,27 @@
     return Number.isFinite(n) ? n : fallback;
   };
 
+  const isPlaceholderTitle = (value = "") => {
+    const t = String(value || "").trim().toLowerCase();
+    return !t || t === "content" || t === "컨텐츠 바로가기" || t === "콘텐츠 바로가기";
+  };
+
+  const resolveTitle = (row) => {
+    if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
+    const dateText = String(row?.date || "").trim();
+    if (dateText) return `${dateText} ASL Gallery`;
+    return `ASL Gallery #${row?.id || ""}`;
+  };
+
   const normalizeRows = (payload) =>
     (Array.isArray(payload) ? payload : [])
       .map((row) => ({
         ...row,
         id: String(row.id || ""),
-        title: String(row.title || "").trim(),
+        title: resolveTitle(row),
         date: String(row.date || "").trim(),
         author: String(row.author || "").trim(),
+        content: String(row.content || row.description || "").trim(),
         source_url: String(row.source_url || "").trim(),
         source_present_num: String(row.source_present_num || "").trim(),
         list_page_num: toInt(row.list_page_num, 0),
@@ -96,7 +110,7 @@
 
   const renderCoverage = () => {
     const imageCount = allRows.reduce((acc, row) => acc + row.images.length, 0);
-    coverageEl.textContent = `Migrated ${allRows.length} posts / ${imageCount} images from legacy gallery archive`;
+    coverageEl.textContent = `${allRows.length} posts · ${imageCount} images`;
   };
 
   const renderGrid = () => {
@@ -118,21 +132,37 @@
     gridEl.innerHTML = pageRows
       .map((row, idx) => {
         const cover = row.images[0] || FALLBACK_IMG;
+        const cover2 = row.images[1] || "";
         const coverThumb = toGalleryThumbUrl(cover, 920);
-        const title = row.title || `Gallery #${esc(row.id)}`;
+        const coverThumb2 = cover2 ? toGalleryThumbUrl(cover2, 760) : "";
+        const title = row.title || `ASL Gallery #${esc(row.id)}`;
         const meta = [row.date, row.author].filter(Boolean).join(" · ");
         const ordinal = start + idx + 1;
         const imageCountLabel = `${row.images.length} image${row.images.length > 1 ? "s" : ""}`;
+        const mediaClass = cover2 ? "gallery-card-media gallery-card-media-split" : "gallery-card-media";
         return `
           <figure class="gallery-card" data-gallery-id="${esc(row.id)}" tabindex="0" role="button" aria-label="${esc(title)}">
-            <div class="gallery-card-media">
+            <div class="${mediaClass}">
               <img
+                class="gallery-card-main-image"
                 src="${esc(coverThumb)}"
                 alt="${esc(title)}"
                 loading="lazy"
                 data-fallback-src="${esc(cover)}"
                 onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
               />
+              ${
+                cover2
+                  ? `<img
+                class="gallery-card-sub-image"
+                src="${esc(coverThumb2)}"
+                alt="${esc(title)}"
+                loading="lazy"
+                data-fallback-src="${esc(cover2)}"
+                onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
+              />`
+                  : ""
+              }
               <span class="gallery-card-index">${ordinal.toString().padStart(2, "0")}</span>
               <span class="gallery-card-count">${esc(imageCountLabel)}</span>
             </div>
@@ -160,9 +190,14 @@
   const openModal = (entry) => {
     modalEntry = entry;
     modalImageIndex = 0;
-    modalTitleEl.textContent = entry.title || `Gallery #${entry.id}`;
+    modalTitleEl.textContent = entry.title || `ASL Gallery #${entry.id}`;
     const meta = [entry.date, entry.author].filter(Boolean).join(" · ");
     modalMetaEl.textContent = meta || "ASL Gallery";
+    if (modalDescEl) {
+      modalDescEl.textContent =
+        entry.content ||
+        "본문 텍스트가 저장되지 않은 게시물입니다. 원문 게시글에서 상세 내용을 확인해 주세요.";
+    }
     modalSourceEl.href = entry.source_url || "#";
     modalSourceEl.classList.toggle("is-disabled", !entry.source_url);
     updateModalImage();
