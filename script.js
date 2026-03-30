@@ -130,7 +130,7 @@ const setupRecentPublicationCarousel = (publicationData = {}) => {
   updateNavState();
 };
 
-const toGalleryThumbUrl = (rawUrl = "", width = 920, quality = 58) => {
+const toGalleryThumbUrl = (rawUrl = "", width = 920) => {
   const url = String(rawUrl || "").trim();
   if (!url) return "./assets/publication-placeholder.svg";
   if (!url.includes("/storage/v1/object/public/")) return url;
@@ -138,7 +138,7 @@ const toGalleryThumbUrl = (rawUrl = "", width = 920, quality = 58) => {
     ? url
     : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
   const sep = rendered.includes("?") ? "&" : "?";
-  return `${rendered}${sep}width=${width}&quality=${quality}&resize=cover`;
+  return `${rendered}${sep}width=${width}&format=webp`;
 };
 
 const setupGalleryPreview = async () => {
@@ -162,7 +162,7 @@ const setupGalleryPreview = async () => {
     grid.innerHTML = rows
       .map((row) => {
         const original = row?.images?.[0] || row?.thumbnail || "./assets/publication-placeholder.svg";
-        const thumb = toGalleryThumbUrl(original, 860, 56);
+        const thumb = toGalleryThumbUrl(original, 860);
         const title = escHtml(row?.title || "ASL Gallery");
         return `
           <figure>
