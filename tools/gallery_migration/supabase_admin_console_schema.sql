@@ -41,6 +41,7 @@ create table if not exists public.members (
 
 -- Ensure columns exist for admin UI compatibility with existing gallery tables.
 alter table if exists public.gallery_posts
+  add column if not exists content text not null default '',
   add column if not exists created_by uuid references auth.users(id),
   add column if not exists created_at timestamptz not null default now(),
   add column if not exists updated_at timestamptz not null default now();

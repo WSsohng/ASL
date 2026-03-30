@@ -58,6 +58,7 @@ create table if not exists public.members (
 create table if not exists public.gallery_posts (
   id text primary key,
   title text not null default '',
+  content text not null default '',
   author text not null default '',
   date_text text not null default '',
   source_url text not null,
@@ -71,6 +72,9 @@ create table if not exists public.gallery_posts (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table if exists public.gallery_posts
+  add column if not exists content text not null default '';
 
 create table if not exists public.gallery_images (
   id bigint generated always as identity primary key,

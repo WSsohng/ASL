@@ -79,12 +79,7 @@
         <button id="galleryModalClose" class="modal-close" type="button" aria-label="Close">×</button>
       </div>
       <div class="gallery-modal-body">
-        <button id="galleryImagePrev" class="member-nav prev" type="button" aria-label="Previous image">‹</button>
-        <figure class="gallery-modal-figure">
-          <img id="galleryModalImage" src="./assets/publication-placeholder.svg" alt="Gallery image" loading="lazy" />
-          <figcaption id="galleryImageCounter">1 / 1</figcaption>
-        </figure>
-        <button id="galleryImageNext" class="member-nav next" type="button" aria-label="Next image">›</button>
+        <div id="galleryModalImages" class="gallery-modal-images" aria-live="polite"></div>
       </div>
       <div class="author-modal-foot">
         <a id="gallerySourceLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener noreferrer">Open Source Post</a>

@@ -54,6 +54,7 @@ class PostRecord:
     source_idx: str
     source_letter_no: str
     source_present_num: str
+    content: str
 
 
 @dataclass
@@ -174,6 +175,52 @@ def parse_list_page(
     return deduped, next_pages
 
 
+def extract_post_content(soup: BeautifulSoup, title: str) -> str:
+    for tag in soup(["script", "style", "noscript"]):
+        tag.decompose()
+
+    title_norm = re.sub(r"\s+", " ", (title or "")).strip()
+    raw_lines = [re.sub(r"\s+", " ", x).strip() for x in soup.get_text("\n", strip=True).splitlines()]
+    lines: List[str] = []
+    for line in raw_lines:
+        if line and line not in lines:
+            lines.append(line)
+
+    start_idx = 0
+    for i, line in enumerate(lines):
+        if "등록일" in line:
+            start_idx = i + 1
+            break
+
+    stop_keywords = ("리스트", "COPYRIGHT", "한양대 ASL 분광분석연구실")
+    blocked_contains = (
+        "Professor Research",
+        "Research Field | Publication",
+        "Lecture | Experiment",
+        "Professor Research Member Lecture Gallery",
+        "Gallery ",
+        "이름 :",
+        "등록일",
+    )
+
+    picked: List[str] = []
+    for line in lines[start_idx:]:
+        low = line.lower()
+        if any(k in line for k in stop_keywords):
+            break
+        if (
+            not line
+            or len(line) < 6
+            or len(line) > 500
+            or line == title_norm
+            or low in {"content", "컨텐츠 바로가기", "콘텐츠 바로가기"}
+            or any(k.lower() in low for k in blocked_contains)
+        ):
+            continue
+        picked.append(line)
+    return "\n\n".join(picked[:6]).strip()
+
+
 def parse_detail_page(
     html: str, detail_url: str, list_page_url: str, list_page_num: Optional[int], thumb_url: str
 ) -> Tuple[PostRecord, List[str]]:
@@ -253,6 +300,7 @@ def parse_detail_page(
         source_idx=idx,
         source_letter_no=letter_no,
         source_present_num=present_num,
+        content=extract_post_content(soup, title),
     )
     return post, uniq
 
@@ -307,11 +355,16 @@ def init_db(db_path: Path) -> sqlite3.Connection:
           source_idx TEXT,
           source_letter_no TEXT,
           source_present_num TEXT,
+          content TEXT DEFAULT '',
           expected_image_count INTEGER NOT NULL,
           migrated_at TEXT NOT NULL
         )
         """
     )
+    try:
+        cur.execute("ALTER TABLE gallery_posts ADD COLUMN content TEXT DEFAULT ''")
+    except Exception:
+        pass
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS gallery_images (
@@ -544,6 +597,7 @@ def crawl(args: argparse.Namespace) -> int:
                 "source_idx": p.source_idx,
                 "source_letter_no": p.source_letter_no,
                 "source_present_num": p.source_present_num,
+                "content": p.content,
                 "list_page_num": p.list_page_num,
                 "thumbnail": p.thumb_url,
                 "images": [i.local_path for i in imgs],
@@ -579,8 +633,8 @@ def crawl(args: argparse.Namespace) -> int:
             INSERT INTO gallery_posts (
               post_id, source_url, title, author, date_text, list_page_url, list_page_num,
               thumb_url, source_data_param, source_idx, source_letter_no, source_present_num,
-              expected_image_count, migrated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+              content, expected_image_count, migrated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(post_id) DO UPDATE SET
               source_url=excluded.source_url,
               title=CASE WHEN excluded.title='' THEN gallery_posts.title ELSE excluded.title END,
@@ -593,6 +647,7 @@ def crawl(args: argparse.Namespace) -> int:
               source_idx=excluded.source_idx,
               source_letter_no=excluded.source_letter_no,
               source_present_num=excluded.source_present_num,
+              content=CASE WHEN excluded.content='' THEN gallery_posts.content ELSE excluded.content END,
               expected_image_count=CASE
                 WHEN excluded.expected_image_count > 0 THEN excluded.expected_image_count
                 ELSE gallery_posts.expected_image_count
@@ -612,6 +667,7 @@ def crawl(args: argparse.Namespace) -> int:
                 p.source_idx,
                 p.source_letter_no,
                 p.source_present_num,
+                p.content,
                 expected_count,
                 migrated_at,
             ),
