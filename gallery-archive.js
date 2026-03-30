@@ -108,7 +108,13 @@
         return `
           <figure class="gallery-card" data-gallery-id="${esc(row.id)}" tabindex="0" role="button" aria-label="${esc(title)}">
             <div class="gallery-card-media">
-              <img src="${esc(coverThumb)}" alt="${esc(title)}" loading="lazy" />
+              <img
+                src="${esc(coverThumb)}"
+                alt="${esc(title)}"
+                loading="lazy"
+                data-fallback-src="${esc(cover)}"
+                onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
+              />
               <span class="gallery-card-index">${ordinal.toString().padStart(2, "0")}</span>
               <span class="gallery-card-count">${esc(imageCountLabel)}</span>
             </div>
