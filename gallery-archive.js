@@ -78,6 +78,16 @@
     return `./assets/gallery/thumbs/${base}.webp`;
   };
 
+  const toLocalOriginalPath = (rawUrl = "") => {
+    const url = String(rawUrl || "").trim();
+    if (!url) return "";
+    const marker = "/gallery/imported/";
+    const idx = url.indexOf(marker);
+    if (idx === -1) return "";
+    const rel = url.slice(idx + marker.length);
+    return `./assets/gallery/imported/${rel}`;
+  };
+
   const toGalleryThumbUrl = (rawUrl = "", width = 900) => {
     const url = String(rawUrl || "").trim();
     if (!url) return FALLBACK_IMG;
@@ -91,15 +101,12 @@
     return `${rendered}${sep}width=${width}&format=webp`;
   };
 
-  const toGalleryFullUrl = (rawUrl = "", width = 1800) => {
+  const toGalleryFullUrl = (rawUrl = "") => {
     const url = String(rawUrl || "").trim();
     if (!url) return FALLBACK_IMG;
-    if (!url.includes("/storage/v1/object/public/")) return url;
-    const rendered = url.includes("/storage/v1/render/image/public/")
-      ? url
-      : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
-    const sep = rendered.includes("?") ? "&" : "?";
-    return `${rendered}${sep}width=${width}&quality=90`;
+    const localOriginal = toLocalOriginalPath(url);
+    if (localOriginal) return localOriginal;
+    return url;
   };
 
   const getTotalPages = () => Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
@@ -185,7 +192,7 @@
     const images = entry.images.length ? entry.images : [FALLBACK_IMG];
     modalImagesEl.innerHTML = images
       .map((src, idx) => {
-        const full = toGalleryFullUrl(src, 2200);
+        const full = toGalleryFullUrl(src);
         const alt = `${entry.title || "ASL Gallery"} (${idx + 1})`;
         return `
           <figure class="gallery-modal-item">
@@ -193,13 +200,23 @@
               src="${esc(full)}"
               alt="${esc(alt)}"
               loading="lazy"
-              data-fallback-src="${esc(src)}"
-              onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
+              data-fallback-src="${esc(src || FALLBACK_IMG)}"
+              onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else if(this.src!=='${esc(FALLBACK_IMG)}'){this.src='${esc(FALLBACK_IMG)}';} else {this.onerror=null;}"
             />
           </figure>
         `;
       })
       .join("");
+  };
+
+  const lockPageScroll = () => {
+    document.documentElement.classList.add("modal-open");
+    document.body.classList.add("modal-open");
+  };
+
+  const unlockPageScroll = () => {
+    document.documentElement.classList.remove("modal-open");
+    document.body.classList.remove("modal-open");
   };
 
   const openModal = (entry) => {
@@ -216,6 +233,7 @@
     modalSourceEl.classList.toggle("is-disabled", !entry.source_url);
     renderModalImages(entry);
     if (!modalEl.open) modalEl.showModal();
+    lockPageScroll();
   };
 
   const applyFilter = () => {
@@ -261,6 +279,7 @@
   modalEl.addEventListener("click", (event) => {
     if (event.target === modalEl) modalEl.close();
   });
+  modalEl.addEventListener("close", unlockPageScroll);
 
   const loadGalleryData = async () => {
     if (window.ASLData?.loadGalleryPosts) return window.ASLData.loadGalleryPosts();
