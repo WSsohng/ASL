@@ -18,6 +18,10 @@
   const modalPrevBtn = document.getElementById("galleryImagePrev");
   const modalNextBtn = document.getElementById("galleryImageNext");
 
+  if (modalCloseBtn) modalCloseBtn.textContent = "×";
+  if (modalPrevBtn) modalPrevBtn.textContent = "‹";
+  if (modalNextBtn) modalNextBtn.textContent = "›";
+
   const PAGE_SIZE = 12;
   const FALLBACK_IMG = "./assets/publication-placeholder.svg";
   let allRows = [];
@@ -55,9 +59,23 @@
       }))
       .sort((a, b) => toInt(b.source_present_num, -1) - toInt(a.source_present_num, -1));
 
+  const toLocalThumbPath = (rawUrl = "") => {
+    const url = String(rawUrl || "").trim();
+    if (!url) return "";
+    const marker = "/gallery/imported/";
+    const idx = url.indexOf(marker);
+    if (idx === -1) return "";
+    const rel = url.slice(idx + marker.length);
+    const ext = rel.lastIndexOf(".");
+    const base = ext > -1 ? rel.slice(0, ext) : rel;
+    return `./assets/gallery/thumbs/${base}.webp`;
+  };
+
   const toGalleryThumbUrl = (rawUrl = "", width = 900) => {
     const url = String(rawUrl || "").trim();
     if (!url) return FALLBACK_IMG;
+    const localThumb = toLocalThumbPath(url);
+    if (localThumb) return localThumb;
     if (!url.includes("/storage/v1/object/public/")) return url;
     const rendered = url.includes("/storage/v1/render/image/public/")
       ? url
