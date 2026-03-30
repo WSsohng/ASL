@@ -55,7 +55,7 @@
       }))
       .sort((a, b) => toInt(b.source_present_num, -1) - toInt(a.source_present_num, -1));
 
-  const toGalleryThumbUrl = (rawUrl = "", width = 900, quality = 56) => {
+  const toGalleryThumbUrl = (rawUrl = "", width = 900) => {
     const url = String(rawUrl || "").trim();
     if (!url) return FALLBACK_IMG;
     if (!url.includes("/storage/v1/object/public/")) return url;
@@ -63,7 +63,7 @@
       ? url
       : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
     const sep = rendered.includes("?") ? "&" : "?";
-    return `${rendered}${sep}width=${width}&quality=${quality}&resize=cover`;
+    return `${rendered}${sep}width=${width}&format=webp`;
   };
 
   const getTotalPages = () => Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
@@ -100,7 +100,7 @@
     gridEl.innerHTML = pageRows
       .map((row, idx) => {
         const cover = row.images[0] || FALLBACK_IMG;
-        const coverThumb = toGalleryThumbUrl(cover, 920, 54);
+        const coverThumb = toGalleryThumbUrl(cover, 920);
         const title = row.title || `Gallery #${esc(row.id)}`;
         const meta = [row.date, row.author].filter(Boolean).join(" · ");
         const ordinal = start + idx + 1;
