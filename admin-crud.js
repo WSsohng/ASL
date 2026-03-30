@@ -150,7 +150,7 @@ const loadRecent = async () => {
       .limit(20),
     supabase
       .from("gallery_posts")
-      .select("id,title,date_text,author,source_url,created_at")
+      .select("id,title,content,date_text,author,source_url,created_at")
       .order("created_at", { ascending: false })
       .limit(20),
     supabase
@@ -164,7 +164,8 @@ const loadRecent = async () => {
     return `<h4>${esc(x.title || "")}</h4><p>${esc(x.journal || "")} · ${esc(x.year || "")} · Cited ${esc(x.citations ?? 0)} · IF ${esc(x.impact_factor ?? "-")}</p>${renderActionButtons("publication", x.id)}`;
   });
   renderRecent(galRecentListEl, gals || [], (x) => {
-    return `<h4>${esc(x.title || "")}</h4><p>${esc(x.date_text || "")} · ${esc(x.author || "")}</p>${renderActionButtons("gallery", x.id)}`;
+    const preview = String(x.content || "").trim().slice(0, 120);
+    return `<h4>${esc(x.title || "")}</h4><p>${esc(x.date_text || "")} · ${esc(x.author || "")}</p><p>${esc(preview || "No content")}</p>${renderActionButtons("gallery", x.id)}`;
   });
   renderRecent(memRecentListEl, mems || [], (x) => {
     return `<h4>${esc(x.name || "")}</h4><p>${esc(x.role || "")} · ${esc(x.track || "")} · ${esc(x.email || "-")}</p>${renderActionButtons("member", x.id)}`;
@@ -264,6 +265,7 @@ galleryForm.addEventListener("submit", async (event) => {
     const title = document.getElementById("galTitle").value.trim();
     const dateText = document.getElementById("galDate").value || "";
     const author = document.getElementById("galAuthor").value.trim();
+    const content = document.getElementById("galContent").value.trim();
     const sourceUrlInput = document.getElementById("galSourceUrl").value.trim();
     const files = [...(document.getElementById("galFiles").files || [])];
     if (!title) throw new Error("Title is required.");
@@ -277,6 +279,7 @@ galleryForm.addEventListener("submit", async (event) => {
           .from("gallery_posts")
           .update({
             title,
+            content,
             date_text: dateText,
             author,
             source_url: sourceUrl
@@ -285,6 +288,7 @@ galleryForm.addEventListener("submit", async (event) => {
       : supabase.from("gallery_posts").insert({
           id: postId,
           title,
+          content,
           date_text: dateText,
           author,
           source_url: sourceUrl,
@@ -377,6 +381,7 @@ const fillPublicationForm = (row) => {
 const fillGalleryForm = (row) => {
   editingGalleryId = row.id;
   document.getElementById("galTitle").value = row.title || "";
+  document.getElementById("galContent").value = row.content || "";
   document.getElementById("galDate").value = toInputDate(row.date_text || "");
   document.getElementById("galAuthor").value = row.author || "";
   document.getElementById("galSourceUrl").value = row.source_url || "";

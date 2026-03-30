@@ -53,6 +53,7 @@ def main():
                 "source_idx": p.get("source_idx", ""),
                 "source_letter_no": p.get("source_letter_no", ""),
                 "source_present_num": p.get("source_present_num", ""),
+                "content": p.get("content", ""),
                 "list_page_num": p.get("list_page_num"),
                 "thumbnail": p.get("thumb_url", ""),
                 "images": [i.get("local_path", "") for i in imgs],

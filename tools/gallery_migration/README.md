@@ -34,6 +34,17 @@ python tools/gallery_migration/migrate_gallery.py --max-pages 2
 python tools/gallery_migration/export_from_db.py
 ```
 
+## Enrich Gallery Body Content (2nd pass)
+If titles/images are already migrated but body content is missing, run:
+```powershell
+python tools/gallery_migration/enrich_gallery_content.py --export-json
+```
+
+Optional full refresh:
+```powershell
+python tools/gallery_migration/enrich_gallery_content.py --force --export-json
+```
+
 ## Safety guard
 - Default `--min-posts-guard 100` prevents overwriting artifacts with partial crawls.
 - Set `--min-posts-guard 0` only for intentional partial tests.
@@ -126,6 +137,12 @@ $env:SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"
 3. Backfill all datasets:
 ```powershell
 python tools/gallery_migration/backfill_supabase_from_json.py --only all
+```
+
+If `gallery_posts.content` does not exist yet in Supabase, run this once in SQL Editor:
+```sql
+alter table if exists public.gallery_posts
+  add column if not exists content text not null default '';
 ```
 
 Optional scope runs:

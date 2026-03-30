@@ -1352,14 +1352,19 @@ h2 {
 }
 
 .gallery-modal-body {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.8rem;
-  align-items: center;
+  display: block;
   margin-top: 0.85rem;
 }
 
-.gallery-modal-figure {
+.gallery-modal-images {
+  max-height: min(72vh, 920px);
+  overflow-y: auto;
+  display: grid;
+  gap: 0.75rem;
+  padding-right: 0.25rem;
+}
+
+.gallery-modal-item {
   margin: 0;
   border: 1px solid var(--line);
   border-radius: 0.9rem;
@@ -1367,18 +1372,12 @@ h2 {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.gallery-modal-figure img {
-  width: min(76vw, 860px);
-  max-height: min(66vh, 680px);
+.gallery-modal-item img {
+  width: 100%;
+  max-height: min(70vh, 860px);
   display: block;
   object-fit: contain;
   background: radial-gradient(circle at center, rgba(70, 92, 140, 0.15), rgba(10, 16, 36, 0.8));
-}
-
-.gallery-modal-figure figcaption {
-  padding: 0.6rem 0.8rem;
-  color: #c8d4ef;
-  font-size: 0.9rem;
 }
 
 .gallery-modal-desc {
@@ -1386,6 +1385,8 @@ h2 {
   color: #b7c4e4;
   font-size: 0.9rem;
   line-height: 1.5;
+  max-width: min(92ch, 100%);
+  white-space: pre-line;
 }
 
 .gallery-empty {
@@ -1758,6 +1759,10 @@ h2 {
   font-size: 0.89rem;
 }
 
+.admin-form-grid .admin-field-wide {
+  grid-column: 1 / -1;
+}
+
 .admin-form-grid label span {
   color: #cad5ef;
 }
@@ -1985,12 +1990,8 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .gallery-modal-body {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-modal-figure img {
-    width: 100%;
+  .gallery-modal-images {
+    max-height: 66vh;
   }
 
   .spectral-dispersion {

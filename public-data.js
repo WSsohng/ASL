@@ -116,6 +116,7 @@
       return {
         id,
         title: String(post.title || "").trim(),
+        content: String(post.content || "").trim(),
         author: String(post.author || "").trim(),
         date: String(post.date_text || "").trim(),
         source_url: String(post.source_url || "").trim(),
@@ -200,7 +201,7 @@
           const [posts, images] = await Promise.all([
             fetchAll(
               "gallery_posts",
-              "id,title,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url"
+              "id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url"
             ),
             fetchAll(
               "gallery_images",

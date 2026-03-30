@@ -197,6 +197,7 @@ def build_gallery_rows(raw: list[dict[str, Any]]) -> tuple[list[dict[str, Any]],
         post_row = {
             "id": post_id,
             "title": norm_text(post.get("title")),
+            "content": norm_text(post.get("content")),
             "author": norm_text(post.get("author")),
             "date_text": norm_text(post.get("date")),
             "source_url": norm_text(post.get("source_url")),

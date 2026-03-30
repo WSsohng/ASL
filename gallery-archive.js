@@ -12,16 +12,11 @@
   const modalTitleEl = document.getElementById("galleryModalTitle");
   const modalMetaEl = document.getElementById("galleryModalMeta");
   const modalDescEl = document.getElementById("galleryModalDesc");
-  const modalImageEl = document.getElementById("galleryModalImage");
-  const modalCounterEl = document.getElementById("galleryImageCounter");
+  const modalImagesEl = document.getElementById("galleryModalImages");
   const modalSourceEl = document.getElementById("gallerySourceLink");
   const modalCloseBtn = document.getElementById("galleryModalClose");
-  const modalPrevBtn = document.getElementById("galleryImagePrev");
-  const modalNextBtn = document.getElementById("galleryImageNext");
 
   if (modalCloseBtn) modalCloseBtn.textContent = "×";
-  if (modalPrevBtn) modalPrevBtn.textContent = "‹";
-  if (modalNextBtn) modalNextBtn.textContent = "›";
 
   const PAGE_SIZE = 12;
   const FALLBACK_IMG = "./assets/publication-placeholder.svg";
@@ -30,8 +25,6 @@
   let currentPage = 1;
 
   let modalEntry = null;
-  let modalImageIndex = 0;
-
   const esc = (value = "") =>
     String(value)
       .replaceAll("&", "&amp;")
@@ -176,20 +169,30 @@
       .join("");
   };
 
-  const updateModalImage = () => {
-    if (!modalEntry) return;
-    const images = modalEntry.images.length ? modalEntry.images : [FALLBACK_IMG];
-    modalImageIndex = Math.min(Math.max(modalImageIndex, 0), images.length - 1);
-    modalImageEl.src = images[modalImageIndex];
-    modalImageEl.alt = modalEntry.title || "Gallery image";
-    modalCounterEl.textContent = `${modalImageIndex + 1} / ${images.length}`;
-    modalPrevBtn.disabled = modalImageIndex <= 0;
-    modalNextBtn.disabled = modalImageIndex >= images.length - 1;
+  const renderModalImages = (entry) => {
+    if (!modalImagesEl) return;
+    const images = entry.images.length ? entry.images : [FALLBACK_IMG];
+    modalImagesEl.innerHTML = images
+      .map((src, idx) => {
+        const thumb = toGalleryThumbUrl(src, 1440);
+        const alt = `${entry.title || "ASL Gallery"} (${idx + 1})`;
+        return `
+          <figure class="gallery-modal-item">
+            <img
+              src="${esc(thumb)}"
+              alt="${esc(alt)}"
+              loading="lazy"
+              data-fallback-src="${esc(src)}"
+              onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;} else {this.onerror=null;}"
+            />
+          </figure>
+        `;
+      })
+      .join("");
   };
 
   const openModal = (entry) => {
     modalEntry = entry;
-    modalImageIndex = 0;
     modalTitleEl.textContent = entry.title || `ASL Gallery #${entry.id}`;
     const meta = [entry.date, entry.author].filter(Boolean).join(" · ");
     modalMetaEl.textContent = meta || "ASL Gallery";
@@ -200,7 +203,7 @@
     }
     modalSourceEl.href = entry.source_url || "#";
     modalSourceEl.classList.toggle("is-disabled", !entry.source_url);
-    updateModalImage();
+    renderModalImages(entry);
     if (!modalEl.open) modalEl.showModal();
   };
 
@@ -241,28 +244,11 @@
     if (entry) openModal(entry);
   });
 
-  modalPrevBtn.addEventListener("click", () => {
-    modalImageIndex -= 1;
-    updateModalImage();
-  });
-  modalNextBtn.addEventListener("click", () => {
-    modalImageIndex += 1;
-    updateModalImage();
-  });
   modalCloseBtn.addEventListener("click", () => {
     if (modalEl.open) modalEl.close();
   });
   modalEl.addEventListener("click", (event) => {
     if (event.target === modalEl) modalEl.close();
-  });
-  modalEl.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      modalImageIndex -= 1;
-      updateModalImage();
-    } else if (event.key === "ArrowRight") {
-      modalImageIndex += 1;
-      updateModalImage();
-    }
   });
 
   const loadGalleryData = async () => {
