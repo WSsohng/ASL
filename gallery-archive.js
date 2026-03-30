@@ -91,6 +91,17 @@
     return `${rendered}${sep}width=${width}&format=webp`;
   };
 
+  const toGalleryFullUrl = (rawUrl = "", width = 1800) => {
+    const url = String(rawUrl || "").trim();
+    if (!url) return FALLBACK_IMG;
+    if (!url.includes("/storage/v1/object/public/")) return url;
+    const rendered = url.includes("/storage/v1/render/image/public/")
+      ? url
+      : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
+    const sep = rendered.includes("?") ? "&" : "?";
+    return `${rendered}${sep}width=${width}&quality=90`;
+  };
+
   const getTotalPages = () => Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
 
   const updatePager = () => {
@@ -174,12 +185,12 @@
     const images = entry.images.length ? entry.images : [FALLBACK_IMG];
     modalImagesEl.innerHTML = images
       .map((src, idx) => {
-        const thumb = toGalleryThumbUrl(src, 1440);
+        const full = toGalleryFullUrl(src, 2200);
         const alt = `${entry.title || "ASL Gallery"} (${idx + 1})`;
         return `
           <figure class="gallery-modal-item">
             <img
-              src="${esc(thumb)}"
+              src="${esc(full)}"
               alt="${esc(alt)}"
               loading="lazy"
               data-fallback-src="${esc(src)}"
