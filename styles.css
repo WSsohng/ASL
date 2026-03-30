@@ -983,12 +983,13 @@ h2 {
 
 .author-modal {
   width: min(860px, 92vw);
-  max-height: 78vh;
+  max-height: 88vh;
   border: 1px solid rgba(155, 177, 231, 0.32);
   border-radius: 0.9rem;
   background: #0f1320;
   color: var(--text);
   padding: 0;
+  overflow-y: auto;
 }
 
 .author-modal::backdrop {
@@ -1357,8 +1358,8 @@ h2 {
 }
 
 .gallery-modal-images {
-  max-height: min(72vh, 920px);
-  overflow-y: auto;
+  max-height: none;
+  overflow: visible;
   display: grid;
   gap: 0.75rem;
   padding-right: 0.25rem;
@@ -1374,7 +1375,7 @@ h2 {
 
 .gallery-modal-item img {
   width: 100%;
-  max-height: min(70vh, 860px);
+  max-height: none;
   display: block;
   object-fit: contain;
   background: radial-gradient(circle at center, rgba(70, 92, 140, 0.15), rgba(10, 16, 36, 0.8));
@@ -1991,7 +1992,7 @@ h2 {
   }
 
   .gallery-modal-images {
-    max-height: 66vh;
+    max-height: none;
   }
 
   .spectral-dispersion {
