@@ -47,13 +47,60 @@
     return Number.isFinite(last) ? last : Number.MAX_SAFE_INTEGER;
   };
 
-  const toPublicationPayload = (rows) => {
+  const isMissingGraphical = (url = "") => {
+    const v = String(url || "").trim().toLowerCase();
+    if (!v) return true;
+    return v.includes("publication-placeholder") || v.includes("no-graphical-abstract");
+  };
+
+  const pickFirstValidImage = (images) => {
+    const list = Array.isArray(images) ? images : [];
+    for (const src of list) {
+      const s = String(src || "").trim();
+      if (!s || isMissingGraphical(s)) continue;
+      return s;
+    }
+    return "";
+  };
+
+  const localPublicationImageMap = (localPayload) => {
+    const bySourceKey = new Map();
+    const byCompositeKey = new Map();
+    const groups = localPayload && typeof localPayload === "object" ? localPayload : {};
+    Object.entries(groups).forEach(([yearGroup, entries]) => {
+      const rows = Array.isArray(entries) ? entries : [];
+      rows.forEach((item, idx) => {
+        const sourceKey = String(item?.source_key || `${yearGroup}:${idx + 1}`).trim();
+        const image = pickFirstValidImage(item?.images);
+        if (image) bySourceKey.set(sourceKey, image);
+        const year = String(item?.year || "").trim() || String(yearGroup).match(/(19|20)\d{2}/)?.[0] || "";
+        const title = String(item?.title || "").trim().toLowerCase();
+        const journal = String(item?.journal || "").trim().toLowerCase();
+        const composite = `${year}||${title}||${journal}`;
+        if (image && year && title && journal) byCompositeKey.set(composite, image);
+      });
+    });
+    return { bySourceKey, byCompositeKey };
+  };
+
+  const toPublicationPayload = (rows, localImageMaps) => {
     const grouped = {};
     (rows || []).forEach((row) => {
       const yearGroup = String(row.source_year_group || row.year || "").trim();
       const key = yearGroup || String(row.year || "Unknown");
       if (!grouped[key]) grouped[key] = [];
-      const image = String(row.graphical_abstract_url || "").trim();
+      let image = String(row.graphical_abstract_url || "").trim();
+      if (!image && localImageMaps) {
+        const sourceKey = String(row.source_key || "").trim();
+        const year = String(row.year || "").trim();
+        const title = String(row.title || "").trim().toLowerCase();
+        const journal = String(row.journal || "").trim().toLowerCase();
+        const composite = `${year}||${title}||${journal}`;
+        image =
+          localImageMaps.bySourceKey.get(sourceKey) ||
+          localImageMaps.byCompositeKey.get(composite) ||
+          "";
+      }
       grouped[key].push({
         title: row.title || "",
         journal: row.journal || "",
@@ -143,17 +190,25 @@
   const loadPublications = async () => {
     if (cache.has("publications")) return cache.get("publications");
     const promise = (async () => {
+      let localPayload = null;
+      try {
+        localPayload = await safeJsonFetch("./assets/publication-data.json");
+      } catch {
+        localPayload = null;
+      }
       if (isReady) {
         try {
           const rows = await fetchAll(
             "publications",
             "id,title,year,journal,authors,authors_marked,doi,citations,impact_factor,graphical_abstract_url,pdf_url,source_key,source_year_group"
           );
-          return toPublicationPayload(rows);
+          const imageMaps = localPayload ? localPublicationImageMap(localPayload) : null;
+          return toPublicationPayload(rows, imageMaps);
         } catch {
           // fallback
         }
       }
+      if (localPayload) return localPayload;
       return safeJsonFetch("./assets/publication-data.json");
     })();
     cache.set("publications", promise);

@@ -1,4 +1,4 @@
-const revealTargets = document.querySelectorAll(".section, .site-footer");
+﻿const revealTargets = document.querySelectorAll(".section, .site-footer");
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -52,8 +52,8 @@ const escHtml = (value = "") =>
 
 const normalizeRecentAuthor = (author = "") =>
   String(author)
-    .replaceAll("†", "")
-    .replaceAll("‡", "")
+    .replaceAll("??, "")
+    .replaceAll("??, "")
     .replace(/\^1/g, "")
     .replace(/\*/g, "")
     .trim();
@@ -107,7 +107,7 @@ const setupRecentPublicationCarousel = (publicationData = {}) => {
           <div class="recent-pub-body">
             <h3 class="recent-pub-title">${escHtml(item.title || "Untitled publication")}</h3>
             <p class="recent-pub-meta">${escHtml(item.journal || "")}</p>
-            <p class="publication-authors">${escHtml(authorLine)} · ${escHtml(item.year || "")}</p>
+            <p class="publication-authors">${escHtml(authorLine)} 쨌 ${escHtml(item.year || "")}</p>
           </div>
         </article>
       `;
@@ -228,6 +228,11 @@ const rayLengthToViewport = (x, y, angleDeg, vw, vh) => {
   if (!positive.length) return 0;
   return Math.min(...positive);
 };
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const getMainFrameRect = () => {
+  const anchor = document.querySelector("main .section") || document.querySelector("main");
+  return anchor?.getBoundingClientRect?.() || null;
+};
 
 const updateSpectralFx = () => {
   const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
@@ -244,36 +249,52 @@ const updateSpectralFx = () => {
   });
 
   const pathProgress = Math.min(Math.max(easedProgress * 1.42 + 0.02, 0), 1);
-  const isMobileViewport = window.matchMedia("(max-width: 900px)").matches;
-  const gratingPoint = isMobileViewport ? 0.81 : 0.84;
-  const incidenceRaw = Math.min(pathProgress / gratingPoint, 1);
-  const reflectedRaw = Math.min(Math.max((pathProgress - gratingPoint) / (1 - gratingPoint), 0), 1);
-  const diffStartGate = 0.065;
-  const reflectedForDiff = Math.min(Math.max((reflectedRaw - diffStartGate) / (1 - diffStartGate), 0), 1);
-  const beamProgress = Math.pow(incidenceRaw, 0.94);
-  const beamReflectProgress = Math.pow(reflectedRaw, 0.88);
-  const diffProgress =
-    reflectedForDiff < 0.45
-      ? 0.5 * Math.pow(reflectedForDiff / 0.45, 2.4)
-      : 0.5 + 0.5 * Math.pow((reflectedForDiff - 0.45) / 0.55, 0.72);
-  const diffAlpha = reflectedRaw < diffStartGate ? 0 : Math.pow(reflectedForDiff, 0.72);
-  const intensity = Math.min(1, 0.22 + sectionBoost * 0.78 + easedProgress * 0.12);
 
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const css = window.getComputedStyle(root);
   const sourceX = parseCssLengthToPx(css.getPropertyValue("--beam-source-x"), vw, vh);
   const sourceY = parseCssLengthToPx(css.getPropertyValue("--beam-source-y"), vw, vh);
-  const branchX = parseCssLengthToPx(css.getPropertyValue("--branch-x"), vw, vh);
+  const branchXCss = parseCssLengthToPx(css.getPropertyValue("--branch-x"), vw, vh);
   const branchY = parseCssLengthToPx(css.getPropertyValue("--branch-y"), vw, vh);
-  const beamAngle = parseCssDeg(css.getPropertyValue("--beam-angle"));
-  const returnAngle = 122;
-  const beamRad = (beamAngle * Math.PI) / 180;
-  const incidenceMax = Math.max(
-    0,
-    (branchX - sourceX) * Math.cos(beamRad) + (branchY - sourceY) * Math.sin(beamRad)
-  );
+  const frameRect = getMainFrameRect();
+  const rightMargin = clamp(vw * 0.05, 34, 86);
+  const rightInset = clamp(vw * 0.006, 6, 14);
+  const viewportRightTarget = vw - rightInset;
+  const branchX = frameRect
+    ? clamp(Math.max(frameRect.right + rightMargin, viewportRightTarget), sourceX + 80, vw - rightInset)
+    : branchXCss;
+
+  const incidenceDx = branchX - sourceX;
+  const incidenceDy = branchY - sourceY;
+  const incidenceMax = Math.max(Math.hypot(incidenceDx, incidenceDy), 1);
+  const beamAngle = (Math.atan2(incidenceDy, incidenceDx) * 180) / Math.PI;
+  const returnAngle = parseCssDeg(css.getPropertyValue("--return-angle")) || 122;
+
   const returnMax = rayLengthToViewport(branchX, branchY, returnAngle, vw, vh);
+  const totalPath = Math.max(incidenceMax + returnMax, 1);
+  const travelLength = pathProgress * totalPath;
+  const incidenceRaw = clamp(travelLength / incidenceMax, 0, 1);
+  const reflectedRaw =
+    travelLength <= incidenceMax || returnMax <= 0
+      ? 0
+      : clamp((travelLength - incidenceMax) / returnMax, 0, 1);
+  const splitPoint = clamp(incidenceMax / totalPath, 0.02, 0.98);
+
+  const beamProgress = Math.pow(incidenceRaw, 0.94);
+  const beamReflectProgress = Math.pow(reflectedRaw, 0.88);
+  const diffStartGate = 0.065;
+  const reflectedForDiff = Math.min(Math.max((reflectedRaw - diffStartGate) / (1 - diffStartGate), 0), 1);
+  const diffProgress =
+    reflectedForDiff < 0.45
+      ? 0.5 * Math.pow(reflectedForDiff / 0.45, 2.4)
+      : 0.5 + 0.5 * Math.pow((reflectedForDiff - 0.45) / 0.55, 0.72);
+  const diffAlpha = reflectedRaw < diffStartGate ? 0 : Math.pow(reflectedForDiff, 0.72);
+  const intensity = Math.min(1, 0.22 + sectionBoost * 0.78 + easedProgress * 0.12);
+  const gratingArrival = clamp((incidenceRaw - 0.9) / 0.1, 0, 1);
+
+  root.style.setProperty("--branch-x", `${branchX.toFixed(2)}px`);
+  root.style.setProperty("--beam-angle", `${beamAngle.toFixed(2)}deg`);
   root.style.setProperty("--beam-max", `${incidenceMax.toFixed(2)}px`);
   root.style.setProperty("--beam2-max", `${(returnMax * 1.08).toFixed(2)}px`);
   root.style.setProperty("--diff-max", `${(returnMax * 1.42).toFixed(2)}px`);
@@ -282,9 +303,10 @@ const updateSpectralFx = () => {
   root.style.setProperty("--scroll-p", progress.toFixed(4));
   root.style.setProperty("--beam-p", beamProgress.toFixed(4));
   root.style.setProperty("--beam2-p", beamReflectProgress.toFixed(4));
-  root.style.setProperty("--split-p", gratingPoint.toFixed(4));
+  root.style.setProperty("--split-p", splitPoint.toFixed(4));
   root.style.setProperty("--diff-p", diffProgress.toFixed(4));
   root.style.setProperty("--diff-alpha", diffAlpha.toFixed(4));
+  root.style.setProperty("--grating-arrival", gratingArrival.toFixed(4));
   root.style.setProperty("--section-boost", intensity.toFixed(3));
 };
 
@@ -419,11 +441,29 @@ if (memberCarousel) {
       .split(",")
       .map((v) => v.trim())
       .filter(Boolean);
+  const normalizeAuthorMarkers = (text = "") =>
+    String(text || "")
+      .replace(/[\u2020\u2021]/g, "^1")
+      .replace(/[\u00A2\u00D3\u00D2\u00F3\u00C7\u00E7]/g, "^1")
+      .replace(/\^1{2,}/g, "^1")
+      .replace(/\*{2,}/g, "*")
+      .replace(/\s+/g, " ")
+      .trim();
+  const applyAuthorCorrections = (authorText = "", item = {}) => {
+    let v = normalizeAuthorMarkers(authorText);
+    const title = String(item?.title || "").toLowerCase();
+    if (
+      title.includes("evaluation of an autoencoder as a feature extraction tool for near-infrared spectroscopic discriminant analysis")
+    ) {
+      v = v
+        .replace(/\bSeeun Jo\b(?!\^1)/i, "Seeun Jo^1")
+        .replace(/\bWoosuk Sohng\b(?!\^1)/i, "Woosuk Sohng^1");
+    }
+    return v;
+  };
   const parseAuthorToken = (token = "") => {
-    let raw = String(token).replace(/\s+/g, " ").trim();
-    raw = raw
-      .replaceAll("†", "^1")
-      .replaceAll("‡", "^1")
+    let raw = normalizeAuthorMarkers(token)
+      .replace(/([A-Za-z])[^,A-Za-z0-9\s.\-^*]+$/u, "$1^1")
       .replace(/\s+1$/, "^1")
       .replace(/\s+\*$/, "*")
       .replace(/\s+\^1$/, "^1");
@@ -448,10 +488,10 @@ if (memberCarousel) {
       .join('<span class="author-sep">, </span>');
   const getDisplayAuthors = (item) => {
     const candidate = (item.authors_marked || "").trim();
-    if (!candidate) return item.authors || "";
-    if (/\b(19|20)\d{2}\b/.test(candidate)) return item.authors || "";
-    if (candidate.length > 420) return item.authors || "";
-    return candidate;
+    if (!candidate) return applyAuthorCorrections(item.authors || "", item);
+    if (/\b(19|20)\d{2}\b/.test(candidate)) return applyAuthorCorrections(item.authors || "", item);
+    if (candidate.length > 420) return applyAuthorCorrections(item.authors || "", item);
+    return applyAuthorCorrections(candidate, item);
   };
   const splitName = (name = "") => {
     const parts = name.replace(",", " ").split(/\s+/).filter(Boolean);
@@ -685,7 +725,7 @@ if (memberCarousel) {
         .map(
           (row) => `
             <article class="author-paper-item">
-              <a class="author-paper-jump" href="./publication.html#${esc(row.year)}" aria-label="Go to publication">↗</a>
+              <a class="author-paper-jump" href="./publication.html?year=${encodeURIComponent(String(row.year || ""))}&pub=${encodeURIComponent(String(row.pubId || ""))}&title=${encodeURIComponent(String(row.title || ""))}" aria-label="Go to publication">&#8599;</a>
               <h3>${esc(row.title)}</h3>
               <p class="author-paper-journal">${esc(row.journal || "Journal information")}</p>
               <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
@@ -713,7 +753,7 @@ if (memberCarousel) {
       buildMemberPhotoMap(memberPayload);
       setupRecentPublicationCarousel(data);
       Object.keys(data).forEach((year) => {
-        (data[year] || []).forEach((item) => {
+        (data[year] || []).forEach((item, idx) => {
           const tokens = splitAuthors(getDisplayAuthors(item));
           const seen = new Set();
           tokens.forEach((token) => {
@@ -726,7 +766,8 @@ if (memberCarousel) {
               year,
               title: item.title || "",
               journal: item.journal || "",
-              authors: getDisplayAuthors(item)
+              authors: getDisplayAuthors(item),
+              pubId: item.source_key || `${year}-${idx + 1}`
             });
           });
         });
