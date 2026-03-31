@@ -12,7 +12,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21772694202.png",
     "images": [
-      "assets/gallery/imported/995/01_img21772694202.png"
+      "./assets/gallery/imported/995/01_img21772694202.png"
     ],
     "image_meta": [
       {
@@ -42,7 +42,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21765866918.png",
     "images": [
-      "assets/gallery/imported/988/01_img21765866918.png"
+      "./assets/gallery/imported/988/01_img21765866918.png"
     ],
     "image_meta": [
       {
@@ -72,7 +72,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21765253286.png",
     "images": [
-      "assets/gallery/imported/987/01_img21765253286.png"
+      "./assets/gallery/imported/987/01_img21765253286.png"
     ],
     "image_meta": [
       {
@@ -102,7 +102,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21761010521.png",
     "images": [
-      "assets/gallery/imported/985/01_img21761010521.png"
+      "./assets/gallery/imported/985/01_img21761010521.png"
     ],
     "image_meta": [
       {
@@ -132,8 +132,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21755656333.jpg",
     "images": [
-      "assets/gallery/imported/982/01_img21755656333.jpg",
-      "assets/gallery/imported/982/02_img31755656334.jpg"
+      "./assets/gallery/imported/982/01_img21755656333.jpg",
+      "./assets/gallery/imported/982/02_img31755656334.jpg"
     ],
     "image_meta": [
       {
@@ -175,7 +175,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21753263056.jpg",
     "images": [
-      "assets/gallery/imported/981/01_img21753263056.jpg"
+      "./assets/gallery/imported/981/01_img21753263056.jpg"
     ],
     "image_meta": [
       {
@@ -205,7 +205,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21747382602.png",
     "images": [
-      "assets/gallery/imported/980/01_img21747382602.png"
+      "./assets/gallery/imported/980/01_img21747382602.png"
     ],
     "image_meta": [
       {
@@ -235,8 +235,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21745892462.jpg",
     "images": [
-      "assets/gallery/imported/978/01_img21745892462.jpg",
-      "assets/gallery/imported/978/02_img31745892225.jpg"
+      "./assets/gallery/imported/978/01_img21745892462.jpg",
+      "./assets/gallery/imported/978/02_img31745892225.jpg"
     ],
     "image_meta": [
       {
@@ -278,8 +278,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21742016807.png",
     "images": [
-      "assets/gallery/imported/977/01_img21742016807.png",
-      "assets/gallery/imported/977/02_img31742016810.png"
+      "./assets/gallery/imported/977/01_img21742016807.png",
+      "./assets/gallery/imported/977/02_img31742016810.png"
     ],
     "image_meta": [
       {
@@ -321,7 +321,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21742015823.jpg",
     "images": [
-      "assets/gallery/imported/976/01_img21742015823.jpg"
+      "./assets/gallery/imported/976/01_img21742015823.jpg"
     ],
     "image_meta": [
       {
@@ -351,7 +351,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21730340389.jpg",
     "images": [
-      "assets/gallery/imported/963/01_img21730340389.jpg"
+      "./assets/gallery/imported/963/01_img21730340389.jpg"
     ],
     "image_meta": [
       {
@@ -381,7 +381,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21730339844.jpg",
     "images": [
-      "assets/gallery/imported/962/01_img21730339844.jpg"
+      "./assets/gallery/imported/962/01_img21730339844.jpg"
     ],
     "image_meta": [
       {
@@ -411,8 +411,8 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21726732063.jpg",
     "images": [
-      "assets/gallery/imported/955/01_img21726732063.jpg",
-      "assets/gallery/imported/955/02_aaaK1726731978.gif"
+      "./assets/gallery/imported/955/01_img21726732063.jpg",
+      "./assets/gallery/imported/955/02_aaaK1726731978.gif"
     ],
     "image_meta": [
       {
@@ -454,8 +454,8 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21719886266.png",
     "images": [
-      "assets/gallery/imported/952/01_img21719886266.png",
-      "assets/gallery/imported/952/02_aaa21719886179.png"
+      "./assets/gallery/imported/952/01_img21719886266.png",
+      "./assets/gallery/imported/952/02_aaa21719886179.png"
     ],
     "image_meta": [
       {
@@ -497,7 +497,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21717121065.png",
     "images": [
-      "assets/gallery/imported/946/01_img21717121065.png"
+      "./assets/gallery/imported/946/01_img21717121065.png"
     ],
     "image_meta": [
       {
@@ -527,8 +527,8 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21715403729.png",
     "images": [
-      "assets/gallery/imported/943/01_img21715403729.png",
-      "assets/gallery/imported/943/02_img31715403731.png"
+      "./assets/gallery/imported/943/01_img21715403729.png",
+      "./assets/gallery/imported/943/02_img31715403731.png"
     ],
     "image_meta": [
       {
@@ -570,7 +570,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21714363134.jpg",
     "images": [
-      "assets/gallery/imported/942/01_img21714363134.jpg"
+      "./assets/gallery/imported/942/01_img21714363134.jpg"
     ],
     "image_meta": [
       {
@@ -600,7 +600,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21707816077.jpg",
     "images": [
-      "assets/gallery/imported/939/01_img21707816077.jpg"
+      "./assets/gallery/imported/939/01_img21707816077.jpg"
     ],
     "image_meta": [
       {
@@ -630,7 +630,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21698886498.jpg",
     "images": [
-      "assets/gallery/imported/937/01_img21698886498.jpg"
+      "./assets/gallery/imported/937/01_img21698886498.jpg"
     ],
     "image_meta": [
       {
@@ -660,7 +660,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21698466634.png",
     "images": [
-      "assets/gallery/imported/935/01_img21698466634.png"
+      "./assets/gallery/imported/935/01_img21698466634.png"
     ],
     "image_meta": [
       {
@@ -690,7 +690,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21697603541.png",
     "images": [
-      "assets/gallery/imported/932/01_img21697603541.png"
+      "./assets/gallery/imported/932/01_img21697603541.png"
     ],
     "image_meta": [
       {
@@ -720,8 +720,8 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21688797768.png",
     "images": [
-      "assets/gallery/imported/925/01_img21688797768.png",
-      "assets/gallery/imported/925/02_aaa_25EA1688797631.png"
+      "./assets/gallery/imported/925/01_img21688797768.png",
+      "./assets/gallery/imported/925/02_aaa_25EA1688797631.png"
     ],
     "image_meta": [
       {
@@ -752,7 +752,7 @@
   },
   {
     "id": "922",
-    "title": "컨텐츠 바로가기",
+    "title": "2023 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkyMiZwYWdlY250PTAmbGV0dGVyX25vPTIxMSZvZmZzZXQ9MTImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTIwMQ==||&boardIndex=2&sub=1&gubun=",
@@ -763,8 +763,8 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21688551007.png",
     "images": [
-      "assets/gallery/imported/922/01_img21688551007.png",
-      "assets/gallery/imported/922/02_aaa_25EA1688550867.png"
+      "./assets/gallery/imported/922/01_img21688551007.png",
+      "./assets/gallery/imported/922/02_aaa_25EA1688550867.png"
     ],
     "image_meta": [
       {
@@ -795,7 +795,7 @@
   },
   {
     "id": "916",
-    "title": "컨텐츠 바로가기",
+    "title": "2023 PITTCON",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkxNiZwYWdlY250PTAmbGV0dGVyX25vPTIxMSZvZmZzZXQ9MTImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTIwMA==||&boardIndex=2&sub=1&gubun=",
@@ -806,7 +806,7 @@
     "list_page_num": 2,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21679976893.jpg",
     "images": [
-      "assets/gallery/imported/916/01_img21679976893.jpg"
+      "./assets/gallery/imported/916/01_img21679976893.jpg"
     ],
     "image_meta": [
       {
@@ -825,7 +825,7 @@
   },
   {
     "id": "915",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkxNSZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5OQ==||&boardIndex=2&sub=1&gubun=",
@@ -836,8 +836,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21672206556.png",
     "images": [
-      "assets/gallery/imported/915/01_img21672206556.png",
-      "assets/gallery/imported/915/02_img31672206558.jpg"
+      "./assets/gallery/imported/915/01_img21672206556.png",
+      "./assets/gallery/imported/915/02_img31672206558.jpg"
     ],
     "image_meta": [
       {
@@ -868,7 +868,7 @@
   },
   {
     "id": "909",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 추계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkwOSZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5OA==||&boardIndex=2&sub=1&gubun=",
@@ -879,7 +879,7 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21666592911.png",
     "images": [
-      "assets/gallery/imported/909/01_img21666592911.png"
+      "./assets/gallery/imported/909/01_img21666592911.png"
     ],
     "image_meta": [
       {
@@ -898,7 +898,7 @@
   },
   {
     "id": "908",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 SCIX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkwOCZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5Nw==||&boardIndex=2&sub=1&gubun=",
@@ -909,8 +909,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21666592685.png",
     "images": [
-      "assets/gallery/imported/908/01_img21666592685.png",
-      "assets/gallery/imported/908/02_img31666592686.png"
+      "./assets/gallery/imported/908/01_img21666592685.png",
+      "./assets/gallery/imported/908/02_img31666592686.png"
     ],
     "image_meta": [
       {
@@ -941,7 +941,7 @@
   },
   {
     "id": "907",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 SPEC",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkwNyZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5Ng==||&boardIndex=2&sub=1&gubun=",
@@ -952,8 +952,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21666592281.png",
     "images": [
-      "assets/gallery/imported/907/01_img21666592281.png",
-      "assets/gallery/imported/907/02_img31666592282.png"
+      "./assets/gallery/imported/907/01_img21666592281.png",
+      "./assets/gallery/imported/907/02_img31666592282.png"
     ],
     "image_meta": [
       {
@@ -984,7 +984,7 @@
   },
   {
     "id": "905",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 후기 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkwNSZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5NQ==||&boardIndex=2&sub=1&gubun=",
@@ -995,8 +995,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21666590516.jpg",
     "images": [
-      "assets/gallery/imported/905/01_img21666590516.jpg",
-      "assets/gallery/imported/905/02_img31666590523.jpg"
+      "./assets/gallery/imported/905/01_img21666590516.jpg",
+      "./assets/gallery/imported/905/02_img31666590523.jpg"
     ],
     "image_meta": [
       {
@@ -1027,7 +1027,7 @@
   },
   {
     "id": "896",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg5NiZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5NA==||&boardIndex=2&sub=1&gubun=",
@@ -1038,8 +1038,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21653550108.jpg",
     "images": [
-      "assets/gallery/imported/896/01_img21653550108.jpg",
-      "assets/gallery/imported/896/02_img31653550112.jpg"
+      "./assets/gallery/imported/896/01_img21653550108.jpg",
+      "./assets/gallery/imported/896/02_img31653550112.jpg"
     ],
     "image_meta": [
       {
@@ -1070,7 +1070,7 @@
   },
   {
     "id": "886",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg4NiZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5Mw==||&boardIndex=2&sub=1&gubun=",
@@ -1081,7 +1081,7 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21653104600.jpg",
     "images": [
-      "assets/gallery/imported/886/01_img21653104600.jpg"
+      "./assets/gallery/imported/886/01_img21653104600.jpg"
     ],
     "image_meta": [
       {
@@ -1100,7 +1100,7 @@
   },
   {
     "id": "884",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 춘계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg4NCZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5Mg==||&boardIndex=2&sub=1&gubun=",
@@ -1111,8 +1111,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21651663766.jpg",
     "images": [
-      "assets/gallery/imported/884/01_img21651663766.jpg",
-      "assets/gallery/imported/884/02_img31651663777.jpg"
+      "./assets/gallery/imported/884/01_img21651663766.jpg",
+      "./assets/gallery/imported/884/02_img31651663777.jpg"
     ],
     "image_meta": [
       {
@@ -1143,7 +1143,7 @@
   },
   {
     "id": "883",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 춘계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg4MyZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5MQ==||&boardIndex=2&sub=1&gubun=",
@@ -1154,8 +1154,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21651663699.jpg",
     "images": [
-      "assets/gallery/imported/883/01_img21651663699.jpg",
-      "assets/gallery/imported/883/02_img31651663705.jpg"
+      "./assets/gallery/imported/883/01_img21651663699.jpg",
+      "./assets/gallery/imported/883/02_img31651663705.jpg"
     ],
     "image_meta": [
       {
@@ -1186,7 +1186,7 @@
   },
   {
     "id": "880",
-    "title": "컨텐츠 바로가기",
+    "title": "2022 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg4MCZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE5MA==||&boardIndex=2&sub=1&gubun=",
@@ -1197,8 +1197,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21645445790.jpg",
     "images": [
-      "assets/gallery/imported/880/01_img21645445790.jpg",
-      "assets/gallery/imported/880/02_img31645445793.jpg"
+      "./assets/gallery/imported/880/01_img21645445790.jpg",
+      "./assets/gallery/imported/880/02_img31645445793.jpg"
     ],
     "image_meta": [
       {
@@ -1229,7 +1229,7 @@
   },
   {
     "id": "876",
-    "title": "컨텐츠 바로가기",
+    "title": "2021 추계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg3NiZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4OQ==||&boardIndex=2&sub=1&gubun=",
@@ -1240,8 +1240,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21640237667.png",
     "images": [
-      "assets/gallery/imported/876/01_img21640237667.png",
-      "assets/gallery/imported/876/02_img31640237681.gif"
+      "./assets/gallery/imported/876/01_img21640237667.png",
+      "./assets/gallery/imported/876/02_img31640237681.gif"
     ],
     "image_meta": [
       {
@@ -1272,7 +1272,7 @@
   },
   {
     "id": "867",
-    "title": "컨텐츠 바로가기",
+    "title": "2020 분석과학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg2NyZwYWdlY250PTAmbGV0dGVyX25vPTE5OSZvZmZzZXQ9MjQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4OA==||&boardIndex=2&sub=1&gubun=",
@@ -1283,8 +1283,8 @@
     "list_page_num": 3,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21626172583.jpg",
     "images": [
-      "assets/gallery/imported/867/01_img21626172583.jpg",
-      "assets/gallery/imported/867/02_img31626172585.jpg"
+      "./assets/gallery/imported/867/01_img21626172583.jpg",
+      "./assets/gallery/imported/867/02_img31626172585.jpg"
     ],
     "image_meta": [
       {
@@ -1315,7 +1315,7 @@
   },
   {
     "id": "866",
-    "title": "컨텐츠 바로가기",
+    "title": "2021 5,6월 생일축하파티",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg2NiZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4Nw==||&boardIndex=2&sub=1&gubun=",
@@ -1326,10 +1326,10 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21625806304.gif",
     "images": [
-      "assets/gallery/imported/866/01_img21625806304.gif",
-      "assets/gallery/imported/866/02_aaaK1625806135.gif",
-      "assets/gallery/imported/866/03_aaaK1625806145.gif",
-      "assets/gallery/imported/866/04_aaaK1625806166.gif"
+      "./assets/gallery/imported/866/01_img21625806304.gif",
+      "./assets/gallery/imported/866/02_aaaK1625806135.gif",
+      "./assets/gallery/imported/866/03_aaaK1625806145.gif",
+      "./assets/gallery/imported/866/04_aaaK1625806166.gif"
     ],
     "image_meta": [
       {
@@ -1384,19 +1384,19 @@
   },
   {
     "id": "857",
-    "title": "컨텐츠 바로가기",
+    "title": "2021 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg1NyZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4Ng==||&boardIndex=2&sub=1&gubun=",
     "source_idx": "857",
     "source_letter_no": "187",
     "source_present_num": "186",
-    "content": "",
+    "content": "2021 졸업식",
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21617870922.jpg",
     "images": [
-      "assets/gallery/imported/857/01_img21617870922.jpg",
-      "assets/gallery/imported/857/02_img31617870923.jpg"
+      "./assets/gallery/imported/857/01_img21617870922.jpg",
+      "./assets/gallery/imported/857/02_img31617870923.jpg"
     ],
     "image_meta": [
       {
@@ -1427,7 +1427,7 @@
   },
   {
     "id": "818",
-    "title": "컨텐츠 바로가기",
+    "title": "2020 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTgxOCZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4NQ==||&boardIndex=2&sub=1&gubun=",
@@ -1438,7 +1438,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21589778140.png",
     "images": [
-      "assets/gallery/imported/818/01_img21589778140.png"
+      "./assets/gallery/imported/818/01_img21589778140.png"
     ],
     "image_meta": [
       {
@@ -1457,7 +1457,7 @@
   },
   {
     "id": "782",
-    "title": "컨텐츠 바로가기",
+    "title": "2020 PITTCON",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc4MiZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4NA==||&boardIndex=2&sub=1&gubun=",
@@ -1468,8 +1468,8 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584444267.png",
     "images": [
-      "assets/gallery/imported/782/01_img21584444267.png",
-      "assets/gallery/imported/782/02_img31584444272.png"
+      "./assets/gallery/imported/782/01_img21584444267.png",
+      "./assets/gallery/imported/782/02_img31584444272.png"
     ],
     "image_meta": [
       {
@@ -1500,7 +1500,7 @@
   },
   {
     "id": "781",
-    "title": "컨텐츠 바로가기",
+    "title": "2020 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc4MSZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4Mw==||&boardIndex=2&sub=1&gubun=",
@@ -1511,7 +1511,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584443992.png",
     "images": [
-      "assets/gallery/imported/781/01_img21584443992.png"
+      "./assets/gallery/imported/781/01_img21584443992.png"
     ],
     "image_meta": [
       {
@@ -1530,7 +1530,7 @@
   },
   {
     "id": "780",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 분석과학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc4MCZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4Mg==||&boardIndex=2&sub=1&gubun=",
@@ -1541,7 +1541,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584443718.png",
     "images": [
-      "assets/gallery/imported/780/01_img21584443718.png"
+      "./assets/gallery/imported/780/01_img21584443718.png"
     ],
     "image_meta": [
       {
@@ -1560,7 +1560,7 @@
   },
   {
     "id": "779",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 ISPFM",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3OSZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4MQ==||&boardIndex=2&sub=1&gubun=",
@@ -1571,7 +1571,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584443518.jpg",
     "images": [
-      "assets/gallery/imported/779/01_img21584443518.jpg"
+      "./assets/gallery/imported/779/01_img21584443518.jpg"
     ],
     "image_meta": [
       {
@@ -1590,7 +1590,7 @@
   },
   {
     "id": "778",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 SciX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3OCZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE4MA==||&boardIndex=2&sub=1&gubun=",
@@ -1601,7 +1601,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584443376.png",
     "images": [
-      "assets/gallery/imported/778/01_img21584443376.png"
+      "./assets/gallery/imported/778/01_img21584443376.png"
     ],
     "image_meta": [
       {
@@ -1620,7 +1620,7 @@
   },
   {
     "id": "777",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3NyZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3OQ==||&boardIndex=2&sub=1&gubun=",
@@ -1631,8 +1631,8 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584443101.jpg",
     "images": [
-      "assets/gallery/imported/777/01_img21584443101.jpg",
-      "assets/gallery/imported/777/02_img31584443101.jpg"
+      "./assets/gallery/imported/777/01_img21584443101.jpg",
+      "./assets/gallery/imported/777/02_img31584443101.jpg"
     ],
     "image_meta": [
       {
@@ -1663,7 +1663,7 @@
   },
   {
     "id": "776",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 2DCOS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3NiZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3OA==||&boardIndex=2&sub=1&gubun=",
@@ -1674,7 +1674,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584442876.png",
     "images": [
-      "assets/gallery/imported/776/01_img21584442876.png"
+      "./assets/gallery/imported/776/01_img21584442876.png"
     ],
     "image_meta": [
       {
@@ -1693,7 +1693,7 @@
   },
   {
     "id": "775",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 Aqouaphotomics",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3NSZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3Nw==||&boardIndex=2&sub=1&gubun=",
@@ -1704,7 +1704,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21584442777.jpg",
     "images": [
-      "assets/gallery/imported/775/01_img21584442777.jpg"
+      "./assets/gallery/imported/775/01_img21584442777.jpg"
     ],
     "image_meta": [
       {
@@ -1723,7 +1723,7 @@
   },
   {
     "id": "729",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 전기/분석분과회 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyOSZwYWdlY250PTAmbGV0dGVyX25vPTE4NyZvZmZzZXQ9MzYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3Ng==||&boardIndex=2&sub=1&gubun=",
@@ -1734,7 +1734,7 @@
     "list_page_num": 4,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21562054513.jpg",
     "images": [
-      "assets/gallery/imported/729/01_img21562054513.jpg"
+      "./assets/gallery/imported/729/01_img21562054513.jpg"
     ],
     "image_meta": [
       {
@@ -1753,7 +1753,7 @@
   },
   {
     "id": "728",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 돌잔치및 환송회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyOCZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3NQ==||&boardIndex=2&sub=1&gubun=",
@@ -1764,7 +1764,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21562054308.jpg",
     "images": [
-      "assets/gallery/imported/728/01_img21562054308.jpg"
+      "./assets/gallery/imported/728/01_img21562054308.jpg"
     ],
     "image_meta": [
       {
@@ -1783,7 +1783,7 @@
   },
   {
     "id": "727",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 분석과학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyNyZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3NA==||&boardIndex=2&sub=1&gubun=",
@@ -1794,7 +1794,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21562053749.jpg",
     "images": [
-      "assets/gallery/imported/727/01_img21562053749.jpg"
+      "./assets/gallery/imported/727/01_img21562053749.jpg"
     ],
     "image_meta": [
       {
@@ -1813,7 +1813,7 @@
   },
   {
     "id": "726",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyNiZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3Mw==||&boardIndex=2&sub=1&gubun=",
@@ -1824,7 +1824,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21562053566.jpg",
     "images": [
-      "assets/gallery/imported/726/01_img21562053566.jpg"
+      "./assets/gallery/imported/726/01_img21562053566.jpg"
     ],
     "image_meta": [
       {
@@ -1843,7 +1843,7 @@
   },
   {
     "id": "725",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 춘계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyNSZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3Mg==||&boardIndex=2&sub=1&gubun=",
@@ -1854,7 +1854,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21562053449.jpg",
     "images": [
-      "assets/gallery/imported/725/01_img21562053449.jpg"
+      "./assets/gallery/imported/725/01_img21562053449.jpg"
     ],
     "image_meta": [
       {
@@ -1873,7 +1873,7 @@
   },
   {
     "id": "707",
-    "title": "컨텐츠 바로가기",
+    "title": "The First Advanced Petrochemical Analytical Technology International Forum",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcwNyZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3MQ==||&boardIndex=2&sub=1&gubun=",
@@ -1884,11 +1884,11 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21561185264.jpg",
     "images": [
-      "assets/gallery/imported/707/01_img21561185264.jpg",
-      "assets/gallery/imported/707/02_20190622153247.jpg",
-      "assets/gallery/imported/707/03_20190622153305.jpg",
-      "assets/gallery/imported/707/04_20190622153332.jpg",
-      "assets/gallery/imported/707/05_20190622153355.jpg"
+      "./assets/gallery/imported/707/01_img21561185264.jpg",
+      "./assets/gallery/imported/707/02_20190622153247.jpg",
+      "./assets/gallery/imported/707/03_20190622153305.jpg",
+      "./assets/gallery/imported/707/04_20190622153332.jpg",
+      "./assets/gallery/imported/707/05_20190622153355.jpg"
     ],
     "image_meta": [
       {
@@ -1955,7 +1955,7 @@
   },
   {
     "id": "675",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 점심 식사",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY3NSZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE3MA==||&boardIndex=2&sub=1&gubun=",
@@ -1966,7 +1966,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21554117373.png",
     "images": [
-      "assets/gallery/imported/675/01_img21554117373.png"
+      "./assets/gallery/imported/675/01_img21554117373.png"
     ],
     "image_meta": [
       {
@@ -1985,7 +1985,7 @@
   },
   {
     "id": "674",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 등나무에서",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY3NCZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2OQ==||&boardIndex=2&sub=1&gubun=",
@@ -1996,7 +1996,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21554117104.jpg",
     "images": [
-      "assets/gallery/imported/674/01_img21554117104.jpg"
+      "./assets/gallery/imported/674/01_img21554117104.jpg"
     ],
     "image_meta": [
       {
@@ -2015,7 +2015,7 @@
   },
   {
     "id": "661",
-    "title": "컨텐츠 바로가기",
+    "title": "2019 회식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY2MSZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2OA==||&boardIndex=2&sub=1&gubun=",
@@ -2026,7 +2026,7 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21552544594.png",
     "images": [
-      "assets/gallery/imported/661/01_img21552544594.png"
+      "./assets/gallery/imported/661/01_img21552544594.png"
     ],
     "image_meta": [
       {
@@ -2045,7 +2045,7 @@
   },
   {
     "id": "654",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 학부생 졸업 논문 발표회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY1NCZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2Nw==||&boardIndex=2&sub=1&gubun=",
@@ -2056,8 +2056,8 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21552354254.jpg",
     "images": [
-      "assets/gallery/imported/654/01_img21552354254.jpg",
-      "assets/gallery/imported/654/02_img31552354254.jpg"
+      "./assets/gallery/imported/654/01_img21552354254.jpg",
+      "./assets/gallery/imported/654/02_img31552354254.jpg"
     ],
     "image_meta": [
       {
@@ -2088,7 +2088,7 @@
   },
   {
     "id": "643",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY0MyZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2Ng==||&boardIndex=2&sub=1&gubun=",
@@ -2099,8 +2099,8 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21548744949.png",
     "images": [
-      "assets/gallery/imported/643/01_img21548744949.png",
-      "assets/gallery/imported/643/02_img31548744950.png"
+      "./assets/gallery/imported/643/01_img21548744949.png",
+      "./assets/gallery/imported/643/02_img31548744950.png"
     ],
     "image_meta": [
       {
@@ -2131,7 +2131,7 @@
   },
   {
     "id": "641",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY0MSZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2NQ==||&boardIndex=2&sub=1&gubun=",
@@ -2142,8 +2142,8 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21546559477.jpg",
     "images": [
-      "assets/gallery/imported/641/01_img21546559477.jpg",
-      "assets/gallery/imported/641/02_img31546559477.jpg"
+      "./assets/gallery/imported/641/01_img21546559477.jpg",
+      "./assets/gallery/imported/641/02_img31546559477.jpg"
     ],
     "image_meta": [
       {
@@ -2174,7 +2174,7 @@
   },
   {
     "id": "640",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 분석과학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY0MCZwYWdlY250PTAmbGV0dGVyX25vPTE3NSZvZmZzZXQ9NDgmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2NA==||&boardIndex=2&sub=1&gubun=",
@@ -2185,8 +2185,8 @@
     "list_page_num": 5,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21546559272.jpg",
     "images": [
-      "assets/gallery/imported/640/01_img21546559272.jpg",
-      "assets/gallery/imported/640/02_img31546559273.jpg"
+      "./assets/gallery/imported/640/01_img21546559272.jpg",
+      "./assets/gallery/imported/640/02_img31546559273.jpg"
     ],
     "image_meta": [
       {
@@ -2217,7 +2217,7 @@
   },
   {
     "id": "636",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 Nanopia",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYzNiZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2Mw==||&boardIndex=2&sub=1&gubun=",
@@ -2228,8 +2228,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21545196630.jpg",
     "images": [
-      "assets/gallery/imported/636/01_img21545196630.jpg",
-      "assets/gallery/imported/636/02_img31545196631.jpg"
+      "./assets/gallery/imported/636/01_img21545196630.jpg",
+      "./assets/gallery/imported/636/02_img31545196631.jpg"
     ],
     "image_meta": [
       {
@@ -2260,7 +2260,7 @@
   },
   {
     "id": "635",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 Nanopia",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYzNSZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2Mg==||&boardIndex=2&sub=1&gubun=",
@@ -2271,8 +2271,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21545196602.jpg",
     "images": [
-      "assets/gallery/imported/635/01_img21545196602.jpg",
-      "assets/gallery/imported/635/02_img31545196602.jpg"
+      "./assets/gallery/imported/635/01_img21545196602.jpg",
+      "./assets/gallery/imported/635/02_img31545196602.jpg"
     ],
     "image_meta": [
       {
@@ -2303,7 +2303,7 @@
   },
   {
     "id": "634",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 SCIX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYzNCZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2MQ==||&boardIndex=2&sub=1&gubun=",
@@ -2314,8 +2314,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21564373139.jpg",
     "images": [
-      "assets/gallery/imported/634/01_img21564373139.jpg",
-      "assets/gallery/imported/634/02_img31564373091.jpg"
+      "./assets/gallery/imported/634/01_img21564373139.jpg",
+      "./assets/gallery/imported/634/02_img31564373091.jpg"
     ],
     "image_meta": [
       {
@@ -2346,7 +2346,7 @@
   },
   {
     "id": "621",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYyMSZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE2MA==||&boardIndex=2&sub=1&gubun=",
@@ -2357,8 +2357,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21540275032.jpg",
     "images": [
-      "assets/gallery/imported/621/01_img21540275032.jpg",
-      "assets/gallery/imported/621/02_img31540275032.jpg"
+      "./assets/gallery/imported/621/01_img21540275032.jpg",
+      "./assets/gallery/imported/621/02_img31540275032.jpg"
     ],
     "image_meta": [
       {
@@ -2389,7 +2389,7 @@
   },
   {
     "id": "620",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 CSD",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYyMCZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1OQ==||&boardIndex=2&sub=1&gubun=",
@@ -2400,8 +2400,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21540258106.jpg",
     "images": [
-      "assets/gallery/imported/620/01_img21540258106.jpg",
-      "assets/gallery/imported/620/02_img31540258106.jpg"
+      "./assets/gallery/imported/620/01_img21540258106.jpg",
+      "./assets/gallery/imported/620/02_img31540258106.jpg"
     ],
     "image_meta": [
       {
@@ -2432,7 +2432,7 @@
   },
   {
     "id": "619",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 ICORS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYxOSZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1OA==||&boardIndex=2&sub=1&gubun=",
@@ -2443,8 +2443,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21540257787.jpg",
     "images": [
-      "assets/gallery/imported/619/01_img21540257787.jpg",
-      "assets/gallery/imported/619/02_img31540257787.jpg"
+      "./assets/gallery/imported/619/01_img21540257787.jpg",
+      "./assets/gallery/imported/619/02_img31540257787.jpg"
     ],
     "image_meta": [
       {
@@ -2475,7 +2475,7 @@
   },
   {
     "id": "618",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 ICORS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYxOCZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1Nw==||&boardIndex=2&sub=1&gubun=",
@@ -2486,8 +2486,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21540257380.jpg",
     "images": [
-      "assets/gallery/imported/618/01_img21540257380.jpg",
-      "assets/gallery/imported/618/02_img31540257380.jpg"
+      "./assets/gallery/imported/618/01_img21540257380.jpg",
+      "./assets/gallery/imported/618/02_img31540257380.jpg"
     ],
     "image_meta": [
       {
@@ -2518,7 +2518,7 @@
   },
   {
     "id": "613",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYxMyZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1Ng==||&boardIndex=2&sub=1&gubun=",
@@ -2529,8 +2529,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21537183698.jpg",
     "images": [
-      "assets/gallery/imported/613/01_img21537183698.jpg",
-      "assets/gallery/imported/613/02_img31537183698.jpg"
+      "./assets/gallery/imported/613/01_img21537183698.jpg",
+      "./assets/gallery/imported/613/02_img31537183698.jpg"
     ],
     "image_meta": [
       {
@@ -2561,7 +2561,7 @@
   },
   {
     "id": "605",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwNSZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1NQ==||&boardIndex=2&sub=1&gubun=",
@@ -2572,8 +2572,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21529908883.png",
     "images": [
-      "assets/gallery/imported/605/01_img21529908883.png",
-      "assets/gallery/imported/605/02_img31529908883.png"
+      "./assets/gallery/imported/605/01_img21529908883.png",
+      "./assets/gallery/imported/605/02_img31529908883.png"
     ],
     "image_meta": [
       {
@@ -2604,7 +2604,7 @@
   },
   {
     "id": "604",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwNCZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1NA==||&boardIndex=2&sub=1&gubun=",
@@ -2615,8 +2615,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21529908762.png",
     "images": [
-      "assets/gallery/imported/604/01_img21529908762.png",
-      "assets/gallery/imported/604/02_img31529908762.png"
+      "./assets/gallery/imported/604/01_img21529908762.png",
+      "./assets/gallery/imported/604/02_img31529908762.png"
     ],
     "image_meta": [
       {
@@ -2647,7 +2647,7 @@
   },
   {
     "id": "603",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwMyZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1Mw==||&boardIndex=2&sub=1&gubun=",
@@ -2658,8 +2658,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21529908559.png",
     "images": [
-      "assets/gallery/imported/603/01_img21529908559.png",
-      "assets/gallery/imported/603/02_img31529908559.png"
+      "./assets/gallery/imported/603/01_img21529908559.png",
+      "./assets/gallery/imported/603/02_img31529908559.png"
     ],
     "image_meta": [
       {
@@ -2690,7 +2690,7 @@
   },
   {
     "id": "602",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 분석과학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwMiZwYWdlY250PTEmbGV0dGVyX25vPTE2MyZvZmZzZXQ9NjAmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1Mg==||&boardIndex=2&sub=1&gubun=",
@@ -2701,8 +2701,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21529403881.jpg",
     "images": [
-      "assets/gallery/imported/602/01_img21529403881.jpg",
-      "assets/gallery/imported/602/02_img31529403881.png"
+      "./assets/gallery/imported/602/01_img21529403881.jpg",
+      "./assets/gallery/imported/602/02_img31529403881.png"
     ],
     "image_meta": [
       {
@@ -2733,7 +2733,7 @@
   },
   {
     "id": "601",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwMSZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1MQ==||&boardIndex=2&sub=1&gubun=",
@@ -2744,8 +2744,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21529387957.jpg",
     "images": [
-      "assets/gallery/imported/601/01_img21529387957.jpg",
-      "assets/gallery/imported/601/02_img31529387957.png"
+      "./assets/gallery/imported/601/01_img21529387957.jpg",
+      "./assets/gallery/imported/601/02_img31529387957.png"
     ],
     "image_meta": [
       {
@@ -2776,7 +2776,7 @@
   },
   {
     "id": "585",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 인도네시아 세미나",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU4NSZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE1MA==||&boardIndex=2&sub=1&gubun=",
@@ -2787,7 +2787,7 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21525417325.gif",
     "images": [
-      "assets/gallery/imported/585/01_img21525417325.gif"
+      "./assets/gallery/imported/585/01_img21525417325.gif"
     ],
     "image_meta": [
       {
@@ -2806,7 +2806,7 @@
   },
   {
     "id": "556",
-    "title": "컨텐츠 바로가기",
+    "title": "2018 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU1NiZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0OQ==||&boardIndex=2&sub=1&gubun=",
@@ -2817,8 +2817,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21519440127.png",
     "images": [
-      "assets/gallery/imported/556/01_img21519440127.png",
-      "assets/gallery/imported/556/02_img31519440128.png"
+      "./assets/gallery/imported/556/01_img21519440127.png",
+      "./assets/gallery/imported/556/02_img31519440128.png"
     ],
     "image_meta": [
       {
@@ -2849,19 +2849,19 @@
   },
   {
     "id": "548",
-    "title": "컨텐츠 바로가기",
+    "title": "2017- ABB MOU",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0OCZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0OA==||&boardIndex=2&sub=1&gubun=",
     "source_idx": "548",
     "source_letter_no": "151",
     "source_present_num": "148",
-    "content": "",
+    "content": "2017- ABB MOU",
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21513053133.jpg",
     "images": [
-      "assets/gallery/imported/548/01_img21513053133.jpg",
-      "assets/gallery/imported/548/02_img31513053133.jpg"
+      "./assets/gallery/imported/548/01_img21513053133.jpg",
+      "./assets/gallery/imported/548/02_img31513053133.jpg"
     ],
     "image_meta": [
       {
@@ -2892,7 +2892,7 @@
   },
   {
     "id": "546",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 산학협력 체결식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0NiZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0Nw==||&boardIndex=2&sub=1&gubun=",
@@ -2903,8 +2903,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21513052892.jpg",
     "images": [
-      "assets/gallery/imported/546/01_img21513052892.jpg",
-      "assets/gallery/imported/546/02_img31513052937.jpg"
+      "./assets/gallery/imported/546/01_img21513052892.jpg",
+      "./assets/gallery/imported/546/02_img31513052937.jpg"
     ],
     "image_meta": [
       {
@@ -2935,7 +2935,7 @@
   },
   {
     "id": "544",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 HPLC",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0NCZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0Ng==||&boardIndex=2&sub=1&gubun=",
@@ -2946,7 +2946,7 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21511945446.png",
     "images": [
-      "assets/gallery/imported/544/01_img21511945446.png"
+      "./assets/gallery/imported/544/01_img21511945446.png"
     ],
     "image_meta": [
       {
@@ -2965,7 +2965,7 @@
   },
   {
     "id": "543",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 SCIX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0MyZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0NQ==||&boardIndex=2&sub=1&gubun=",
@@ -2976,8 +2976,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21511945374.png",
     "images": [
-      "assets/gallery/imported/543/01_img21511945374.png",
-      "assets/gallery/imported/543/02_img31511945374.png"
+      "./assets/gallery/imported/543/01_img21511945374.png",
+      "./assets/gallery/imported/543/02_img31511945374.png"
     ],
     "image_meta": [
       {
@@ -3008,7 +3008,7 @@
   },
   {
     "id": "542",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 SCIX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0MiZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0NA==||&boardIndex=2&sub=1&gubun=",
@@ -3019,8 +3019,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21511945201.png",
     "images": [
-      "assets/gallery/imported/542/01_img21511945201.png",
-      "assets/gallery/imported/542/02_img31511945201.png"
+      "./assets/gallery/imported/542/01_img21511945201.png",
+      "./assets/gallery/imported/542/02_img31511945201.png"
     ],
     "image_meta": [
       {
@@ -3051,7 +3051,7 @@
   },
   {
     "id": "541",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 치앙마이 세미나",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0MSZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0Mw==||&boardIndex=2&sub=1&gubun=",
@@ -3062,7 +3062,7 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21511943068.png",
     "images": [
-      "assets/gallery/imported/541/01_img21511943068.png"
+      "./assets/gallery/imported/541/01_img21511943068.png"
     ],
     "image_meta": [
       {
@@ -3081,7 +3081,7 @@
   },
   {
     "id": "500",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 스승의날",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTUwMCZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0Mg==||&boardIndex=2&sub=1&gubun=",
@@ -3092,8 +3092,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499153690.jpg",
     "images": [
-      "assets/gallery/imported/500/01_img21499153690.jpg",
-      "assets/gallery/imported/500/02_img31499153690.jpg"
+      "./assets/gallery/imported/500/01_img21499153690.jpg",
+      "./assets/gallery/imported/500/02_img31499153690.jpg"
     ],
     "image_meta": [
       {
@@ -3124,7 +3124,7 @@
   },
   {
     "id": "499",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5OSZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0MQ==||&boardIndex=2&sub=1&gubun=",
@@ -3135,8 +3135,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131873.jpg",
     "images": [
-      "assets/gallery/imported/499/01_img21499131873.jpg",
-      "assets/gallery/imported/499/02_img31499131874.jpg"
+      "./assets/gallery/imported/499/01_img21499131873.jpg",
+      "./assets/gallery/imported/499/02_img31499131874.jpg"
     ],
     "image_meta": [
       {
@@ -3167,7 +3167,7 @@
   },
   {
     "id": "498",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5OCZwYWdlY250PTEmbGV0dGVyX25vPTE1MSZvZmZzZXQ9NzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTE0MA==||&boardIndex=2&sub=1&gubun=",
@@ -3178,8 +3178,8 @@
     "list_page_num": 7,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131799.jpg",
     "images": [
-      "assets/gallery/imported/498/01_img21499131799.jpg",
-      "assets/gallery/imported/498/02_img31499131799.jpg"
+      "./assets/gallery/imported/498/01_img21499131799.jpg",
+      "./assets/gallery/imported/498/02_img31499131799.jpg"
     ],
     "image_meta": [
       {
@@ -3210,7 +3210,7 @@
   },
   {
     "id": "497",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5NyZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzOQ==||&boardIndex=2&sub=1&gubun=",
@@ -3221,8 +3221,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131536.jpg",
     "images": [
-      "assets/gallery/imported/497/01_img21499131536.jpg",
-      "assets/gallery/imported/497/02_img31499131536.jpg"
+      "./assets/gallery/imported/497/01_img21499131536.jpg",
+      "./assets/gallery/imported/497/02_img31499131536.jpg"
     ],
     "image_meta": [
       {
@@ -3253,7 +3253,7 @@
   },
   {
     "id": "496",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5NiZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzOA==||&boardIndex=2&sub=1&gubun=",
@@ -3264,8 +3264,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131497.jpg",
     "images": [
-      "assets/gallery/imported/496/01_img21499131497.jpg",
-      "assets/gallery/imported/496/02_img31499131497.jpg"
+      "./assets/gallery/imported/496/01_img21499131497.jpg",
+      "./assets/gallery/imported/496/02_img31499131497.jpg"
     ],
     "image_meta": [
       {
@@ -3296,7 +3296,7 @@
   },
   {
     "id": "495",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5NSZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzNw==||&boardIndex=2&sub=1&gubun=",
@@ -3307,8 +3307,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131210.jpg",
     "images": [
-      "assets/gallery/imported/495/01_img21499131210.jpg",
-      "assets/gallery/imported/495/02_img31499131210.jpg"
+      "./assets/gallery/imported/495/01_img21499131210.jpg",
+      "./assets/gallery/imported/495/02_img31499131210.jpg"
     ],
     "image_meta": [
       {
@@ -3339,7 +3339,7 @@
   },
   {
     "id": "494",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5NCZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzNg==||&boardIndex=2&sub=1&gubun=",
@@ -3350,8 +3350,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499131142.jpg",
     "images": [
-      "assets/gallery/imported/494/01_img21499131142.jpg",
-      "assets/gallery/imported/494/02_img31499131142.jpg"
+      "./assets/gallery/imported/494/01_img21499131142.jpg",
+      "./assets/gallery/imported/494/02_img31499131142.jpg"
     ],
     "image_meta": [
       {
@@ -3382,7 +3382,7 @@
   },
   {
     "id": "493",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5MyZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzNQ==||&boardIndex=2&sub=1&gubun=",
@@ -3393,8 +3393,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499085291.jpg",
     "images": [
-      "assets/gallery/imported/493/01_img21499085291.jpg",
-      "assets/gallery/imported/493/02_img31499085291.jpg"
+      "./assets/gallery/imported/493/01_img21499085291.jpg",
+      "./assets/gallery/imported/493/02_img31499085291.jpg"
     ],
     "image_meta": [
       {
@@ -3425,7 +3425,7 @@
   },
   {
     "id": "492",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5MiZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzNA==||&boardIndex=2&sub=1&gubun=",
@@ -3436,8 +3436,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499085159.jpg",
     "images": [
-      "assets/gallery/imported/492/01_img21499085159.jpg",
-      "assets/gallery/imported/492/02_img31499085159.jpg"
+      "./assets/gallery/imported/492/01_img21499085159.jpg",
+      "./assets/gallery/imported/492/02_img31499085159.jpg"
     ],
     "image_meta": [
       {
@@ -3468,7 +3468,7 @@
   },
   {
     "id": "489",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 NBSIS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ4OSZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzMw==||&boardIndex=2&sub=1&gubun=",
@@ -3479,8 +3479,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21499084781.jpg",
     "images": [
-      "assets/gallery/imported/489/01_img21499084781.jpg",
-      "assets/gallery/imported/489/02_img31499084782.jpg"
+      "./assets/gallery/imported/489/01_img21499084781.jpg",
+      "./assets/gallery/imported/489/02_img31499084782.jpg"
     ],
     "image_meta": [
       {
@@ -3511,7 +3511,7 @@
   },
   {
     "id": "484",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 대한화학회 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ4NCZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzMg==||&boardIndex=2&sub=1&gubun=",
@@ -3522,8 +3522,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21493179392.png",
     "images": [
-      "assets/gallery/imported/484/01_img21493179392.png",
-      "assets/gallery/imported/484/02_20170426130249.jpg"
+      "./assets/gallery/imported/484/01_img21493179392.png",
+      "./assets/gallery/imported/484/02_20170426130249.jpg"
     ],
     "image_meta": [
       {
@@ -3554,7 +3554,7 @@
   },
   {
     "id": "469",
-    "title": "컨텐츠 바로가기",
+    "title": "2017 졸업식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2OSZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzMQ==||&boardIndex=2&sub=1&gubun=",
@@ -3565,7 +3565,7 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21487322576.jpg",
     "images": [
-      "assets/gallery/imported/469/01_img21487322576.jpg"
+      "./assets/gallery/imported/469/01_img21487322576.jpg"
     ],
     "image_meta": [
       {
@@ -3584,7 +3584,7 @@
   },
   {
     "id": "468",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2OCZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEzMA==||&boardIndex=2&sub=1&gubun=",
@@ -3595,8 +3595,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482220203.jpg",
     "images": [
-      "assets/gallery/imported/468/01_img21482220203.jpg",
-      "assets/gallery/imported/468/02_img31482220203.jpg"
+      "./assets/gallery/imported/468/01_img21482220203.jpg",
+      "./assets/gallery/imported/468/02_img31482220203.jpg"
     ],
     "image_meta": [
       {
@@ -3627,7 +3627,7 @@
   },
   {
     "id": "467",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2NyZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyOQ==||&boardIndex=2&sub=1&gubun=",
@@ -3638,8 +3638,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482219695.jpg",
     "images": [
-      "assets/gallery/imported/467/01_img21482219695.jpg",
-      "assets/gallery/imported/467/02_img31482219695.jpg"
+      "./assets/gallery/imported/467/01_img21482219695.jpg",
+      "./assets/gallery/imported/467/02_img31482219695.jpg"
     ],
     "image_meta": [
       {
@@ -3670,7 +3670,7 @@
   },
   {
     "id": "466",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2NiZwYWdlY250PTEmbGV0dGVyX25vPTEzOSZvZmZzZXQ9ODQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyOA==||&boardIndex=2&sub=1&gubun=",
@@ -3681,8 +3681,8 @@
     "list_page_num": 8,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482219534.jpg",
     "images": [
-      "assets/gallery/imported/466/01_img21482219534.jpg",
-      "assets/gallery/imported/466/02_img31482219534.jpg"
+      "./assets/gallery/imported/466/01_img21482219534.jpg",
+      "./assets/gallery/imported/466/02_img31482219534.jpg"
     ],
     "image_meta": [
       {
@@ -3713,7 +3713,7 @@
   },
   {
     "id": "465",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2NSZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyNw==||&boardIndex=2&sub=1&gubun=",
@@ -3724,8 +3724,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482219379.jpg",
     "images": [
-      "assets/gallery/imported/465/01_img21482219379.jpg",
-      "assets/gallery/imported/465/02_img31482219379.jpg"
+      "./assets/gallery/imported/465/01_img21482219379.jpg",
+      "./assets/gallery/imported/465/02_img31482219379.jpg"
     ],
     "image_meta": [
       {
@@ -3756,7 +3756,7 @@
   },
   {
     "id": "464",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2NCZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyNg==||&boardIndex=2&sub=1&gubun=",
@@ -3767,8 +3767,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482219133.jpg",
     "images": [
-      "assets/gallery/imported/464/01_img21482219133.jpg",
-      "assets/gallery/imported/464/02_img31482219134.jpg"
+      "./assets/gallery/imported/464/01_img21482219133.jpg",
+      "./assets/gallery/imported/464/02_img31482219134.jpg"
     ],
     "image_meta": [
       {
@@ -3799,7 +3799,7 @@
   },
   {
     "id": "463",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2MyZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyNQ==||&boardIndex=2&sub=1&gubun=",
@@ -3810,8 +3810,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21482218866.jpg",
     "images": [
-      "assets/gallery/imported/463/01_img21482218866.jpg",
-      "assets/gallery/imported/463/02_img31482218866.jpg"
+      "./assets/gallery/imported/463/01_img21482218866.jpg",
+      "./assets/gallery/imported/463/02_img31482218866.jpg"
     ],
     "image_meta": [
       {
@@ -3842,7 +3842,7 @@
   },
   {
     "id": "461",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2MSZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyNA==||&boardIndex=2&sub=1&gubun=",
@@ -3853,8 +3853,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481891625.jpg",
     "images": [
-      "assets/gallery/imported/461/01_img21481891625.jpg",
-      "assets/gallery/imported/461/02_img31481891625.jpg"
+      "./assets/gallery/imported/461/01_img21481891625.jpg",
+      "./assets/gallery/imported/461/02_img31481891625.jpg"
     ],
     "image_meta": [
       {
@@ -3885,7 +3885,7 @@
   },
   {
     "id": "460",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2MCZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyMw==||&boardIndex=2&sub=1&gubun=",
@@ -3896,8 +3896,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481890362.jpg",
     "images": [
-      "assets/gallery/imported/460/01_img21481890362.jpg",
-      "assets/gallery/imported/460/02_img31481890440.jpg"
+      "./assets/gallery/imported/460/01_img21481890362.jpg",
+      "./assets/gallery/imported/460/02_img31481890440.jpg"
     ],
     "image_meta": [
       {
@@ -3928,7 +3928,7 @@
   },
   {
     "id": "459",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1OSZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyMg==||&boardIndex=2&sub=1&gubun=",
@@ -3939,8 +3939,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481889830.jpg",
     "images": [
-      "assets/gallery/imported/459/01_img21481889830.jpg",
-      "assets/gallery/imported/459/02_img31481889887.jpg"
+      "./assets/gallery/imported/459/01_img21481889830.jpg",
+      "./assets/gallery/imported/459/02_img31481889887.jpg"
     ],
     "image_meta": [
       {
@@ -3971,7 +3971,7 @@
   },
   {
     "id": "458",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1OCZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyMQ==||&boardIndex=2&sub=1&gubun=",
@@ -3982,8 +3982,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481889435.jpg",
     "images": [
-      "assets/gallery/imported/458/01_img21481889435.jpg",
-      "assets/gallery/imported/458/02_img31481889435.jpg"
+      "./assets/gallery/imported/458/01_img21481889435.jpg",
+      "./assets/gallery/imported/458/02_img31481889435.jpg"
     ],
     "image_meta": [
       {
@@ -4014,7 +4014,7 @@
   },
   {
     "id": "457",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1NyZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTEyMA==||&boardIndex=2&sub=1&gubun=",
@@ -4025,8 +4025,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481888130.jpg",
     "images": [
-      "assets/gallery/imported/457/01_img21481888130.jpg",
-      "assets/gallery/imported/457/02_img31481888131.jpg"
+      "./assets/gallery/imported/457/01_img21481888130.jpg",
+      "./assets/gallery/imported/457/02_img31481888131.jpg"
     ],
     "image_meta": [
       {
@@ -4057,7 +4057,7 @@
   },
   {
     "id": "455",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1NSZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTExOQ==||&boardIndex=2&sub=1&gubun=",
@@ -4068,8 +4068,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481887266.jpg",
     "images": [
-      "assets/gallery/imported/455/01_img21481887266.jpg",
-      "assets/gallery/imported/455/02_img31481888228.jpg"
+      "./assets/gallery/imported/455/01_img21481887266.jpg",
+      "./assets/gallery/imported/455/02_img31481888228.jpg"
     ],
     "image_meta": [
       {
@@ -4100,7 +4100,7 @@
   },
   {
     "id": "454",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1NCZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTExOA==||&boardIndex=2&sub=1&gubun=",
@@ -4111,8 +4111,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481867248.jpg",
     "images": [
-      "assets/gallery/imported/454/01_img21481867248.jpg",
-      "assets/gallery/imported/454/02_img31481867248.jpg"
+      "./assets/gallery/imported/454/01_img21481867248.jpg",
+      "./assets/gallery/imported/454/02_img31481867248.jpg"
     ],
     "image_meta": [
       {
@@ -4143,7 +4143,7 @@
   },
   {
     "id": "451",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 하계분석분과회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1MSZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTExNw==||&boardIndex=2&sub=1&gubun=",
@@ -4154,8 +4154,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481866616.jpg",
     "images": [
-      "assets/gallery/imported/451/01_img21481866616.jpg",
-      "assets/gallery/imported/451/02_img31481866616.jpg"
+      "./assets/gallery/imported/451/01_img21481866616.jpg",
+      "./assets/gallery/imported/451/02_img31481866616.jpg"
     ],
     "image_meta": [
       {
@@ -4186,7 +4186,7 @@
   },
   {
     "id": "450",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 스승의 날 행사",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1MCZwYWdlY250PTEmbGV0dGVyX25vPTEyNyZvZmZzZXQ9OTYmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTExNg==||&boardIndex=2&sub=1&gubun=",
@@ -4197,8 +4197,8 @@
     "list_page_num": 9,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481866242.jpg",
     "images": [
-      "assets/gallery/imported/450/01_img21481866242.jpg",
-      "assets/gallery/imported/450/02_img31481866243.jpg"
+      "./assets/gallery/imported/450/01_img21481866242.jpg",
+      "./assets/gallery/imported/450/02_img31481866243.jpg"
     ],
     "image_meta": [
       {
@@ -4229,7 +4229,7 @@
   },
   {
     "id": "449",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 스승의 날 행사",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ0OSZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTU=||&boardIndex=2&sub=1&gubun=",
@@ -4240,8 +4240,8 @@
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21481866104.jpg",
     "images": [
-      "assets/gallery/imported/449/01_img21481866104.jpg",
-      "assets/gallery/imported/449/02_img31481866104.jpg"
+      "./assets/gallery/imported/449/01_img21481866104.jpg",
+      "./assets/gallery/imported/449/02_img31481866104.jpg"
     ],
     "image_meta": [
       {
@@ -4272,19 +4272,19 @@
   },
   {
     "id": "396",
-    "title": "컨텐츠 바로가기",
+    "title": "Doctor Muya presented for KRF program",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5NiZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTQ=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "396",
     "source_letter_no": "115",
     "source_present_num": "114",
-    "content": "",
+    "content": "Doctor Muya presented for KRF program",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21462252975.jpg",
     "images": [
-      "assets/gallery/imported/396/01_img21462252975.jpg",
-      "assets/gallery/imported/396/02_img31462252975.jpg"
+      "./assets/gallery/imported/396/01_img21462252975.jpg",
+      "./assets/gallery/imported/396/02_img31462252975.jpg"
     ],
     "image_meta": [
       {
@@ -4315,19 +4315,19 @@
   },
   {
     "id": "395",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 Chemistry Department Symposium",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5NSZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTM=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "395",
     "source_letter_no": "115",
     "source_present_num": "113",
-    "content": "",
+    "content": "2016 Chemistry Department Symposium",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21462252626.jpg",
     "images": [
-      "assets/gallery/imported/395/01_img21462252626.jpg",
-      "assets/gallery/imported/395/02_img31462252727.jpg"
+      "./assets/gallery/imported/395/01_img21462252626.jpg",
+      "./assets/gallery/imported/395/02_img31462252727.jpg"
     ],
     "image_meta": [
       {
@@ -4358,7 +4358,7 @@
   },
   {
     "id": "394",
-    "title": "컨텐츠 바로가기",
+    "title": "KCS 2016 - Analytical Chemistry Division Award for Excellent Research",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5NCZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTI=||&boardIndex=2&sub=1&gubun=",
@@ -4369,8 +4369,8 @@
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21462252580.jpg",
     "images": [
-      "assets/gallery/imported/394/01_img21462252580.jpg",
-      "assets/gallery/imported/394/02_img31462252580.jpg"
+      "./assets/gallery/imported/394/01_img21462252580.jpg",
+      "./assets/gallery/imported/394/02_img31462252580.jpg"
     ],
     "image_meta": [
       {
@@ -4401,7 +4401,7 @@
   },
   {
     "id": "393",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5MyZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTE=||&boardIndex=2&sub=1&gubun=",
@@ -4412,8 +4412,8 @@
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21462252508.jpg",
     "images": [
-      "assets/gallery/imported/393/01_img21462252508.jpg",
-      "assets/gallery/imported/393/02_img31462252508.jpg"
+      "./assets/gallery/imported/393/01_img21462252508.jpg",
+      "./assets/gallery/imported/393/02_img31462252508.jpg"
     ],
     "image_meta": [
       {
@@ -4444,7 +4444,7 @@
   },
   {
     "id": "392",
-    "title": "컨텐츠 바로가기",
+    "title": "2016 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5MiZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMTA=||&boardIndex=2&sub=1&gubun=",
@@ -4455,7 +4455,7 @@
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21462252452.jpg",
     "images": [
-      "assets/gallery/imported/392/01_img21462252452.jpg"
+      "./assets/gallery/imported/392/01_img21462252452.jpg"
     ],
     "image_meta": [
       {
@@ -4474,19 +4474,19 @@
   },
   {
     "id": "350",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 End Year Party",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM1MCZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDk=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "350",
     "source_letter_no": "115",
     "source_present_num": "109",
-    "content": "",
+    "content": "2015 End Year Party",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148633.jpg",
     "images": [
-      "assets/gallery/imported/350/01_img21452148633.jpg",
-      "assets/gallery/imported/350/02_img31452148633.jpg"
+      "./assets/gallery/imported/350/01_img21452148633.jpg",
+      "./assets/gallery/imported/350/02_img31452148633.jpg"
     ],
     "image_meta": [
       {
@@ -4517,19 +4517,19 @@
   },
   {
     "id": "349",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0OSZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDg=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "349",
     "source_letter_no": "115",
     "source_present_num": "108",
-    "content": "",
+    "content": "2015 KCS",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148439.jpg",
     "images": [
-      "assets/gallery/imported/349/01_img21452148439.jpg",
-      "assets/gallery/imported/349/02_img31452148439.jpg"
+      "./assets/gallery/imported/349/01_img21452148439.jpg",
+      "./assets/gallery/imported/349/02_img31452148439.jpg"
     ],
     "image_meta": [
       {
@@ -4560,19 +4560,19 @@
   },
   {
     "id": "348",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0OCZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDc=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "348",
     "source_letter_no": "115",
     "source_present_num": "107",
-    "content": "",
+    "content": "2015 KCS",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148760.jpg",
     "images": [
-      "assets/gallery/imported/348/01_img21452148760.jpg",
-      "assets/gallery/imported/348/02_img31452148406.jpg"
+      "./assets/gallery/imported/348/01_img21452148760.jpg",
+      "./assets/gallery/imported/348/02_img31452148406.jpg"
     ],
     "image_meta": [
       {
@@ -4603,19 +4603,19 @@
   },
   {
     "id": "347",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0NyZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDY=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "347",
     "source_letter_no": "115",
     "source_present_num": "106",
-    "content": "",
+    "content": "2015 KCS",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148375.jpg",
     "images": [
-      "assets/gallery/imported/347/01_img21452148375.jpg",
-      "assets/gallery/imported/347/02_img31452148375.jpg"
+      "./assets/gallery/imported/347/01_img21452148375.jpg",
+      "./assets/gallery/imported/347/02_img31452148375.jpg"
     ],
     "image_meta": [
       {
@@ -4646,18 +4646,18 @@
   },
   {
     "id": "346",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 KCS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0NiZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDU=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "346",
     "source_letter_no": "115",
     "source_present_num": "105",
-    "content": "",
+    "content": "2015 KCS",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148345.jpg",
     "images": [
-      "assets/gallery/imported/346/01_img21452148345.jpg"
+      "./assets/gallery/imported/346/01_img21452148345.jpg"
     ],
     "image_meta": [
       {
@@ -4676,19 +4676,19 @@
   },
   {
     "id": "345",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 SCIX",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0NSZwYWdlY250PTEmbGV0dGVyX25vPTExNSZvZmZzZXQ9MTA4JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDQ=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "345",
     "source_letter_no": "115",
     "source_present_num": "104",
-    "content": "",
+    "content": "2015 SCIX",
     "list_page_num": 10,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148300.jpg",
     "images": [
-      "assets/gallery/imported/345/01_img21452148300.jpg",
-      "assets/gallery/imported/345/02_img31452148300.jpg"
+      "./assets/gallery/imported/345/01_img21452148300.jpg",
+      "./assets/gallery/imported/345/02_img31452148300.jpg"
     ],
     "image_meta": [
       {
@@ -4719,19 +4719,19 @@
   },
   {
     "id": "344",
-    "title": "컨텐츠 바로가기",
+    "title": "2015 PITTCON",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0NCZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDM=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "344",
     "source_letter_no": "103",
     "source_present_num": "103",
-    "content": "",
+    "content": "2015 PITTCON",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21452148120.jpg",
     "images": [
-      "assets/gallery/imported/344/01_img21452148120.jpg",
-      "assets/gallery/imported/344/02_img31452148120.jpg"
+      "./assets/gallery/imported/344/01_img21452148120.jpg",
+      "./assets/gallery/imported/344/02_img31452148120.jpg"
     ],
     "image_meta": [
       {
@@ -4762,7 +4762,7 @@
   },
   {
     "id": "314",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 송년회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMxNCZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDI=||&boardIndex=2&sub=1&gubun=",
@@ -4773,8 +4773,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419903349.jpg",
     "images": [
-      "assets/gallery/imported/314/01_img21419903349.jpg",
-      "assets/gallery/imported/314/02_img31419903350.jpg"
+      "./assets/gallery/imported/314/01_img21419903349.jpg",
+      "./assets/gallery/imported/314/02_img31419903350.jpg"
     ],
     "image_meta": [
       {
@@ -4805,7 +4805,7 @@
   },
   {
     "id": "313",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 회식",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMxMyZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDE=||&boardIndex=2&sub=1&gubun=",
@@ -4816,8 +4816,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419902885.jpg",
     "images": [
-      "assets/gallery/imported/313/01_img21419902885.jpg",
-      "assets/gallery/imported/313/02_img31419902886.jpg"
+      "./assets/gallery/imported/313/01_img21419902885.jpg",
+      "./assets/gallery/imported/313/02_img31419902886.jpg"
     ],
     "image_meta": [
       {
@@ -4848,7 +4848,7 @@
   },
   {
     "id": "312",
-    "title": "컨텐츠 바로가기",
+    "title": "2014년도 화학과 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMxMiZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0xMDA=||&boardIndex=2&sub=1&gubun=",
@@ -4859,8 +4859,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419900024.jpg",
     "images": [
-      "assets/gallery/imported/312/01_img21419900024.jpg",
-      "assets/gallery/imported/312/02_img31419900024.jpg"
+      "./assets/gallery/imported/312/01_img21419900024.jpg",
+      "./assets/gallery/imported/312/02_img31419900024.jpg"
     ],
     "image_meta": [
       {
@@ -4891,7 +4891,7 @@
   },
   {
     "id": "311",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 여름 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMxMSZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05OQ==||&boardIndex=2&sub=1&gubun=",
@@ -4902,8 +4902,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419899796.jpg",
     "images": [
-      "assets/gallery/imported/311/01_img21419899796.jpg",
-      "assets/gallery/imported/311/02_img31419899797.jpg"
+      "./assets/gallery/imported/311/01_img21419899796.jpg",
+      "./assets/gallery/imported/311/02_img31419899797.jpg"
     ],
     "image_meta": [
       {
@@ -4934,7 +4934,7 @@
   },
   {
     "id": "309",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 여름 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwOSZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05OA==||&boardIndex=2&sub=1&gubun=",
@@ -4945,8 +4945,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419856731.jpg",
     "images": [
-      "assets/gallery/imported/309/01_img21419856731.jpg",
-      "assets/gallery/imported/309/02_img31419856732.jpg"
+      "./assets/gallery/imported/309/01_img21419856731.jpg",
+      "./assets/gallery/imported/309/02_img31419856732.jpg"
     ],
     "image_meta": [
       {
@@ -4977,7 +4977,7 @@
   },
   {
     "id": "304",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 여름 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwNCZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05Nw==||&boardIndex=2&sub=1&gubun=",
@@ -4988,8 +4988,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419855745.jpg",
     "images": [
-      "assets/gallery/imported/304/01_img21419855745.jpg",
-      "assets/gallery/imported/304/02_img31419855745.jpg"
+      "./assets/gallery/imported/304/01_img21419855745.jpg",
+      "./assets/gallery/imported/304/02_img31419855745.jpg"
     ],
     "image_meta": [
       {
@@ -5020,7 +5020,7 @@
   },
   {
     "id": "302",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 여름 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwMiZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05Ng==||&boardIndex=2&sub=1&gubun=",
@@ -5031,8 +5031,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419855650.jpg",
     "images": [
-      "assets/gallery/imported/302/01_img21419855650.jpg",
-      "assets/gallery/imported/302/02_img31419855651.jpg"
+      "./assets/gallery/imported/302/01_img21419855650.jpg",
+      "./assets/gallery/imported/302/02_img31419855651.jpg"
     ],
     "image_meta": [
       {
@@ -5063,7 +5063,7 @@
   },
   {
     "id": "301",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwMSZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05NQ==||&boardIndex=2&sub=1&gubun=",
@@ -5074,8 +5074,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419853372.jpg",
     "images": [
-      "assets/gallery/imported/301/01_img21419853372.jpg",
-      "assets/gallery/imported/301/02_img31419853373.jpg"
+      "./assets/gallery/imported/301/01_img21419853372.jpg",
+      "./assets/gallery/imported/301/02_img31419853373.jpg"
     ],
     "image_meta": [
       {
@@ -5106,7 +5106,7 @@
   },
   {
     "id": "300",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwMCZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05NA==||&boardIndex=2&sub=1&gubun=",
@@ -5117,8 +5117,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419853158.jpg",
     "images": [
-      "assets/gallery/imported/300/01_img21419853158.jpg",
-      "assets/gallery/imported/300/02_img31419853159.jpg"
+      "./assets/gallery/imported/300/01_img21419853158.jpg",
+      "./assets/gallery/imported/300/02_img31419853159.jpg"
     ],
     "image_meta": [
       {
@@ -5149,7 +5149,7 @@
   },
   {
     "id": "299",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTI5OSZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05Mw==||&boardIndex=2&sub=1&gubun=",
@@ -5160,8 +5160,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419853092.jpg",
     "images": [
-      "assets/gallery/imported/299/01_img21419853092.jpg",
-      "assets/gallery/imported/299/02_img31419853092.jpg"
+      "./assets/gallery/imported/299/01_img21419853092.jpg",
+      "./assets/gallery/imported/299/02_img31419853092.jpg"
     ],
     "image_meta": [
       {
@@ -5192,7 +5192,7 @@
   },
   {
     "id": "298",
-    "title": "컨텐츠 바로가기",
+    "title": "2014 ANS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTI5OCZwYWdlY250PTImbGV0dGVyX25vPTEwMyZvZmZzZXQ9MTIwJnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT05Mg==||&boardIndex=2&sub=1&gubun=",
@@ -5203,8 +5203,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21419845651.jpg",
     "images": [
-      "assets/gallery/imported/298/01_img21419845651.jpg",
-      "assets/gallery/imported/298/02_img31419845651.jpg"
+      "./assets/gallery/imported/298/01_img21419845651.jpg",
+      "./assets/gallery/imported/298/02_img31419845651.jpg"
     ],
     "image_meta": [
       {
@@ -5235,7 +5235,7 @@
   },
   {
     "id": "203",
-    "title": "컨텐츠 바로가기",
+    "title": "2014년 첫 회식 ~~~",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTIwMyZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTkx||&boardIndex=2&sub=1&gubun=",
@@ -5246,8 +5246,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21392620189.jpg",
     "images": [
-      "assets/gallery/imported/203/01_img21392620189.jpg",
-      "assets/gallery/imported/203/02_img31392620190.jpg"
+      "./assets/gallery/imported/203/01_img21392620189.jpg",
+      "./assets/gallery/imported/203/02_img31392620190.jpg"
     ],
     "image_meta": [
       {
@@ -5278,7 +5278,7 @@
   },
   {
     "id": "186",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE4NiZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTkw||&boardIndex=2&sub=1&gubun=",
@@ -5289,8 +5289,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381807007.jpg",
     "images": [
-      "assets/gallery/imported/186/01_img21381807007.jpg",
-      "assets/gallery/imported/186/02_img31381807007.jpg"
+      "./assets/gallery/imported/186/01_img21381807007.jpg",
+      "./assets/gallery/imported/186/02_img31381807007.jpg"
     ],
     "image_meta": [
       {
@@ -5321,7 +5321,7 @@
   },
   {
     "id": "185",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE4NSZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg5||&boardIndex=2&sub=1&gubun=",
@@ -5332,7 +5332,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381807064.jpg",
     "images": [
-      "assets/gallery/imported/185/01_img21381807064.jpg"
+      "./assets/gallery/imported/185/01_img21381807064.jpg"
     ],
     "image_meta": [
       {
@@ -5351,7 +5351,7 @@
   },
   {
     "id": "179",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3OSZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg4||&boardIndex=2&sub=1&gubun=",
@@ -5362,7 +5362,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381803783.jpg",
     "images": [
-      "assets/gallery/imported/179/01_img21381803783.jpg"
+      "./assets/gallery/imported/179/01_img21381803783.jpg"
     ],
     "image_meta": [
       {
@@ -5381,7 +5381,7 @@
   },
   {
     "id": "178",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3OCZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg3||&boardIndex=2&sub=1&gubun=",
@@ -5392,7 +5392,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381803681.jpg",
     "images": [
-      "assets/gallery/imported/178/01_img21381803681.jpg"
+      "./assets/gallery/imported/178/01_img21381803681.jpg"
     ],
     "image_meta": [
       {
@@ -5411,7 +5411,7 @@
   },
   {
     "id": "176",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3NiZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg2||&boardIndex=2&sub=1&gubun=",
@@ -5422,8 +5422,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381802588.jpg",
     "images": [
-      "assets/gallery/imported/176/01_img21381802588.jpg",
-      "assets/gallery/imported/176/02_img31381802589.jpg"
+      "./assets/gallery/imported/176/01_img21381802588.jpg",
+      "./assets/gallery/imported/176/02_img31381802589.jpg"
     ],
     "image_meta": [
       {
@@ -5454,7 +5454,7 @@
   },
   {
     "id": "175",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3NSZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg1||&boardIndex=2&sub=1&gubun=",
@@ -5465,8 +5465,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381802427.jpg",
     "images": [
-      "assets/gallery/imported/175/01_img21381802427.jpg",
-      "assets/gallery/imported/175/02_img31381802428.jpg"
+      "./assets/gallery/imported/175/01_img21381802427.jpg",
+      "./assets/gallery/imported/175/02_img31381802428.jpg"
     ],
     "image_meta": [
       {
@@ -5497,7 +5497,7 @@
   },
   {
     "id": "174",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 ICAVS7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3NCZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTg0||&boardIndex=2&sub=1&gubun=",
@@ -5508,8 +5508,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381802218.jpg",
     "images": [
-      "assets/gallery/imported/174/01_img21381802218.jpg",
-      "assets/gallery/imported/174/02_img31381802218.jpg"
+      "./assets/gallery/imported/174/01_img21381802218.jpg",
+      "./assets/gallery/imported/174/02_img31381802218.jpg"
     ],
     "image_meta": [
       {
@@ -5540,7 +5540,7 @@
   },
   {
     "id": "173",
-    "title": "컨텐츠 바로가기",
+    "title": "2DCOS-7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3MyZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTgz||&boardIndex=2&sub=1&gubun=",
@@ -5551,7 +5551,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381802021.jpg",
     "images": [
-      "assets/gallery/imported/173/01_img21381802021.jpg"
+      "./assets/gallery/imported/173/01_img21381802021.jpg"
     ],
     "image_meta": [
       {
@@ -5570,7 +5570,7 @@
   },
   {
     "id": "172",
-    "title": "컨텐츠 바로가기",
+    "title": "2DCOS-7",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3MiZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTgy||&boardIndex=2&sub=1&gubun=",
@@ -5581,8 +5581,8 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381801986.jpg",
     "images": [
-      "assets/gallery/imported/172/01_img21381801986.jpg",
-      "assets/gallery/imported/172/02_img31381801986.jpg"
+      "./assets/gallery/imported/172/01_img21381801986.jpg",
+      "./assets/gallery/imported/172/02_img31381801986.jpg"
     ],
     "image_meta": [
       {
@@ -5613,7 +5613,7 @@
   },
   {
     "id": "171",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 화학과 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3MSZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTgx||&boardIndex=2&sub=1&gubun=",
@@ -5624,7 +5624,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381801827.jpg",
     "images": [
-      "assets/gallery/imported/171/01_img21381801827.jpg"
+      "./assets/gallery/imported/171/01_img21381801827.jpg"
     ],
     "image_meta": [
       {
@@ -5643,7 +5643,7 @@
   },
   {
     "id": "170",
-    "title": "컨텐츠 바로가기",
+    "title": "2013 춘계 분석과학회 발표",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTE3MCZwYWdlY250PTImbGV0dGVyX25vPTkxJm9mZnNldD0xMzImc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTgw||&boardIndex=2&sub=1&gubun=",
@@ -5654,7 +5654,7 @@
     "list_page_num": 12,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21381801742.jpg",
     "images": [
-      "assets/gallery/imported/170/01_img21381801742.jpg"
+      "./assets/gallery/imported/170/01_img21381801742.jpg"
     ],
     "image_meta": [
       {
@@ -5673,7 +5673,7 @@
   },
   {
     "id": "110",
-    "title": "컨텐츠 바로가기",
+    "title": "태국 치앙마이 대학교에 다녀오셨습니다_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTExMCZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc5||&boardIndex=2&sub=1&gubun=",
@@ -5684,7 +5684,7 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358162170.jpg",
     "images": [
-      "assets/gallery/imported/110/01_img21358162170.jpg"
+      "./assets/gallery/imported/110/01_img21358162170.jpg"
     ],
     "image_meta": [
       {
@@ -5703,7 +5703,7 @@
   },
   {
     "id": "109",
-    "title": "컨텐츠 바로가기",
+    "title": "태국 치앙마이 대학교에 다녀오셨습니다_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwOSZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc4||&boardIndex=2&sub=1&gubun=",
@@ -5714,8 +5714,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358162136.jpg",
     "images": [
-      "assets/gallery/imported/109/01_img21358162136.jpg",
-      "assets/gallery/imported/109/02_img31358162136.jpg"
+      "./assets/gallery/imported/109/01_img21358162136.jpg",
+      "./assets/gallery/imported/109/02_img31358162136.jpg"
     ],
     "image_meta": [
       {
@@ -5746,7 +5746,7 @@
   },
   {
     "id": "108",
-    "title": "컨텐츠 바로가기",
+    "title": "2012년도 화학과 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwOCZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc3||&boardIndex=2&sub=1&gubun=",
@@ -5757,8 +5757,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358162093.jpg",
     "images": [
-      "assets/gallery/imported/108/01_img21358162093.jpg",
-      "assets/gallery/imported/108/02_img31358162094.jpg"
+      "./assets/gallery/imported/108/01_img21358162093.jpg",
+      "./assets/gallery/imported/108/02_img31358162094.jpg"
     ],
     "image_meta": [
       {
@@ -5789,7 +5789,7 @@
   },
   {
     "id": "107",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 CHEMOMETRICS 학회에 다녀왔습니다_3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwNyZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc2||&boardIndex=2&sub=1&gubun=",
@@ -5800,8 +5800,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358162028.jpg",
     "images": [
-      "assets/gallery/imported/107/01_img21358162028.jpg",
-      "assets/gallery/imported/107/02_img31358162028.jpg"
+      "./assets/gallery/imported/107/01_img21358162028.jpg",
+      "./assets/gallery/imported/107/02_img31358162028.jpg"
     ],
     "image_meta": [
       {
@@ -5832,7 +5832,7 @@
   },
   {
     "id": "106",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 CHEMOMETRICS 학회에 다녀왔습니다_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwNiZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc1||&boardIndex=2&sub=1&gubun=",
@@ -5843,8 +5843,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161954.jpg",
     "images": [
-      "assets/gallery/imported/106/01_img21358161954.jpg",
-      "assets/gallery/imported/106/02_img31358161954.jpg"
+      "./assets/gallery/imported/106/01_img21358161954.jpg",
+      "./assets/gallery/imported/106/02_img31358161954.jpg"
     ],
     "image_meta": [
       {
@@ -5875,7 +5875,7 @@
   },
   {
     "id": "104",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 CHEMOMETRICS 학회에 다녀왔습니다_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwNCZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTc0||&boardIndex=2&sub=1&gubun=",
@@ -5886,8 +5886,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161896.jpg",
     "images": [
-      "assets/gallery/imported/104/01_img21358161896.jpg",
-      "assets/gallery/imported/104/02_img31358161897.jpg"
+      "./assets/gallery/imported/104/01_img21358161896.jpg",
+      "./assets/gallery/imported/104/02_img31358161897.jpg"
     ],
     "image_meta": [
       {
@@ -5918,7 +5918,7 @@
   },
   {
     "id": "103",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 ASIA NIR 학회에 다녀왔습니다_5",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwMyZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTcz||&boardIndex=2&sub=1&gubun=",
@@ -5929,8 +5929,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161763.jpg",
     "images": [
-      "assets/gallery/imported/103/01_img21358161763.jpg",
-      "assets/gallery/imported/103/02_img31358161763.jpg"
+      "./assets/gallery/imported/103/01_img21358161763.jpg",
+      "./assets/gallery/imported/103/02_img31358161763.jpg"
     ],
     "image_meta": [
       {
@@ -5961,7 +5961,7 @@
   },
   {
     "id": "102",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 ASIA NIR 학회에 다녀왔습니다_4",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwMiZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTcy||&boardIndex=2&sub=1&gubun=",
@@ -5972,8 +5972,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161613.jpg",
     "images": [
-      "assets/gallery/imported/102/01_img21358161613.jpg",
-      "assets/gallery/imported/102/02_img31358161613.jpg"
+      "./assets/gallery/imported/102/01_img21358161613.jpg",
+      "./assets/gallery/imported/102/02_img31358161613.jpg"
     ],
     "image_meta": [
       {
@@ -6004,7 +6004,7 @@
   },
   {
     "id": "101",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 ASIA NIR 학회에 다녀왔습니다_3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwMSZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTcx||&boardIndex=2&sub=1&gubun=",
@@ -6015,8 +6015,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161582.jpg",
     "images": [
-      "assets/gallery/imported/101/01_img21358161582.jpg",
-      "assets/gallery/imported/101/02_img31358161582.jpg"
+      "./assets/gallery/imported/101/01_img21358161582.jpg",
+      "./assets/gallery/imported/101/02_img31358161582.jpg"
     ],
     "image_meta": [
       {
@@ -6047,7 +6047,7 @@
   },
   {
     "id": "100",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 ASIA NIR 학회에 다녀왔습니다_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTEwMCZwYWdlY250PTImbGV0dGVyX25vPTc5Jm9mZnNldD0xNDQmc2VhcmNoPSZzZWFyY2hzdHJpbmc9JnByZXNlbnRfbnVtPTcw||&boardIndex=2&sub=1&gubun=",
@@ -6058,8 +6058,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161539.jpg",
     "images": [
-      "assets/gallery/imported/100/01_img21358161539.jpg",
-      "assets/gallery/imported/100/02_img31358161539.jpg"
+      "./assets/gallery/imported/100/01_img21358161539.jpg",
+      "./assets/gallery/imported/100/02_img31358161539.jpg"
     ],
     "image_meta": [
       {
@@ -6090,7 +6090,7 @@
   },
   {
     "id": "99",
-    "title": "컨텐츠 바로가기",
+    "title": "2012 ASIA NIR 학회에 다녀왔습니다_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk5JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Nzkmb2Zmc2V0PTE0NCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Njk=||&boardIndex=2&sub=1&gubun=",
@@ -6101,8 +6101,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161482.jpg",
     "images": [
-      "assets/gallery/imported/99/01_img21358161482.jpg",
-      "assets/gallery/imported/99/02_img31358161482.jpg"
+      "./assets/gallery/imported/99/01_img21358161482.jpg",
+      "./assets/gallery/imported/99/02_img31358161482.jpg"
     ],
     "image_meta": [
       {
@@ -6133,7 +6133,7 @@
   },
   {
     "id": "98",
-    "title": "컨텐츠 바로가기",
+    "title": "아이오와에 갔습니다_4",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk4JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Nzkmb2Zmc2V0PTE0NCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Njg=||&boardIndex=2&sub=1&gubun=",
@@ -6144,8 +6144,8 @@
     "list_page_num": 13,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161358.jpg",
     "images": [
-      "assets/gallery/imported/98/01_img21358161358.jpg",
-      "assets/gallery/imported/98/02_img31358161358.jpg"
+      "./assets/gallery/imported/98/01_img21358161358.jpg",
+      "./assets/gallery/imported/98/02_img31358161358.jpg"
     ],
     "image_meta": [
       {
@@ -6176,7 +6176,7 @@
   },
   {
     "id": "97",
-    "title": "컨텐츠 바로가기",
+    "title": "아이오와에 갔습니다_3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk3JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Njc=||&boardIndex=2&sub=1&gubun=",
@@ -6187,8 +6187,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358161299.jpg",
     "images": [
-      "assets/gallery/imported/97/01_img21358161299.jpg",
-      "assets/gallery/imported/97/02_img31358161300.jpg"
+      "./assets/gallery/imported/97/01_img21358161299.jpg",
+      "./assets/gallery/imported/97/02_img31358161300.jpg"
     ],
     "image_meta": [
       {
@@ -6219,7 +6219,7 @@
   },
   {
     "id": "96",
-    "title": "컨텐츠 바로가기",
+    "title": "아이오와에 갔습니다_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk2JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjY=||&boardIndex=2&sub=1&gubun=",
@@ -6230,8 +6230,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160523.jpg",
     "images": [
-      "assets/gallery/imported/96/01_img21358160523.jpg",
-      "assets/gallery/imported/96/02_img31358160523.jpg"
+      "./assets/gallery/imported/96/01_img21358160523.jpg",
+      "./assets/gallery/imported/96/02_img31358160523.jpg"
     ],
     "image_meta": [
       {
@@ -6262,7 +6262,7 @@
   },
   {
     "id": "95",
-    "title": "컨텐츠 바로가기",
+    "title": "아이오와에 갔습니다_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk1JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjU=||&boardIndex=2&sub=1&gubun=",
@@ -6273,8 +6273,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160476.jpg",
     "images": [
-      "assets/gallery/imported/95/01_img21358160476.jpg",
-      "assets/gallery/imported/95/02_img31358160477.jpg"
+      "./assets/gallery/imported/95/01_img21358160476.jpg",
+      "./assets/gallery/imported/95/02_img31358160477.jpg"
     ],
     "image_meta": [
       {
@@ -6305,7 +6305,7 @@
   },
   {
     "id": "94",
-    "title": "컨텐츠 바로가기",
+    "title": "22회 라만 학회를 다녀왔습니다_3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTk0JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjQ=||&boardIndex=2&sub=1&gubun=",
@@ -6316,8 +6316,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160436.jpg",
     "images": [
-      "assets/gallery/imported/94/01_img21358160436.jpg",
-      "assets/gallery/imported/94/02_img31358160437.jpg"
+      "./assets/gallery/imported/94/01_img21358160436.jpg",
+      "./assets/gallery/imported/94/02_img31358160437.jpg"
     ],
     "image_meta": [
       {
@@ -6348,7 +6348,7 @@
   },
   {
     "id": "93",
-    "title": "컨텐츠 바로가기",
+    "title": "22회 라만 학회를 다녀왔습니다_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkzJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjM=||&boardIndex=2&sub=1&gubun=",
@@ -6359,8 +6359,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160394.jpg",
     "images": [
-      "assets/gallery/imported/93/01_img21358160394.jpg",
-      "assets/gallery/imported/93/02_img31358160394.jpg"
+      "./assets/gallery/imported/93/01_img21358160394.jpg",
+      "./assets/gallery/imported/93/02_img31358160394.jpg"
     ],
     "image_meta": [
       {
@@ -6391,7 +6391,7 @@
   },
   {
     "id": "92",
-    "title": "컨텐츠 바로가기",
+    "title": "22회 라만 학회를 다녀왔습니다_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkyJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjI=||&boardIndex=2&sub=1&gubun=",
@@ -6402,8 +6402,8 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160354.jpg",
     "images": [
-      "assets/gallery/imported/92/01_img21358160354.jpg",
-      "assets/gallery/imported/92/02_img31358160354.jpg"
+      "./assets/gallery/imported/92/01_img21358160354.jpg",
+      "./assets/gallery/imported/92/02_img31358160354.jpg"
     ],
     "image_meta": [
       {
@@ -6434,7 +6434,7 @@
   },
   {
     "id": "91",
-    "title": "컨텐츠 바로가기",
+    "title": "미소와 교수님",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkxJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjE=||&boardIndex=2&sub=1&gubun=",
@@ -6445,7 +6445,7 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160293.jpg",
     "images": [
-      "assets/gallery/imported/91/01_img21358160293.jpg"
+      "./assets/gallery/imported/91/01_img21358160293.jpg"
     ],
     "image_meta": [
       {
@@ -6464,18 +6464,18 @@
   },
   {
     "id": "90",
-    "title": "컨텐츠 바로가기",
+    "title": "Farewell party with Lawan",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTkwJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NjA=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "90",
     "source_letter_no": "67",
     "source_present_num": "60",
-    "content": "",
+    "content": "Farewell party with Lawan",
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160243.jpg",
     "images": [
-      "assets/gallery/imported/90/01_img21358160243.jpg"
+      "./assets/gallery/imported/90/01_img21358160243.jpg"
     ],
     "image_meta": [
       {
@@ -6494,18 +6494,18 @@
   },
   {
     "id": "89",
-    "title": "컨텐츠 바로가기",
+    "title": "2009 피츠버그 컨퍼런스 사진들 2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg5JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTk=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "89",
     "source_letter_no": "67",
     "source_present_num": "59",
-    "content": "",
+    "content": "2009 피츠버그 컨퍼런스 사진들 2",
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160218.jpg",
     "images": [
-      "assets/gallery/imported/89/01_img21358160218.jpg"
+      "./assets/gallery/imported/89/01_img21358160218.jpg"
     ],
     "image_meta": [
       {
@@ -6524,19 +6524,19 @@
   },
   {
     "id": "88",
-    "title": "컨텐츠 바로가기",
+    "title": "2009 피츠버그 컨퍼런스 사진들 1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg4JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTg=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "88",
     "source_letter_no": "67",
     "source_present_num": "58",
-    "content": "",
+    "content": "2009 피츠버그 컨퍼런스 사진들 1",
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160201.jpg",
     "images": [
-      "assets/gallery/imported/88/01_img21358160201.jpg",
-      "assets/gallery/imported/88/02_img31358160201.jpg"
+      "./assets/gallery/imported/88/01_img21358160201.jpg",
+      "./assets/gallery/imported/88/02_img31358160201.jpg"
     ],
     "image_meta": [
       {
@@ -6567,7 +6567,7 @@
   },
   {
     "id": "87",
-    "title": "컨텐츠 바로가기",
+    "title": "교수님 캐리커처",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg3JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTc=||&boardIndex=2&sub=1&gubun=",
@@ -6578,7 +6578,7 @@
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160176.jpg",
     "images": [
-      "assets/gallery/imported/87/01_img21358160176.jpg"
+      "./assets/gallery/imported/87/01_img21358160176.jpg"
     ],
     "image_meta": [
       {
@@ -6597,19 +6597,19 @@
   },
   {
     "id": "86",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg2JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89Njcmb2Zmc2V0PTE1NiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTY=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "86",
     "source_letter_no": "67",
     "source_present_num": "56",
-    "content": "",
+    "content": "NIR 학회",
     "list_page_num": 14,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160132.jpg",
     "images": [
-      "assets/gallery/imported/86/01_img21358160132.jpg",
-      "assets/gallery/imported/86/02_img31358160132.jpg"
+      "./assets/gallery/imported/86/01_img21358160132.jpg",
+      "./assets/gallery/imported/86/02_img31358160132.jpg"
     ],
     "image_meta": [
       {
@@ -6640,7 +6640,7 @@
   },
   {
     "id": "85",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg1JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTU=||&boardIndex=2&sub=1&gubun=",
@@ -6651,8 +6651,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160096.jpg",
     "images": [
-      "assets/gallery/imported/85/01_img21358160096.jpg",
-      "assets/gallery/imported/85/02_img31358160096.jpg"
+      "./assets/gallery/imported/85/01_img21358160096.jpg",
+      "./assets/gallery/imported/85/02_img31358160096.jpg"
     ],
     "image_meta": [
       {
@@ -6683,7 +6683,7 @@
   },
   {
     "id": "84",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회 발표3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTg0JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTQ=||&boardIndex=2&sub=1&gubun=",
@@ -6694,7 +6694,7 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160058.jpg",
     "images": [
-      "assets/gallery/imported/84/01_img21358160058.jpg"
+      "./assets/gallery/imported/84/01_img21358160058.jpg"
     ],
     "image_meta": [
       {
@@ -6713,7 +6713,7 @@
   },
   {
     "id": "83",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회 발표2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTgzJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTM=||&boardIndex=2&sub=1&gubun=",
@@ -6724,8 +6724,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358160022.jpg",
     "images": [
-      "assets/gallery/imported/83/01_img21358160022.jpg",
-      "assets/gallery/imported/83/02_img31358160022.jpg"
+      "./assets/gallery/imported/83/01_img21358160022.jpg",
+      "./assets/gallery/imported/83/02_img31358160022.jpg"
     ],
     "image_meta": [
       {
@@ -6756,19 +6756,19 @@
   },
   {
     "id": "82",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회 발표1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTgyJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTI=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "82",
     "source_letter_no": "55",
     "source_present_num": "52",
-    "content": "",
+    "content": "NIR 학회 발표1",
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159969.jpg",
     "images": [
-      "assets/gallery/imported/82/01_img21358159969.jpg",
-      "assets/gallery/imported/82/02_img31358159969.jpg"
+      "./assets/gallery/imported/82/01_img21358159969.jpg",
+      "./assets/gallery/imported/82/02_img31358159969.jpg"
     ],
     "image_meta": [
       {
@@ -6799,7 +6799,7 @@
   },
   {
     "id": "81",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 상반기 대한화학회 2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTgxJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTE=||&boardIndex=2&sub=1&gubun=",
@@ -6810,7 +6810,7 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159929.jpg",
     "images": [
-      "assets/gallery/imported/81/01_img21358159929.jpg"
+      "./assets/gallery/imported/81/01_img21358159929.jpg"
     ],
     "image_meta": [
       {
@@ -6829,7 +6829,7 @@
   },
   {
     "id": "80",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 상반기 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTgwJnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NTA=||&boardIndex=2&sub=1&gubun=",
@@ -6840,8 +6840,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159862.jpg",
     "images": [
-      "assets/gallery/imported/80/01_img21358159862.jpg",
-      "assets/gallery/imported/80/02_img31358159862.jpg"
+      "./assets/gallery/imported/80/01_img21358159862.jpg",
+      "./assets/gallery/imported/80/02_img31358159862.jpg"
     ],
     "image_meta": [
       {
@@ -6872,7 +6872,7 @@
   },
   {
     "id": "79",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 피츠버그 컨퍼런스 사진들_4",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc5JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDk=||&boardIndex=2&sub=1&gubun=",
@@ -6883,8 +6883,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159760.jpg",
     "images": [
-      "assets/gallery/imported/79/01_img21358159760.jpg",
-      "assets/gallery/imported/79/02_img31358159761.jpg"
+      "./assets/gallery/imported/79/01_img21358159760.jpg",
+      "./assets/gallery/imported/79/02_img31358159761.jpg"
     ],
     "image_meta": [
       {
@@ -6915,19 +6915,19 @@
   },
   {
     "id": "78",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 피츠버그 컨퍼런스 사진들_3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc4JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDg=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "78",
     "source_letter_no": "55",
     "source_present_num": "48",
-    "content": "",
+    "content": "2008 피츠버그 컨퍼런스 사진들_3",
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159689.jpg",
     "images": [
-      "assets/gallery/imported/78/01_img21358159689.jpg",
-      "assets/gallery/imported/78/02_img31358159690.jpg"
+      "./assets/gallery/imported/78/01_img21358159689.jpg",
+      "./assets/gallery/imported/78/02_img31358159690.jpg"
     ],
     "image_meta": [
       {
@@ -6958,19 +6958,19 @@
   },
   {
     "id": "77",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 피츠버그 컨퍼런스 사진들_2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc3JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDc=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "77",
     "source_letter_no": "55",
     "source_present_num": "47",
-    "content": "",
+    "content": "2008 피츠버그 컨퍼런스 사진들_2",
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159577.jpg",
     "images": [
-      "assets/gallery/imported/77/01_img21358159577.jpg",
-      "assets/gallery/imported/77/02_img31358159578.jpg"
+      "./assets/gallery/imported/77/01_img21358159577.jpg",
+      "./assets/gallery/imported/77/02_img31358159578.jpg"
     ],
     "image_meta": [
       {
@@ -7001,7 +7001,7 @@
   },
   {
     "id": "76",
-    "title": "컨텐츠 바로가기",
+    "title": "2008 피츠버그 컨퍼런스 사진들_1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc2JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDY=||&boardIndex=2&sub=1&gubun=",
@@ -7012,8 +7012,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159527.jpg",
     "images": [
-      "assets/gallery/imported/76/01_img21358159527.jpg",
-      "assets/gallery/imported/76/02_img31358159527.jpg"
+      "./assets/gallery/imported/76/01_img21358159527.jpg",
+      "./assets/gallery/imported/76/02_img31358159527.jpg"
     ],
     "image_meta": [
       {
@@ -7044,7 +7044,7 @@
   },
   {
     "id": "75",
-    "title": "컨텐츠 바로가기",
+    "title": "ASL MEMBERS",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc1JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDU=||&boardIndex=2&sub=1&gubun=",
@@ -7055,8 +7055,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159500.jpg",
     "images": [
-      "assets/gallery/imported/75/01_img21358159500.jpg",
-      "assets/gallery/imported/75/02_img31358159500.jpg"
+      "./assets/gallery/imported/75/01_img21358159500.jpg",
+      "./assets/gallery/imported/75/02_img31358159500.jpg"
     ],
     "image_meta": [
       {
@@ -7087,7 +7087,7 @@
   },
   {
     "id": "74",
-    "title": "컨텐츠 바로가기",
+    "title": "미국생활 2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTc0JnBhZ2VjbnQ9MiZsZXR0ZXJfbm89NTUmb2Zmc2V0PTE2OCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDQ=||&boardIndex=2&sub=1&gubun=",
@@ -7098,8 +7098,8 @@
     "list_page_num": 15,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159466.jpg",
     "images": [
-      "assets/gallery/imported/74/01_img21358159466.jpg",
-      "assets/gallery/imported/74/02_img31358159466.jpg"
+      "./assets/gallery/imported/74/01_img21358159466.jpg",
+      "./assets/gallery/imported/74/02_img31358159466.jpg"
     ],
     "image_meta": [
       {
@@ -7130,19 +7130,19 @@
   },
   {
     "id": "73",
-    "title": "컨텐츠 바로가기",
+    "title": "미국생활",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTczJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDM=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "73",
     "source_letter_no": "43",
     "source_present_num": "43",
-    "content": "",
+    "content": "미국생활",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159385.jpg",
     "images": [
-      "assets/gallery/imported/73/01_img21358159385.jpg",
-      "assets/gallery/imported/73/02_img31358159385.jpg"
+      "./assets/gallery/imported/73/01_img21358159385.jpg",
+      "./assets/gallery/imported/73/02_img31358159385.jpg"
     ],
     "image_meta": [
       {
@@ -7173,7 +7173,7 @@
   },
   {
     "id": "72",
-    "title": "컨텐츠 바로가기",
+    "title": "2007 FACSS CONFERENCE",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcyJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDI=||&boardIndex=2&sub=1&gubun=",
@@ -7184,7 +7184,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159306.jpg",
     "images": [
-      "assets/gallery/imported/72/01_img21358159306.jpg"
+      "./assets/gallery/imported/72/01_img21358159306.jpg"
     ],
     "image_meta": [
       {
@@ -7203,7 +7203,7 @@
   },
   {
     "id": "71",
-    "title": "컨텐츠 바로가기",
+    "title": "2007 FACSS CONFERENCE",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTcxJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDE=||&boardIndex=2&sub=1&gubun=",
@@ -7214,8 +7214,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159228.jpg",
     "images": [
-      "assets/gallery/imported/71/01_img21358159228.jpg",
-      "assets/gallery/imported/71/02_img31358159228.jpg"
+      "./assets/gallery/imported/71/01_img21358159228.jpg",
+      "./assets/gallery/imported/71/02_img31358159228.jpg"
     ],
     "image_meta": [
       {
@@ -7246,19 +7246,19 @@
   },
   {
     "id": "69",
-    "title": "컨텐츠 바로가기",
+    "title": "2007 Asianalysis 제주도 라마다 호텔 2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY5JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09NDA=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "69",
     "source_letter_no": "43",
     "source_present_num": "40",
-    "content": "",
+    "content": "2007 Asianalysis 제주도 라마다 호텔 2",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159097.jpg",
     "images": [
-      "assets/gallery/imported/69/01_img21358159097.jpg",
-      "assets/gallery/imported/69/02_img31358159129.jpg"
+      "./assets/gallery/imported/69/01_img21358159097.jpg",
+      "./assets/gallery/imported/69/02_img31358159129.jpg"
     ],
     "image_meta": [
       {
@@ -7289,18 +7289,18 @@
   },
   {
     "id": "68",
-    "title": "컨텐츠 바로가기",
+    "title": "2007 Asianalysis 제주도 라마다 호텔입니다. ^^",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY4JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mzk=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "68",
     "source_letter_no": "43",
     "source_present_num": "39",
-    "content": "",
+    "content": "2007 Asianalysis 제주도 라마다 호텔입니다. ^^",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159073.jpg",
     "images": [
-      "assets/gallery/imported/68/01_img21358159073.jpg"
+      "./assets/gallery/imported/68/01_img21358159073.jpg"
     ],
     "image_meta": [
       {
@@ -7319,7 +7319,7 @@
   },
   {
     "id": "67",
-    "title": "컨텐츠 바로가기",
+    "title": "2007분석과학회 창원대학교",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY3JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mzg=||&boardIndex=2&sub=1&gubun=",
@@ -7330,8 +7330,8 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358159037.jpg",
     "images": [
-      "assets/gallery/imported/67/01_img21358159037.jpg",
-      "assets/gallery/imported/67/02_img31358159037.jpg"
+      "./assets/gallery/imported/67/01_img21358159037.jpg",
+      "./assets/gallery/imported/67/02_img31358159037.jpg"
     ],
     "image_meta": [
       {
@@ -7362,19 +7362,19 @@
   },
   {
     "id": "66",
-    "title": "컨텐츠 바로가기",
+    "title": "2007년 상반기 대한화학회 코엑스 ^^",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY2JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mzc=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "66",
     "source_letter_no": "43",
     "source_present_num": "37",
-    "content": "",
+    "content": "2007년 상반기 대한화학회 코엑스 ^^",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158999.jpg",
     "images": [
-      "assets/gallery/imported/66/01_img21358158999.jpg",
-      "assets/gallery/imported/66/02_img31358158999.jpg"
+      "./assets/gallery/imported/66/01_img21358158999.jpg",
+      "./assets/gallery/imported/66/02_img31358158999.jpg"
     ],
     "image_meta": [
       {
@@ -7405,19 +7405,19 @@
   },
   {
     "id": "65",
-    "title": "컨텐츠 바로가기",
+    "title": "2007년 pittcon 국제학회 3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY1JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzY=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "65",
     "source_letter_no": "43",
     "source_present_num": "36",
-    "content": "",
+    "content": "2007년 pittcon 국제학회 3",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158895.jpg",
     "images": [
-      "assets/gallery/imported/65/01_img21358158895.jpg",
-      "assets/gallery/imported/65/02_img31358158895.jpg"
+      "./assets/gallery/imported/65/01_img21358158895.jpg",
+      "./assets/gallery/imported/65/02_img31358158895.jpg"
     ],
     "image_meta": [
       {
@@ -7448,19 +7448,19 @@
   },
   {
     "id": "64",
-    "title": "컨텐츠 바로가기",
+    "title": "2007년 pittcon 국제학회 2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTY0JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzU=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "64",
     "source_letter_no": "43",
     "source_present_num": "35",
-    "content": "",
+    "content": "2007년 pittcon 국제학회 2",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158770.jpg",
     "images": [
-      "assets/gallery/imported/64/01_img21358158770.jpg",
-      "assets/gallery/imported/64/02_img31358158944.jpg"
+      "./assets/gallery/imported/64/01_img21358158770.jpg",
+      "./assets/gallery/imported/64/02_img31358158944.jpg"
     ],
     "image_meta": [
       {
@@ -7491,19 +7491,19 @@
   },
   {
     "id": "63",
-    "title": "컨텐츠 바로가기",
+    "title": "2007년 pittcon 국제학회 1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYzJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzQ=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "63",
     "source_letter_no": "43",
     "source_present_num": "34",
-    "content": "",
+    "content": "2007년 pittcon 국제학회 1",
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158735.jpg",
     "images": [
-      "assets/gallery/imported/63/01_img21358158735.jpg",
-      "assets/gallery/imported/63/02_img31358158736.jpg"
+      "./assets/gallery/imported/63/01_img21358158735.jpg",
+      "./assets/gallery/imported/63/02_img31358158736.jpg"
     ],
     "image_meta": [
       {
@@ -7534,7 +7534,7 @@
   },
   {
     "id": "62",
-    "title": "컨텐츠 바로가기",
+    "title": "2006년 춘계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYyJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzM=||&boardIndex=2&sub=1&gubun=",
@@ -7545,7 +7545,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158698.jpg",
     "images": [
-      "assets/gallery/imported/62/01_img21358158698.jpg"
+      "./assets/gallery/imported/62/01_img21358158698.jpg"
     ],
     "image_meta": [
       {
@@ -7564,7 +7564,7 @@
   },
   {
     "id": "61",
-    "title": "컨텐츠 바로가기",
+    "title": "2006년 춘계 대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYxJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NDMmb2Zmc2V0PTE4MCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzI=||&boardIndex=2&sub=1&gubun=",
@@ -7575,7 +7575,7 @@
     "list_page_num": null,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158635.jpg",
     "images": [
-      "assets/gallery/imported/61/01_img21358158635.jpg"
+      "./assets/gallery/imported/61/01_img21358158635.jpg"
     ],
     "image_meta": [
       {
@@ -7594,7 +7594,7 @@
   },
   {
     "id": "60",
-    "title": "컨텐츠 바로가기",
+    "title": "NIR 학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTYwJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzE=||&boardIndex=2&sub=1&gubun=",
@@ -7605,7 +7605,7 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158598.jpg",
     "images": [
-      "assets/gallery/imported/60/01_img21358158598.jpg"
+      "./assets/gallery/imported/60/01_img21358158598.jpg"
     ],
     "image_meta": [
       {
@@ -7624,7 +7624,7 @@
   },
   {
     "id": "59",
-    "title": "컨텐츠 바로가기",
+    "title": "겨울 스키 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU5JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MzA=||&boardIndex=2&sub=1&gubun=",
@@ -7635,7 +7635,7 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158562.jpg",
     "images": [
-      "assets/gallery/imported/59/01_img21358158562.jpg"
+      "./assets/gallery/imported/59/01_img21358158562.jpg"
     ],
     "image_meta": [
       {
@@ -7654,7 +7654,7 @@
   },
   {
     "id": "58",
-    "title": "컨텐츠 바로가기",
+    "title": "전기분석분과회_속초",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU4JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mjk=||&boardIndex=2&sub=1&gubun=",
@@ -7665,8 +7665,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158524.jpg",
     "images": [
-      "assets/gallery/imported/58/01_img21358158524.jpg",
-      "assets/gallery/imported/58/02_img31358158524.jpg"
+      "./assets/gallery/imported/58/01_img21358158524.jpg",
+      "./assets/gallery/imported/58/02_img31358158524.jpg"
     ],
     "image_meta": [
       {
@@ -7697,7 +7697,7 @@
   },
   {
     "id": "57",
-    "title": "컨텐츠 바로가기",
+    "title": "2005.5.대한화학회",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU3JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mjg=||&boardIndex=2&sub=1&gubun=",
@@ -7708,7 +7708,7 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158453.jpg",
     "images": [
-      "assets/gallery/imported/57/01_img21358158453.jpg"
+      "./assets/gallery/imported/57/01_img21358158453.jpg"
     ],
     "image_meta": [
       {
@@ -7727,19 +7727,19 @@
   },
   {
     "id": "56",
-    "title": "컨텐츠 바로가기",
+    "title": "강촌 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU2JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09Mjc=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "56",
     "source_letter_no": "31",
     "source_present_num": "27",
-    "content": "",
+    "content": "강촌 MT",
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158378.jpg",
     "images": [
-      "assets/gallery/imported/56/01_img21358158378.jpg",
-      "assets/gallery/imported/56/02_img31358158378.jpg"
+      "./assets/gallery/imported/56/01_img21358158378.jpg",
+      "./assets/gallery/imported/56/02_img31358158378.jpg"
     ],
     "image_meta": [
       {
@@ -7770,19 +7770,19 @@
   },
   {
     "id": "55",
-    "title": "컨텐츠 바로가기",
+    "title": "속초 전기분석분과회의",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU1JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjY=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "55",
     "source_letter_no": "31",
     "source_present_num": "26",
-    "content": "",
+    "content": "속초 전기분석분과회의",
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158329.jpg",
     "images": [
-      "assets/gallery/imported/55/01_img21358158329.jpg",
-      "assets/gallery/imported/55/02_img31358158329.jpg"
+      "./assets/gallery/imported/55/01_img21358158329.jpg",
+      "./assets/gallery/imported/55/02_img31358158329.jpg"
     ],
     "image_meta": [
       {
@@ -7813,7 +7813,7 @@
   },
   {
     "id": "54",
-    "title": "컨텐츠 바로가기",
+    "title": "강촌 5월 MT",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTU0JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjU=||&boardIndex=2&sub=1&gubun=",
@@ -7824,8 +7824,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158293.jpg",
     "images": [
-      "assets/gallery/imported/54/01_img21358158293.jpg",
-      "assets/gallery/imported/54/02_img31358158293.jpg"
+      "./assets/gallery/imported/54/01_img21358158293.jpg",
+      "./assets/gallery/imported/54/02_img31358158293.jpg"
     ],
     "image_meta": [
       {
@@ -7856,7 +7856,7 @@
   },
   {
     "id": "53",
-    "title": "컨텐츠 바로가기",
+    "title": "상하이 학회3",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTUzJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjQ=||&boardIndex=2&sub=1&gubun=",
@@ -7867,8 +7867,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158199.jpg",
     "images": [
-      "assets/gallery/imported/53/01_img21358158199.jpg",
-      "assets/gallery/imported/53/02_img31358158199.jpg"
+      "./assets/gallery/imported/53/01_img21358158199.jpg",
+      "./assets/gallery/imported/53/02_img31358158199.jpg"
     ],
     "image_meta": [
       {
@@ -7899,7 +7899,7 @@
   },
   {
     "id": "52",
-    "title": "컨텐츠 바로가기",
+    "title": "상하이 학회2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTUyJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjM=||&boardIndex=2&sub=1&gubun=",
@@ -7910,8 +7910,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358158128.jpg",
     "images": [
-      "assets/gallery/imported/52/01_img21358158128.jpg",
-      "assets/gallery/imported/52/02_img31358158128.jpg"
+      "./assets/gallery/imported/52/01_img21358158128.jpg",
+      "./assets/gallery/imported/52/02_img31358158128.jpg"
     ],
     "image_meta": [
       {
@@ -7942,7 +7942,7 @@
   },
   {
     "id": "51",
-    "title": "컨텐츠 바로가기",
+    "title": "상하이 학회1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTUxJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjI=||&boardIndex=2&sub=1&gubun=",
@@ -7953,8 +7953,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157925.jpg",
     "images": [
-      "assets/gallery/imported/51/01_img21358157925.jpg",
-      "assets/gallery/imported/51/02_img31358157925.jpg"
+      "./assets/gallery/imported/51/01_img21358157925.jpg",
+      "./assets/gallery/imported/51/02_img31358157925.jpg"
     ],
     "image_meta": [
       {
@@ -7985,18 +7985,18 @@
   },
   {
     "id": "50",
-    "title": "컨텐츠 바로가기",
+    "title": "ㅋㅋㅋ 한규오빠...^^",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTUwJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjE=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "50",
     "source_letter_no": "31",
     "source_present_num": "21",
-    "content": "",
+    "content": "ㅋㅋㅋ 한규오빠...^^",
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157875.jpg",
     "images": [
-      "assets/gallery/imported/50/01_img21358157875.jpg"
+      "./assets/gallery/imported/50/01_img21358157875.jpg"
     ],
     "image_meta": [
       {
@@ -8015,7 +8015,7 @@
   },
   {
     "id": "49",
-    "title": "컨텐츠 바로가기",
+    "title": "심포지엄 양평",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ5JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MzEmb2Zmc2V0PTE5MiZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MjA=||&boardIndex=2&sub=1&gubun=",
@@ -8026,8 +8026,8 @@
     "list_page_num": 17,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157850.jpg",
     "images": [
-      "assets/gallery/imported/49/01_img21358157850.jpg",
-      "assets/gallery/imported/49/02_img31358157850.jpg"
+      "./assets/gallery/imported/49/01_img21358157850.jpg",
+      "./assets/gallery/imported/49/02_img31358157850.jpg"
     ],
     "image_meta": [
       {
@@ -8058,7 +8058,7 @@
   },
   {
     "id": "48",
-    "title": "컨텐츠 바로가기",
+    "title": "곤도라 안에서...",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ4JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTk=||&boardIndex=2&sub=1&gubun=",
@@ -8069,8 +8069,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157816.jpg",
     "images": [
-      "assets/gallery/imported/48/01_img21358157816.jpg",
-      "assets/gallery/imported/48/02_img31358157816.jpg"
+      "./assets/gallery/imported/48/01_img21358157816.jpg",
+      "./assets/gallery/imported/48/02_img31358157816.jpg"
     ],
     "image_meta": [
       {
@@ -8101,7 +8101,7 @@
   },
   {
     "id": "47",
-    "title": "컨텐츠 바로가기",
+    "title": "ㅋㅋㅋ 오래비들...",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ3JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTg=||&boardIndex=2&sub=1&gubun=",
@@ -8112,8 +8112,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157770.jpg",
     "images": [
-      "assets/gallery/imported/47/01_img21358157770.jpg",
-      "assets/gallery/imported/47/02_img31358157770.jpg"
+      "./assets/gallery/imported/47/01_img21358157770.jpg",
+      "./assets/gallery/imported/47/02_img31358157770.jpg"
     ],
     "image_meta": [
       {
@@ -8144,7 +8144,7 @@
   },
   {
     "id": "46",
-    "title": "컨텐츠 바로가기",
+    "title": "역시..정상...",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ2JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTc=||&boardIndex=2&sub=1&gubun=",
@@ -8155,7 +8155,7 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157726.jpg",
     "images": [
-      "assets/gallery/imported/46/01_img21358157726.jpg"
+      "./assets/gallery/imported/46/01_img21358157726.jpg"
     ],
     "image_meta": [
       {
@@ -8174,7 +8174,7 @@
   },
   {
     "id": "45",
-    "title": "컨텐츠 바로가기",
+    "title": "향적봉",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ1JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTY=||&boardIndex=2&sub=1&gubun=",
@@ -8185,8 +8185,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157692.jpg",
     "images": [
-      "assets/gallery/imported/45/01_img21358157692.jpg",
-      "assets/gallery/imported/45/02_img31358157692.jpg"
+      "./assets/gallery/imported/45/01_img21358157692.jpg",
+      "./assets/gallery/imported/45/02_img31358157692.jpg"
     ],
     "image_meta": [
       {
@@ -8217,7 +8217,7 @@
   },
   {
     "id": "44",
-    "title": "컨텐츠 바로가기",
+    "title": "무주 덕유산 정상에서",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQ0JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTU=||&boardIndex=2&sub=1&gubun=",
@@ -8228,8 +8228,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157655.jpg",
     "images": [
-      "assets/gallery/imported/44/01_img21358157655.jpg",
-      "assets/gallery/imported/44/02_img31358157655.jpg"
+      "./assets/gallery/imported/44/01_img21358157655.jpg",
+      "./assets/gallery/imported/44/02_img31358157655.jpg"
     ],
     "image_meta": [
       {
@@ -8260,18 +8260,18 @@
   },
   {
     "id": "43",
-    "title": "컨텐츠 바로가기",
+    "title": "무주에서...",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQzJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTQ=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "43",
     "source_letter_no": "19",
     "source_present_num": "14",
-    "content": "",
+    "content": "무주에서...",
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157610.jpg",
     "images": [
-      "assets/gallery/imported/43/01_img21358157610.jpg"
+      "./assets/gallery/imported/43/01_img21358157610.jpg"
     ],
     "image_meta": [
       {
@@ -8290,19 +8290,19 @@
   },
   {
     "id": "42",
-    "title": "컨텐츠 바로가기",
+    "title": "무주에서...",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQyJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTM=||&boardIndex=2&sub=1&gubun=",
     "source_idx": "42",
     "source_letter_no": "19",
     "source_present_num": "13",
-    "content": "",
+    "content": "무주에서...",
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157544.jpg",
     "images": [
-      "assets/gallery/imported/42/01_img21358157544.jpg",
-      "assets/gallery/imported/42/02_img31358157590.jpg"
+      "./assets/gallery/imported/42/01_img21358157544.jpg",
+      "./assets/gallery/imported/42/02_img31358157590.jpg"
     ],
     "image_meta": [
       {
@@ -8333,7 +8333,7 @@
   },
   {
     "id": "41",
-    "title": "컨텐츠 바로가기",
+    "title": "펠렛 370개 달성!!!",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQxJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTI=||&boardIndex=2&sub=1&gubun=",
@@ -8344,8 +8344,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157510.jpg",
     "images": [
-      "assets/gallery/imported/41/01_img21358157510.jpg",
-      "assets/gallery/imported/41/02_img31358157510.jpg"
+      "./assets/gallery/imported/41/01_img21358157510.jpg",
+      "./assets/gallery/imported/41/02_img31358157510.jpg"
     ],
     "image_meta": [
       {
@@ -8376,7 +8376,7 @@
   },
   {
     "id": "40",
-    "title": "컨텐츠 바로가기",
+    "title": "2003 송년회2",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTQwJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTE=||&boardIndex=2&sub=1&gubun=",
@@ -8387,8 +8387,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157471.jpg",
     "images": [
-      "assets/gallery/imported/40/01_img21358157471.jpg",
-      "assets/gallery/imported/40/02_img31358157471.jpg"
+      "./assets/gallery/imported/40/01_img21358157471.jpg",
+      "./assets/gallery/imported/40/02_img31358157471.jpg"
     ],
     "image_meta": [
       {
@@ -8419,7 +8419,7 @@
   },
   {
     "id": "39",
-    "title": "컨텐츠 바로가기",
+    "title": "2003년 송년회1",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM5JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09MTA=||&boardIndex=2&sub=1&gubun=",
@@ -8430,8 +8430,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157408.jpg",
     "images": [
-      "assets/gallery/imported/39/01_img21358157408.jpg",
-      "assets/gallery/imported/39/02_img31358157408.jpg"
+      "./assets/gallery/imported/39/01_img21358157408.jpg",
+      "./assets/gallery/imported/39/02_img31358157408.jpg"
     ],
     "image_meta": [
       {
@@ -8462,7 +8462,7 @@
   },
   {
     "id": "38",
-    "title": "컨텐츠 바로가기",
+    "title": "도요다 상~~~",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM4JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09OQ==||&boardIndex=2&sub=1&gubun=",
@@ -8473,8 +8473,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157357.jpg",
     "images": [
-      "assets/gallery/imported/38/01_img21358157357.jpg",
-      "assets/gallery/imported/38/02_img31358157357.jpg"
+      "./assets/gallery/imported/38/01_img21358157357.jpg",
+      "./assets/gallery/imported/38/02_img31358157357.jpg"
     ],
     "image_meta": [
       {
@@ -8505,7 +8505,7 @@
   },
   {
     "id": "37",
-    "title": "컨텐츠 바로가기",
+    "title": "인체영상 연구회 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM3JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89MTkmb2Zmc2V0PTIwNCZzZWFyY2g9JnNlYXJjaHN0cmluZz0mcHJlc2VudF9udW09OA==||&boardIndex=2&sub=1&gubun=",
@@ -8516,8 +8516,8 @@
     "list_page_num": 18,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157303.jpg",
     "images": [
-      "assets/gallery/imported/37/01_img21358157303.jpg",
-      "assets/gallery/imported/37/02_img31358157303.jpg"
+      "./assets/gallery/imported/37/01_img21358157303.jpg",
+      "./assets/gallery/imported/37/02_img31358157303.jpg"
     ],
     "image_meta": [
       {
@@ -8548,7 +8548,7 @@
   },
   {
     "id": "36",
-    "title": "컨텐츠 바로가기",
+    "title": "인체영상 연구회 심포지엄",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM2JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT03||&boardIndex=2&sub=1&gubun=",
@@ -8559,8 +8559,8 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157155.jpg",
     "images": [
-      "assets/gallery/imported/36/01_img21358157155.jpg",
-      "assets/gallery/imported/36/02_img31358157155.jpg"
+      "./assets/gallery/imported/36/01_img21358157155.jpg",
+      "./assets/gallery/imported/36/02_img31358157155.jpg"
     ],
     "image_meta": [
       {
@@ -8591,7 +8591,7 @@
   },
   {
     "id": "35",
-    "title": "컨텐츠 바로가기",
+    "title": "민식오래비의 변화^O^",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM1JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT02||&boardIndex=2&sub=1&gubun=",
@@ -8602,7 +8602,7 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358157044.jpg",
     "images": [
-      "assets/gallery/imported/35/01_img21358157044.jpg"
+      "./assets/gallery/imported/35/01_img21358157044.jpg"
     ],
     "image_meta": [
       {
@@ -8621,7 +8621,7 @@
   },
   {
     "id": "34",
-    "title": "컨텐츠 바로가기",
+    "title": "오사카 성",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTM0JnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT01||&boardIndex=2&sub=1&gubun=",
@@ -8632,8 +8632,8 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358156972.jpg",
     "images": [
-      "assets/gallery/imported/34/01_img21358156972.jpg",
-      "assets/gallery/imported/34/02_img31358156972.jpg"
+      "./assets/gallery/imported/34/01_img21358156972.jpg",
+      "./assets/gallery/imported/34/02_img31358156972.jpg"
     ],
     "image_meta": [
       {
@@ -8664,7 +8664,7 @@
   },
   {
     "id": "33",
-    "title": "컨텐츠 바로가기",
+    "title": "식당과 휴식 공간(?)",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMzJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT00||&boardIndex=2&sub=1&gubun=",
@@ -8675,7 +8675,7 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358156906.jpg",
     "images": [
-      "assets/gallery/imported/33/01_img21358156906.jpg"
+      "./assets/gallery/imported/33/01_img21358156906.jpg"
     ],
     "image_meta": [
       {
@@ -8694,7 +8694,7 @@
   },
   {
     "id": "32",
-    "title": "컨텐츠 바로가기",
+    "title": "도서관",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMyJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0z||&boardIndex=2&sub=1&gubun=",
@@ -8705,7 +8705,7 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358156849.jpg",
     "images": [
-      "assets/gallery/imported/32/01_img21358156849.jpg"
+      "./assets/gallery/imported/32/01_img21358156849.jpg"
     ],
     "image_meta": [
       {
@@ -8724,7 +8724,7 @@
   },
   {
     "id": "31",
-    "title": "컨텐츠 바로가기",
+    "title": "이공학부 건물!!!",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMxJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0y||&boardIndex=2&sub=1&gubun=",
@@ -8735,7 +8735,7 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358156709.jpg",
     "images": [
-      "assets/gallery/imported/31/01_img21358156709.jpg"
+      "./assets/gallery/imported/31/01_img21358156709.jpg"
     ],
     "image_meta": [
       {
@@ -8754,7 +8754,7 @@
   },
   {
     "id": "30",
-    "title": "컨텐츠 바로가기",
+    "title": "관서 학원 대학 입구",
     "author": "",
     "date": "",
     "source_url": "http://asl.hanyang.ac.kr/05.php?type=view&data=aWR4PTMwJnBhZ2VjbnQ9MyZsZXR0ZXJfbm89NyZvZmZzZXQ9MjE2JnNlYXJjaD0mc2VhcmNoc3RyaW5nPSZwcmVzZW50X251bT0x||&boardIndex=2&sub=1&gubun=",
@@ -8765,8 +8765,8 @@
     "list_page_num": 19,
     "thumbnail": "http://asl.hanyang.ac.kr/upload/bbs/a_img21358156644.jpg",
     "images": [
-      "assets/gallery/imported/30/01_img21358156644.jpg",
-      "assets/gallery/imported/30/02_img31358156644.jpg"
+      "./assets/gallery/imported/30/01_img21358156644.jpg",
+      "./assets/gallery/imported/30/02_img31358156644.jpg"
     ],
     "image_meta": [
       {

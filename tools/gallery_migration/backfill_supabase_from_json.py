@@ -71,6 +71,19 @@ def is_missing_graphical(url: str) -> bool:
     return "no-graphical-abstract" in u or "publication-placeholder" in u
 
 
+def pick_first_valid_graphical(images: Any) -> str:
+    if not isinstance(images, list):
+        return ""
+    for src in images:
+        candidate = norm_text(src)
+        if not candidate:
+            continue
+        if is_missing_graphical(candidate):
+            continue
+        return candidate
+    return ""
+
+
 def stable_uuid(*parts: str) -> str:
     key = "|".join(parts)
     return str(uuid.uuid5(uuid.NAMESPACE_URL, key))
@@ -134,12 +147,7 @@ def build_publication_rows(raw: dict[str, list[dict[str, Any]]]) -> list[dict[st
             year = detect_year(group_key, item)
             if not title or not journal or year <= 0:
                 continue
-            images = item.get("images") or []
-            graphical = ""
-            if isinstance(images, list) and images:
-                first = norm_text(images[0])
-                if not is_missing_graphical(first):
-                    graphical = first
+            graphical = pick_first_valid_graphical(item.get("images") or [])
             row = {
                 "id": stable_uuid("pub", str(year), title, journal),
                 "title": title,
