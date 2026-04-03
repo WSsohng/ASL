@@ -106,84 +106,6 @@
         const authorProfileScholarLinkEl = document.getElementById("authorProfileScholarLink");
         const authorProfileScopusLinkEl = document.getElementById("authorProfileScopusLink");
         const authorProfileImageEl = document.getElementById("authorProfileImage");
-        const JOURNAL_IF_RULES = [
-          { re: /\banalytica chimica acta\b/i, value: "6.0" },
-          { re: /\btalanta\b/i, value: "6.1" },
-          { re: /\banalyst\b/i, value: "3.3" },
-          { re: /\banalytical chemistry\b|^anal\.\s*chem\b|\banal\s*chem\b/i, value: "6.7" },
-          { re: /\bmicrochemical journal\b/i, value: "5.1" },
-          { re: /\bbiosensors\b.*\bbioelectronics\b/i, value: "10.5" },
-          { re: /\bsensors\b.*\bactuators\b.*\bb\b/i, value: "7.7" },
-          { re: /\bfuel\b/i, value: "7.5" },
-          { re: /\bjournal of raman spectroscopy\b/i, value: "2.9" },
-          { re: /\bapplied spectroscopy reviews\b/i, value: "6.3" },
-          { re: /\bapplied spectroscopy\b/i, value: "3.4" },
-          { re: /\bvibrational spectroscopy\b/i, value: "2.4" },
-          { re: /\bmacromolecular research\b/i, value: "2.9" },
-          { re: /\bmacromolecules\b/i, value: "5.1" },
-          { re: /\bapplied surface science\b/i, value: "6.7" },
-          { re: /\blangmuir\b/i, value: "3.9" },
-          { re: /\bchemical engineering journal\b/i, value: "13.4" },
-          { re: /\bacs omega\b/i, value: "4.1" },
-          { re: /\bpolymer\b/i, value: "4.6" },
-          { re: /\bsolar energy\b/i, value: "7.5" },
-          { re: /\bultramicroscopy\b/i, value: "2.7" },
-          { re: /\bcolloids and surfaces, a\b/i, value: "5.2" },
-          { re: /\bphysica e\b/i, value: "3.6" },
-          { re: /\bsynthetic metals\b/i, value: "4.2" },
-          { re: /\bjournal of materials chemistry\b/i, value: "6.0" },
-          { re: /\bjournal of materials chemistry c\b/i, value: "6.5" },
-          { re: /\bjournal of analytical atomic spectrometry\b/i, value: "3.8" },
-          { re: /\bfood research international\b/i, value: "8.1" },
-          { re: /\bfood control\b/i, value: "6.0" },
-          { re: /\bexpert systems with applications\b/i, value: "8.5" },
-          { re: /\bjournal of agriculture and food research\b/i, value: "4.1" },
-          { re: /\bchemistryselect\b/i, value: "2.3" },
-          { re: /\bspectrochimica acta part b\b/i, value: "3.8" },
-          { re: /\belectroanalysis\b/i, value: "3.0" },
-          { re: /\bjournal of applied electrochemistry\b/i, value: "3.0" },
-          { re: /\bint\b.*\bquantum\b.*\bchem\b/i, value: "2.3" },
-          { re: /\bstruct\b.*\bchem\b/i, value: "1.9" },
-          { re: /\bjournal of the electrochemical society\b/i, value: "4.0" },
-          { re: /\bcurrent research in food science\b/i, value: "7.0" },
-          { re: /\bmaterials today\b/i, value: "22.0" },
-          { re: /\benvironmental research\b/i, value: "7.7" },
-          { re: /\bfood chemistry\b/i, value: "9.8" },
-          { re: /\bacta biomaterialia\b/i, value: "9.6" },
-          { re: /\bcomputational\b.*\btheoretical\b.*\bchemistry\b/i, value: "2.8" },
-          { re: /\bjournal of food composition\b.*\banalysis\b/i, value: "4.6" },
-          { re: /\bsurface science\b/i, value: "1.9" },
-          { re: /\bsolar energy materials and solar cells\b/i, value: "7.5" },
-          { re: /\bsolar energy\b/i, value: "7.5" },
-          { re: /\bjournal of plant biology\b/i, value: "2.5" },
-          { re: /\bmacromolecular bioscience\b/i, value: "4.6" },
-          { re: /\bthin solid films\b|thin solid flims/i, value: "2.3" },
-          { re: /\bsensors\b/i, value: "3.9" },
-          { re: /\bphotochemistry\b.*\bphotobiology\b/i, value: "3.3" },
-          { re: /\bapplied biochemistry\s*&\s*biotechnology\b/i, value: "2.8" },
-          { re: /\bapplied biochemistry\b.*\bbiotechnology\b/i, value: "2.8" },
-          { re: /\bpolymer engineering\s*&\s*science\b/i, value: "3.3" },
-          { re: /\banalytical sciences?\b/i, value: "1.8" },
-          { re: /\bbiopolymers?\b/i, value: "2.9" },
-          { re: /\bthe analyst\b/i, value: "3.3" },
-          { re: /\bbull\b.*\bkorean\b.*\bchem\b.*\bsoc\b/i, value: "1.7" },
-          { re: /\bbull\b.*\bkorean\b.*\bchem\b/i, value: "1.7" },
-          { re: /\bchemphyschem\b/i, value: "3.8" },
-          { re: /\bjournal of molecular structure\b|^j\.\s*mol\.\s*struct\b|\bj\s*mol\s*struct\b/i, value: "3.8" },
-          { re: /\bchemometrics\b.*\bintelligent\b.*\blaboratory\b.*\bsystem/i, value: "4.2" },
-          { re: /\bjournal of chromatography a\b/i, value: "4.0" },
-          { re: /\bjournal\b.*\bpharmaceutical\b.*\bbiomedical\b.*\banalysis\b|^j\.\s*pharmaceutical\b.*\bbiomedical\b.*\banalysis\b|\bj pharmaceutical\b.*\bbiomedical\b.*\banalysis\b/i, value: "3.1" },
-          { re: /\bspectrochimica acta part a\b/i, value: "4.6" },
-          { re: /\brsc adv\b/i, value: "4.6" },
-          { re: /\bacs\b.*\bappl\b.*\bmater\b.*\binterfaces\b|\bacs applied materials interfaces\b/i, value: "9.5" },
-          { re: /\bacs appl\.\s*nano\s*mater|\bacs appl nano mater\b/i, value: "5.2" },
-          { re: /\bj am ceram soc\b/i, value: "3.9" },
-          { re: /\bnear infrared analysis\b/i, value: "N/A" },
-          { re: /\bjournal of materials science\b.*\bengineering a\b/i, value: "N/A" },
-          { re: /\bsn applied aciences\b|\bsn applied sciences\b/i, value: "N/A" },
-          { re: /\bchemical physics letter\b|\bchemical physics letters\b/i, value: "2.8" },
-          { re: /\bcolloids\b.*\bsurfaces\b.*\ba\b/i, value: "5.2" }
-        ];
         const citationCache = new Map();
         const authorMetricCache = new Map();
         const memberPhotoMap = new Map();
@@ -281,10 +203,39 @@
             .replace(/\bno\b/g, " ")
             .replace(/\s+/g, " ")
             .trim();
-        const getJournalIF = (journal = "") => {
+        const JOURNAL_CATEGORY_RULES = [
+          { re: /\bfood chemistry\b/i, value: { category: "Food Science", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\btalanta\b/i, value: { category: "Analytical Chemistry", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\banalytica chimica acta\b/i, value: { category: "Analytical Chemistry", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\banalyst\b/i, value: { category: "Analytical Chemistry", quartile: "Q2", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bmicrochemical journal\b/i, value: { category: "Analytical Chemistry", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bspectrochimica acta part a\b/i, value: { category: "Spectroscopy", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bchemical engineering journal\b/i, value: { category: "Chemical Engineering", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bfuel\b/i, value: { category: "Energy & Fuels", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bjournal of food composition\b.*\banalysis\b/i, value: { category: "Food Science", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bacs appl\.\s*nano\s*mater|\bacs appl nano mater\b/i, value: { category: "Materials Science", quartile: "Q1", source: "SJR", indexedIn: "Scopus" } },
+          { re: /\bacs omega\b/i, value: { category: "Multidisciplinary Chemistry", quartile: "Q2", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bpolymer\b/i, value: { category: "Polymer Science", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bsensors\b.*\bactuators\b.*\bb\b/i, value: { category: "Instrumentation", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bvibrational spectroscopy\b/i, value: { category: "Spectroscopy", quartile: "Q2", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bapplied spectroscopy\b/i, value: { category: "Spectroscopy", quartile: "Q2", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\brsc adv\b/i, value: { category: "Chemistry, Multidisciplinary", quartile: "Q2", source: "JCR", indexedIn: "SCIE" } },
+          { re: /\bacs\b.*\bappl\b.*\bmater\b.*\binterfaces\b|\bacs applied materials interfaces\b/i, value: { category: "Materials Science", quartile: "Q1", source: "JCR", indexedIn: "SCIE" } }
+        ];
+        const quartileToTopPercent = (q = "") => {
+          const v = String(q || "").toUpperCase();
+          if (v === "Q1") return "Top 25%";
+          if (v === "Q2") return "Top 50%";
+          if (v === "Q3") return "Top 75%";
+          if (v === "Q4") return "Top 100%";
+          return "";
+        };
+        const getJournalCategoryMetrics = (journal = "") => {
           const key = normalizeJournalKey(journal);
-          const matched = JOURNAL_IF_RULES.find((rule) => rule.re.test(key));
-          return matched ? matched.value : "N/A";
+          const matched = JOURNAL_CATEGORY_RULES.find((rule) => rule.re.test(key));
+          return matched
+            ? matched.value
+            : { category: "Category pending curation", quartile: "-", source: "", indexedIn: "Manual check" };
         };
         const splitAuthors = (authorText = "") =>
           authorText
@@ -547,7 +498,6 @@
               const metricEl = card.querySelector(".pub-entry-metrics");
               if (!metricEl) continue;
               const citationChip = metricEl.querySelector(".metric-citation");
-              const ifValue = metricEl.dataset.if || "N/A";
               const citations = await fetchCitationCount(title);
               const citationText = Number.isFinite(citations) ? citations : 0;
               if (citationChip) citationChip.textContent = `Cited ${citationText}`;
@@ -684,11 +634,25 @@
               const authorsHtml = renderAuthors(authorsDisplay);
               const pdf = item.pdf || "";
               const fallbackImg = "./assets/publication-placeholder.svg";
-              const ifValue = getJournalIF(journalRaw);
+              const metrics = getJournalCategoryMetrics(journalRaw);
               const imageSrc = pickGraphicalAbstractSrc(item, fallbackImg);
               const imgHtml = `<figure class="pub-entry-media"><img src="${esc(imageSrc)}" alt="Graphical abstract for ${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImg}'" /></figure>`;
               const pdfHtml = pdf
                 ? `<a class="pub-entry-link" href="${esc(pdf)}" download>PDF</a>`
+                : "";
+              const quartileChip =
+                metrics.quartile && metrics.quartile !== "-"
+                  ? `<span class="metric-chip metric-quartile">${esc(metrics.source)} ${esc(metrics.quartile)}</span>`
+                  : "";
+              const percentileText = quartileToTopPercent(metrics.quartile);
+              const percentileChip = percentileText
+                ? `<span class="metric-chip metric-percentile">${esc(percentileText)}</span>`
+                : "";
+              const categoryChip = metrics.category
+                ? `<span class="metric-chip metric-category">${esc(metrics.category)}</span>`
+                : "";
+              const indexChip = metrics.indexedIn
+                ? `<span class="metric-chip metric-index">${esc(metrics.indexedIn)}</span>`
                 : "";
               const pubId = esc(item.id || `${year}-${idx + 1}`);
 
@@ -703,9 +667,12 @@
                     </div>
                     <div class="pub-journal-row">
                       <p class="pub-entry-journal">${journal}</p>
-                      <div class="pub-entry-metrics" data-if="${esc(ifValue)}">
+                      <div class="pub-entry-metrics">
                         <span class="metric-chip metric-citation">Cited 0</span>
-                        <span class="metric-chip metric-if">IF ${esc(ifValue)}</span>
+                        ${quartileChip}
+                        ${percentileChip}
+                        ${categoryChip}
+                        ${indexChip}
                       </div>
                     </div>
                     <p class="pub-entry-authors">${authorsHtml}</p>

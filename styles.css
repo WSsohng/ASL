@@ -942,9 +942,24 @@ h2 {
   background: rgba(121, 163, 255, 0.14);
 }
 
-.metric-if {
+.metric-quartile {
   color: #fff3d0;
-  background: rgba(234, 190, 93, 0.16);
+  background: rgba(224, 170, 68, 0.18);
+}
+
+.metric-category {
+  color: #ddecff;
+  background: rgba(100, 144, 235, 0.16);
+}
+
+.metric-percentile {
+  color: #f2f8ff;
+  background: rgba(123, 166, 255, 0.2);
+}
+
+.metric-index {
+  color: #dcffe8;
+  background: rgba(78, 166, 112, 0.2);
 }
 
 .pub-entry-authors {
@@ -1595,34 +1610,45 @@ h2 {
 }
 
 .member-card {
-  flex: 0 0 calc((100% - 4rem) / 5);
-  min-width: 200px;
+  flex: 0 0 calc((100% - 5rem) / 6);
+  min-width: 170px;
   border-radius: 1rem;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(24, 30, 43, 0.95), rgba(14, 18, 27, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(22, 28, 40, 0.9), rgba(13, 18, 27, 0.92));
+  border: 1px solid rgba(191, 208, 244, 0.2);
   scroll-snap-align: start;
-  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
   cursor: pointer;
+  position: relative;
 }
 
 .member-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(181, 206, 255, 0.45);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  transform: translateY(-2px);
+  border-color: rgba(196, 215, 255, 0.4);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, rgba(25, 33, 47, 0.92), rgba(14, 20, 30, 0.94));
+}
+
+.member-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 42% 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(16, 24, 38, 0.18), rgba(16, 24, 38, 0));
+  z-index: 1;
 }
 
 .member-card h3 {
   margin: 0;
-  padding: 0.74rem 0.8rem 0.12rem;
-  font-size: 0.94rem;
+  padding: 0.66rem 0.72rem 0.08rem;
+  font-size: 0.9rem;
   line-height: 1.25;
 }
 
 .member-card p {
   margin: 0;
-  padding: 0 0.8rem 0.8rem;
-  font-size: 0.76rem;
+  padding: 0 0.72rem 0.72rem;
+  font-size: 0.73rem;
   color: #b4c0d8;
   letter-spacing: 0.03em;
 }
@@ -1631,9 +1657,16 @@ h2 {
   width: 100%;
   aspect-ratio: 7 / 8;
   object-fit: cover;
-  object-position: center;
+  object-position: center 40%;
   display: block;
   background: linear-gradient(135deg, #1f293e 0%, #30476d 100%);
+  filter: grayscale(0.1) saturate(0.72) contrast(0.9) brightness(0.98);
+  transition: filter 220ms ease, transform 220ms ease;
+}
+
+.member-card:hover .member-photo {
+  filter: grayscale(0.04) saturate(0.86) contrast(0.95) brightness(1);
+  transform: scale(1.008);
 }
 
 .alumni-grid {

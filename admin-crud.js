@@ -145,7 +145,7 @@ const loadRecent = async () => {
   const [{ data: pubs }, { data: gals }, { data: mems }] = await Promise.all([
     supabase
       .from("publications")
-      .select("id,title,year,journal,citations,impact_factor,created_at")
+      .select("id,title,year,journal,citations,created_at")
       .order("created_at", { ascending: false })
       .limit(20),
     supabase
@@ -232,8 +232,7 @@ publicationForm.addEventListener("submit", async (event) => {
       authors: document.getElementById("pubAuthors").value.trim(),
       authors_marked: document.getElementById("pubAuthors").value.trim(),
       doi: document.getElementById("pubDoi").value.trim() || null,
-      citations: asInt(document.getElementById("pubCitations").value || "0", 0),
-      impact_factor: asFloat(document.getElementById("pubImpactFactor").value || "0", 0)
+      citations: asInt(document.getElementById("pubCitations").value || "0", 0)
     };
     const imageFile = document.getElementById("pubImageFile").files?.[0];
     if (imageFile) {
@@ -374,7 +373,6 @@ const fillPublicationForm = (row) => {
   document.getElementById("pubAuthors").value = row.authors || "";
   document.getElementById("pubDoi").value = row.doi || "";
   document.getElementById("pubCitations").value = row.citations ?? 0;
-  document.getElementById("pubImpactFactor").value = row.impact_factor ?? "";
   setSubmitLabels();
 };
 
