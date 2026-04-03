@@ -52,8 +52,8 @@ const escHtml = (value = "") =>
 
 const normalizeRecentAuthor = (author = "") =>
   String(author)
-    .replaceAll("??, "")
-    .replaceAll("??, "")
+    // Remove broken/legacy marker glyphs safely (equal contribution/corresponding symbols)
+    .replace(/[\u00A2\u00D3\u00D2\u00F3\u00C7\u00E7\u2020\u2021]/g, "")
     .replace(/\^1/g, "")
     .replace(/\*/g, "")
     .trim();
