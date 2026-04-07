@@ -15,6 +15,7 @@ const memberForm = document.getElementById("memberForm");
 const pubRecentListEl = document.getElementById("pubRecentList");
 const galRecentListEl = document.getElementById("galRecentList");
 const memRecentListEl = document.getElementById("memRecentList");
+const memTrackFilterEl = document.getElementById("memTrackFilter");
 
 const pubSubmitBtn = publicationForm?.querySelector('button[type="submit"]');
 const galSubmitBtn = galleryForm?.querySelector('button[type="submit"]');
@@ -33,6 +34,7 @@ let supabase = null;
 let editingPublicationId = null;
 let editingGalleryId = null;
 let editingMemberId = null;
+let memberTrackFilter = "all";
 
 const setStatus = (message, type = "info") => {
   if (!statusEl) return;
@@ -53,6 +55,19 @@ const esc = (value = "") =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+
+const normalizeTrack = (track = "") => {
+  const v = String(track || "").trim().toLowerCase();
+  if (v === "alumni" || v === "faculty") return v;
+  return "current";
+};
+
+const trackLabel = (track = "") => {
+  const t = normalizeTrack(track);
+  if (t === "alumni") return "Alumni";
+  if (t === "faculty") return "Faculty";
+  return "Current";
+};
 
 const asInt = (value, fallback = 0) => {
   const n = Number.parseInt(String(value ?? ""), 10);
@@ -141,6 +156,22 @@ const renderActionButtons = (entity, id) => {
   `;
 };
 
+const renderMemberActionButtons = (id, track) => {
+  const safeId = esc(id);
+  const t = normalizeTrack(track);
+  const quickSwitchBtn =
+    t === "alumni"
+      ? `<button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="set-current" data-id="${safeId}">Set Current</button>`
+      : `<button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="set-alumni" data-id="${safeId}">Set Alumni</button>`;
+  return `
+    <div class="admin-item-actions">
+      ${quickSwitchBtn}
+      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="edit" data-id="${safeId}">Edit</button>
+      <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button" data-entity="member" data-action="delete" data-id="${safeId}">Delete</button>
+    </div>
+  `;
+};
+
 const loadRecent = async () => {
   const [{ data: pubs }, { data: gals }, { data: mems }] = await Promise.all([
     supabase
@@ -157,7 +188,7 @@ const loadRecent = async () => {
       .from("members")
       .select("id,name,role,track,email,created_at")
       .order("created_at", { ascending: false })
-      .limit(20)
+      .limit(300)
   ]);
 
   renderRecent(pubRecentListEl, pubs || [], (x) => {
@@ -167,8 +198,27 @@ const loadRecent = async () => {
     const preview = String(x.content || "").trim().slice(0, 120);
     return `<h4>${esc(x.title || "")}</h4><p>${esc(x.date_text || "")} · ${esc(x.author || "")}</p><p>${esc(preview || "No content")}</p>${renderActionButtons("gallery", x.id)}`;
   });
-  renderRecent(memRecentListEl, mems || [], (x) => {
-    return `<h4>${esc(x.name || "")}</h4><p>${esc(x.role || "")} · ${esc(x.track || "")} · ${esc(x.email || "-")}</p>${renderActionButtons("member", x.id)}`;
+  const filteredMembers = (mems || []).filter((x) => {
+    if (memberTrackFilter === "all") return true;
+    return normalizeTrack(x.track) === memberTrackFilter;
+  });
+  renderRecent(memRecentListEl, filteredMembers, (x) => {
+    const track = normalizeTrack(x.track);
+    const trackTagClass =
+      track === "alumni"
+        ? "admin-track-tag is-alumni"
+        : track === "faculty"
+          ? "admin-track-tag is-faculty"
+          : "admin-track-tag is-current";
+    return `
+      <h4>${esc(x.name || "")}</h4>
+      <p class="admin-member-meta">
+        <span class="${trackTagClass}">${esc(trackLabel(track))}</span>
+        <span>${esc(x.role || "")}</span>
+        <span>${esc(x.email || "-")}</span>
+      </p>
+      ${renderMemberActionButtons(x.id, track)}
+    `;
   });
 };
 
@@ -345,7 +395,7 @@ memberForm.addEventListener("submit", async (event) => {
       role: document.getElementById("memRole").value.trim(),
       email: document.getElementById("memEmail").value.trim() || null,
       career: document.getElementById("memCareer").value.trim() || null,
-      track: document.getElementById("memTrack").value
+      track: normalizeTrack(document.getElementById("memTrack").value)
     };
     const imageFile = document.getElementById("memImageFile").files?.[0];
     if (imageFile) {
@@ -392,7 +442,7 @@ const fillMemberForm = (row) => {
   document.getElementById("memRole").value = row.role || "";
   document.getElementById("memEmail").value = row.email || "";
   document.getElementById("memCareer").value = row.career || "";
-  document.getElementById("memTrack").value = row.track || "current";
+  document.getElementById("memTrack").value = normalizeTrack(row.track || "current");
   setSubmitLabels();
 };
 
@@ -441,6 +491,23 @@ const onAdminListAction = async (event) => {
       }
       await loadRecent();
       setStatus("Record deleted.", "ok");
+      return;
+    }
+
+    if ((action === "set-alumni" || action === "set-current") && entity === "member") {
+      const targetTrack = action === "set-alumni" ? "alumni" : "current";
+      const { error } = await supabase.from("members").update({ track: targetTrack }).eq("id", id);
+      if (error) throw error;
+      if (editingMemberId === id) {
+        document.getElementById("memTrack").value = targetTrack;
+      }
+      await loadRecent();
+      setStatus(
+        targetTrack === "alumni"
+          ? "Member track updated to Alumni."
+          : "Member track updated to Current.",
+        "ok"
+      );
     }
   } catch (err) {
     setStatus(err.message || "Action failed.", "error");
@@ -450,6 +517,12 @@ const onAdminListAction = async (event) => {
 pubRecentListEl?.addEventListener("click", onAdminListAction);
 galRecentListEl?.addEventListener("click", onAdminListAction);
 memRecentListEl?.addEventListener("click", onAdminListAction);
+memTrackFilterEl?.addEventListener("change", async (event) => {
+  const next = String(event.target?.value || "all").toLowerCase();
+  memberTrackFilter = ["all", "current", "alumni", "faculty"].includes(next) ? next : "all";
+  if (!requireClient()) return;
+  await loadRecent();
+});
 
 const bootstrap = async () => {
   if (!supabaseUrl || !supabaseAnonKey) {
@@ -461,6 +534,7 @@ const bootstrap = async () => {
   });
   initTabs();
   setSubmitLabels();
+  memberTrackFilter = String(memTrackFilterEl?.value || "all").toLowerCase();
   setStatus("Ready. Sign in to continue.", "info");
 
   const { data } = await supabase.auth.getSession();

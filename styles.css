@@ -1867,6 +1867,29 @@ h2 {
   align-self: end;
 }
 
+.admin-member-tools {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.admin-member-tools label {
+  display: grid;
+  gap: 0.35rem;
+  color: #c5d1ea;
+  font-size: 0.82rem;
+}
+
+.admin-member-tools select {
+  min-width: 170px;
+  border: 1px solid rgba(180, 202, 246, 0.28);
+  border-radius: 0.58rem;
+  background: rgba(9, 13, 22, 0.7);
+  color: #e2ebff;
+  padding: 0.4rem 0.55rem;
+}
+
 .admin-tab-row {
   margin-top: 0.85rem;
   display: flex;
@@ -1923,6 +1946,40 @@ h2 {
   margin: 0.28rem 0 0;
   color: #c5d1ea;
   font-size: 0.83rem;
+}
+
+.admin-member-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.58rem;
+}
+
+.admin-track-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(180, 202, 246, 0.34);
+  padding: 0.1rem 0.48rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.admin-track-tag.is-current {
+  background: rgba(88, 141, 255, 0.2);
+  color: #eaf1ff;
+}
+
+.admin-track-tag.is-alumni {
+  background: rgba(121, 199, 152, 0.2);
+  color: #dffbe8;
+}
+
+.admin-track-tag.is-faculty {
+  background: rgba(226, 181, 86, 0.22);
+  color: #fff5db;
 }
 
 .admin-item-actions {

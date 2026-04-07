@@ -119,6 +119,17 @@
             <label><span>Profile Image (optional)</span><input id="memImageFile" type="file" accept="image/*" /></label>
             <button class="btn btn-primary" type="submit">Save Member</button>
           </form>
+          <div class="admin-member-tools">
+            <label>
+              <span>Track Filter</span>
+              <select id="memTrackFilter">
+                <option value="all">All</option>
+                <option value="current">Current</option>
+                <option value="alumni">Alumni</option>
+                <option value="faculty">Faculty</option>
+              </select>
+            </label>
+          </div>
           <div id="memRecentList" class="admin-list"></div>
         </section>
       </section>
