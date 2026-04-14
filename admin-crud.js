@@ -474,7 +474,6 @@ memberForm.addEventListener("submit", async (event) => {
       email: document.getElementById("memEmail").value.trim() || null,
       career: document.getElementById("memCareer").value.trim() || null,
       scopus_id: document.getElementById("memScopusId").value.trim() || null,
-      openalex_id: document.getElementById("memOpenAlexId").value.trim() || null,
       track: normalizeTrack(document.getElementById("memTrack").value)
     };
     const imageFile = document.getElementById("memImageFile").files?.[0];
@@ -539,7 +538,6 @@ const fillMemberForm = (row) => {
   document.getElementById("memEmail").value = row.email || "";
   document.getElementById("memCareer").value = row.career || "";
   document.getElementById("memScopusId").value = row.scopus_id || "";
-  document.getElementById("memOpenAlexId").value = row.openalex_id || "";
   document.getElementById("memTrack").value = normalizeTrack(row.track || "current");
   setSubmitLabels();
 };
