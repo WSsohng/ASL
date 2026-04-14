@@ -181,7 +181,12 @@ const renderMemberActionButtons = (id, track) => {
 };
 
 const loadRecent = async () => {
-  const [{ data: pubs }, { data: gals }, { data: mems }, { data: interns }] = await Promise.all([
+  const [
+    { data: pubs, error: pubsErr },
+    { data: gals, error: galsErr },
+    { data: mems, error: memsErr },
+    { data: interns, error: internsErr }
+  ] = await Promise.all([
     supabase
       .from("publications")
       .select("id,seq_no,title,year,journal,citations,impact_factor,graphical_abstract_url,created_at")
@@ -204,6 +209,16 @@ const loadRecent = async () => {
       .order("submitted_at", { ascending: false })
       .limit(100)
   ]);
+
+  const queryErrors = [
+    pubsErr && `Publications: ${pubsErr.message}`,
+    galsErr && `Gallery: ${galsErr.message}`,
+    memsErr && `Members: ${memsErr.message}`,
+    internsErr && `Interns: ${internsErr.message}`
+  ].filter(Boolean);
+  if (queryErrors.length) {
+    setStatus(`DB 조회 오류 — ${queryErrors.join(" | ")}`, "error");
+  }
 
   renderRecent(pubRecentListEl, pubs || [], (x) => {
     const num = x.seq_no != null ? `<span style="display:inline-block;min-width:2rem;font-size:0.75rem;font-weight:700;color:#7aa4ff;margin-right:0.3rem;">#${x.seq_no}</span>` : "";
@@ -661,10 +676,16 @@ const bootstrap = async () => {
     const profile = await ensureAdmin(user.id);
     userInfoEl.textContent = `${profile.email || user.email} · role: admin`;
     setAdminVisible(true);
-    await loadRecent();
     setStatus("Authenticated as admin.", "ok");
-  } catch {
-    setAdminVisible(false);
+    await loadRecent();
+  } catch (err) {
+    const msg = err?.message || String(err);
+    if (msg.includes("Admin role") || msg.includes("profiles")) {
+      setAdminVisible(false);
+    } else {
+      setAdminVisible(true);
+      setStatus(`초기 데이터 로딩 오류: ${msg}`, "error");
+    }
   }
 };
 
