@@ -85,14 +85,7 @@
             <img id="alumniProfileImage" class="author-photo" src="./assets/publication-placeholder.svg" alt="Alumni profile image" loading="lazy" />
           </div>
           <p class="author-profile-name" id="alumniProfileName">-</p>
-          <p class="author-profile-affil" id="alumniProfileAffil">Hanyang University</p>
-          <div class="author-profile-metrics">
-            <p id="alumniProfileHIndex">H-index: loading...</p>
-            <p id="alumniProfileWorks">Works: -</p>
-            <p id="alumniProfileCitations">Citations: -</p>
-          </div>
-          <a id="alumniProfileScholarLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Open Google Scholar Query</a>
-          <a id="alumniProfileScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">Check on Scopus Author Search</a>
+          <a id="alumniProfileScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer">View on Scopus ↗</a>
         </aside>
         <div id="alumniAuthorModalBody" class="author-modal-body"></div>
       </div>
@@ -109,12 +102,7 @@
         const modalCloseBtn = document.getElementById("alumniAuthorModalClose");
         const modalBodyEl = document.getElementById("alumniAuthorModalBody");
         const profileNameEl = document.getElementById("alumniProfileName");
-        const profileAffilEl = document.getElementById("alumniProfileAffil");
-        const profileHIndexEl = document.getElementById("alumniProfileHIndex");
-        const profileWorksEl = document.getElementById("alumniProfileWorks");
-        const profileCitationsEl = document.getElementById("alumniProfileCitations");
         const profileImageEl = document.getElementById("alumniProfileImage");
-        const profileScholarLinkEl = document.getElementById("alumniProfileScholarLink");
         const profileScopusLinkEl = document.getElementById("alumniProfileScopusLink");
 
         const esc = (value = "") =>
@@ -124,7 +112,6 @@
             .replaceAll(">", "&gt;")
             .replaceAll('"', "&quot;")
             .replaceAll("'", "&#39;");
-        const fmt = (v) => (Number.isFinite(Number(v)) ? Number(v).toLocaleString() : v);
         const normalizeName = (s = "") =>
           String(s)
             .toLowerCase()
@@ -217,8 +204,6 @@
           return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
         };
 
-        const metricCache = new Map();
-        const memberOpenAlexMap = new Map(); /* normalizedName → openalex_id */
         const authorToPapers = new Map();
         const memberPhotoMap = new Map();
         let memberIndex = [];
@@ -253,72 +238,20 @@
           );
           return near || null;
         };
-        const fetchOpenAlexAuthor = async (openAlexId) => {
-          const shortId = openAlexId.replace("https://openalex.org/", "").trim();
-          if (!shortId) return null;
-          try {
-            const res = await fetch(`https://api.openalex.org/authors/${shortId}`);
-            if (!res.ok) return null;
-            return await res.json();
-          } catch { return null; }
-        };
-
-        const fetchAuthorMetrics = async (authorName) => {
-          if (metricCache.has(authorName)) return metricCache.get(authorName);
-          const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
-
-          const toOut = (row) => {
-            const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
-            return { hIndex: row?.summary_stats?.h_index ?? "—", works: row?.works_count ?? "—", citations: row?.cited_by_count ?? "—", affiliation: affil, source: "OpenAlex" };
-          };
-
-          try {
-            /* Priority 1: explicit OpenAlex ID set by admin (corrects wrong auto-match) */
-            const openAlexId = memberOpenAlexMap.get(normalizeName(authorName));
-            if (openAlexId) {
-              const row = await fetchOpenAlexAuthor(openAlexId);
-              if (row) { const out = toOut(row); metricCache.set(authorName, out); return out; }
-            }
-
-            /* Priority 2: OpenAlex name search — must be Hanyang-affiliated and name must match */
-            const nameNorm = authorName.toLowerCase().replace(/\s+/g, "");
-            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(authorName + " hanyang")}&per-page=10`);
-            if (!res.ok) { metricCache.set(authorName, fallback); return fallback; }
-            const data = await res.json();
-            const candidates = (data?.results || []).filter((r) => {
-              const inst = (r?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
-              const displayNorm = (r?.display_name || "").toLowerCase().replace(/\s+/g, "");
-              return inst.includes("hanyang") && (displayNorm === nameNorm || displayNorm.includes(nameNorm) || nameNorm.includes(displayNorm));
-            });
-            const best = candidates[0];
-            if (!best) { metricCache.set(authorName, fallback); return fallback; }
-            const out = toOut(best);
-            metricCache.set(authorName, out);
-            return out;
-          } catch {
-            metricCache.set(authorName, fallback);
-            return fallback;
-          }
-        };
-        const renderAuthorModal = async (name, image) => {
+        const renderAuthorModal = (name, image) => {
           const rows = (authorToPapers.get(name) || []).sort((a, b) => Number(b.year) - Number(a.year));
           modalTitleEl.textContent = `${name} — Publications`;
           profileNameEl.textContent = name;
           profileImageEl.src = image || memberPhotoMap.get(normalizeName(name)) || "./assets/publication-placeholder.svg";
           profileImageEl.alt = `${name} profile image`;
-          profileAffilEl.textContent = "Hanyang University";
-          profileHIndexEl.textContent = "H-index: 불러오는 중...";
-          profileWorksEl.textContent = "Works: —";
-          profileCitationsEl.textContent = "Citations: —";
-          profileScholarLinkEl.href = `https://scholar.google.com/scholar?q=${encodeURIComponent(`${name} hanyang`)}`;
 
           const sid = getMemberScopusId(name);
           if (sid) {
             profileScopusLinkEl.href = getScopusUrl(sid);
             profileScopusLinkEl.textContent = "View on Scopus ↗";
+            profileScopusLinkEl.style.display = "";
           } else {
-            profileScopusLinkEl.href = getScopusSearchUrl(name);
-            profileScopusLinkEl.textContent = "Check on Scopus Author Search";
+            profileScopusLinkEl.style.display = "none";
           }
 
           if (!rows.length) {
@@ -336,22 +269,6 @@
               `).join("");
           }
           if (!modalEl.open) modalEl.showModal();
-
-          const metrics = await fetchAuthorMetrics(name);
-          profileHIndexEl.textContent = `H-index: ${fmt(metrics.hIndex)}`;
-          profileWorksEl.textContent = `Works: ${fmt(metrics.works)}`;
-          profileCitationsEl.textContent = `Citations: ${fmt(metrics.citations)}`;
-          profileAffilEl.textContent = metrics.affiliation || "Hanyang University";
-
-          /* Show metric source */
-          let sourceEl = document.getElementById("alumniMetricSource");
-          if (!sourceEl) {
-            sourceEl = document.createElement("small");
-            sourceEl.id = "alumniMetricSource";
-            sourceEl.style.cssText = "color:var(--muted);font-size:0.72rem;display:block;margin-top:0.3rem;";
-            profileScopusLinkEl.insertAdjacentElement("afterend", sourceEl);
-          }
-          sourceEl.textContent = metrics.source ? `출처: ${metrics.source}` : "";
         };
 
         Promise.all([
@@ -366,9 +283,8 @@
             const names = [...new Set(["Hoeil Chung", ...people.map((person) => cleanText(person.name || "")).filter(Boolean)])];
             memberIndex = names.map((name) => ({ name, aliases: makeAliases(name) }));
 
-            /* Build Scopus ID map and OpenAlex ID map from DB */
+            /* Build Scopus ID map from DB */
             memberScopusMap.clear();
-            memberOpenAlexMap.clear();
             people.forEach((person) => {
               const key = normalizeName(person.name || "");
               const sid = person?.scopus_id || "";
@@ -376,8 +292,6 @@
                 makeAliases(person.name).forEach((alias) => { if (alias) memberScopusMap.set(alias, sid); });
                 memberScopusMap.set(key, sid);
               }
-              const oid = person?.openalex_id || "";
-              if (oid) memberOpenAlexMap.set(key, oid);
               const image = String(person?.image || "").trim();
               if (!image) return;
               putMemberPhoto(person.name, image);

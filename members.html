@@ -186,14 +186,7 @@
             <img id="memberPubPhoto" class="author-photo" src="./assets/publication-placeholder.svg" alt="Profile" loading="lazy" />
           </div>
           <p class="author-profile-name" id="memberPubName">-</p>
-          <p class="author-profile-affil" id="memberPubAffil">Hanyang University</p>
-          <div class="author-profile-metrics">
-            <p id="memberPubHIndex">H-index: —</p>
-            <p id="memberPubWorks">Works: —</p>
-            <p id="memberPubCitations">Citations: —</p>
-          </div>
           <a id="memberPubScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">View on Scopus ↗</a>
-          <small id="memberPubMetricSource" style="color:var(--muted);font-size:0.72rem;display:block;margin-top:0.3rem;"></small>
         </aside>
         <div id="memberPubBody" class="author-modal-body">
           <p class="publication-authors">Loading...</p>
@@ -287,91 +280,34 @@
           return Number.isFinite(n) ? n : 0;
         };
 
-        /* ── Scopus / OpenAlex metrics ── */
+        /* ── Scopus ID helper ── */
         const KNOWN_SCOPUS_IDS = {
           "Hoeil Chung":    "7404006949",
           "Haeseong Jeong": "57224628166",
           "Seongsoo Jeong": "57855298300"
         };
-        const metricCache = new Map();
 
         const getScopusId = (m) => m.scopus_id || KNOWN_SCOPUS_IDS[m.name] || "";
-
-        const fetchOpenAlexAuthor = async (openAlexId) => {
-          const shortId = openAlexId.replace("https://openalex.org/", "").trim();
-          if (!shortId) return null;
-          try {
-            const res = await fetch(`https://api.openalex.org/authors/${shortId}`);
-            if (!res.ok) return null;
-            return await res.json();
-          } catch { return null; }
-        };
-
-        const fetchMetrics = async (memberInfo) => {
-          const cacheKey = memberInfo.name;
-          if (metricCache.has(cacheKey)) return metricCache.get(cacheKey);
-          const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
-
-          const toOut = (row) => {
-            const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
-            return { hIndex: row?.summary_stats?.h_index ?? "—", works: row?.works_count ?? "—", citations: row?.cited_by_count ?? "—", affiliation: affil, source: "OpenAlex" };
-          };
-
-          try {
-            /* Priority 1: explicit OpenAlex ID in DB (admin-corrected match) */
-            if (memberInfo.openalex_id) {
-              const row = await fetchOpenAlexAuthor(memberInfo.openalex_id);
-              if (row) { const out = toOut(row); metricCache.set(cacheKey, out); return out; }
-            }
-
-            /* Priority 2: OpenAlex name search — Hanyang-affiliated + name must match */
-            const nameNorm = memberInfo.name.toLowerCase().replace(/\s+/g, "");
-            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(memberInfo.name + " hanyang")}&per-page=10`);
-            if (!res.ok) { metricCache.set(cacheKey, fallback); return fallback; }
-            const data = await res.json();
-            const results = (data?.results || []).filter((r) => {
-              const inst = (r?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
-              const displayNorm = (r?.display_name || "").toLowerCase().replace(/\s+/g, "");
-              return inst.includes("hanyang") && (displayNorm === nameNorm || displayNorm.includes(nameNorm) || nameNorm.includes(displayNorm));
-            });
-            const best = results[0];
-            if (!best) { metricCache.set(cacheKey, fallback); return fallback; }
-            const out = toOut(best);
-            metricCache.set(cacheKey, out);
-            return out;
-          } catch { metricCache.set(cacheKey, fallback); return fallback; }
-        };
 
         /* ── Modal ── */
         const modal = document.getElementById("memberPubModal");
         const modalTitle = document.getElementById("memberPubModalTitle");
         const modalPhoto = document.getElementById("memberPubPhoto");
         const modalName = document.getElementById("memberPubName");
-        const modalAffil = document.getElementById("memberPubAffil");
-        const modalHIndex = document.getElementById("memberPubHIndex");
-        const modalWorks = document.getElementById("memberPubWorks");
-        const modalCitations = document.getElementById("memberPubCitations");
         const modalScopusLink = document.getElementById("memberPubScopusLink");
-        const modalMetricSource = document.getElementById("memberPubMetricSource");
         const modalBody = document.getElementById("memberPubBody");
         const modalCloseBtn = document.getElementById("memberPubModalClose");
 
-        const openMemberModal = async (memberInfo) => {
+        const openMemberModal = (memberInfo) => {
           const { name, image } = memberInfo;
           modalTitle.textContent = `${name} — Publications`;
           modalPhoto.src = image || PLACEHOLDER_IMG;
           modalPhoto.alt = `${name} profile`;
           modalName.textContent = name;
-          modalAffil.textContent = "Hanyang University";
-          modalHIndex.textContent = "H-index: 불러오는 중...";
-          modalWorks.textContent = "Works: —";
-          modalCitations.textContent = "Citations: —";
-          modalMetricSource.textContent = "";
 
           const sid = getScopusId(memberInfo);
           if (sid) {
             modalScopusLink.href = `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(sid)}`;
-            modalScopusLink.textContent = "View on Scopus ↗";
             modalScopusLink.style.display = "";
           } else {
             modalScopusLink.style.display = "none";
@@ -399,14 +335,6 @@
           }
 
           if (!modal.open) modal.showModal();
-
-          /* Async metrics load */
-          const metrics = await fetchMetrics(memberInfo);
-          modalHIndex.textContent = `H-index: ${metrics.hIndex}`;
-          modalWorks.textContent = `Works: ${metrics.works}`;
-          modalCitations.textContent = `Citations: ${metrics.citations}`;
-          if (metrics.affiliation) modalAffil.textContent = metrics.affiliation;
-          if (metrics.source) modalMetricSource.textContent = `출처: ${metrics.source}`;
         };
 
         modalCloseBtn?.addEventListener("click", () => { if (modal.open) modal.close(); });
