@@ -325,7 +325,7 @@ window.addEventListener("resize", requestSpectralUpdate);
 updateSpectralFx();
 
 const researchWrap = document.querySelector("#researchCards");
-if (researchWrap && window.matchMedia("(pointer: fine)").matches) {
+if (researchWrap && window.matchMedia("(pointer: fine)").matches && window.matchMedia("(min-width: 641px)").matches) {
   const cards = [...researchWrap.querySelectorAll(".research-card")];
   let activeX = 0.12;
   let cardTicking = false;
