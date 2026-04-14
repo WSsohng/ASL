@@ -141,9 +141,7 @@
         scopus_url: row.scopus_url || "",
         source_image: row.source_image || "",
         source_section: row.source_section || "",
-        h_index: row.h_index != null ? row.h_index : null,
-        works_count: row.works_count != null ? row.works_count : null,
-        cited_by_count: row.cited_by_count != null ? row.cited_by_count : null
+        openalex_id: row.openalex_id || ""
       };
       const track = String(row.track || "current").toLowerCase();
       if (track === "faculty") out.faculty.push(mapped);
@@ -228,7 +226,7 @@
         try {
           const rows = await fetchAll(
             "members",
-            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,h_index,works_count,cited_by_count"
+            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,openalex_id"
           );
           rows.sort((a, b) => {
             const ao = a.sort_order ?? 9999;

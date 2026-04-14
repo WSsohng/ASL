@@ -459,9 +459,7 @@ memberForm.addEventListener("submit", async (event) => {
       email: document.getElementById("memEmail").value.trim() || null,
       career: document.getElementById("memCareer").value.trim() || null,
       scopus_id: document.getElementById("memScopusId").value.trim() || null,
-      h_index: document.getElementById("memHIndex").value !== "" ? parseInt(document.getElementById("memHIndex").value, 10) : null,
-      works_count: document.getElementById("memWorksCount").value !== "" ? parseInt(document.getElementById("memWorksCount").value, 10) : null,
-      cited_by_count: document.getElementById("memCitedBy").value !== "" ? parseInt(document.getElementById("memCitedBy").value, 10) : null,
+      openalex_id: document.getElementById("memOpenAlexId").value.trim() || null,
       track: normalizeTrack(document.getElementById("memTrack").value)
     };
     const imageFile = document.getElementById("memImageFile").files?.[0];
@@ -526,9 +524,7 @@ const fillMemberForm = (row) => {
   document.getElementById("memEmail").value = row.email || "";
   document.getElementById("memCareer").value = row.career || "";
   document.getElementById("memScopusId").value = row.scopus_id || "";
-  document.getElementById("memHIndex").value = row.h_index != null ? row.h_index : "";
-  document.getElementById("memWorksCount").value = row.works_count != null ? row.works_count : "";
-  document.getElementById("memCitedBy").value = row.cited_by_count != null ? row.cited_by_count : "";
+  document.getElementById("memOpenAlexId").value = row.openalex_id || "";
   document.getElementById("memTrack").value = normalizeTrack(row.track || "current");
   setSubmitLabels();
 };

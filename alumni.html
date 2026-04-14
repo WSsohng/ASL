@@ -218,7 +218,7 @@
         };
 
         const metricCache = new Map();
-        const memberManualMetrics = new Map(); /* normalizedName → {hIndex, works, citations} */
+        const memberOpenAlexMap = new Map(); /* normalizedName → openalex_id */
         const authorToPapers = new Map();
         const memberPhotoMap = new Map();
         let memberIndex = [];
@@ -253,20 +253,34 @@
           );
           return near || null;
         };
+        const fetchOpenAlexAuthor = async (openAlexId) => {
+          const shortId = openAlexId.replace("https://openalex.org/", "").trim();
+          if (!shortId) return null;
+          try {
+            const res = await fetch(`https://api.openalex.org/authors/${shortId}`);
+            if (!res.ok) return null;
+            return await res.json();
+          } catch { return null; }
+        };
+
         const fetchAuthorMetrics = async (authorName) => {
           if (metricCache.has(authorName)) return metricCache.get(authorName);
           const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
 
-          /* Priority 1: manually entered metrics in DB (Admin panel) */
-          const manualKey = normalizeName(authorName);
-          const manual = memberManualMetrics.get(manualKey);
-          if (manual) {
-            metricCache.set(authorName, manual);
-            return manual;
-          }
+          const toOut = (row) => {
+            const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
+            return { hIndex: row?.summary_stats?.h_index ?? "—", works: row?.works_count ?? "—", citations: row?.cited_by_count ?? "—", affiliation: affil, source: "OpenAlex" };
+          };
 
           try {
-            /* Priority 2: OpenAlex name search (Hanyang-affiliated + name match required) */
+            /* Priority 1: explicit OpenAlex ID set by admin (corrects wrong auto-match) */
+            const openAlexId = memberOpenAlexMap.get(normalizeName(authorName));
+            if (openAlexId) {
+              const row = await fetchOpenAlexAuthor(openAlexId);
+              if (row) { const out = toOut(row); metricCache.set(authorName, out); return out; }
+            }
+
+            /* Priority 2: OpenAlex name search — must be Hanyang-affiliated and name must match */
             const nameNorm = authorName.toLowerCase().replace(/\s+/g, "");
             const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(authorName + " hanyang")}&per-page=10`);
             if (!res.ok) { metricCache.set(authorName, fallback); return fallback; }
@@ -278,13 +292,7 @@
             });
             const best = candidates[0];
             if (!best) { metricCache.set(authorName, fallback); return fallback; }
-            const out = {
-              hIndex: best?.summary_stats?.h_index ?? "—",
-              works: best?.works_count ?? "—",
-              citations: best?.cited_by_count ?? "—",
-              affiliation: (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University",
-              source: "OpenAlex"
-            };
+            const out = toOut(best);
             metricCache.set(authorName, out);
             return out;
           } catch {
@@ -358,25 +366,18 @@
             const names = [...new Set(["Hoeil Chung", ...people.map((person) => cleanText(person.name || "")).filter(Boolean)])];
             memberIndex = names.map((name) => ({ name, aliases: makeAliases(name) }));
 
-            /* Build Scopus ID map and manual metrics map from DB */
+            /* Build Scopus ID map and OpenAlex ID map from DB */
             memberScopusMap.clear();
-            memberManualMetrics.clear();
+            memberOpenAlexMap.clear();
             people.forEach((person) => {
+              const key = normalizeName(person.name || "");
               const sid = person?.scopus_id || "";
               if (sid) {
                 makeAliases(person.name).forEach((alias) => { if (alias) memberScopusMap.set(alias, sid); });
-                memberScopusMap.set(normalizeName(person.name), sid);
+                memberScopusMap.set(key, sid);
               }
-              if (person.h_index != null || person.works_count != null || person.cited_by_count != null) {
-                const metrics = {
-                  hIndex: person.h_index != null ? person.h_index : "—",
-                  works: person.works_count != null ? person.works_count : "—",
-                  citations: person.cited_by_count != null ? person.cited_by_count : "—",
-                  affiliation: "Hanyang University",
-                  source: "Scopus"
-                };
-                memberManualMetrics.set(normalizeName(person.name), metrics);
-              }
+              const oid = person?.openalex_id || "";
+              if (oid) memberOpenAlexMap.set(key, oid);
               const image = String(person?.image || "").trim();
               if (!image) return;
               putMemberPhoto(person.name, image);
