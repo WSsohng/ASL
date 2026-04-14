@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인턴 지원 | Analytical Spectroscopy Laboratory</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Analytical Spectroscopy Laboratory" />
+    <meta property="og:title" content="인턴 지원 | ASL" />
+    <meta
+      property="og:description"
+      content="ASL 분광분석연구실 학부 인턴 지원 페이지입니다."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/asl-favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .intern-wrap {
+        width: min(720px, 94%);
+        margin: 0 auto;
+        padding: 2rem 0 5rem;
+      }
+
+      .intern-intro {
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 0.95rem;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        background: rgba(14, 17, 28, 0.5);
+      }
+
+      .intern-intro ul {
+        margin: 0.75rem 0 0 1.25rem;
+        padding: 0;
+      }
+
+      .intern-intro li {
+        margin-bottom: 0.35rem;
+      }
+
+      .intern-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: rgba(220, 230, 255, 0.9);
+      }
+
+      .form-label span.required {
+        color: #f97777;
+        margin-left: 0.2rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        background: rgba(10, 12, 20, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 0.5rem;
+        color: inherit;
+        font-family: inherit;
+        font-size: 0.92rem;
+        padding: 0.75rem 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+        outline: none;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: rgba(177, 202, 255, 0.6);
+        box-shadow: 0 0 0 3px rgba(177, 202, 255, 0.08);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 140px;
+        line-height: 1.6;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .form-hint {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      .intern-submit-row {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+
+      .intern-status {
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .intern-status.is-success {
+        color: #6ee87a;
+      }
+
+      .intern-status.is-error {
+        color: #f97777;
+      }
+
+      .intern-success-box {
+        display: none;
+        padding: 2rem;
+        border: 1px solid rgba(110, 232, 122, 0.3);
+        border-radius: 0.75rem;
+        background: rgba(110, 232, 122, 0.05);
+        text-align: center;
+      }
+
+      .intern-success-box.is-visible {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
+        <span class="brand-lines">
+          <span class="brand-main">분광분석연구실</span>
+          <span class="brand-sub">Analytical Spectroscopy Laboratory</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="./index.html#top">About</a>
+        <a href="./index.html#research">Research</a>
+        <a href="./publication.html">Publications</a>
+        <a href="./index.html#professor">Professor</a>
+        <a href="./members.html">Members</a>
+        <a href="./gallery.html">Gallery</a>
+      </nav>
+      <a class="header-cta" href="./index.html#contact">Contact</a>
+    </header>
+
+    <main class="page-shell">
+      <div class="intern-wrap">
+        <div class="section-head" style="margin-bottom:1.5rem;">
+          <div>
+            <p class="eyebrow">Opportunities</p>
+            <h1>인턴 지원</h1>
+          </div>
+        </div>
+
+        <div class="intern-intro">
+          <p>
+            ASL(분광분석연구실)은 분광분석, 화학계량학, AI 모델링에 관심 있는 학부생 인턴을 모집합니다.
+            아래 양식을 작성하여 지원해 주세요. 지원 내용은 교수님께 전달됩니다.
+          </p>
+          <ul>
+            <li>모집 대상: 한양대학교 학부생 (타 대학도 지원 가능)</li>
+            <li>활동 내용: 실험 보조, 데이터 분석, 문헌 조사 등</li>
+            <li>문의: <a href="mailto:hoeil@hanyang.ac.kr" style="color:rgba(177,202,255,0.8);">hoeil@hanyang.ac.kr</a></li>
+          </ul>
+        </div>
+
+        <div id="internSuccessBox" class="intern-success-box">
+          <p style="font-size:1.1rem;font-weight:700;margin:0 0 0.5rem;">지원이 완료되었습니다!</p>
+          <p style="color:var(--muted);margin:0;">검토 후 연락드리겠습니다. 감사합니다.</p>
+        </div>
+
+        <form id="internForm" class="intern-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="internName">이름<span class="required">*</span></label>
+              <input
+                id="internName"
+                name="name"
+                class="form-input"
+                type="text"
+                placeholder="홍길동"
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="internStudentId">학번 / 소속<span class="required">*</span></label>
+              <input
+                id="internStudentId"
+                name="student_id"
+                class="form-input"
+                type="text"
+                placeholder="2021XXXXX / 화학과 3학년"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="internPhone">연락처 (전화)<span class="required">*</span></label>
+              <input
+                id="internPhone"
+                name="phone"
+                class="form-input"
+                type="tel"
+                placeholder="010-XXXX-XXXX"
+                required
+                autocomplete="tel"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="internEmail">연락처 (이메일)<span class="required">*</span></label>
+              <input
+                id="internEmail"
+                name="email"
+                class="form-input"
+                type="email"
+                placeholder="example@hanyang.ac.kr"
+                required
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="internPeriod">희망 인턴 기간<span class="required">*</span></label>
+            <input
+              id="internPeriod"
+              name="period"
+              class="form-input"
+              type="text"
+              placeholder="예) 2026년 여름방학 (7월~8월, 약 6주)"
+              required
+            />
+            <p class="form-hint">시작 시기와 기간(주 단위)을 자유롭게 기입해 주세요.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="internMotivation">지원 동기 / 자기소개<span class="required">*</span></label>
+            <textarea
+              id="internMotivation"
+              name="motivation"
+              class="form-textarea"
+              placeholder="지원 동기, 관련 경험, 배우고 싶은 내용 등을 자유롭게 작성해 주세요."
+              required
+            ></textarea>
+          </div>
+
+          <div class="intern-submit-row">
+            <button class="btn btn-contrast" type="submit" id="internSubmitBtn">지원하기</button>
+            <span id="internStatus" class="intern-status"></span>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer id="contact" class="site-footer">
+      <h2>Contact & Laboratory Information</h2>
+      <p class="contact-address-ko">서울특별시 성동구 왕십리로 222 한양대학교 자연과학대학 화학과 613-1호</p>
+      <p class="contact-address-en">
+        Analytical Spectroscopy Laboratory 613-1, Department of Chemistry, College of Natural
+        Sciences, Hanyang University, 222 Wangsimni-ro, Seongdong-gu, Seoul 04763, Korea
+      </p>
+      <p class="contact-tel">Tel: 02-2220-0937</p>
+      <a href="mailto:hoeil@hanyang.ac.kr">hoeil@hanyang.ac.kr</a>
+    </footer>
+
+    <script src="./admin-config.js"></script>
+    <script type="module">
+      const cfg = window.ASL_SUPABASE_CONFIG || {};
+      const SUPA_URL = (cfg.url || "").replace(/\/+$/, "");
+      const SUPA_KEY = cfg.anonKey || "";
+
+      const form = document.getElementById("internForm");
+      const statusEl = document.getElementById("internStatus");
+      const submitBtn = document.getElementById("internSubmitBtn");
+      const successBox = document.getElementById("internSuccessBox");
+
+      const setStatus = (msg, type = "") => {
+        statusEl.textContent = msg;
+        statusEl.className = "intern-status" + (type ? ` is-${type}` : "");
+      };
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+
+        const required = ["name", "student_id", "phone", "email", "period", "motivation"];
+        for (const key of required) {
+          if (!String(data[key] || "").trim()) {
+            setStatus("모든 필수 항목을 입력해 주세요.", "error");
+            return;
+          }
+        }
+
+        submitBtn.disabled = true;
+        setStatus("제출 중...");
+
+        const payload = {
+          name: data.name.trim(),
+          student_id: data.student_id.trim(),
+          phone: data.phone.trim(),
+          email: data.email.trim(),
+          period: data.period.trim(),
+          motivation: data.motivation.trim(),
+          submitted_at: new Date().toISOString()
+        };
+
+        if (SUPA_URL && SUPA_KEY) {
+          const res = await fetch(`${SUPA_URL}/rest/v1/intern_applications`, {
+            method: "POST",
+            headers: {
+              "apikey": SUPA_KEY,
+              "Authorization": `Bearer ${SUPA_KEY}`,
+              "Content-Type": "application/json",
+              "Prefer": "return=minimal"
+            },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            let msg = `HTTP ${res.status}`;
+            try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+            setStatus(`제출 실패: ${msg}`, "error");
+            submitBtn.disabled = false;
+            return;
+          }
+        } else {
+          console.warn("Supabase not configured. Application data:", payload);
+          setStatus("Supabase 연결이 설정되지 않았습니다. 관리자에게 문의해 주세요.", "error");
+          submitBtn.disabled = false;
+          return;
+        }
+
+        form.style.display = "none";
+        successBox.classList.add("is-visible");
+        setStatus("");
+      });
+    </script>
+  </body>
+</html>

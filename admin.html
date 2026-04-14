@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -16,7 +16,8 @@
   <body>
     <header class="site-header">
       <a class="brand" href="./index.html">
-        <span class="brand-mark">ASL</span>
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
         <span class="brand-lines">
           <span class="brand-main">관리 콘솔</span>
           <span class="brand-sub">Admin Console</span>
@@ -26,6 +27,7 @@
         <a href="./index.html">Home</a>
         <a href="./publication.html">Publications</a>
         <a href="./gallery.html">Gallery</a>
+        <a href="./members.html">Members</a>
       </nav>
       <a class="header-cta" href="./index.html">Back</a>
     </header>
@@ -69,6 +71,7 @@
           <button class="admin-tab is-active" data-tab="publication" type="button" role="tab" aria-selected="true">Publication</button>
           <button class="admin-tab" data-tab="gallery" type="button" role="tab" aria-selected="false">Gallery</button>
           <button class="admin-tab" data-tab="members" type="button" role="tab" aria-selected="false">Members</button>
+          <button class="admin-tab" data-tab="intern" type="button" role="tab" aria-selected="false">Intern Applications</button>
         </div>
 
         <section class="admin-pane is-active" data-pane="publication">
@@ -79,9 +82,10 @@
             <label><span>Journal</span><input id="pubJournal" type="text" required /></label>
             <label><span>Authors</span><textarea id="pubAuthors" rows="3" required></textarea></label>
             <label><span>DOI (optional)</span><input id="pubDoi" type="text" /></label>
-            <label><span>Citations</span><input id="pubCitations" type="number" min="0" value="0" /></label>
             <p class="publication-authors admin-inline-note">Category metrics are auto-applied from journal mapping (JCR/SJR quartile, top percentile, indexed DB).</p>
             <label><span>Graphical Abstract (optional)</span><input id="pubImageFile" type="file" accept="image/*" /></label>
+            <label><span>PDF 파일 (optional)</span><input id="pubPdfFile" type="file" accept="application/pdf" /></label>
+            <label><span>PDF URL (optional, 파일 대신 링크 입력)</span><input id="pubPdfUrl" type="url" placeholder="https://doi.org/..." /></label>
             <button class="btn btn-primary" type="submit">Save Publication</button>
           </form>
           <div id="pubRecentList" class="admin-list"></div>
@@ -109,6 +113,22 @@
             <label><span>Email</span><input id="memEmail" type="email" /></label>
             <label><span>Career</span><input id="memCareer" type="text" /></label>
             <label>
+              <span>Scopus Author ID <small style="font-weight:400;color:var(--muted)">(숫자만 입력, 예: 7404006949)</small></span>
+              <input id="memScopusId" type="text" placeholder="57224628166" style="font-family:monospace;" />
+            </label>
+            <label>
+              <span>H-index <small style="font-weight:400;color:var(--muted)">(수동 입력, OpenAlex에 없을 때)</small></span>
+              <input id="memHIndex" type="number" min="0" placeholder="예: 5" />
+            </label>
+            <label>
+              <span>Documents (Works) <small style="font-weight:400;color:var(--muted)">(수동 입력)</small></span>
+              <input id="memWorksCount" type="number" min="0" placeholder="예: 20" />
+            </label>
+            <label>
+              <span>Citations <small style="font-weight:400;color:var(--muted)">(수동 입력)</small></span>
+              <input id="memCitedBy" type="number" min="0" placeholder="예: 80" />
+            </label>
+            <label>
               <span>Track</span>
               <select id="memTrack">
                 <option value="current">Current</option>
@@ -131,6 +151,12 @@
             </label>
           </div>
           <div id="memRecentList" class="admin-list"></div>
+        </section>
+
+        <section class="admin-pane" data-pane="intern">
+          <h3>인턴 지원 내역</h3>
+          <p class="publication-authors" style="margin-bottom:1rem;">지원자 목록 (최신순). 지원 페이지: <a href="./intern.html" target="_blank" rel="noopener noreferrer">intern.html</a></p>
+          <div id="internApplicationList" class="admin-list"></div>
         </section>
       </section>
 

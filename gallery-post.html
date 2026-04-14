@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASL | Gallery</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Analytical Spectroscopy Laboratory" />
+    <meta property="og:title" content="ASL | Gallery" />
+    <meta
+      property="og:description"
+      content="Gallery post from Hanyang University Analytical Spectroscopy Laboratory (ASL)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/asl-favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .gallery-post-wrap {
+        width: min(960px, 94%);
+        margin: 0 auto;
+        padding: 2rem 0 5rem;
+      }
+      .gallery-post-header {
+        margin-bottom: 2rem;
+      }
+      .gallery-post-header h1 {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        margin-bottom: 0.5rem;
+      }
+      .gallery-post-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .gallery-post-content {
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        white-space: pre-wrap;
+      }
+      .gallery-post-images {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+      .gallery-post-images img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        display: block;
+      }
+      .gallery-post-footer {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .gallery-post-loading {
+        padding: 4rem 0;
+        color: var(--muted);
+        text-align: center;
+      }
+      .gallery-post-error {
+        padding: 4rem 0;
+        color: var(--muted);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
+        <span class="brand-lines">
+          <span class="brand-main">분광분석연구실</span>
+          <span class="brand-sub">Analytical Spectroscopy Laboratory</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="./index.html#top">About</a>
+        <a href="./index.html#research">Research</a>
+        <a href="./publication.html">Publications</a>
+        <a href="./index.html#professor">Professor</a>
+        <a href="./members.html">Members</a>
+        <a href="./gallery.html">Gallery</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-intern-btn" href="./intern.html">인턴 지원</a>
+        <a class="header-cta" href="./gallery.html">← Gallery</a>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="gallery-post-wrap">
+        <div id="galleryPostContent" class="gallery-post-loading">
+          <p>Loading...</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="./admin-config.js"></script>
+    <script src="./public-data.js"></script>
+    <script>
+      (() => {
+        const contentEl = document.getElementById("galleryPostContent");
+        const FALLBACK_IMG = "./assets/publication-placeholder.svg";
+
+        const getQueryId = () => {
+          const params = new URLSearchParams(window.location.search);
+          return params.get("id") || "";
+        };
+
+        const esc = (v = "") =>
+          String(v)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;");
+
+        const toInt = (v, fallback = 0) => {
+          const n = Number.parseInt(v, 10);
+          return Number.isFinite(n) ? n : fallback;
+        };
+
+        const isPlaceholderTitle = (value = "") => {
+          const t = String(value || "").trim().toLowerCase();
+          return !t || t === "content" || t === "컨텐츠 바로가기" || t === "콘텐츠 바로가기";
+        };
+
+        const resolveTitle = (row) => {
+          if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
+          const dateText = String(row?.date || "").trim();
+          if (dateText) return `${dateText} ASL Gallery`;
+          return `ASL Gallery #${row?.id || ""}`;
+        };
+
+        const toLocalOriginalPath = (rawUrl = "") => {
+          const url = String(rawUrl || "").trim();
+          if (!url) return "";
+          const marker = "/gallery/imported/";
+          const idx = url.indexOf(marker);
+          if (idx === -1) return "";
+          const rel = url.slice(idx + marker.length);
+          return `./assets/gallery/imported/${rel}`;
+        };
+
+        const toGalleryFullUrl = (rawUrl = "") => {
+          const url = String(rawUrl || "").trim();
+          if (!url) return FALLBACK_IMG;
+          const local = toLocalOriginalPath(url);
+          if (local) return local;
+          return url;
+        };
+
+        const normalizeRows = (payload) =>
+          (Array.isArray(payload) ? payload : []).map((row) => ({
+            ...row,
+            id: String(row.id || ""),
+            title: resolveTitle(row),
+            date: String(row.date || "").trim(),
+            author: String(row.author || "").trim(),
+            content: String(row.content || row.description || "").trim(),
+            source_url: String(row.source_url || "").trim(),
+            source_present_num: String(row.source_present_num || "").trim(),
+            images: Array.isArray(row.images) ? row.images.filter(Boolean) : []
+          }));
+
+        const loadGalleryData = async () => {
+          if (window.ASLData?.loadGalleryPosts) return window.ASLData.loadGalleryPosts();
+          const candidates = [
+            "./data/gallery_migration/gallery-data.runtime.json",
+            "./data/gallery_migration/gallery-data.supabase.json",
+            "./data/gallery_migration/gallery-data.json"
+          ];
+          let lastError = null;
+          for (const url of candidates) {
+            try {
+              const r = await fetch(url, { cache: "no-store" });
+              if (!r.ok) throw new Error(`Failed to load: ${r.status}`);
+              return await r.json();
+            } catch (err) {
+              lastError = err;
+            }
+          }
+          throw lastError || new Error("Failed to load gallery data");
+        };
+
+        const renderPost = (entry) => {
+          const title = esc(entry.title);
+          const meta = [entry.date, entry.author].filter(Boolean).join(" · ");
+          const content = entry.content
+            ? `<p class="gallery-post-content">${esc(entry.content)}</p>`
+            : "";
+          const images = entry.images.length
+            ? entry.images
+                .map(
+                  (src) =>
+                    `<img src="${esc(toGalleryFullUrl(src))}" alt="${esc(entry.title)}" loading="lazy" />`
+                )
+                .join("")
+            : `<img src="${FALLBACK_IMG}" alt="No image available" />`;
+
+          const sourceLink = entry.source_url
+            ? `<a class="btn btn-ghost" href="${esc(entry.source_url)}" target="_blank" rel="noopener noreferrer">원문 게시글 보기</a>`
+            : "";
+
+          document.title = `${entry.title} | ASL Gallery`;
+
+          contentEl.innerHTML = `
+            <div class="gallery-post-header">
+              <p class="eyebrow">Gallery</p>
+              <h1>${title}</h1>
+              <p class="gallery-post-meta">${esc(meta)}</p>
+            </div>
+            ${content}
+            <div class="gallery-post-images">${images}</div>
+            <div class="gallery-post-footer">
+              <a class="btn btn-contrast" href="./gallery.html">← Gallery 목록</a>
+              ${sourceLink}
+            </div>
+          `;
+        };
+
+        const showError = (msg) => {
+          contentEl.innerHTML = `<div class="gallery-post-error"><p>${esc(msg)}</p><a class="btn btn-ghost" href="./gallery.html">← Gallery 목록</a></div>`;
+        };
+
+        const targetId = getQueryId();
+        if (!targetId) {
+          showError("Gallery 포스트 ID가 없습니다.");
+        } else {
+          loadGalleryData()
+            .then((payload) => {
+              const rows = normalizeRows(payload);
+              const entry = rows.find((r) => r.id === targetId);
+              if (!entry) {
+                showError(`ID "${targetId}"에 해당하는 게시물을 찾을 수 없습니다.`);
+              } else {
+                renderPost(entry);
+              }
+            })
+            .catch((err) => {
+              showError(err.message || "Gallery 데이터를 불러올 수 없습니다.");
+            });
+        }
+      })();
+    </script>
+  </body>
+</html>

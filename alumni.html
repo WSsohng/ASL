@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,8 @@
   <body>
     <header class="site-header">
       <a class="brand" href="./index.html">
-        <span class="brand-mark">ASL</span>
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
         <span class="brand-lines">
           <span class="brand-main">분광분석연구실</span>
           <span class="brand-sub">Analytical Spectroscopy Laboratory</span>
@@ -44,10 +45,13 @@
         <a href="./index.html#research">Research</a>
         <a href="./publication.html">Publications</a>
         <a href="./index.html#professor">Professor</a>
-        <a href="./index.html#members">Members</a>
+        <a href="./members.html">Members</a>
         <a href="./gallery.html">Gallery</a>
       </nav>
-      <a class="header-cta" href="./alumni.html">Alumni</a>
+      <div class="header-actions">
+        <a class="header-intern-btn" href="./intern.html">인턴 지원</a>
+        <a class="header-cta" href="./alumni.html">Alumni</a>
+      </div>
     </header>
 
     <main class="page-shell">
@@ -129,7 +133,7 @@
             .replace(/[^a-z]/g, "");
         const splitAuthors = (authorText = "") =>
           authorText
-            .split(",")
+            .split(/[;,]/)
             .map((v) => v.trim())
             .filter(Boolean);
         const parseAuthorToken = (token = "") => {
@@ -186,36 +190,52 @@
           if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
           return [...aliases].filter(Boolean);
         };
+        /* Scopus IDs confirmed from Scopus / ScholarWorks Hanyang */
+        const KNOWN_SCOPUS_IDS = {
+          "Hoeil Chung":    "7404006949",
+          "Haeseong Jeong": "57224628166",
+          "Seongsoo Jeong": "57855298300"
+        };
+        /* Populated from DB member data after load */
+        const memberScopusMap = new Map(); /* normalizedName → scopus_id */
+
+        const getMemberScopusId = (authorName = "") => {
+          const key = normalizeName(authorName);
+          if (memberScopusMap.has(key)) return memberScopusMap.get(key);
+          const known = Object.entries(KNOWN_SCOPUS_IDS).find(([n]) => normalizeName(n) === key);
+          return known ? known[1] : null;
+        };
+
+        const getScopusUrl = (sid) =>
+          `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(sid)}`;
+
         const getScopusSearchUrl = (name = "") => {
+          const sid = getMemberScopusId(name);
+          if (sid) return getScopusUrl(sid);
           const { first, last } = splitName(name);
           const query = `${last} ${first} hanyang`;
           return `https://www.scopus.com/search/form.uri?display=authorLookup&origin=resultslist&st1=${encodeURIComponent(query)}`;
         };
-        const AUTHOR_METRIC_OVERRIDES = [
-          {
-            name: "Haeseong Jeong",
-            hIndex: 3,
-            works: 10,
-            citations: 28,
-            affiliation: "Hanyang University, Seoul, South Korea",
-            scopusId: "57224628166"
-          },
-          {
-            name: "Yoonji Kim",
-            hIndex: "-",
-            works: "-",
-            citations: "-",
-            affiliation: "Hanyang University, Seoul, South Korea"
-          }
-        ];
-        const getAuthorOverride = (name = "") => {
-          const key = normalizeName(name);
-          return AUTHOR_METRIC_OVERRIDES.find((item) => normalizeName(item.name) === key) || null;
-        };
+
         const metricCache = new Map();
+        const memberManualMetrics = new Map(); /* normalizedName → {hIndex, works, citations} */
+        const openAlexScopusCache = new Map();
         const authorToPapers = new Map();
         const memberPhotoMap = new Map();
         let memberIndex = [];
+
+        const fetchOpenAlexIdByScopus = async (sid) => {
+          if (openAlexScopusCache.has(sid)) return openAlexScopusCache.get(sid);
+          try {
+            const res = await fetch(`https://api.openalex.org/authors?filter=ids.scopus:${encodeURIComponent(sid)}&per-page=1`);
+            if (!res.ok) { openAlexScopusCache.set(sid, null); return null; }
+            const data = await res.json();
+            const id = data?.results?.[0]?.id || null;
+            const shortId = id ? id.replace("https://openalex.org/", "") : null;
+            openAlexScopusCache.set(sid, shortId);
+            return shortId;
+          } catch { openAlexScopusCache.set(sid, null); return null; }
+        };
 
         const cleanText = (value = "") => String(value).replace(/\s+/g, " ").trim();
 
@@ -249,13 +269,39 @@
         };
         const fetchAuthorMetrics = async (authorName) => {
           if (metricCache.has(authorName)) return metricCache.get(authorName);
-          const override = getAuthorOverride(authorName);
-          if (override) {
-            metricCache.set(authorName, override);
-            return override;
+          const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
+
+          /* Priority 0: manually entered metrics in DB */
+          const manualKey = normalizeName(authorName);
+          const manual = memberManualMetrics.get(manualKey);
+          if (manual) {
+            metricCache.set(authorName, manual);
+            return manual;
           }
-          const fallback = { hIndex: "-", works: "-", citations: "-", affiliation: "Hanyang University" };
+
           try {
+            /* Priority 1: Scopus ID → OpenAlex */
+            const sid = getMemberScopusId(authorName);
+            if (sid) {
+              const openAlexId = await fetchOpenAlexIdByScopus(sid);
+              if (openAlexId) {
+                const res = await fetch(`https://api.openalex.org/authors/${openAlexId}`);
+                if (res.ok) {
+                  const row = await res.json();
+                  const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
+                  const out = {
+                    hIndex: row?.summary_stats?.h_index ?? "—",
+                    works: row?.works_count ?? "—",
+                    citations: row?.cited_by_count ?? "—",
+                    affiliation: affil,
+                    source: "Scopus"
+                  };
+                  metricCache.set(authorName, out);
+                  return out;
+                }
+              }
+            }
+            /* Priority 2: name-based OpenAlex search */
             const { first, last } = splitName(authorName);
             const queries = [...new Set([
               authorName,
@@ -269,46 +315,40 @@
               const res = await fetch(url);
               if (!res.ok) continue;
               const data = await res.json();
-              const rows = Array.isArray(data?.results) ? data.results : [];
-              rows.forEach((row) => {
+              (data?.results || []).forEach((row) => {
                 const id = row?.id || `${row?.display_name || ""}:${row?.works_count || 0}`;
                 if (!byId.has(id)) byId.set(id, row);
               });
             }
             const candidates = [...byId.values()];
-            if (!candidates.length) {
-              metricCache.set(authorName, fallback);
-              return fallback;
-            }
+            if (!candidates.length) { metricCache.set(authorName, fallback); return fallback; }
             const nameNorm = normalizeName(authorName);
-            const score = (candidate) => {
-              const display = normalizeName(candidate?.display_name || "");
-              const inst = (candidate?.last_known_institutions || [])
-                .map((x) => x?.display_name || "")
-                .join(" ")
-                .toLowerCase();
-              const h = Number(candidate?.summary_stats?.h_index ?? 0);
-              const w = Number(candidate?.works_count ?? 0);
-              const c = Number(candidate?.cited_by_count ?? 0);
+            const score = (c) => {
+              const display = normalizeName(c?.display_name || "");
+              const inst = (c?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
+              const h = Number(c?.summary_stats?.h_index ?? 0);
+              const w = Number(c?.works_count ?? 0);
+              const ci = Number(c?.cited_by_count ?? 0);
               let s = 0;
               if (display === nameNorm) s += 8;
               if (display.includes(nameNorm) || nameNorm.includes(display)) s += 4;
               if (inst.includes("hanyang")) s += 6;
               if (h > 0) s += 3;
               if (w > 0) s += 2;
-              if (c > 0) s += 1;
-              if (h === 0 && w === 0 && c === 0) s -= 4;
+              if (ci > 0) s += 1;
+              if (h === 0 && w === 0 && ci === 0) s -= 4;
               return s;
             };
             candidates.sort((a, b) => score(b) - score(a));
-            const best = candidates[0];
+            let best = candidates[0];
+            const bestNonZero = candidates.find((x) => Number(x?.summary_stats?.h_index ?? 0) > 0 || Number(x?.works_count ?? 0) > 0);
+            if (bestNonZero && Number(best?.summary_stats?.h_index ?? 0) === 0 && Number(best?.works_count ?? 0) === 0) best = bestNonZero;
             const out = {
-              hIndex: best?.summary_stats?.h_index ?? "-",
-              works: best?.works_count ?? "-",
-              citations: best?.cited_by_count ?? "-",
-              affiliation:
-                (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") ||
-                "Hanyang University"
+              hIndex: best?.summary_stats?.h_index ?? "—",
+              works: best?.works_count ?? "—",
+              citations: best?.cited_by_count ?? "—",
+              affiliation: (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University",
+              source: "OpenAlex"
             };
             metricCache.set(authorName, out);
             return out;
@@ -319,43 +359,56 @@
         };
         const renderAuthorModal = async (name, image) => {
           const rows = (authorToPapers.get(name) || []).sort((a, b) => Number(b.year) - Number(a.year));
-          modalTitleEl.textContent = `${name} - Publications`;
+          modalTitleEl.textContent = `${name} — Publications`;
           profileNameEl.textContent = name;
           profileImageEl.src = image || memberPhotoMap.get(normalizeName(name)) || "./assets/publication-placeholder.svg";
           profileImageEl.alt = `${name} profile image`;
           profileAffilEl.textContent = "Hanyang University";
-          profileHIndexEl.textContent = "H-index: loading...";
-          profileWorksEl.textContent = "Works: -";
-          profileCitationsEl.textContent = "Citations: -";
+          profileHIndexEl.textContent = "H-index: 불러오는 중...";
+          profileWorksEl.textContent = "Works: —";
+          profileCitationsEl.textContent = "Citations: —";
           profileScholarLinkEl.href = `https://scholar.google.com/scholar?q=${encodeURIComponent(`${name} hanyang`)}`;
-          const override = getAuthorOverride(name);
-          profileScopusLinkEl.href = override?.scopusId
-            ? `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(override.scopusId)}`
-            : getScopusSearchUrl(name);
+
+          const sid = getMemberScopusId(name);
+          if (sid) {
+            profileScopusLinkEl.href = getScopusUrl(sid);
+            profileScopusLinkEl.textContent = "View on Scopus ↗";
+          } else {
+            profileScopusLinkEl.href = getScopusSearchUrl(name);
+            profileScopusLinkEl.textContent = "Check on Scopus Author Search";
+          }
 
           if (!rows.length) {
             modalBodyEl.innerHTML = '<p class="publication-authors">No publication entries matched for this member.</p>';
           } else {
             modalBodyEl.innerHTML = rows
-              .map(
-                (row) => `
-                  <article class="author-paper-item">
-                    <a class="author-paper-jump" href="./publication.html#${esc(row.year)}" aria-label="Go to publication">&#8599;</a>
-                    <h3>${esc(row.title)}</h3>
-                    <p class="author-paper-journal">${esc(row.journal || "Journal information")}</p>
-                    <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
-                    <p>${renderAuthorsInline(row.authors || "")}</p>
-                  </article>
-                `
-              )
-              .join("");
+              .map((row) => `
+                <article class="author-paper-item">
+                  <a class="author-paper-jump" href="./publication.html?year=${esc(row.year)}" aria-label="Go to publication">↗</a>
+                  <h3>${esc(row.title)}</h3>
+                  <p class="author-paper-journal">${esc(row.journal || "Journal information")}${row.year ? ` (${esc(row.year)})` : ""}</p>
+                  <a class="author-paper-scholar" href="https://scholar.google.com/scholar?q=${encodeURIComponent(`${row.title} ${name}`)}" target="_blank" rel="noopener noreferrer">Verify on Google Scholar</a>
+                  <p class="publication-authors" style="font-size:0.82rem;margin-top:0.35rem;">${renderAuthorsInline(row.authors || "")}</p>
+                </article>
+              `).join("");
           }
           if (!modalEl.open) modalEl.showModal();
+
           const metrics = await fetchAuthorMetrics(name);
           profileHIndexEl.textContent = `H-index: ${fmt(metrics.hIndex)}`;
           profileWorksEl.textContent = `Works: ${fmt(metrics.works)}`;
           profileCitationsEl.textContent = `Citations: ${fmt(metrics.citations)}`;
           profileAffilEl.textContent = metrics.affiliation || "Hanyang University";
+
+          /* Show metric source */
+          let sourceEl = document.getElementById("alumniMetricSource");
+          if (!sourceEl) {
+            sourceEl = document.createElement("small");
+            sourceEl.id = "alumniMetricSource";
+            sourceEl.style.cssText = "color:var(--muted);font-size:0.72rem;display:block;margin-top:0.3rem;";
+            profileScopusLinkEl.insertAdjacentElement("afterend", sourceEl);
+          }
+          sourceEl.textContent = metrics.source ? `출처: ${metrics.source}` : "";
         };
 
         Promise.all([
@@ -365,10 +418,30 @@
           .then(([payload, publicationPayload]) => {
             const alumni = Array.isArray(payload?.alumni) ? payload.alumni : [];
             const currentMembers = Array.isArray(payload?.current_members) ? payload.current_members : [];
-            const people = [...currentMembers, ...alumni];
+            const faculty = Array.isArray(payload?.faculty) ? payload.faculty : [];
+            const people = [...faculty, ...currentMembers, ...alumni];
             const names = [...new Set(["Hoeil Chung", ...people.map((person) => cleanText(person.name || "")).filter(Boolean)])];
             memberIndex = names.map((name) => ({ name, aliases: makeAliases(name) }));
+
+            /* Build Scopus ID map and manual metrics map from DB */
+            memberScopusMap.clear();
+            memberManualMetrics.clear();
             people.forEach((person) => {
+              const sid = person?.scopus_id || "";
+              if (sid) {
+                makeAliases(person.name).forEach((alias) => { if (alias) memberScopusMap.set(alias, sid); });
+                memberScopusMap.set(normalizeName(person.name), sid);
+              }
+              if (person.h_index != null || person.works_count != null || person.cited_by_count != null) {
+                const metrics = {
+                  hIndex: person.h_index != null ? person.h_index : "—",
+                  works: person.works_count != null ? person.works_count : "—",
+                  citations: person.cited_by_count != null ? person.cited_by_count : "—",
+                  affiliation: "Hanyang University",
+                  source: "Scopus"
+                };
+                memberManualMetrics.set(normalizeName(person.name), metrics);
+              }
               const image = String(person?.image || "").trim();
               if (!image) return;
               putMemberPhoto(person.name, image);

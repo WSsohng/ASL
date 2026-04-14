@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ASL | Analytical Spectroscopy Laboratory</title>
+    <title>Analytical Spectroscopy Laboratory</title>
     <meta
       name="description"
       content="Hanyang University Analytical Spectroscopy Laboratory (ASL) research and publications."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Analytical Spectroscopy Laboratory" />
-    <meta property="og:title" content="ASL | Analytical Spectroscopy Laboratory" />
+    <meta property="og:title" content="Analytical Spectroscopy Laboratory" />
     <meta
       property="og:description"
       content="Hanyang University Analytical Spectroscopy Laboratory (ASL) research and publications."
@@ -19,7 +19,7 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ASL | Analytical Spectroscopy Laboratory" />
+    <meta name="twitter:title" content="Analytical Spectroscopy Laboratory" />
     <meta
       name="twitter:description"
       content="Hanyang University Analytical Spectroscopy Laboratory (ASL) research and publications."
@@ -52,7 +52,8 @@
 
     <header class="site-header">
       <a class="brand" href="#top">
-        <span class="brand-mark">ASL</span>
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
         <span class="brand-lines">
           <span class="brand-main">분광분석연구실</span>
           <span class="brand-sub">Analytical Spectroscopy Laboratory</span>
@@ -63,10 +64,13 @@
         <a href="#research">Research</a>
         <a href="./publication.html">Publications</a>
         <a href="#professor">Professor</a>
-        <a href="#members">Members</a>
+        <a href="./members.html">Members</a>
         <a href="./gallery.html">Gallery</a>
       </nav>
-      <a class="header-cta" href="#contact">Contact</a>
+      <div class="header-actions">
+        <a class="header-intern-btn" href="./intern.html">인턴 지원</a>
+        <a class="header-cta" href="#contact">Contact</a>
+      </div>
     </header>
 
     <main id="top">
@@ -105,84 +109,50 @@
         <p class="eyebrow">Research Focus</p>
         <h2>Research Themes</h2>
         <div class="research-cards" id="researchCards">
-          <article class="research-card rc-1" data-depth="0.9">
-            <h3>Biological & Clinical Samples</h3>
-            <div class="research-pattern p-grid"></div>
-            <p class="card-no">01 / 05</p>
-            <p class="card-kor">
-              생체유래 시료(소변, 담즙, 체액 등)에서 질병 관련 신호를 정량화하고, 전처리부터 검증까지
-              임상 적용 가능성을 고려한 분석 프로토콜을 설계합니다.
-            </p>
-            <p class="card-copy">
-              We establish spectroscopy-based quantitative workflows for clinical matrices, integrating
-              Raman/SERS and NIR fingerprints with robust validation to support translational diagnostics.
-            </p>
-            <p class="card-tags">Topics: Clinical diagnostics, urine/bile analysis, biomarker quantitation</p>
+          <article class="research-card rc-1" data-research-id="1" role="button" tabindex="0" aria-haspopup="dialog" data-depth="0.9">
+            <p class="card-no">01 / 03</p>
+            <h3>Spectroscopy &amp; Sensing</h3>
+            <div class="research-pattern rc-img-wrap">
+              <img src="./assets/research-1-thumb.png" alt="" aria-hidden="true" />
+            </div>
+            <p class="card-hint">자세히 보기 →</p>
           </article>
-          <article class="research-card rc-2" data-depth="1.1">
-            <h3>Food, Agriculture & Environment</h3>
-            <div class="research-pattern p-wave"></div>
-            <p class="card-no">02 / 05</p>
-            <p class="card-kor">
-              식품 원산지, 품질, 위변조 판별과 환경 시료 모니터링을 위해 비파괴 분광분석 기반의
-              분류·정량 모델을 개발합니다.
-            </p>
-            <p class="card-copy">
-              We combine molecular and elemental spectral signatures for origin discrimination, quality
-              assessment, and contamination screening in complex food and environmental matrices.
-            </p>
-            <p class="card-tags">Topics: Origin authentication, quality control, contamination screening</p>
+          <article class="research-card rc-2" data-research-id="2" role="button" tabindex="0" aria-haspopup="dialog" data-depth="1.1">
+            <p class="card-no">02 / 03</p>
+            <h3>AI &amp; Analytical Chemistry</h3>
+            <div class="research-pattern rc-img-wrap">
+              <img src="./assets/research-2-thumb.png" alt="" aria-hidden="true" />
+            </div>
+            <p class="card-hint">자세히 보기 →</p>
           </article>
-          <article class="research-card rc-3" data-depth="1.25">
-            <h3>Spectroscopic Platforms</h3>
-            <div class="research-pattern p-ray"></div>
-            <p class="card-no">03 / 05</p>
-            <p class="card-kor">
-              Raman, SERS, NIR, 전기화학-분광 융합 등 복수의 플랫폼을 시료 특성에 맞게 선택·결합하여
-              감도, 선택성, 재현성을 높입니다.
-            </p>
-            <p class="card-copy">
-              We engineer multimodal spectroscopy systems, including transmission Raman, reusable SERS
-              substrates, and electrochemical-coupled sensing, to maximize sensitivity and reproducibility.
-            </p>
-            <p class="card-tags">Topics: Raman/SERS/NIR, multimodal sensing, substrate engineering</p>
-          </article>
-          <article class="research-card rc-4" data-depth="1">
-            <h3>Chemometrics & AI Modeling</h3>
-            <div class="research-pattern p-loop"></div>
-            <p class="card-no">04 / 05</p>
-            <p class="card-kor">
-              PCA, PLS, PLS-DA, SVM, 딥러닝 기반 모델을 사용해 스펙트럼 데이터를 해석하고,
-              과적합을 줄인 재현 가능한 정량·분류 모델을 구축합니다.
-            </p>
-            <p class="card-copy">
-              Our chemometric pipeline integrates preprocessing, variable selection, and multivariate or
-              machine-learning models (PCA, PLS, PLS-DA, SVM, deep learning) for robust prediction.
-            </p>
-            <p class="card-tags">Topics: Data fusion, model validation, explainable prediction</p>
-          </article>
-          <article class="research-card rc-5" data-depth="1.05">
-            <h3>Quantitative Translation</h3>
-            <div class="research-pattern p-lattice"></div>
-            <p class="card-no">05 / 05</p>
-            <p class="card-kor">
-              연구실 수준의 분석법을 실제 사용 환경으로 확장하기 위해 교정 이전(calibration transfer),
-              장비 간 편차 보정, 반복 재현성 검증까지 포함한 전주기 평가를 수행합니다.
-            </p>
-            <p class="card-copy">
-              We emphasize deployable quantitative analytics through calibration transfer, inter-instrument
-              harmonization, and long-term robustness tests under practical measurement conditions.
-            </p>
-            <p class="card-tags">Topics: Calibration transfer, robustness, real-world deployment</p>
+          <article class="research-card rc-3" data-research-id="3" role="button" tabindex="0" aria-haspopup="dialog" data-depth="1.25">
+            <p class="card-no">03 / 03</p>
+            <h3>Application in Industry</h3>
+            <div class="research-pattern rc-img-wrap">
+              <img src="./assets/research-3-thumb.png" alt="" aria-hidden="true" />
+            </div>
+            <p class="card-hint">자세히 보기 →</p>
           </article>
         </div>
       </section>
+
+      <dialog id="researchModal" class="author-modal research-modal">
+        <div class="author-modal-head">
+          <div>
+            <h3 id="researchModalTitle">Research Theme</h3>
+          </div>
+          <button id="researchModalClose" class="modal-close" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="research-modal-body">
+          <div id="researchModalContent" class="research-modal-content"></div>
+        </div>
+      </dialog>
 
       <section id="publications" class="section">
         <div class="section-head">
           <div>
             <p class="eyebrow">Publications</p>
-            <h2>Recent Entries</h2>
+            <h2>RECENT WORKS</h2>
           </div>
           <a class="btn btn-contrast" href="./publication.html">Open Full Publication</a>
         </div>
@@ -220,6 +190,8 @@
               <li>Industrial R&D at SK Energy: NIR online process monitoring systems</li>
               <li>Professor at Hanyang University since 2002</li>
               <li>200+ peer-reviewed publications; ICNIRS PAC Elected Member (2023-2027)</li>
+              <li>Location: Room 613-1, Department of Chemistry, College of Natural Sciences, Hanyang University</li>
+              <li>Tel: 02-2220-0937</li>
             </ul>
             <div class="professor-metrics" id="professorMetrics">
               <article class="prof-metric-card">
@@ -244,34 +216,6 @@
         </article>
       </section>
 
-      <section id="members" class="section members-section">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Members</p>
-            <h2>Team</h2>
-          </div>
-          <a class="btn btn-contrast" href="./alumni.html">Alumni Archive</a>
-        </div>
-
-        <div class="member-carousel" data-member-carousel>
-          <button class="member-nav prev" type="button" aria-label="Previous members">&#10094;</button>
-          <div class="member-viewport" data-member-viewport>
-            <div class="member-track">
-              <article class="member-card" data-member-name="Bui Thu Thuy"><img class="member-photo" src="./assets/members/current/bui-thu-thuy.jpg" alt="Bui Thu Thuy profile" loading="lazy" /><h3>Bui Thu Thuy</h3><p>Postdoctoral researcher</p></article>
-              <article class="member-card" data-member-name="Yunjung Kim"><img class="member-photo" src="./assets/members/current/yunjung-kim.jpg" alt="Yunjung Kim profile" loading="lazy" /><h3>Yunjung Kim</h3><p>Postdoctoral researcher</p></article>
-              <article class="member-card" data-member-name="Haeseong Jeong"><img class="member-photo" src="./assets/members/current/haeseong-jeong.jpg" alt="Haeseong Jeong profile" loading="lazy" /><h3>Haeseong Jeong</h3><p>Ph. D. Candidate</p></article>
-              <article class="member-card" data-member-name="Seongsoo Jeong"><img class="member-photo" src="./assets/members/current/seongsoo-jeong.jpg" alt="Seongsoo Jeong profile" loading="lazy" /><h3>Seongsoo Jeong</h3><p>Ph. D. Candidate</p></article>
-              <article class="member-card" data-member-name="Eunbi Jang"><img class="member-photo" src="./assets/members/current/eunbi-jang.jpg" alt="Eunbi Jang profile" loading="lazy" /><h3>Eunbi Jang</h3><p>Ph. D. Candidate</p></article>
-              <article class="member-card" data-member-name="Sangjae Kim"><img class="member-photo" src="./assets/members/current/sangjae-kim.png" alt="Sangjae Kim profile" loading="lazy" /><h3>Sangjae Kim</h3><p>Ph. D. Candidate</p></article>
-              <article class="member-card" data-member-name="Juyoung Park"><img class="member-photo" src="./assets/members/current/juyoung-park.jpg" alt="Juyoung Park profile" loading="lazy" /><h3>Juyoung Park</h3><p>Ph. D. Candidate</p></article>
-              <article class="member-card" data-member-name="Junhee Kim"><img class="member-photo" src="./assets/members/current/junhee-kim.jpg" alt="Junhee Kim profile" loading="lazy" /><h3>Junhee Kim</h3><p>Ph. D Candidate</p></article>
-              <article class="member-card" data-member-name="Younghum Cho"><img class="member-photo" src="./assets/members/current/younghum-cho.jpg" alt="Younghum Cho profile" loading="lazy" /><h3>Younghum Cho</h3><p>Ph. D Candidate</p></article>
-              <article class="member-card" data-member-name="Jiwoo Cho"><img class="member-photo" src="./assets/members/current/jiwoo-cho.jpg" alt="Jiwoo Cho profile" loading="lazy" /><h3>Jiwoo Cho</h3><p>Master Course</p></article>
-            </div>
-          </div>
-          <button class="member-nav next" type="button" aria-label="Next members">&#10095;</button>
-        </div>
-      </section>
 
       <section id="gallery" class="section">
         <div class="section-head">
@@ -292,10 +236,12 @@
 
     <footer id="contact" class="site-footer">
       <h2>Contact & Laboratory Information</h2>
-      <p>
+      <p class="contact-address-ko">서울특별시 성동구 왕십리로 222 한양대학교 자연과학대학 화학과 613-1호</p>
+      <p class="contact-address-en">
         Analytical Spectroscopy Laboratory 613-1, Department of Chemistry, College of Natural
         Sciences, Hanyang University, 222 Wangsimni-ro, Seongdong-gu, Seoul 04763, Korea
       </p>
+      <p class="contact-tel">Tel: 02-2220-0937</p>
       <a href="mailto:hoeil@hanyang.ac.kr">hoeil@hanyang.ac.kr</a>
     </footer>
     <dialog id="memberAuthorModal" class="author-modal">
@@ -327,5 +273,83 @@
     <script src="./admin-config.js"></script>
     <script src="./public-data.js"></script>
     <script src="./script.js"></script>
+    <script>
+      (() => {
+        const RESEARCH_DATA = {
+          "1": {
+            title: "Spectroscopy & Sensing",
+            images: ["./assets/research-1-detail.png"],
+            kor: "담즙이나 소변과 같은 체액을 빠르고 비침습적으로 분석할 수 있는 분광학 기반의 진단 플랫폼을 개발하고 있습니다.",
+            eng: "Our research introduces a rapid, non-invasive diagnostic platform designed for spectroscopic analysis of biological fluids, including bile and urine. By integrating multimodal techniques such as SERS, Raman, IR, and NIR, our system captures distinct molecular fingerprints from complex clinical samples. Our high-throughput workflow is engineered to overcome the constraints of current clinical standards. Ultimately, it aims to provide an efficient tool for early detection and point-of-care medical screening.",
+            topics: "Raman · SERS · NIR · Multimodal sensing · Substrate engineering · Clinical diagnostics · Origin authentication",
+            papers: []
+          },
+          "2": {
+            title: "AI & Analytical Chemistry",
+            images: ["./assets/research-2-detail.png"],
+            kor: "우리 연구실은 분광학의 고차원적이고 복잡한 데이터 해석 문제를 화학계량학(Chemometrics)과 인공지능(AI)을 통해 해결하고 있습니다. 머신러닝과 딥러닝을 활용해 복잡한 스펙트럼에서 핵심 정보만 추출해 내고, 이를 바탕으로 매우 정확한 예측 및 분류 모델을 개발하는 데 주력합니다.",
+            eng: "Spectroscopy is a powerful analytical tool due to its non-destructive analysis and minimal sample preparation. However, interpreting spectroscopic data presents significant challenges. The data is highly dimensional, characterized by complex, broad, and overlapping peaks. Our laboratory is dedicated to overcoming these inherent limitations through advanced data processing (Chemometrics) and artificial intelligence. We focus on developing feature extraction and selection methodologies to obtain the most critical information hidden within complex spectra. By leveraging machine learning and deep learning algorithms, we build highly accurate classification and regression models.",
+            topics: "PCA · PLS · PLS-DA · SVM · Deep learning · Data fusion · Model validation · Explainable prediction",
+            papers: []
+          },
+          "3": {
+            title: "Application in Industry",
+            images: ["./assets/research-3-detail.png"],
+            kor: "삼성디스플레이, 현대제철, SK, ABB 등 다양한 산업 파트너와의 협력을 통해 분광분석 기술을 실제 제조 현장에 적용하고 있습니다.",
+            eng: "Beyond laboratory environments, our research focuses on the practical integration of spectroscopy into real-world industrial processes. We bridge the gap between analytical theory and field application by collaborating with diverse industrial partners and research institutions — including Samsung Display, Hyundai Steel, Altria, ABB, KNC, and SK — to solve complex manufacturing challenges.",
+            topics: "Calibration transfer · Process analytics · Industrial NIR · On-line monitoring · Partner collaboration",
+            papers: []
+          }
+        };
+
+        const modalEl = document.getElementById("researchModal");
+        const modalTitleEl = document.getElementById("researchModalTitle");
+        const modalContentEl = document.getElementById("researchModalContent");
+        const modalCloseBtn = document.getElementById("researchModalClose");
+
+        const openResearchModal = (id) => {
+          const data = RESEARCH_DATA[id];
+          if (!data || !modalEl) return;
+          modalTitleEl.textContent = data.title;
+          modalContentEl.innerHTML = `
+            ${(data.images || []).map(src => `<img src="${src}" class="rc-modal-img" alt="" />`).join("")}
+            <div class="rc-modal-desc">
+              <p class="rc-modal-kor">${data.kor}</p>
+              <p class="rc-modal-eng">${data.eng}</p>
+              <p class="rc-modal-topics"><strong>Keywords:</strong> ${data.topics}</p>
+              ${data.papers.length ? `<div class="rc-modal-papers"><strong>Representative Publications</strong><ul>${data.papers.map(p => `<li>${p}</li>`).join("")}</ul></div>` : ""}
+            </div>
+          `;
+          if (!modalEl.open) modalEl.showModal();
+          document.documentElement.classList.add("modal-open");
+          document.body.classList.add("modal-open");
+        };
+
+        const closeResearchModal = () => {
+          if (modalEl && modalEl.open) modalEl.close();
+          document.documentElement.classList.remove("modal-open");
+          document.body.classList.remove("modal-open");
+        };
+
+        document.getElementById("researchCards").addEventListener("click", (e) => {
+          const card = e.target.closest(".research-card[data-research-id]");
+          if (card) openResearchModal(card.dataset.researchId);
+        });
+        document.getElementById("researchCards").addEventListener("keydown", (e) => {
+          if (e.key !== "Enter" && e.key !== " ") return;
+          const card = e.target.closest(".research-card[data-research-id]");
+          if (card) { e.preventDefault(); openResearchModal(card.dataset.researchId); }
+        });
+
+        if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeResearchModal);
+        if (modalEl) {
+          modalEl.addEventListener("click", (e) => { if (e.target === modalEl) closeResearchModal(); });
+          modalEl.addEventListener("close", () => {
+            document.documentElement.classList.remove("modal-open");
+            document.body.classList.remove("modal-open");
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

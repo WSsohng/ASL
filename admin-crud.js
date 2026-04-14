@@ -95,6 +95,8 @@ const setSubmitLabels = () => {
 const resetPublicationFormState = () => {
   editingPublicationId = null;
   publicationForm.reset();
+  const previewEl = document.getElementById("pubCurrentImagePreview");
+  if (previewEl) previewEl.remove();
   setSubmitLabels();
 };
 
@@ -116,7 +118,11 @@ const uploadFileAndGetPublicUrl = async (bucket, file, folderPrefix) => {
   const { error: uploadError } = await supabase.storage.from(bucket).upload(objectPath, file, {
     upsert: true
   });
-  if (uploadError) throw uploadError;
+  if (uploadError) {
+    // Bucket may not exist — warn but do not block save
+    setStatus(`⚠️ 이미지 업로드 실패 (버킷 미설정): ${uploadError.message} — 이미지 없이 저장합니다.`, "error");
+    return null;
+  }
   const { data } = supabase.storage.from(bucket).getPublicUrl(objectPath);
   return data?.publicUrl || "";
 };
@@ -165,6 +171,8 @@ const renderMemberActionButtons = (id, track) => {
       : `<button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="set-alumni" data-id="${safeId}">Set Alumni</button>`;
   return `
     <div class="admin-item-actions">
+      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="move-up" data-id="${safeId}" title="위로">▲</button>
+      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="move-down" data-id="${safeId}" title="아래로">▼</button>
       ${quickSwitchBtn}
       <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="edit" data-id="${safeId}">Edit</button>
       <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button" data-entity="member" data-action="delete" data-id="${safeId}">Delete</button>
@@ -173,12 +181,12 @@ const renderMemberActionButtons = (id, track) => {
 };
 
 const loadRecent = async () => {
-  const [{ data: pubs }, { data: gals }, { data: mems }] = await Promise.all([
+  const [{ data: pubs }, { data: gals }, { data: mems }, { data: interns }] = await Promise.all([
     supabase
       .from("publications")
-      .select("id,title,year,journal,citations,created_at")
-      .order("created_at", { ascending: false })
-      .limit(20),
+      .select("id,seq_no,title,year,journal,citations,impact_factor,graphical_abstract_url,created_at")
+      .order("seq_no", { ascending: false, nullsFirst: false })
+      .limit(500),
     supabase
       .from("gallery_posts")
       .select("id,title,content,date_text,author,source_url,created_at")
@@ -186,13 +194,23 @@ const loadRecent = async () => {
       .limit(20),
     supabase
       .from("members")
-      .select("id,name,role,track,email,created_at")
-      .order("created_at", { ascending: false })
-      .limit(300)
+      .select("id,name,role,track,email,sort_order,created_at")
+      .order("sort_order", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: true })
+      .limit(300),
+    supabase
+      .from("intern_applications")
+      .select("id,name,student_id,phone,email,period,motivation,submitted_at")
+      .order("submitted_at", { ascending: false })
+      .limit(100)
   ]);
 
   renderRecent(pubRecentListEl, pubs || [], (x) => {
-    return `<h4>${esc(x.title || "")}</h4><p>${esc(x.journal || "")} · ${esc(x.year || "")} · Cited ${esc(x.citations ?? 0)} · IF ${esc(x.impact_factor ?? "-")}</p>${renderActionButtons("publication", x.id)}`;
+    const num = x.seq_no != null ? `<span style="display:inline-block;min-width:2rem;font-size:0.75rem;font-weight:700;color:#7aa4ff;margin-right:0.3rem;">#${x.seq_no}</span>` : "";
+    const thumb = x.graphical_abstract_url
+      ? `<img src="${esc(x.graphical_abstract_url)}" alt="abstract" style="width:72px;height:54px;object-fit:cover;border-radius:4px;flex-shrink:0;background:#1a2035;" />`
+      : `<div style="width:72px;height:54px;border-radius:4px;background:#1a2035;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#556;text-align:center;">No<br>image</div>`;
+    return `<div style="display:flex;gap:0.8rem;align-items:flex-start;">${thumb}<div style="min-width:0;flex:1;"><h4 style="margin:0 0 0.25rem;font-size:0.9rem;">${num}${esc(x.title || "")}</h4><p style="margin:0;font-size:0.8rem;">${esc(x.journal || "")} · ${esc(x.year || "")} · Cited ${esc(x.citations ?? 0)}</p>${renderActionButtons("publication", x.id)}</div></div>`;
   });
   renderRecent(galRecentListEl, gals || [], (x) => {
     const preview = String(x.content || "").trim().slice(0, 120);
@@ -220,6 +238,37 @@ const loadRecent = async () => {
       ${renderMemberActionButtons(x.id, track)}
     `;
   });
+
+  const internListEl = document.getElementById("internApplicationList");
+  if (internListEl) {
+    const internData = interns || [];
+    if (!internData.length) {
+      internListEl.innerHTML = '<p class="publication-authors" style="padding:1rem 0;">지원 내역이 없습니다.</p>';
+    } else {
+      internListEl.innerHTML = internData.map((x) => {
+        const submittedAt = x.submitted_at ? new Date(x.submitted_at).toLocaleString("ko-KR") : "-";
+        const motivationPreview = String(x.motivation || "").trim().slice(0, 150);
+        return `
+          <div class="admin-list-item" style="border-left: 3px solid rgba(177,202,255,0.4);padding-left:1rem;">
+            <h4>${esc(x.name || "")} <span style="font-weight:400;font-size:0.85rem;color:var(--muted);">(${esc(x.student_id || "")})</span></h4>
+            <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0;">
+              📧 ${esc(x.email || "-")} &nbsp;·&nbsp; 📞 ${esc(x.phone || "-")}
+            </p>
+            <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0;">
+              📅 희망 기간: ${esc(x.period || "-")} &nbsp;·&nbsp; 제출: ${esc(submittedAt)}
+            </p>
+            <p style="font-size:0.85rem;color:rgba(200,215,245,0.8);margin:0.5rem 0 0;line-height:1.5;">
+              ${esc(motivationPreview)}${motivationPreview.length < String(x.motivation || "").trim().length ? "…" : ""}
+            </p>
+            <div class="admin-item-actions" style="margin-top:0.5rem;">
+              <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button"
+                data-entity="intern" data-action="delete" data-id="${esc(String(x.id))}">Delete</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+  }
 };
 
 const initTabs = () => {
@@ -282,15 +331,29 @@ publicationForm.addEventListener("submit", async (event) => {
       authors: document.getElementById("pubAuthors").value.trim(),
       authors_marked: document.getElementById("pubAuthors").value.trim(),
       doi: document.getElementById("pubDoi").value.trim() || null,
-      citations: asInt(document.getElementById("pubCitations").value || "0", 0)
+      citations: 0
     };
     const imageFile = document.getElementById("pubImageFile").files?.[0];
     if (imageFile) {
-      payload.graphical_abstract_url = await uploadFileAndGetPublicUrl(
+      const url = await uploadFileAndGetPublicUrl(
         storageBuckets.publications,
         imageFile,
         "graphical-abstract"
       );
+      if (url) payload.graphical_abstract_url = url;
+    }
+
+    const pdfFile = document.getElementById("pubPdfFile").files?.[0];
+    const pdfUrlInput = document.getElementById("pubPdfUrl").value.trim();
+    if (pdfFile) {
+      const url = await uploadFileAndGetPublicUrl(
+        storageBuckets.publications,
+        pdfFile,
+        "pdf"
+      );
+      if (url) payload.pdf_url = url;
+    } else if (pdfUrlInput) {
+      payload.pdf_url = pdfUrlInput;
     }
     const query = editingPublicationId
       ? supabase.from("publications").update(payload).eq("id", editingPublicationId)
@@ -395,6 +458,10 @@ memberForm.addEventListener("submit", async (event) => {
       role: document.getElementById("memRole").value.trim(),
       email: document.getElementById("memEmail").value.trim() || null,
       career: document.getElementById("memCareer").value.trim() || null,
+      scopus_id: document.getElementById("memScopusId").value.trim() || null,
+      h_index: document.getElementById("memHIndex").value !== "" ? parseInt(document.getElementById("memHIndex").value, 10) : null,
+      works_count: document.getElementById("memWorksCount").value !== "" ? parseInt(document.getElementById("memWorksCount").value, 10) : null,
+      cited_by_count: document.getElementById("memCitedBy").value !== "" ? parseInt(document.getElementById("memCitedBy").value, 10) : null,
       track: normalizeTrack(document.getElementById("memTrack").value)
     };
     const imageFile = document.getElementById("memImageFile").files?.[0];
@@ -422,7 +489,23 @@ const fillPublicationForm = (row) => {
   document.getElementById("pubJournal").value = row.journal || "";
   document.getElementById("pubAuthors").value = row.authors || "";
   document.getElementById("pubDoi").value = row.doi || "";
-  document.getElementById("pubCitations").value = row.citations ?? 0;
+  document.getElementById("pubPdfUrl").value = row.pdf_url || "";
+
+  // Show current graphical abstract preview
+  let previewEl = document.getElementById("pubCurrentImagePreview");
+  if (!previewEl) {
+    previewEl = document.createElement("div");
+    previewEl.id = "pubCurrentImagePreview";
+    previewEl.style.cssText = "margin-top:0.5rem;";
+    const fileLabel = document.getElementById("pubImageFile")?.closest("label");
+    if (fileLabel) fileLabel.insertAdjacentElement("afterend", previewEl);
+  }
+  if (row.graphical_abstract_url) {
+    previewEl.innerHTML = `<p style="font-size:0.8rem;color:#8899bb;margin:0 0 0.3rem;">현재 이미지 (새 파일 업로드 시 교체됩니다):</p><img src="${esc(row.graphical_abstract_url)}" style="max-width:180px;max-height:120px;object-fit:contain;border-radius:4px;background:#1a2035;padding:4px;" />`;
+  } else {
+    previewEl.innerHTML = `<p style="font-size:0.8rem;color:#8899bb;margin:0;">현재 등록된 이미지 없음</p>`;
+  }
+
   setSubmitLabels();
 };
 
@@ -442,6 +525,10 @@ const fillMemberForm = (row) => {
   document.getElementById("memRole").value = row.role || "";
   document.getElementById("memEmail").value = row.email || "";
   document.getElementById("memCareer").value = row.career || "";
+  document.getElementById("memScopusId").value = row.scopus_id || "";
+  document.getElementById("memHIndex").value = row.h_index != null ? row.h_index : "";
+  document.getElementById("memWorksCount").value = row.works_count != null ? row.works_count : "";
+  document.getElementById("memCitedBy").value = row.cited_by_count != null ? row.cited_by_count : "";
   document.getElementById("memTrack").value = normalizeTrack(row.track || "current");
   setSubmitLabels();
 };
@@ -488,6 +575,9 @@ const onAdminListAction = async (event) => {
         const { error } = await supabase.from("members").delete().eq("id", id);
         if (error) throw error;
         if (editingMemberId === id) resetMemberFormState();
+      } else if (entity === "intern") {
+        const { error } = await supabase.from("intern_applications").delete().eq("id", id);
+        if (error) throw error;
       }
       await loadRecent();
       setStatus("Record deleted.", "ok");
@@ -509,6 +599,36 @@ const onAdminListAction = async (event) => {
         "ok"
       );
     }
+
+    if ((action === "move-up" || action === "move-down") && entity === "member") {
+      const { data: allMembers, error: fetchErr } = await supabase
+        .from("members")
+        .select("id,sort_order")
+        .order("sort_order", { ascending: true, nullsFirst: false })
+        .order("created_at", { ascending: true });
+      if (fetchErr) throw fetchErr;
+
+      const idx = allMembers.findIndex((m) => m.id === id);
+      if (idx === -1) return;
+      const swapIdx = action === "move-up" ? idx - 1 : idx + 1;
+      if (swapIdx < 0 || swapIdx >= allMembers.length) return;
+
+      const a = allMembers[idx];
+      const b = allMembers[swapIdx];
+      const aOrder = a.sort_order ?? idx + 1;
+      const bOrder = b.sort_order ?? swapIdx + 1;
+
+      const updates = [
+        supabase.from("members").update({ sort_order: bOrder }).eq("id", a.id),
+        supabase.from("members").update({ sort_order: aOrder }).eq("id", b.id)
+      ];
+      const results = await Promise.all(updates);
+      const updateErr = results.find((r) => r.error)?.error;
+      if (updateErr) throw updateErr;
+
+      await loadRecent();
+      setStatus("Member order updated.", "ok");
+    }
   } catch (err) {
     setStatus(err.message || "Action failed.", "error");
   }
@@ -517,6 +637,7 @@ const onAdminListAction = async (event) => {
 pubRecentListEl?.addEventListener("click", onAdminListAction);
 galRecentListEl?.addEventListener("click", onAdminListAction);
 memRecentListEl?.addEventListener("click", onAdminListAction);
+document.getElementById("internApplicationList")?.addEventListener("click", onAdminListAction);
 memTrackFilterEl?.addEventListener("change", async (event) => {
   const next = String(event.target?.value || "all").toLowerCase();
   memberTrackFilter = ["all", "current", "alumni", "faculty"].includes(next) ? next : "all";

@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members | Analytical Spectroscopy Laboratory</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Analytical Spectroscopy Laboratory" />
+    <meta property="og:title" content="Members | ASL" />
+    <meta
+      property="og:description"
+      content="Current members of Hanyang University Analytical Spectroscopy Laboratory (ASL)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/asl-favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 2rem;
+        margin-top: 2.5rem;
+      }
+
+      .member-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 1.75rem 1.25rem 1.5rem;
+        background: rgba(14, 17, 28, 0.5);
+        transition: border-color 220ms ease, box-shadow 220ms ease;
+      }
+
+      .member-item:hover {
+        border-color: rgba(177, 202, 255, 0.35);
+        box-shadow: 0 4px 20px rgba(100, 140, 255, 0.08);
+      }
+
+      .member-item-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        background: rgba(20, 25, 40, 0.8);
+      }
+
+      .member-item-name {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .member-item-name-ko {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .member-item-role {
+        font-size: 0.82rem;
+        color: rgba(177, 202, 255, 0.8);
+        margin: 0;
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: 0.02em;
+      }
+
+      .member-item-email {
+        font-size: 0.78rem;
+        color: var(--muted);
+        word-break: break-all;
+        line-height: 1.4;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0.15rem;
+        transition: color 160ms ease, border-color 160ms ease;
+      }
+
+      .member-item-email:hover {
+        color: rgba(177, 202, 255, 0.9);
+        border-color: rgba(177, 202, 255, 0.5);
+      }
+
+      .member-item-scholar {
+        font-size: 0.78rem;
+        color: rgba(150, 180, 255, 0.7);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        border: 1px solid rgba(150, 180, 255, 0.25);
+        border-radius: 999px;
+        padding: 0.25rem 0.75rem;
+        margin-top: 0.25rem;
+        transition: background 160ms ease, border-color 160ms ease;
+      }
+
+      .member-item-scholar:hover {
+        background: rgba(150, 180, 255, 0.1);
+        border-color: rgba(150, 180, 255, 0.5);
+      }
+
+      .members-section-title {
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 3rem 0 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .members-section-title:first-child {
+        margin-top: 0;
+      }
+
+      @media (max-width: 600px) {
+        .members-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 1.25rem;
+        }
+        .member-item-photo {
+          width: 90px;
+          height: 90px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <img src="./assets/asl-favicon.svg" class="brand-logo" alt="ASL logo" />
+
+        <span class="brand-lines">
+          <span class="brand-main">분광분석연구실</span>
+          <span class="brand-sub">Analytical Spectroscopy Laboratory</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="./index.html#top">About</a>
+        <a href="./index.html#research">Research</a>
+        <a href="./publication.html">Publications</a>
+        <a href="./index.html#professor">Professor</a>
+        <a href="./members.html" class="is-active">Members</a>
+        <a href="./gallery.html">Gallery</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-intern-btn" href="./intern.html">인턴 지원</a>
+        <a class="header-cta" href="./alumni.html">Alumni Archive</a>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Members</p>
+          <h1>Team</h1>
+        </div>
+        <a class="btn btn-contrast" href="./alumni.html">Alumni Archive</a>
+      </div>
+
+      <div id="membersContent">
+        <p class="publication-authors">Loading members...</p>
+      </div>
+    </main>
+
+    <!-- Member publications modal -->
+    <dialog id="memberPubModal" class="author-modal">
+      <div class="author-modal-head">
+        <h2 id="memberPubModalTitle">Publications</h2>
+        <button id="memberPubModalClose" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="author-modal-layout">
+        <aside class="author-profile">
+          <div class="author-photo-slot">
+            <img id="memberPubPhoto" class="author-photo" src="./assets/publication-placeholder.svg" alt="Profile" loading="lazy" />
+          </div>
+          <p class="author-profile-name" id="memberPubName">-</p>
+          <p class="author-profile-affil" id="memberPubAffil">Hanyang University</p>
+          <div class="author-profile-metrics">
+            <p id="memberPubHIndex">H-index: —</p>
+            <p id="memberPubWorks">Works: —</p>
+            <p id="memberPubCitations">Citations: —</p>
+          </div>
+          <a id="memberPubScopusLink" class="author-paper-scholar" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">View on Scopus ↗</a>
+          <small id="memberPubMetricSource" style="color:var(--muted);font-size:0.72rem;display:block;margin-top:0.3rem;"></small>
+        </aside>
+        <div id="memberPubBody" class="author-modal-body">
+          <p class="publication-authors">Loading...</p>
+        </div>
+      </div>
+    </dialog>
+
+    <footer id="contact" class="site-footer">
+      <h2>Contact & Laboratory Information</h2>
+      <p class="contact-address-ko">서울특별시 성동구 왕십리로 222 한양대학교 자연과학대학 화학과 613-1호</p>
+      <p class="contact-address-en">
+        Analytical Spectroscopy Laboratory 613-1, Department of Chemistry, College of Natural
+        Sciences, Hanyang University, 222 Wangsimni-ro, Seongdong-gu, Seoul 04763, Korea
+      </p>
+      <p class="contact-tel">Tel: 02-2220-0937</p>
+      <a href="mailto:hoeil@hanyang.ac.kr">hoeil@hanyang.ac.kr</a>
+    </footer>
+
+    <script src="./admin-config.js"></script>
+    <script src="./public-data.js"></script>
+    <script>
+      (() => {
+        const PLACEHOLDER_IMG = "./assets/publication-placeholder.svg";
+
+        const esc = (v = "") =>
+          String(v)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+
+        /* ── Author name matching (mirrors publication.html logic) ── */
+        const normalizeName = (s = "") =>
+          String(s).toLowerCase().replace(/[\u2020*]/g, "").replace(/\d+/g, "").replace(/[^a-z]/g, "");
+
+        const makeNameAliases = (name) => {
+          const clean = name.replace(",", " ").replace(/\s+/g, " ").trim();
+          const tokens = clean.split(" ").filter(Boolean);
+          const aliases = new Set([normalizeName(clean), normalizeName(name)]);
+          if (tokens.length >= 2) {
+            aliases.add(normalizeName(`${tokens[0]} ${tokens[tokens.length - 1]}`));
+            aliases.add(normalizeName(`${tokens[tokens.length - 1]} ${tokens[0]}`));
+            aliases.add(normalizeName(`${tokens[0][0]} ${tokens[tokens.length - 1]}`));
+          }
+          if (tokens.length === 3) {
+            const [a, b, c] = tokens;
+            [`${a} ${c} ${b}`, `${b} ${a} ${c}`, `${b} ${c} ${a}`, `${c} ${a} ${b}`, `${c} ${b} ${a}`]
+              .forEach((v) => aliases.add(normalizeName(v)));
+          }
+          if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
+          return [...aliases].filter(Boolean);
+        };
+
+        const splitAuthors = (s = "") => s.split(/[;,]/).map((t) => t.trim()).filter(Boolean);
+
+        const parseAuthorToken = (token = "") => {
+          const cleaned = token.replace(/[†*‡§\d]/g, "").replace(/\s+/g, " ").trim();
+          return { base: cleaned };
+        };
+
+        let MEMBER_INDEX = [];
+        const buildMemberIndex = (members) => {
+          MEMBER_INDEX = members.map((m) => ({ name: m.name, aliases: makeNameAliases(m.name), image: m.image || "", scopus_url: m.scopus_url || "" }));
+        };
+
+        const resolveMember = (token = "") => {
+          const key = normalizeName(token);
+          if (!key) return null;
+          return MEMBER_INDEX.find((m) => m.aliases.includes(key)) || null;
+        };
+
+        /* ── Publication indexing ── */
+        const authorsToEntries = new Map();
+
+        const indexPublication = (entry) => {
+          const authors = entry.authors || entry.author || "";
+          splitAuthors(authors).forEach((token) => {
+            const { base } = parseAuthorToken(token);
+            const member = resolveMember(base);
+            if (!member) return;
+            if (!authorsToEntries.has(member.name)) authorsToEntries.set(member.name, []);
+            const list = authorsToEntries.get(member.name);
+            const entryKey = entry.doi || entry.source_key || entry.title;
+            if (!list.find((e) => (e.doi || e.source_key || e.title) === entryKey)) list.push(entry);
+          });
+        };
+
+        const orderForYear = (y) => {
+          const n = parseInt(y, 10);
+          return Number.isFinite(n) ? n : 0;
+        };
+
+        /* ── Scopus / OpenAlex metrics ── */
+        const KNOWN_SCOPUS_IDS = {
+          "Hoeil Chung":    "7404006949",
+          "Haeseong Jeong": "57224628166",
+          "Seongsoo Jeong": "57855298300"
+        };
+        const metricCache = new Map();
+        const openAlexScopusCache = new Map();
+
+        const getScopusId = (m) => m.scopus_id || KNOWN_SCOPUS_IDS[m.name] || "";
+
+        const fetchOpenAlexIdByScopus = async (sid) => {
+          if (openAlexScopusCache.has(sid)) return openAlexScopusCache.get(sid);
+          try {
+            const res = await fetch(`https://api.openalex.org/authors?filter=ids.scopus:${encodeURIComponent(sid)}&per-page=1`);
+            if (!res.ok) { openAlexScopusCache.set(sid, null); return null; }
+            const data = await res.json();
+            const id = data?.results?.[0]?.id || null;
+            const shortId = id ? id.replace("https://openalex.org/", "") : null;
+            openAlexScopusCache.set(sid, shortId);
+            return shortId;
+          } catch { openAlexScopusCache.set(sid, null); return null; }
+        };
+
+        const fetchMetrics = async (memberInfo) => {
+          const cacheKey = memberInfo.name;
+          if (metricCache.has(cacheKey)) return metricCache.get(cacheKey);
+          const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
+
+          /* Priority 1: manually entered metrics in DB */
+          if (memberInfo.h_index != null || memberInfo.works_count != null || memberInfo.cited_by_count != null) {
+            const out = {
+              hIndex: memberInfo.h_index != null ? memberInfo.h_index : "—",
+              works: memberInfo.works_count != null ? memberInfo.works_count : "—",
+              citations: memberInfo.cited_by_count != null ? memberInfo.cited_by_count : "—",
+              affiliation: "Hanyang University",
+              source: "Scopus"
+            };
+            metricCache.set(cacheKey, out);
+            return out;
+          }
+
+          try {
+            const sid = getScopusId(memberInfo);
+            if (sid) {
+              /* Priority 2: Scopus ID → OpenAlex lookup */
+              const openAlexId = await fetchOpenAlexIdByScopus(sid);
+              if (openAlexId) {
+                const res = await fetch(`https://api.openalex.org/authors/${openAlexId}`);
+                if (res.ok) {
+                  const row = await res.json();
+                  const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
+                  const out = { hIndex: row?.summary_stats?.h_index ?? "—", works: row?.works_count ?? "—", citations: row?.cited_by_count ?? "—", affiliation: affil, source: "Scopus" };
+                  metricCache.set(cacheKey, out);
+                  return out;
+                }
+              }
+            }
+            /* Priority 3: OpenAlex name search */
+            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(memberInfo.name + " hanyang")}&per-page=5`);
+            if (!res.ok) { metricCache.set(cacheKey, fallback); return fallback; }
+            const data = await res.json();
+            const results = (data?.results || []).filter((r) => {
+              const inst = (r?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
+              return inst.includes("hanyang");
+            });
+            const best = results[0];
+            if (!best) { metricCache.set(cacheKey, fallback); return fallback; }
+            const affil = (best?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
+            const out = { hIndex: best?.summary_stats?.h_index ?? "—", works: best?.works_count ?? "—", citations: best?.cited_by_count ?? "—", affiliation: affil, source: "OpenAlex" };
+            metricCache.set(cacheKey, out);
+            return out;
+          } catch { metricCache.set(cacheKey, fallback); return fallback; }
+        };
+
+        /* ── Modal ── */
+        const modal = document.getElementById("memberPubModal");
+        const modalTitle = document.getElementById("memberPubModalTitle");
+        const modalPhoto = document.getElementById("memberPubPhoto");
+        const modalName = document.getElementById("memberPubName");
+        const modalAffil = document.getElementById("memberPubAffil");
+        const modalHIndex = document.getElementById("memberPubHIndex");
+        const modalWorks = document.getElementById("memberPubWorks");
+        const modalCitations = document.getElementById("memberPubCitations");
+        const modalScopusLink = document.getElementById("memberPubScopusLink");
+        const modalMetricSource = document.getElementById("memberPubMetricSource");
+        const modalBody = document.getElementById("memberPubBody");
+        const modalCloseBtn = document.getElementById("memberPubModalClose");
+
+        const openMemberModal = async (memberInfo) => {
+          const { name, image } = memberInfo;
+          modalTitle.textContent = `${name} — Publications`;
+          modalPhoto.src = image || PLACEHOLDER_IMG;
+          modalPhoto.alt = `${name} profile`;
+          modalName.textContent = name;
+          modalAffil.textContent = "Hanyang University";
+          modalHIndex.textContent = "H-index: 불러오는 중...";
+          modalWorks.textContent = "Works: —";
+          modalCitations.textContent = "Citations: —";
+          modalMetricSource.textContent = "";
+
+          const sid = getScopusId(memberInfo);
+          if (sid) {
+            modalScopusLink.href = `https://www.scopus.com/authid/detail.uri?authorId=${encodeURIComponent(sid)}`;
+            modalScopusLink.textContent = "View on Scopus ↗";
+            modalScopusLink.style.display = "";
+          } else {
+            modalScopusLink.style.display = "none";
+          }
+
+          const rows = (authorsToEntries.get(name) || []).sort(
+            (a, b) => orderForYear(b.year) - orderForYear(a.year)
+          );
+
+          if (!rows.length) {
+            modalBody.innerHTML = '<p class="publication-authors">등록된 논문이 없습니다.</p>';
+          } else {
+            modalBody.innerHTML = rows.map((row) => `
+              <article class="author-paper-item">
+                <h3>${esc(row.title || "")}</h3>
+                <p class="author-paper-journal">${esc(row.journal || "")}${row.year ? ` (${esc(row.year)})` : ""}</p>
+                <p class="publication-authors" style="font-size:0.82rem;margin-top:0.35rem;">${esc(row.authors || row.author || "")}</p>
+                <a class="author-paper-scholar"
+                   href="https://scholar.google.com/scholar?q=${encodeURIComponent((row.title || "") + " " + name)}"
+                   target="_blank" rel="noopener noreferrer">
+                  Google Scholar에서 확인 ↗
+                </a>
+              </article>
+            `).join("");
+          }
+
+          if (!modal.open) modal.showModal();
+
+          /* Async metrics load */
+          const metrics = await fetchMetrics(memberInfo);
+          modalHIndex.textContent = `H-index: ${metrics.hIndex}`;
+          modalWorks.textContent = `Works: ${metrics.works}`;
+          modalCitations.textContent = `Citations: ${metrics.citations}`;
+          if (metrics.affiliation) modalAffil.textContent = metrics.affiliation;
+          if (metrics.source) modalMetricSource.textContent = `출처: ${metrics.source}`;
+        };
+
+        modalCloseBtn?.addEventListener("click", () => { if (modal.open) modal.close(); });
+        modal?.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
+
+        /* ── Render members ── */
+        const renderMembers = (members) => {
+          const container = document.getElementById("membersContent");
+          if (!members || !members.length) {
+            container.innerHTML = "<p class='publication-authors'>현재 멤버 정보가 없습니다.</p>";
+            return;
+          }
+
+          buildMemberIndex(members);
+
+          const cards = members.map((m) => {
+            const photo = m.image || PLACEHOLDER_IMG;
+            const nameKo = m.name_ko ? `<p class="member-item-name-ko">${esc(m.name_ko)}</p>` : "";
+            const emailHtml = m.email
+              ? `<a class="member-item-email" href="mailto:${esc(m.email)}" onclick="event.stopPropagation()">${esc(m.email)}</a>`
+              : "";
+            const scopusHtml = m.scopus_url
+              ? `<a class="member-item-scholar" href="${esc(m.scopus_url)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Scopus ↗</a>`
+              : "";
+
+            return `
+              <div class="member-item" style="cursor:pointer" data-name="${esc(m.name)}" title="논문 목록 보기">
+                <img class="member-item-photo" src="${esc(photo)}" alt="${esc(m.name)} profile"
+                     loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'" />
+                <h3 class="member-item-name">${esc(m.name)}</h3>
+                ${nameKo}
+                <p class="member-item-role">${esc(m.role)}</p>
+                ${emailHtml}
+                ${scopusHtml}
+              </div>
+            `;
+          });
+
+          container.innerHTML = `<div class="members-grid">${cards.join("")}</div>`;
+
+          const memberMap = new Map(members.map((m) => [m.name, m]));
+          container.querySelectorAll(".member-item").forEach((card) => {
+            card.addEventListener("click", async function () {
+              const name = this.dataset.name;
+              if (!name) return;
+              const m = memberMap.get(name);
+              if (m) await openMemberModal(m);
+            });
+          });
+        };
+
+        /* ── Load data ── */
+        const loadMembers = async () => {
+          if (window.ASLData?.loadMembers) {
+            const payload = await window.ASLData.loadMembers();
+            return payload?.current_members || [];
+          }
+          const r = await fetch("./assets/member-data.json");
+          if (!r.ok) throw new Error("Failed to load member data");
+          const data = await r.json();
+          return data?.current_members || [];
+        };
+
+        const loadPublications = async () => {
+          if (window.ASLData?.loadPublications) {
+            const payload = await window.ASLData.loadPublications();
+            return Object.values(payload || {}).flat();
+          }
+          const r = await fetch("./assets/publication-data.json");
+          if (!r.ok) return [];
+          const data = await r.json();
+          if (Array.isArray(data)) return data;
+          return Object.values(data || {}).flat();
+        };
+
+        const container = document.getElementById("membersContent");
+        Promise.all([loadMembers(), loadPublications()])
+          .then(([members, pubs]) => {
+            renderMembers(members);
+            pubs.forEach(indexPublication);
+          })
+          .catch((err) => {
+            container.innerHTML =
+              `<p class="publication-authors">멤버 데이터를 불러올 수 없습니다: ${esc(err.message)}</p>`;
+          });
+      })();
+    </script>
+  </body>
+</html>

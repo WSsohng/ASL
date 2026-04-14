@@ -1,4 +1,4 @@
-﻿const revealTargets = document.querySelectorAll(".section, .site-footer");
+const revealTargets = document.querySelectorAll(".section, .site-footer");
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -107,7 +107,7 @@ const setupRecentPublicationCarousel = (publicationData = {}) => {
           <div class="recent-pub-body">
             <h3 class="recent-pub-title">${escHtml(item.title || "Untitled publication")}</h3>
             <p class="recent-pub-meta">${escHtml(item.journal || "")}</p>
-            <p class="publication-authors">${escHtml(authorLine)} 쨌 ${escHtml(item.year || "")}</p>
+            <p class="publication-authors">${escHtml(authorLine)} · ${escHtml(item.year || "")}</p>
           </div>
         </article>
       `;

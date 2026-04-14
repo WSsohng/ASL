@@ -6,6 +6,9 @@
   const prevBtn = document.getElementById("galleryPrev");
   const nextBtn = document.getElementById("galleryNext");
   const pageInfoEl = document.getElementById("galleryPageInfo");
+  const prevBtnBottom = document.getElementById("galleryPrevBottom");
+  const nextBtnBottom = document.getElementById("galleryNextBottom");
+  const pageInfoBottomEl = document.getElementById("galleryPageInfoBottom");
   const coverageEl = document.getElementById("galleryCoverage");
 
   const modalEl = document.getElementById("galleryPostModal");
@@ -114,9 +117,13 @@
   const updatePager = () => {
     const totalPages = getTotalPages();
     currentPage = Math.min(Math.max(currentPage, 1), totalPages);
-    pageInfoEl.textContent = `${currentPage} / ${totalPages}`;
+    const infoText = `${currentPage} / ${totalPages}`;
+    pageInfoEl.textContent = infoText;
     prevBtn.disabled = currentPage <= 1;
     nextBtn.disabled = currentPage >= totalPages;
+    if (pageInfoBottomEl) pageInfoBottomEl.textContent = infoText;
+    if (prevBtnBottom) prevBtnBottom.disabled = currentPage <= 1;
+    if (nextBtnBottom) nextBtnBottom.disabled = currentPage >= totalPages;
   };
 
   const renderCoverage = () => {
@@ -254,14 +261,31 @@
     currentPage += 1;
     renderGrid();
   });
+  if (prevBtnBottom) {
+    prevBtnBottom.addEventListener("click", () => {
+      currentPage -= 1;
+      renderGrid();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+  if (nextBtnBottom) {
+    nextBtnBottom.addEventListener("click", () => {
+      currentPage += 1;
+      renderGrid();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
   searchEl.addEventListener("input", applyFilter);
+
+  const openGalleryPost = (id) => {
+    window.location.href = `./gallery-post.html?id=${encodeURIComponent(id)}`;
+  };
 
   gridEl.addEventListener("click", (event) => {
     const card = event.target.closest(".gallery-card[data-gallery-id]");
     if (!card) return;
     const id = card.getAttribute("data-gallery-id");
-    const entry = filteredRows.find((row) => row.id === id);
-    if (entry) openModal(entry);
+    if (id) openGalleryPost(id);
   });
   gridEl.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
@@ -269,17 +293,20 @@
     if (!card) return;
     event.preventDefault();
     const id = card.getAttribute("data-gallery-id");
-    const entry = filteredRows.find((row) => row.id === id);
-    if (entry) openModal(entry);
+    if (id) openGalleryPost(id);
   });
 
-  modalCloseBtn.addEventListener("click", () => {
-    if (modalEl.open) modalEl.close();
-  });
-  modalEl.addEventListener("click", (event) => {
-    if (event.target === modalEl) modalEl.close();
-  });
-  modalEl.addEventListener("close", unlockPageScroll);
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener("click", () => {
+      if (modalEl && modalEl.open) modalEl.close();
+    });
+  }
+  if (modalEl) {
+    modalEl.addEventListener("click", (event) => {
+      if (event.target === modalEl) modalEl.close();
+    });
+    modalEl.addEventListener("close", unlockPageScroll);
+  }
 
   const loadGalleryData = async () => {
     if (window.ASLData?.loadGalleryPosts) return window.ASLData.loadGalleryPosts();

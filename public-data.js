@@ -102,6 +102,7 @@
           "";
       }
       grouped[key].push({
+        id: row.id || "",
         title: row.title || "",
         journal: row.journal || "",
         authors: row.authors || "",
@@ -136,8 +137,13 @@
         career: row.career || "",
         research: row.research || "",
         image: row.image_url || "",
+        scopus_id: row.scopus_id || "",
+        scopus_url: row.scopus_url || "",
         source_image: row.source_image || "",
-        source_section: row.source_section || ""
+        source_section: row.source_section || "",
+        h_index: row.h_index != null ? row.h_index : null,
+        works_count: row.works_count != null ? row.works_count : null,
+        cited_by_count: row.cited_by_count != null ? row.cited_by_count : null
       };
       const track = String(row.track || "current").toLowerCase();
       if (track === "faculty") out.faculty.push(mapped);
@@ -222,8 +228,13 @@
         try {
           const rows = await fetchAll(
             "members",
-            "id,name,name_ko,role,email,career,research,track,image_url,source_image,source_section"
+            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,h_index,works_count,cited_by_count"
           );
+          rows.sort((a, b) => {
+            const ao = a.sort_order ?? 9999;
+            const bo = b.sort_order ?? 9999;
+            return ao - bo;
+          });
           return toMemberPayload(rows);
         } catch {
           // fallback
