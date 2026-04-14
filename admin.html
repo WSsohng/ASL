@@ -112,22 +112,18 @@
             <label><span>Role</span><input id="memRole" type="text" required /></label>
             <label><span>Email</span><input id="memEmail" type="email" /></label>
             <label><span>Career</span><input id="memCareer" type="text" /></label>
-            <label>
-              <span>Scopus Author ID <small style="font-weight:400;color:var(--muted)">(숫자만 입력, 예: 7404006949)</small></span>
+            <label style="grid-column:1/-1">
+              <span>Scopus Author ID <small style="font-weight:400;color:var(--muted)">(숫자만 입력, 예: 7404006949 — Scopus 프로필 URL의 authorId= 값)</small></span>
               <input id="memScopusId" type="text" placeholder="57224628166" style="font-family:monospace;" />
             </label>
-            <label>
-              <span>H-index <small style="font-weight:400;color:var(--muted)">(수동 입력, OpenAlex에 없을 때)</small></span>
-              <input id="memHIndex" type="number" min="0" placeholder="예: 5" />
-            </label>
-            <label>
-              <span>Documents (Works) <small style="font-weight:400;color:var(--muted)">(수동 입력)</small></span>
-              <input id="memWorksCount" type="number" min="0" placeholder="예: 20" />
-            </label>
-            <label>
-              <span>Citations <small style="font-weight:400;color:var(--muted)">(수동 입력)</small></span>
-              <input id="memCitedBy" type="number" min="0" placeholder="예: 80" />
-            </label>
+            <fieldset style="grid-column:1/-1;border:1px solid #ddd;border-radius:6px;padding:0.6rem 0.9rem;margin:0">
+              <legend style="font-size:0.78rem;color:var(--muted);padding:0 0.3rem">Scopus 지표 (자동 조회 불가 시 수동 입력 — Scopus 프로필에서 확인)</legend>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem">
+                <label><span>H-index</span><input id="memHIndex" type="number" min="0" placeholder="예: 5" /></label>
+                <label><span>Documents</span><input id="memWorksCount" type="number" min="0" placeholder="예: 20" /></label>
+                <label><span>Citations</span><input id="memCitedBy" type="number" min="0" placeholder="예: 80" /></label>
+              </div>
+            </fieldset>
             <label>
               <span>Track</span>
               <select id="memTrack">

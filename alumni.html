@@ -219,23 +219,9 @@
 
         const metricCache = new Map();
         const memberManualMetrics = new Map(); /* normalizedName → {hIndex, works, citations} */
-        const openAlexScopusCache = new Map();
         const authorToPapers = new Map();
         const memberPhotoMap = new Map();
         let memberIndex = [];
-
-        const fetchOpenAlexIdByScopus = async (sid) => {
-          if (openAlexScopusCache.has(sid)) return openAlexScopusCache.get(sid);
-          try {
-            const res = await fetch(`https://api.openalex.org/authors?filter=ids.scopus:${encodeURIComponent(sid)}&per-page=1`);
-            if (!res.ok) { openAlexScopusCache.set(sid, null); return null; }
-            const data = await res.json();
-            const id = data?.results?.[0]?.id || null;
-            const shortId = id ? id.replace("https://openalex.org/", "") : null;
-            openAlexScopusCache.set(sid, shortId);
-            return shortId;
-          } catch { openAlexScopusCache.set(sid, null); return null; }
-        };
 
         const cleanText = (value = "") => String(value).replace(/\s+/g, " ").trim();
 
@@ -271,7 +257,7 @@
           if (metricCache.has(authorName)) return metricCache.get(authorName);
           const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
 
-          /* Priority 0: manually entered metrics in DB */
+          /* Priority 1: manually entered metrics in DB (Admin panel) */
           const manualKey = normalizeName(authorName);
           const manual = memberManualMetrics.get(manualKey);
           if (manual) {
@@ -280,69 +266,18 @@
           }
 
           try {
-            /* Priority 1: Scopus ID → OpenAlex */
-            const sid = getMemberScopusId(authorName);
-            if (sid) {
-              const openAlexId = await fetchOpenAlexIdByScopus(sid);
-              if (openAlexId) {
-                const res = await fetch(`https://api.openalex.org/authors/${openAlexId}`);
-                if (res.ok) {
-                  const row = await res.json();
-                  const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
-                  const out = {
-                    hIndex: row?.summary_stats?.h_index ?? "—",
-                    works: row?.works_count ?? "—",
-                    citations: row?.cited_by_count ?? "—",
-                    affiliation: affil,
-                    source: "Scopus"
-                  };
-                  metricCache.set(authorName, out);
-                  return out;
-                }
-              }
-            }
-            /* Priority 2: name-based OpenAlex search */
-            const { first, last } = splitName(authorName);
-            const queries = [...new Set([
-              authorName,
-              `${last} ${first}`.trim(),
-              `${first} ${last}`.trim(),
-              `${authorName} hanyang`.trim()
-            ])].filter(Boolean);
-            const byId = new Map();
-            for (const q of queries) {
-              const url = `https://api.openalex.org/authors?search=${encodeURIComponent(q)}&per-page=25`;
-              const res = await fetch(url);
-              if (!res.ok) continue;
-              const data = await res.json();
-              (data?.results || []).forEach((row) => {
-                const id = row?.id || `${row?.display_name || ""}:${row?.works_count || 0}`;
-                if (!byId.has(id)) byId.set(id, row);
-              });
-            }
-            const candidates = [...byId.values()];
-            if (!candidates.length) { metricCache.set(authorName, fallback); return fallback; }
-            const nameNorm = normalizeName(authorName);
-            const score = (c) => {
-              const display = normalizeName(c?.display_name || "");
-              const inst = (c?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
-              const h = Number(c?.summary_stats?.h_index ?? 0);
-              const w = Number(c?.works_count ?? 0);
-              const ci = Number(c?.cited_by_count ?? 0);
-              let s = 0;
-              if (display === nameNorm) s += 8;
-              if (display.includes(nameNorm) || nameNorm.includes(display)) s += 4;
-              if (inst.includes("hanyang")) s += 6;
-              if (h > 0) s += 3;
-              if (w > 0) s += 2;
-              if (ci > 0) s += 1;
-              if (h === 0 && w === 0 && ci === 0) s -= 4;
-              return s;
-            };
-            candidates.sort((a, b) => score(b) - score(a));
-            let best = candidates[0];
-            const bestNonZero = candidates.find((x) => Number(x?.summary_stats?.h_index ?? 0) > 0 || Number(x?.works_count ?? 0) > 0);
-            if (bestNonZero && Number(best?.summary_stats?.h_index ?? 0) === 0 && Number(best?.works_count ?? 0) === 0) best = bestNonZero;
+            /* Priority 2: OpenAlex name search (Hanyang-affiliated + name match required) */
+            const nameNorm = authorName.toLowerCase().replace(/\s+/g, "");
+            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(authorName + " hanyang")}&per-page=10`);
+            if (!res.ok) { metricCache.set(authorName, fallback); return fallback; }
+            const data = await res.json();
+            const candidates = (data?.results || []).filter((r) => {
+              const inst = (r?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
+              const displayNorm = (r?.display_name || "").toLowerCase().replace(/\s+/g, "");
+              return inst.includes("hanyang") && (displayNorm === nameNorm || displayNorm.includes(nameNorm) || nameNorm.includes(displayNorm));
+            });
+            const best = candidates[0];
+            if (!best) { metricCache.set(authorName, fallback); return fallback; }
             const out = {
               hIndex: best?.summary_stats?.h_index ?? "—",
               works: best?.works_count ?? "—",

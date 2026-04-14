@@ -294,29 +294,15 @@
           "Seongsoo Jeong": "57855298300"
         };
         const metricCache = new Map();
-        const openAlexScopusCache = new Map();
 
         const getScopusId = (m) => m.scopus_id || KNOWN_SCOPUS_IDS[m.name] || "";
-
-        const fetchOpenAlexIdByScopus = async (sid) => {
-          if (openAlexScopusCache.has(sid)) return openAlexScopusCache.get(sid);
-          try {
-            const res = await fetch(`https://api.openalex.org/authors?filter=ids.scopus:${encodeURIComponent(sid)}&per-page=1`);
-            if (!res.ok) { openAlexScopusCache.set(sid, null); return null; }
-            const data = await res.json();
-            const id = data?.results?.[0]?.id || null;
-            const shortId = id ? id.replace("https://openalex.org/", "") : null;
-            openAlexScopusCache.set(sid, shortId);
-            return shortId;
-          } catch { openAlexScopusCache.set(sid, null); return null; }
-        };
 
         const fetchMetrics = async (memberInfo) => {
           const cacheKey = memberInfo.name;
           if (metricCache.has(cacheKey)) return metricCache.get(cacheKey);
           const fallback = { hIndex: "—", works: "—", citations: "—", affiliation: "Hanyang University", source: "" };
 
-          /* Priority 1: manually entered metrics in DB */
+          /* Priority 1: manually entered metrics in DB (set via Admin panel) */
           if (memberInfo.h_index != null || memberInfo.works_count != null || memberInfo.cited_by_count != null) {
             const out = {
               hIndex: memberInfo.h_index != null ? memberInfo.h_index : "—",
@@ -330,28 +316,15 @@
           }
 
           try {
-            const sid = getScopusId(memberInfo);
-            if (sid) {
-              /* Priority 2: Scopus ID → OpenAlex lookup */
-              const openAlexId = await fetchOpenAlexIdByScopus(sid);
-              if (openAlexId) {
-                const res = await fetch(`https://api.openalex.org/authors/${openAlexId}`);
-                if (res.ok) {
-                  const row = await res.json();
-                  const affil = (row?.last_known_institutions || []).map((x) => x?.display_name).filter(Boolean).join(", ") || "Hanyang University";
-                  const out = { hIndex: row?.summary_stats?.h_index ?? "—", works: row?.works_count ?? "—", citations: row?.cited_by_count ?? "—", affiliation: affil, source: "Scopus" };
-                  metricCache.set(cacheKey, out);
-                  return out;
-                }
-              }
-            }
-            /* Priority 3: OpenAlex name search */
-            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(memberInfo.name + " hanyang")}&per-page=5`);
+            /* Priority 2: OpenAlex name search (Hanyang-affiliated only) */
+            const res = await fetch(`https://api.openalex.org/authors?search=${encodeURIComponent(memberInfo.name + " hanyang")}&per-page=10`);
             if (!res.ok) { metricCache.set(cacheKey, fallback); return fallback; }
             const data = await res.json();
+            const nameNorm = memberInfo.name.toLowerCase().replace(/\s+/g, "");
             const results = (data?.results || []).filter((r) => {
               const inst = (r?.last_known_institutions || []).map((x) => x?.display_name || "").join(" ").toLowerCase();
-              return inst.includes("hanyang");
+              const displayNorm = (r?.display_name || "").toLowerCase().replace(/\s+/g, "");
+              return inst.includes("hanyang") && (displayNorm === nameNorm || displayNorm.includes(nameNorm) || nameNorm.includes(displayNorm));
             });
             const best = results[0];
             if (!best) { metricCache.set(cacheKey, fallback); return fallback; }
