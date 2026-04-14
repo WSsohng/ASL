@@ -2523,47 +2523,51 @@ h2 {
     padding: 3.1rem 0;
   }
 
-  /* Mobile 2-row navigation */
+  /* ── Mobile nav: brand row + all links/buttons in one wrapping flow ── */
   .site-header {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-    padding: 0.65rem 0.9rem 0.5rem;
-  }
-
-  .site-header > .brand {
-    align-self: flex-start;
-  }
-
-  .nav {
     flex-wrap: wrap;
+    align-items: center;
+    gap: 0.28rem 0.55rem;
+    padding: 0.55rem 0.8rem 0.45rem;
+  }
+
+  /* Brand takes the full first row */
+  .site-header > .brand {
+    flex: 0 0 100%;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Collapse nav and header-actions so their children join the same flex flow */
+  .nav {
+    display: contents;
     overflow-x: visible;
     white-space: normal;
-    gap: 0.3rem 0.65rem;
-    justify-content: flex-start;
-    padding-bottom: 0;
   }
 
   .nav a {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.04em;
+    padding: 0.18rem 0;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .header-actions {
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    display: contents;
   }
 
   .header-intern-btn {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
+    font-size: 0.68rem;
+    padding: 0.28rem 0.6rem;
+    flex-shrink: 0;
   }
 
   .header-cta {
     display: inline-flex;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
+    font-size: 0.68rem;
+    padding: 0.25rem 0.55rem;
+    flex-shrink: 0;
   }
 
   /* ── Research Themes mobile: simple vertical card stack, no hover-expand ── */
