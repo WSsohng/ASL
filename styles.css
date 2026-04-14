@@ -2561,25 +2561,26 @@ h2 {
     flex-shrink: 0;
   }
 
-  /* ── Row 1: first 4 nav links grow equally to fill the line ──
-     When 4 items fill 100%, the 5th (Members) wraps to next row.       */
+  /* ── Row 1: first 4 nav links each take ~25% → together fill the line
+     Using flex-basis (not flex-grow) so wrap is evaluated at initial sizing.
+     4 × (25% - 0.35rem) + 3 × 0.45rem(gap) ≈ 100% → Members can't fit → wraps. */
   .nav a:nth-child(1),
   .nav a:nth-child(2),
   .nav a:nth-child(3),
   .nav a:nth-child(4) {
-    flex: 1 1 0;
+    flex: 0 0 calc(25% - 0.35rem);
     text-align: center;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.64rem;
-    letter-spacing: 0.035em;
+    letter-spacing: 0.03em;
   }
 
   /* ── Row 2 left: Members, Gallery ── */
   .nav a:nth-child(5),
   .nav a:nth-child(6) {
-    flex-shrink: 0;
+    flex: 0 0 auto;
   }
 
   /* ── Row 2 right: 인턴지원 pushed right via auto margin ── */
