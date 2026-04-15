@@ -341,7 +341,7 @@ publicationForm.addEventListener("submit", async (event) => {
     setStatus("Saving publication...", "info");
     const payload = {
       title: document.getElementById("pubTitle").value.trim(),
-      year: asInt(document.getElementById("pubYear").value, 0),
+      year: (() => { const v = document.getElementById("pubYear").value.trim(); return v === "1995-1999" ? v : asInt(v, 0); })(),
       journal: document.getElementById("pubJournal").value.trim(),
       authors: document.getElementById("pubAuthors").value.trim(),
       authors_marked: document.getElementById("pubAuthors").value.trim(),

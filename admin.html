@@ -78,7 +78,7 @@
           <h3>Publication Upload</h3>
           <form id="publicationForm" class="admin-form-grid">
             <label><span>Title</span><input id="pubTitle" type="text" required /></label>
-            <label><span>Year</span><input id="pubYear" type="number" min="1990" max="2100" required /></label>
+            <label><span>Year <small style="font-weight:400;color:var(--muted)">(단일 연도 또는 1995-1999)</small></span><input id="pubYear" type="text" pattern="\d{4}|1995-1999" placeholder="2024" title="4자리 연도(예: 2024) 또는 1995-1999" required /></label>
             <label><span>Journal</span><input id="pubJournal" type="text" required /></label>
             <label><span>Authors</span><textarea id="pubAuthors" rows="3" required></textarea></label>
             <label><span>DOI (optional)</span><input id="pubDoi" type="text" /></label>
