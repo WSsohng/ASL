@@ -147,7 +147,8 @@
           if (/hoeil/i.test(name) && /chung/i.test(name)) aliases.add("hchung");
           return [...aliases].filter(Boolean);
         };
-        const MEMBER_INDEX = MEMBER_NAMES.map((name) => ({ name, aliases: makeNameAliases(name) }));
+        /* Seeded with hardcoded fallback; dynamically extended from DB in buildMemberPhotoMap */
+        let MEMBER_INDEX = MEMBER_NAMES.map((name) => ({ name, aliases: makeNameAliases(name) }));
         const putMemberPhoto = (name, image) => {
           const key = normalizeName(name);
           if (!key || !image || memberPhotoMap.has(key)) return;
@@ -160,6 +161,18 @@
           const currentMembers = Array.isArray(memberPayload?.current_members) ? memberPayload.current_members : [];
           const alumniMembers = Array.isArray(memberPayload?.alumni) ? memberPayload.alumni : [];
           const faculty = Array.isArray(memberPayload?.faculty) ? memberPayload.faculty : [];
+
+          /* Extend MEMBER_INDEX with DB members not already in the hardcoded list */
+          const indexedKeys = new Set(MEMBER_INDEX.map((m) => normalizeName(m.name)));
+          [...currentMembers, ...alumniMembers, ...faculty].forEach((member) => {
+            if (!member?.name) return;
+            const key = normalizeName(member.name);
+            if (!indexedKeys.has(key)) {
+              MEMBER_INDEX.push({ name: member.name, aliases: makeNameAliases(member.name) });
+              indexedKeys.add(key);
+            }
+          });
+
           /* Only current + alumni members are clickable */
           [...currentMembers, ...alumniMembers].forEach((member) => {
             clickableAuthorsSet.add(normalizeName(member.name));
