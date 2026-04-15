@@ -173,8 +173,8 @@
             }
           });
 
-          /* Only current + alumni members are clickable */
-          [...currentMembers, ...alumniMembers].forEach((member) => {
+          /* current, alumni, faculty all get clickable author buttons */
+          [...currentMembers, ...alumniMembers, ...faculty].forEach((member) => {
             clickableAuthorsSet.add(normalizeName(member.name));
             makeNameAliases(member.name).forEach((alias) => {
               if (alias) clickableAuthorsSet.add(alias);

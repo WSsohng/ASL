@@ -12,7 +12,7 @@
     return res.json();
   };
 
-  const fetchAll = async (table, select) => {
+  const fetchAll = async (table, select, order = "") => {
     if (!isReady) throw new Error("Supabase public config is not set.");
     const out = [];
     const pageSize = 1000;
@@ -23,6 +23,7 @@
         limit: String(pageSize),
         offset: String(offset)
       });
+      if (order) query.set("order", order);
       const res = await fetch(`${supabaseUrl}/rest/v1/${table}?${query.toString()}`, {
         headers: {
           apikey: anonKey,
@@ -226,13 +227,9 @@
         try {
           const rows = await fetchAll(
             "members",
-            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,openalex_id"
+            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,openalex_id",
+            "sort_order.asc.nullslast,created_at.asc"
           );
-          rows.sort((a, b) => {
-            const ao = a.sort_order ?? 9999;
-            const bo = b.sort_order ?? 9999;
-            return ao - bo;
-          });
           return toMemberPayload(rows);
         } catch {
           // fallback

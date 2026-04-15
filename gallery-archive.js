@@ -277,7 +277,10 @@
   }
   searchEl.addEventListener("input", applyFilter);
 
+  const GALLERY_PAGE_KEY = "asl_gallery_page";
+
   const openGalleryPost = (id) => {
+    sessionStorage.setItem(GALLERY_PAGE_KEY, String(currentPage));
     window.location.href = `./gallery-post.html?id=${encodeURIComponent(id)}`;
   };
 
@@ -332,6 +335,11 @@
     .then((payload) => {
       allRows = normalizeRows(payload);
       filteredRows = [...allRows];
+      const saved = sessionStorage.getItem(GALLERY_PAGE_KEY);
+      if (saved) {
+        currentPage = Math.max(1, Number.parseInt(saved, 10) || 1);
+        sessionStorage.removeItem(GALLERY_PAGE_KEY);
+      }
       renderCoverage();
       renderGrid();
     })
