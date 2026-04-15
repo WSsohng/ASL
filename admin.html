@@ -124,6 +124,10 @@
                 <option value="faculty">Faculty</option>
               </select>
             </label>
+            <label>
+              <span>Order <small style="font-weight:400;color:var(--muted)">(표시 순서 — 숫자가 작을수록 앞에 위치)</small></span>
+              <input id="memSortOrder" type="number" min="1" placeholder="1" />
+            </label>
             <label><span>Profile Image (optional)</span><input id="memImageFile" type="file" accept="image/*" /></label>
             <button class="btn btn-primary" type="submit">Save Member</button>
           </form>

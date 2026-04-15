@@ -171,8 +171,6 @@ const renderMemberActionButtons = (id, track) => {
       : `<button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="set-alumni" data-id="${safeId}">Set Alumni</button>`;
   return `
     <div class="admin-item-actions">
-      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="move-up" data-id="${safeId}" title="위로">▲</button>
-      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="move-down" data-id="${safeId}" title="아래로">▼</button>
       ${quickSwitchBtn}
       <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="member" data-action="edit" data-id="${safeId}">Edit</button>
       <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button" data-entity="member" data-action="delete" data-id="${safeId}">Delete</button>
@@ -243,8 +241,9 @@ const loadRecent = async () => {
         : track === "faculty"
           ? "admin-track-tag is-faculty"
           : "admin-track-tag is-current";
+    const orderLabel = x.sort_order != null ? `#${x.sort_order}` : "순서 미지정";
     return `
-      <h4>${esc(x.name || "")}</h4>
+      <h4>${esc(x.name || "")} <small style="font-size:0.75rem;color:#7aa4ff;font-weight:400;">${orderLabel}</small></h4>
       <p class="admin-member-meta">
         <span class="${trackTagClass}">${esc(trackLabel(track))}</span>
         <span>${esc(x.role || "")}</span>
@@ -468,13 +467,15 @@ memberForm.addEventListener("submit", async (event) => {
   if (!requireClient()) return;
   try {
     setStatus("Saving member...", "info");
+    const sortOrderRaw = document.getElementById("memSortOrder").value.trim();
     const payload = {
       name: document.getElementById("memName").value.trim(),
       role: document.getElementById("memRole").value.trim(),
       email: document.getElementById("memEmail").value.trim() || null,
       career: document.getElementById("memCareer").value.trim() || null,
       scopus_id: document.getElementById("memScopusId").value.trim() || null,
-      track: normalizeTrack(document.getElementById("memTrack").value)
+      track: normalizeTrack(document.getElementById("memTrack").value),
+      sort_order: sortOrderRaw !== "" ? asInt(sortOrderRaw, null) : null
     };
     const imageFile = document.getElementById("memImageFile").files?.[0];
     if (imageFile) {
@@ -539,6 +540,7 @@ const fillMemberForm = (row) => {
   document.getElementById("memCareer").value = row.career || "";
   document.getElementById("memScopusId").value = row.scopus_id || "";
   document.getElementById("memTrack").value = normalizeTrack(row.track || "current");
+  document.getElementById("memSortOrder").value = row.sort_order != null ? row.sort_order : "";
   setSubmitLabels();
 };
 
@@ -609,35 +611,6 @@ const onAdminListAction = async (event) => {
       );
     }
 
-    if ((action === "move-up" || action === "move-down") && entity === "member") {
-      const { data: allMembers, error: fetchErr } = await supabase
-        .from("members")
-        .select("id,sort_order")
-        .order("sort_order", { ascending: true, nullsFirst: false })
-        .order("created_at", { ascending: true });
-      if (fetchErr) throw fetchErr;
-
-      const idx = allMembers.findIndex((m) => m.id === id);
-      if (idx === -1) return;
-      const swapIdx = action === "move-up" ? idx - 1 : idx + 1;
-      if (swapIdx < 0 || swapIdx >= allMembers.length) return;
-
-      const a = allMembers[idx];
-      const b = allMembers[swapIdx];
-      const aOrder = a.sort_order ?? idx + 1;
-      const bOrder = b.sort_order ?? swapIdx + 1;
-
-      const updates = [
-        supabase.from("members").update({ sort_order: bOrder }).eq("id", a.id),
-        supabase.from("members").update({ sort_order: aOrder }).eq("id", b.id)
-      ];
-      const results = await Promise.all(updates);
-      const updateErr = results.find((r) => r.error)?.error;
-      if (updateErr) throw updateErr;
-
-      await loadRecent();
-      setStatus("Member order updated.", "ok");
-    }
   } catch (err) {
     setStatus(err.message || "Action failed.", "error");
   }
