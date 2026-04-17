@@ -578,7 +578,16 @@
             fetch("./assets/member-data.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
         ])
           .then(([payload, memberPayload]) => {
-            allData = payload;
+            /* Merge individual years 1995-1999 into a single "1995-1999" tab */
+            const LEGACY_YEARS = new Set(["1995", "1996", "1997", "1998", "1999"]);
+            const merged = {};
+            Object.entries(payload).forEach(([year, entries]) => {
+              const key = LEGACY_YEARS.has(String(year)) ? "1995-1999" : year;
+              if (!merged[key]) merged[key] = [];
+              merged[key].push(...entries);
+            });
+            allData = merged;
+
             buildMemberPhotoMap(memberPayload);
             Object.keys(allData).forEach((year) => {
               allData[year].forEach((item, idx) => {
