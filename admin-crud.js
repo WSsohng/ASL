@@ -354,7 +354,7 @@ publicationForm.addEventListener("submit", async (event) => {
 
     const payload = {
       title: document.getElementById("pubTitle").value.trim(),
-      year: (() => { const v = document.getElementById("pubYear").value.trim(); return v === "1995-1999" ? v : asInt(v, 0); })(),
+      year: asInt(document.getElementById("pubYear").value.trim(), 0),
       journal: document.getElementById("pubJournal").value.trim(),
       authors: document.getElementById("pubAuthors").value.trim(),
       authors_marked: document.getElementById("pubAuthors").value.trim(),
@@ -653,6 +653,8 @@ const bootstrap = async () => {
   });
   initTabs();
   setSubmitLabels();
+  const yearInput = document.getElementById("pubYear");
+  if (yearInput) yearInput.placeholder = String(new Date().getFullYear());
   memberTrackFilter = String(memTrackFilterEl?.value || "all").toLowerCase();
   setStatus("Ready. Sign in to continue.", "info");
 
