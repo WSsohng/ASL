@@ -338,6 +338,20 @@ publicationForm.addEventListener("submit", async (event) => {
   if (!requireClient()) return;
   try {
     setStatus("Saving publication...", "info");
+    const seqNoRaw = document.getElementById("pubSeqNo").value.trim();
+    let seqNo = seqNoRaw !== "" ? asInt(seqNoRaw, null) : null;
+
+    /* Auto-assign next seq_no for new publications if field is empty */
+    if (!editingPublicationId && seqNo === null) {
+      const { data: top } = await supabase
+        .from("publications")
+        .select("seq_no")
+        .order("seq_no", { ascending: false, nullsFirst: false })
+        .limit(1);
+      const maxSeq = top?.[0]?.seq_no ?? 0;
+      seqNo = maxSeq + 1;
+    }
+
     const payload = {
       title: document.getElementById("pubTitle").value.trim(),
       year: (() => { const v = document.getElementById("pubYear").value.trim(); return v === "1995-1999" ? v : asInt(v, 0); })(),
@@ -345,7 +359,8 @@ publicationForm.addEventListener("submit", async (event) => {
       authors: document.getElementById("pubAuthors").value.trim(),
       authors_marked: document.getElementById("pubAuthors").value.trim(),
       doi: document.getElementById("pubDoi").value.trim() || null,
-      citations: 0
+      citations: 0,
+      seq_no: seqNo
     };
     const imageFile = document.getElementById("pubImageFile").files?.[0];
     if (imageFile) {
@@ -497,6 +512,7 @@ memberForm.addEventListener("submit", async (event) => {
 
 const fillPublicationForm = (row) => {
   editingPublicationId = row.id;
+  document.getElementById("pubSeqNo").value = row.seq_no != null ? row.seq_no : "";
   document.getElementById("pubTitle").value = row.title || "";
   document.getElementById("pubYear").value = row.year || "";
   document.getElementById("pubJournal").value = row.journal || "";
