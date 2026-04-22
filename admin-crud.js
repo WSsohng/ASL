@@ -294,7 +294,7 @@ const loadRecent = async () => {
     } else {
       internListEl.innerHTML = internData.map((x) => {
         const submittedAt = x.submitted_at ? new Date(x.submitted_at).toLocaleString("ko-KR") : "-";
-        const motivationPreview = String(x.motivation || "").trim().slice(0, 150);
+        const motivationText = String(x.motivation || "").trim();
         return `
           <div class="admin-list-item" style="border-left: 3px solid rgba(177,202,255,0.4);padding-left:1rem;">
             <h4>${esc(x.name || "")} <span style="font-weight:400;font-size:0.85rem;color:var(--muted);">(${esc(x.student_id || "")})</span></h4>
@@ -304,8 +304,8 @@ const loadRecent = async () => {
             <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0;">
               📅 희망 기간: ${esc(x.period || "-")} &nbsp;·&nbsp; 제출: ${esc(submittedAt)}
             </p>
-            <p style="font-size:0.85rem;color:rgba(200,215,245,0.8);margin:0.5rem 0 0;line-height:1.5;">
-              ${esc(motivationPreview)}${motivationPreview.length < String(x.motivation || "").trim().length ? "…" : ""}
+            <p style="font-size:0.85rem;color:rgba(200,215,245,0.8);margin:0.5rem 0 0;line-height:1.5;white-space:pre-wrap;word-break:break-word;">
+              ${esc(motivationText || "-")}
             </p>
             <div class="admin-item-actions" style="margin-top:0.5rem;">
               <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button"
