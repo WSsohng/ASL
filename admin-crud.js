@@ -295,6 +295,8 @@ const loadRecent = async () => {
       internListEl.innerHTML = internData.map((x) => {
         const submittedAt = x.submitted_at ? new Date(x.submitted_at).toLocaleString("ko-KR") : "-";
         const motivationText = String(x.motivation || "").trim();
+        const motivationElementId = `internMotivation-${String(x.id)}`;
+        const shouldCollapse = motivationText.length > 180;
         return `
           <div class="admin-list-item" style="border-left: 3px solid rgba(177,202,255,0.4);padding-left:1rem;">
             <h4>${esc(x.name || "")} <span style="font-weight:400;font-size:0.85rem;color:var(--muted);">(${esc(x.student_id || "")})</span></h4>
@@ -304,10 +306,15 @@ const loadRecent = async () => {
             <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0;">
               📅 희망 기간: ${esc(x.period || "-")} &nbsp;·&nbsp; 제출: ${esc(submittedAt)}
             </p>
-            <p style="font-size:0.85rem;color:rgba(200,215,245,0.8);margin:0.5rem 0 0;line-height:1.5;white-space:pre-wrap;word-break:break-word;">
+            <p id="${esc(motivationElementId)}" class="admin-intern-motivation${shouldCollapse ? " is-collapsed" : ""}" style="font-size:0.85rem;color:rgba(200,215,245,0.8);margin:0.5rem 0 0;line-height:1.5;white-space:pre-wrap;word-break:break-word;">
               ${esc(motivationText || "-")}
             </p>
             <div class="admin-item-actions" style="margin-top:0.5rem;">
+              ${
+                shouldCollapse
+                  ? `<button class="btn btn-ghost admin-mini-btn" type="button" data-entity="intern-motivation" data-action="toggle" data-id="${esc(motivationElementId)}">전체보기</button>`
+                  : ""
+              }
               <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button"
                 data-entity="intern" data-action="delete" data-id="${esc(String(x.id))}">Delete</button>
             </div>
@@ -638,11 +645,20 @@ const fillMemberForm = (row) => {
 };
 
 const onAdminListAction = async (event) => {
-  if (!requireClient()) return;
   const button = event.target.closest("button[data-action][data-id][data-entity]");
-  if (!button || !supabase) return;
+  if (!button) return;
   const { action, id, entity } = button.dataset;
   if (!action || !id || !entity) return;
+
+  if (entity === "intern-motivation" && action === "toggle") {
+    const motivationEl = document.getElementById(id);
+    if (!motivationEl) return;
+    const collapsed = motivationEl.classList.toggle("is-collapsed");
+    button.textContent = collapsed ? "전체보기" : "접기";
+    return;
+  }
+
+  if (!requireClient() || !supabase) return;
 
   try {
     if (action === "edit") {

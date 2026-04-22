@@ -2267,6 +2267,13 @@ h2 {
   font-size: 0.83rem;
 }
 
+.admin-intern-motivation.is-collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .admin-member-meta {
   display: flex;
   flex-wrap: wrap;
