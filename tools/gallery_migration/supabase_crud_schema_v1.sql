@@ -95,6 +95,29 @@ create table if not exists public.gallery_images (
   unique(post_id, image_url)
 );
 
+create table if not exists public.intern_applications (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  student_id text not null default '',
+  phone text not null default '',
+  email text not null default '',
+  period text not null default '',
+  motivation text not null default '',
+  submitted_at timestamptz not null default now(),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.notification_recipients (
+  id uuid primary key default gen_random_uuid(),
+  channel text not null default 'intern_application',
+  email text not null,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique(channel, email)
+);
+
 -- ---------------------------------------------------------------------------
 -- Indexes
 -- ---------------------------------------------------------------------------
@@ -105,6 +128,8 @@ create index if not exists idx_members_name on public.members(name);
 create index if not exists idx_gallery_posts_source_present_num on public.gallery_posts(source_present_num);
 create index if not exists idx_gallery_images_post_sort on public.gallery_images(post_id, sort_order);
 create index if not exists idx_gallery_images_sha256 on public.gallery_images(sha256);
+create index if not exists idx_intern_applications_submitted_at on public.intern_applications(submitted_at desc);
+create index if not exists idx_notification_recipients_channel_active on public.notification_recipients(channel, is_active);
 
 -- ---------------------------------------------------------------------------
 -- Updated-at trigger
@@ -144,6 +169,16 @@ create trigger trg_gallery_images_updated_at
 before update on public.gallery_images
 for each row execute function public.tg_set_updated_at();
 
+drop trigger if exists trg_intern_applications_updated_at on public.intern_applications;
+create trigger trg_intern_applications_updated_at
+before update on public.intern_applications
+for each row execute function public.tg_set_updated_at();
+
+drop trigger if exists trg_notification_recipients_updated_at on public.notification_recipients;
+create trigger trg_notification_recipients_updated_at
+before update on public.notification_recipients
+for each row execute function public.tg_set_updated_at();
+
 -- ---------------------------------------------------------------------------
 -- RLS
 -- ---------------------------------------------------------------------------
@@ -152,6 +187,8 @@ alter table public.publications enable row level security;
 alter table public.members enable row level security;
 alter table public.gallery_posts enable row level security;
 alter table public.gallery_images enable row level security;
+alter table public.intern_applications enable row level security;
+alter table public.notification_recipients enable row level security;
 
 create or replace function public.is_admin()
 returns boolean
@@ -216,6 +253,38 @@ using (true);
 
 drop policy if exists gallery_images_admin_write on public.gallery_images;
 create policy gallery_images_admin_write on public.gallery_images
+for all to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
+drop policy if exists intern_applications_public_insert on public.intern_applications;
+create policy intern_applications_public_insert on public.intern_applications
+for insert to anon, authenticated
+with check (true);
+
+drop policy if exists intern_applications_admin_read on public.intern_applications;
+create policy intern_applications_admin_read on public.intern_applications
+for select to authenticated
+using (public.is_admin());
+
+drop policy if exists intern_applications_admin_write on public.intern_applications;
+create policy intern_applications_admin_write on public.intern_applications
+for update to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
+drop policy if exists intern_applications_admin_delete on public.intern_applications;
+create policy intern_applications_admin_delete on public.intern_applications
+for delete to authenticated
+using (public.is_admin());
+
+drop policy if exists notification_recipients_admin_read on public.notification_recipients;
+create policy notification_recipients_admin_read on public.notification_recipients
+for select to authenticated
+using (public.is_admin());
+
+drop policy if exists notification_recipients_admin_write on public.notification_recipients;
+create policy notification_recipients_admin_write on public.notification_recipients
 for all to authenticated
 using (public.is_admin())
 with check (public.is_admin());

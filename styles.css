@@ -2185,6 +2185,14 @@ h2 {
   gap: 0.65rem;
 }
 
+.admin-notify-box {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(180, 202, 246, 0.2);
+  border-radius: 0.8rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .admin-member-tools label {
   display: grid;
   gap: 0.35rem;

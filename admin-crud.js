@@ -11,11 +11,14 @@ const signOutBtn = document.getElementById("adminSignOutBtn");
 const publicationForm = document.getElementById("publicationForm");
 const galleryForm = document.getElementById("galleryForm");
 const memberForm = document.getElementById("memberForm");
+const notifyRecipientForm = document.getElementById("notifyRecipientForm");
+const notifyRecipientEmailEl = document.getElementById("notifyRecipientEmail");
 
 const pubRecentListEl = document.getElementById("pubRecentList");
 const galRecentListEl = document.getElementById("galRecentList");
 const memRecentListEl = document.getElementById("memRecentList");
 const memTrackFilterEl = document.getElementById("memTrackFilter");
+const notifyRecipientListEl = document.getElementById("notifyRecipientList");
 
 const pubSubmitBtn = publicationForm?.querySelector('button[type="submit"]');
 const galSubmitBtn = galleryForm?.querySelector('button[type="submit"]');
@@ -77,6 +80,16 @@ const asInt = (value, fallback = 0) => {
 const asFloat = (value, fallback = 0) => {
   const n = Number.parseFloat(String(value ?? ""));
   return Number.isFinite(n) ? n : fallback;
+};
+
+const parseEmailList = (value = "") => {
+  const unique = new Set();
+  String(value || "")
+    .split(",")
+    .map((x) => x.trim().toLowerCase())
+    .filter(Boolean)
+    .forEach((email) => unique.add(email));
+  return [...unique];
 };
 
 const toInputDate = (value = "") => {
@@ -178,12 +191,25 @@ const renderMemberActionButtons = (id, track) => {
   `;
 };
 
+const renderRecipientActionButtons = (id, isActive) => {
+  const safeId = esc(id);
+  const toggleLabel = isActive ? "Disable" : "Enable";
+  const toggleAction = isActive ? "disable" : "enable";
+  return `
+    <div class="admin-item-actions">
+      <button class="btn btn-ghost admin-mini-btn" type="button" data-entity="recipient" data-action="${toggleAction}" data-id="${safeId}">${toggleLabel}</button>
+      <button class="btn btn-ghost admin-mini-btn admin-mini-danger" type="button" data-entity="recipient" data-action="delete" data-id="${safeId}">Delete</button>
+    </div>
+  `;
+};
+
 const loadRecent = async () => {
   const [
     { data: pubs, error: pubsErr },
     { data: gals, error: galsErr },
     { data: mems, error: memsErr },
-    { data: interns, error: internsErr }
+    { data: interns, error: internsErr },
+    { data: recipients, error: recipientsErr }
   ] = await Promise.all([
     supabase
       .from("publications")
@@ -205,14 +231,21 @@ const loadRecent = async () => {
       .from("intern_applications")
       .select("id,name,student_id,phone,email,period,motivation,submitted_at")
       .order("submitted_at", { ascending: false })
-      .limit(100)
+      .limit(100),
+    supabase
+      .from("notification_recipients")
+      .select("id,email,is_active,channel,created_at")
+      .eq("channel", "intern_application")
+      .order("created_at", { ascending: true })
+      .limit(200)
   ]);
 
   const queryErrors = [
     pubsErr && `Publications: ${pubsErr.message}`,
     galsErr && `Gallery: ${galsErr.message}`,
     memsErr && `Members: ${memsErr.message}`,
-    internsErr && `Interns: ${internsErr.message}`
+    internsErr && `Interns: ${internsErr.message}`,
+    recipientsErr && `Recipients: ${recipientsErr.message}`
   ].filter(Boolean);
   if (queryErrors.length) {
     setStatus(`DB 조회 오류 — ${queryErrors.join(" | ")}`, "error");
@@ -281,6 +314,27 @@ const loadRecent = async () => {
           </div>
         `;
       }).join("");
+    }
+  }
+
+  if (notifyRecipientListEl) {
+    const recipientData = recipients || [];
+    if (!recipientData.length) {
+      notifyRecipientListEl.innerHTML = '<p class="publication-authors" style="padding:0.5rem 0;">등록된 수신 이메일이 없습니다.</p>';
+    } else {
+      notifyRecipientListEl.innerHTML = recipientData
+        .map((x) => {
+          const active = Boolean(x.is_active);
+          const state = active ? "Active" : "Disabled";
+          return `
+            <div class="admin-list-item">
+              <h4>${esc(x.email || "")}</h4>
+              <p style="font-size:0.8rem;color:var(--muted);">Channel: ${esc(x.channel || "intern_application")} · State: ${state}</p>
+              ${renderRecipientActionButtons(String(x.id), active)}
+            </div>
+          `;
+        })
+        .join("");
     }
   }
 };
@@ -510,6 +564,29 @@ memberForm.addEventListener("submit", async (event) => {
   }
 });
 
+notifyRecipientForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!requireClient()) return;
+  try {
+    const emails = parseEmailList(notifyRecipientEmailEl?.value || "");
+    if (!emails.length) throw new Error("수신 이메일을 1개 이상 입력해 주세요.");
+    const rows = emails.map((email) => ({
+      channel: "intern_application",
+      email,
+      is_active: true
+    }));
+    const { error } = await supabase
+      .from("notification_recipients")
+      .upsert(rows, { onConflict: "channel,email", ignoreDuplicates: false });
+    if (error) throw error;
+    notifyRecipientForm.reset();
+    await loadRecent();
+    setStatus(`수신자 ${emails.length}건 저장 완료.`, "ok");
+  } catch (err) {
+    setStatus(err.message || "수신자 저장 실패.", "error");
+  }
+});
+
 const fillPublicationForm = (row) => {
   editingPublicationId = row.id;
   document.getElementById("pubSeqNo").value = row.seq_no != null ? row.seq_no : "";
@@ -605,9 +682,24 @@ const onAdminListAction = async (event) => {
       } else if (entity === "intern") {
         const { error } = await supabase.from("intern_applications").delete().eq("id", id);
         if (error) throw error;
+      } else if (entity === "recipient") {
+        const { error } = await supabase.from("notification_recipients").delete().eq("id", id);
+        if (error) throw error;
       }
       await loadRecent();
       setStatus("Record deleted.", "ok");
+      return;
+    }
+
+    if ((action === "enable" || action === "disable") && entity === "recipient") {
+      const nextState = action === "enable";
+      const { error } = await supabase
+        .from("notification_recipients")
+        .update({ is_active: nextState })
+        .eq("id", id);
+      if (error) throw error;
+      await loadRecent();
+      setStatus(nextState ? "Recipient enabled." : "Recipient disabled.", "ok");
       return;
     }
 
@@ -636,6 +728,7 @@ pubRecentListEl?.addEventListener("click", onAdminListAction);
 galRecentListEl?.addEventListener("click", onAdminListAction);
 memRecentListEl?.addEventListener("click", onAdminListAction);
 document.getElementById("internApplicationList")?.addEventListener("click", onAdminListAction);
+notifyRecipientListEl?.addEventListener("click", onAdminListAction);
 memTrackFilterEl?.addEventListener("change", async (event) => {
   const next = String(event.target?.value || "all").toLowerCase();
   memberTrackFilter = ["all", "current", "alumni", "faculty"].includes(next) ? next : "all";

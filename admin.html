@@ -149,6 +149,18 @@
         <section class="admin-pane" data-pane="intern">
           <h3>인턴 지원 내역</h3>
           <p class="publication-authors" style="margin-bottom:1rem;">지원자 목록 (최신순). 지원 페이지: <a href="./intern.html" target="_blank" rel="noopener noreferrer">intern.html</a></p>
+          <section class="admin-notify-box">
+            <h4 style="margin:0 0 0.5rem;">신규 지원 알림 수신 이메일</h4>
+            <p class="publication-authors" style="margin:0 0 0.75rem;">신규 지원 이벤트 메일에 사용됩니다. 콤마(,)로 여러 개를 한 번에 추가할 수 있습니다.</p>
+            <form id="notifyRecipientForm" class="admin-form-grid">
+              <label class="admin-field-wide">
+                <span>수신 이메일</span>
+                <input id="notifyRecipientEmail" type="text" placeholder="admin1@example.com, admin2@example.com" />
+              </label>
+              <button class="btn btn-primary" type="submit">수신자 추가</button>
+            </form>
+            <div id="notifyRecipientList" class="admin-list"></div>
+          </section>
           <div id="internApplicationList" class="admin-list"></div>
         </section>
       </section>

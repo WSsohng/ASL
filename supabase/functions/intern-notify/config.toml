@@ -1,0 +1,2 @@
+[functions.intern-notify]
+verify_jwt = false
