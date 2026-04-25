@@ -135,8 +135,6 @@
 
         const resolveTitle = (row) => {
           if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
-          const dateText = String(row?.date || "").trim();
-          if (dateText) return `${dateText} ASL Gallery`;
           return `ASL Gallery #${row?.id || ""}`;
         };
 
@@ -193,7 +191,7 @@
 
         const renderPost = (entry) => {
           const title = esc(entry.title);
-          const meta = [entry.date, entry.author].filter(Boolean).join(" · ");
+          const meta = [entry.author].filter(Boolean).join(" · ");
           const content = entry.content
             ? `<p class="gallery-post-content">${esc(entry.content)}</p>`
             : "";

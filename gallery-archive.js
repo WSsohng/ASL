@@ -62,8 +62,6 @@
 
   const resolveTitle = (row) => {
     if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
-    const dateText = String(row?.date || "").trim();
-    if (dateText) return `${dateText} ASL Gallery`;
     return `ASL Gallery #${row?.id || ""}`;
   };
 
@@ -180,7 +178,7 @@
         const coverThumb = toGalleryThumbUrl(cover, 920);
         const coverThumb2 = cover2 ? toGalleryThumbUrl(cover2, 760) : "";
         const title = row.title || `ASL Gallery #${esc(row.id)}`;
-        const meta = [row.date, row.author].filter(Boolean).join(" · ");
+        const meta = [row.author].filter(Boolean).join(" · ");
         const ordinal = start + idx + 1;
         const imageCountLabel = `${row.images.length} image${row.images.length > 1 ? "s" : ""}`;
         const mediaClass = cover2 ? "gallery-card-media gallery-card-media-split" : "gallery-card-media";
@@ -255,7 +253,7 @@
   const openModal = (entry) => {
     modalEntry = entry;
     modalTitleEl.textContent = entry.title || `ASL Gallery #${entry.id}`;
-    const meta = [entry.date, entry.author].filter(Boolean).join(" · ");
+    const meta = [entry.author].filter(Boolean).join(" · ");
     modalMetaEl.textContent = meta || "ASL Gallery";
     if (modalDescEl) {
       modalDescEl.textContent =
