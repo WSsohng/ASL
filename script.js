@@ -163,9 +163,26 @@ const setupGalleryPreview = async () => {
       throw new Error("Gallery data loader is not available.");
     }
     const payload = await window.ASLData.loadGalleryPosts();
+    const toOptionalInt = (v) => {
+      const n = Number.parseInt(String(v || ""), 10);
+      return Number.isFinite(n) ? n : null;
+    };
+    const toTime = (v) => {
+      const t = Date.parse(String(v || ""));
+      return Number.isFinite(t) ? t : 0;
+    };
     const rows = (Array.isArray(payload) ? payload : [])
       .slice()
-      .sort((a, b) => Number.parseInt(b?.source_present_num || "0", 10) - Number.parseInt(a?.source_present_num || "0", 10))
+      .sort((a, b) => {
+        const timeDiff = toTime(b?.created_at) - toTime(a?.created_at);
+        if (timeDiff !== 0) return timeDiff;
+        const aNum = toOptionalInt(a?.source_present_num);
+        const bNum = toOptionalInt(b?.source_present_num);
+        if (aNum !== null && bNum !== null && bNum !== aNum) return bNum - aNum;
+        if (aNum !== null && bNum === null) return -1;
+        if (aNum === null && bNum !== null) return 1;
+        return String(b?.id || "").localeCompare(String(a?.id || ""));
+      })
       .slice(0, 3);
     if (!rows.length) {
       grid.innerHTML =

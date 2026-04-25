@@ -153,6 +153,25 @@
   };
 
   const toGalleryPayload = (posts, images) => {
+    const toPresentNum = (value) => {
+      const n = Number.parseInt(String(value || ""), 10);
+      return Number.isFinite(n) ? n : null;
+    };
+    const toTime = (value) => {
+      const t = Date.parse(String(value || ""));
+      return Number.isFinite(t) ? t : 0;
+    };
+    const compareGalleryRows = (a, b) => {
+      const timeDiff = toTime(b.created_at) - toTime(a.created_at);
+      if (timeDiff !== 0) return timeDiff;
+      const aNum = toPresentNum(a.source_present_num);
+      const bNum = toPresentNum(b.source_present_num);
+      if (aNum !== null && bNum !== null && bNum !== aNum) return bNum - aNum;
+      if (aNum !== null && bNum === null) return -1;
+      if (aNum === null && bNum !== null) return 1;
+      return String(b.id || "").localeCompare(String(a.id || ""));
+    };
+
     const imageMap = new Map();
     (images || []).forEach((img) => {
       const postId = String(img.post_id || "");
@@ -175,6 +194,7 @@
         source_idx: String(post.source_idx || ""),
         source_letter_no: String(post.source_letter_no || ""),
         source_present_num: String(post.source_present_num || ""),
+        created_at: String(post.created_at || "").trim(),
         list_page_num: Number(post.list_page_num || 0),
         thumbnail: String(post.thumbnail_url || ""),
         images: postImages.map((x) => String(x.image_url || "").trim()).filter(Boolean),
@@ -188,7 +208,7 @@
         }))
       };
     });
-    rows.sort((a, b) => Number.parseInt(b.source_present_num, 10) - Number.parseInt(a.source_present_num, 10));
+    rows.sort(compareGalleryRows);
     return rows;
   };
 
@@ -250,7 +270,7 @@
       const [posts, images] = await Promise.all([
         fetchAll(
           "gallery_posts",
-          "id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url"
+          "id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,created_at,list_page_num,thumbnail_url"
         ),
         fetchAll(
           "gallery_images",

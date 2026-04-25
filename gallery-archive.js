@@ -40,6 +40,14 @@
     const n = Number.parseInt(v, 10);
     return Number.isFinite(n) ? n : fallback;
   };
+  const toOptionalInt = (v) => {
+    const n = Number.parseInt(v, 10);
+    return Number.isFinite(n) ? n : null;
+  };
+  const toTime = (v) => {
+    const t = Date.parse(String(v || ""));
+    return Number.isFinite(t) ? t : 0;
+  };
 
   const isPlaceholderTitle = (value = "") => {
     const t = String(value || "").trim().toLowerCase();
@@ -64,10 +72,20 @@
         content: String(row.content || row.description || "").trim(),
         source_url: String(row.source_url || "").trim(),
         source_present_num: String(row.source_present_num || "").trim(),
+        created_at: String(row.created_at || "").trim(),
         list_page_num: toInt(row.list_page_num, 0),
         images: Array.isArray(row.images) ? row.images.filter(Boolean) : []
       }))
-      .sort((a, b) => toInt(b.source_present_num, -1) - toInt(a.source_present_num, -1));
+      .sort((a, b) => {
+        const timeDiff = toTime(b.created_at) - toTime(a.created_at);
+        if (timeDiff !== 0) return timeDiff;
+        const aNum = toOptionalInt(a.source_present_num);
+        const bNum = toOptionalInt(b.source_present_num);
+        if (aNum !== null && bNum !== null && bNum !== aNum) return bNum - aNum;
+        if (aNum !== null && bNum === null) return -1;
+        if (aNum === null && bNum !== null) return 1;
+        return String(b.id || "").localeCompare(String(a.id || ""));
+      });
 
   const toLocalThumbPath = (rawUrl = "") => {
     const url = String(rawUrl || "").trim();
