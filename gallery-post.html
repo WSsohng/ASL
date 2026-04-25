@@ -209,10 +209,6 @@
                 .join("")
             : `<img src="${FALLBACK_IMG}" alt="No image available" />`;
 
-          const sourceLink = entry.source_url
-            ? `<a class="btn btn-ghost" href="${esc(entry.source_url)}" target="_blank" rel="noopener noreferrer">원문 게시글 보기</a>`
-            : "";
-
           document.title = `${entry.title} | ASL Gallery`;
 
           contentEl.innerHTML = `
@@ -225,7 +221,6 @@
             <div class="gallery-post-images">${images}</div>
             <div class="gallery-post-footer">
               <a class="btn btn-contrast" href="./gallery.html">← Gallery 목록</a>
-              ${sourceLink}
             </div>
           `;
         };

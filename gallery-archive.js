@@ -16,7 +16,6 @@
   const modalMetaEl = document.getElementById("galleryModalMeta");
   const modalDescEl = document.getElementById("galleryModalDesc");
   const modalImagesEl = document.getElementById("galleryModalImages");
-  const modalSourceEl = document.getElementById("gallerySourceLink");
   const modalCloseBtn = document.getElementById("galleryModalClose");
 
   if (modalCloseBtn) modalCloseBtn.textContent = "×";
@@ -266,8 +265,6 @@
         entry.content ||
         "본문 텍스트가 저장되지 않은 게시물입니다. 원문 게시글에서 상세 내용을 확인해 주세요.";
     }
-    modalSourceEl.href = entry.source_url || "#";
-    modalSourceEl.classList.toggle("is-disabled", !entry.source_url);
     renderModalImages(entry);
     if (!modalEl.open) modalEl.showModal();
     lockPageScroll();
