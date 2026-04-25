@@ -11,6 +11,7 @@ const signOutBtn = document.getElementById("adminSignOutBtn");
 const publicationForm = document.getElementById("publicationForm");
 const galleryForm = document.getElementById("galleryForm");
 const memberForm = document.getElementById("memberForm");
+const galBackfillBtn = document.getElementById("galBackfillBtn");
 const notifyRecipientForm = document.getElementById("notifyRecipientForm");
 const notifyRecipientEmailEl = document.getElementById("notifyRecipientEmail");
 
@@ -90,6 +91,23 @@ const parseEmailList = (value = "") => {
     .filter(Boolean)
     .forEach((email) => unique.add(email));
   return [...unique];
+};
+
+const isPlaceholderTitle = (value = "") => {
+  const t = String(value || "").trim().toLowerCase();
+  return !t || t === "content" || t === "컨텐츠 바로가기" || t === "콘텐츠 바로가기";
+};
+
+const normalizeLegacyDate = (value = "") => {
+  const v = String(value || "").trim();
+  if (!v) return "";
+  const m = v.match(/^(\d{1,2})[./-](\d{1,2})$/);
+  if (m) {
+    const mm = m[1].padStart(2, "0");
+    const dd = m[2].padStart(2, "0");
+    return `${mm}-${dd}`;
+  }
+  return v;
 };
 
 const toInputDate = (value = "") => {
@@ -568,6 +586,88 @@ memberForm.addEventListener("submit", async (event) => {
     setStatus(wasEditing ? "Member updated." : "Member saved.", "ok");
   } catch (err) {
     setStatus(err.message || "Member save failed.", "error");
+  }
+});
+
+galBackfillBtn?.addEventListener("click", async () => {
+  if (!requireClient()) return;
+  if (!window.confirm("기존 갤러리 메타데이터를 백필하시겠습니까? (빈/placeholder 항목만 갱신)")) return;
+
+  try {
+    setStatus("Loading legacy gallery dataset for backfill...", "info");
+    const legacyRes = await fetch("./data/gallery_migration/gallery-data.json", { cache: "no-store" });
+    if (!legacyRes.ok) throw new Error(`Legacy dataset load failed: HTTP ${legacyRes.status}`);
+    const legacyPayload = await legacyRes.json();
+    const legacyRows = Array.isArray(legacyPayload) ? legacyPayload : [];
+    if (!legacyRows.length) throw new Error("Legacy dataset is empty.");
+
+    const byPresentNum = new Map();
+    const bySourceIdx = new Map();
+    const byId = new Map();
+    legacyRows.forEach((row) => {
+      const present = String(row?.source_present_num || "").trim();
+      const sourceIdx = String(row?.source_idx || "").trim();
+      const id = String(row?.id || "").trim();
+      if (present) byPresentNum.set(present, row);
+      if (sourceIdx) bySourceIdx.set(sourceIdx, row);
+      if (id) byId.set(id, row);
+    });
+
+    const { data: currentRows, error: selectError } = await supabase
+      .from("gallery_posts")
+      .select("id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url")
+      .order("source_present_num", { ascending: false, nullsFirst: false })
+      .limit(500);
+    if (selectError) throw selectError;
+
+    const rows = currentRows || [];
+    let updatedCount = 0;
+    let matchedCount = 0;
+
+    for (const row of rows) {
+      const id = String(row.id || "").trim();
+      const presentNum = String(row.source_present_num || "").trim();
+      const sourceIdx = String(row.source_idx || "").trim();
+      const legacy = byPresentNum.get(presentNum) || bySourceIdx.get(sourceIdx) || byId.get(id);
+      if (!legacy) continue;
+      matchedCount += 1;
+
+      const patch = {};
+      const legacyTitle = String(legacy.title || "").trim();
+      const legacyContent = String(legacy.content || "").trim();
+      const legacyAuthor = String(legacy.author || "").trim();
+      const legacyDate = normalizeLegacyDate(legacy.date);
+      const legacyUrl = String(legacy.source_url || "").trim();
+      const legacyLetterNo = String(legacy.source_letter_no || "").trim();
+      const legacyPresentNum = String(legacy.source_present_num || "").trim();
+      const legacyListPage = Number.isFinite(Number(legacy.list_page_num)) ? Number(legacy.list_page_num) : null;
+      const legacyThumb = String(legacy.thumbnail || "").trim();
+
+      if (isPlaceholderTitle(row.title) && legacyTitle) patch.title = legacyTitle;
+      if (!String(row.content || "").trim() && legacyContent) patch.content = legacyContent;
+      if (!String(row.author || "").trim() && legacyAuthor) patch.author = legacyAuthor;
+      if (!String(row.date_text || "").trim() && legacyDate) patch.date_text = legacyDate;
+      if (!String(row.source_url || "").trim() && legacyUrl) patch.source_url = legacyUrl;
+      if (!String(row.source_idx || "").trim() && String(legacy.source_idx || "").trim()) {
+        patch.source_idx = String(legacy.source_idx || "").trim();
+      }
+      if (!String(row.source_letter_no || "").trim() && legacyLetterNo) patch.source_letter_no = legacyLetterNo;
+      if (!String(row.source_present_num || "").trim() && legacyPresentNum) patch.source_present_num = legacyPresentNum;
+      if ((row.list_page_num === null || row.list_page_num === undefined) && legacyListPage !== null) {
+        patch.list_page_num = legacyListPage;
+      }
+      if (!String(row.thumbnail_url || "").trim() && legacyThumb) patch.thumbnail_url = legacyThumb;
+
+      if (!Object.keys(patch).length) continue;
+      const { error: updateError } = await supabase.from("gallery_posts").update(patch).eq("id", row.id);
+      if (updateError) throw updateError;
+      updatedCount += 1;
+    }
+
+    await loadRecent();
+    setStatus(`Gallery backfill complete. matched=${matchedCount}, updated=${updatedCount}`, "ok");
+  } catch (err) {
+    setStatus(err.message || "Gallery backfill failed.", "error");
   }
 });
 
