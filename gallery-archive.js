@@ -64,6 +64,11 @@
     if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
     return `ASL Gallery #${row?.id || ""}`;
   };
+  const getDisplayAuthor = (value = "") => {
+    const author = String(value || "").trim();
+    if (!author) return "";
+    return author === "관리자" ? "" : author;
+  };
 
   const normalizeRows = (payload) =>
     (Array.isArray(payload) ? payload : [])
@@ -178,7 +183,7 @@
         const coverThumb = toGalleryThumbUrl(cover, 920);
         const coverThumb2 = cover2 ? toGalleryThumbUrl(cover2, 760) : "";
         const title = row.title || `ASL Gallery #${esc(row.id)}`;
-        const meta = [row.author].filter(Boolean).join(" · ");
+        const meta = getDisplayAuthor(row.author);
         const ordinal = start + idx + 1;
         const imageCountLabel = `${row.images.length} image${row.images.length > 1 ? "s" : ""}`;
         const mediaClass = cover2 ? "gallery-card-media gallery-card-media-split" : "gallery-card-media";
@@ -210,7 +215,7 @@
             </div>
             <figcaption>
               <strong>${esc(title)}</strong>
-              <span>${esc(meta || "ASL Gallery")}</span>
+              ${meta ? `<span>${esc(meta)}</span>` : ""}
             </figcaption>
           </figure>
         `;
@@ -253,8 +258,9 @@
   const openModal = (entry) => {
     modalEntry = entry;
     modalTitleEl.textContent = entry.title || `ASL Gallery #${entry.id}`;
-    const meta = [entry.author].filter(Boolean).join(" · ");
-    modalMetaEl.textContent = meta || "ASL Gallery";
+    const meta = getDisplayAuthor(entry.author);
+    modalMetaEl.textContent = meta;
+    modalMetaEl.style.display = meta ? "" : "none";
     if (modalDescEl) {
       modalDescEl.textContent =
         entry.content ||

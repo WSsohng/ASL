@@ -137,6 +137,11 @@
           if (!isPlaceholderTitle(row?.title)) return String(row.title).trim();
           return `ASL Gallery #${row?.id || ""}`;
         };
+        const getDisplayAuthor = (value = "") => {
+          const author = String(value || "").trim();
+          if (!author) return "";
+          return author === "관리자" ? "" : author;
+        };
 
         const toLocalOriginalPath = (rawUrl = "") => {
           const url = String(rawUrl || "").trim();
@@ -191,7 +196,7 @@
 
         const renderPost = (entry) => {
           const title = esc(entry.title);
-          const meta = [entry.author].filter(Boolean).join(" · ");
+          const meta = getDisplayAuthor(entry.author);
           const content = entry.content
             ? `<p class="gallery-post-content">${esc(entry.content)}</p>`
             : "";
@@ -214,7 +219,7 @@
             <div class="gallery-post-header">
               <p class="eyebrow">Gallery</p>
               <h1>${title}</h1>
-              <p class="gallery-post-meta">${esc(meta)}</p>
+              ${meta ? `<p class="gallery-post-meta">${esc(meta)}</p>` : ""}
             </div>
             ${content}
             <div class="gallery-post-images">${images}</div>
