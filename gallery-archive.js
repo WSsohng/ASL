@@ -313,22 +313,7 @@
 
   const loadGalleryData = async () => {
     if (window.ASLData?.loadGalleryPosts) return window.ASLData.loadGalleryPosts();
-    const candidates = [
-      "./data/gallery_migration/gallery-data.runtime.json",
-      "./data/gallery_migration/gallery-data.supabase.json",
-      "./data/gallery_migration/gallery-data.json"
-    ];
-    let lastError = null;
-    for (const url of candidates) {
-      try {
-        const r = await fetch(url, { cache: "no-store" });
-        if (!r.ok) throw new Error(`Failed to load gallery data: ${r.status} (${url})`);
-        return await r.json();
-      } catch (err) {
-        lastError = err;
-      }
-    }
-    throw lastError || new Error("Failed to load gallery data");
+    throw new Error("Gallery loader is unavailable. Check public-data.js load order.");
   };
 
   loadGalleryData()

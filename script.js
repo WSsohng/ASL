@@ -159,11 +159,10 @@ const setupGalleryPreview = async () => {
   const grid = document.getElementById("galleryPreviewGrid");
   if (!grid) return;
   try {
-    const payload =
-      (await window.ASLData?.loadGalleryPosts?.()) ||
-      (await fetch("./data/gallery_migration/gallery-data.runtime.json", { cache: "no-store" }).then((r) =>
-        r.json()
-      ));
+    if (!window.ASLData?.loadGalleryPosts) {
+      throw new Error("Gallery data loader is not available.");
+    }
+    const payload = await window.ASLData.loadGalleryPosts();
     const rows = (Array.isArray(payload) ? payload : [])
       .slice()
       .sort((a, b) => Number.parseInt(b?.source_present_num || "0", 10) - Number.parseInt(a?.source_present_num || "0", 10))

@@ -244,37 +244,20 @@
   const loadGalleryPosts = async () => {
     if (cache.has("gallery")) return cache.get("gallery");
     const promise = (async () => {
-      const candidates = [
-        "./data/gallery_migration/gallery-data.runtime.json",
-        "./data/gallery_migration/gallery-data.supabase.json",
-        "./data/gallery_migration/gallery-data.json"
-      ];
-      let lastError = null;
-      for (const url of candidates) {
-        try {
-          return await safeJsonFetch(url);
-        } catch (err) {
-          lastError = err;
-        }
+      if (!isReady) {
+        throw new Error("Supabase gallery config is missing. Check admin-config.js (url / anonKey).");
       }
-      if (isReady) {
-        try {
-          const [posts, images] = await Promise.all([
-            fetchAll(
-              "gallery_posts",
-              "id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url"
-            ),
-            fetchAll(
-              "gallery_images",
-              "post_id,image_url,local_path,sha256,bytes_size,sort_order,is_cover,status,error"
-            )
-          ]);
-          return toGalleryPayload(posts, images);
-        } catch (err) {
-          lastError = err;
-        }
-      }
-      throw lastError || new Error("Failed to load gallery data");
+      const [posts, images] = await Promise.all([
+        fetchAll(
+          "gallery_posts",
+          "id,title,content,author,date_text,source_url,source_idx,source_letter_no,source_present_num,list_page_num,thumbnail_url"
+        ),
+        fetchAll(
+          "gallery_images",
+          "post_id,image_url,local_path,sha256,bytes_size,sort_order,is_cover,status,error"
+        )
+      ]);
+      return toGalleryPayload(posts, images);
     })();
     cache.set("gallery", promise);
     return promise;
