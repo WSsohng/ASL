@@ -110,6 +110,24 @@ const normalizeLegacyDate = (value = "") => {
   return v;
 };
 
+const toGallerySortTimestamp = (row = {}) => {
+  const raw = String(row.date_text || "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    const t = Date.parse(`${raw}T00:00:00Z`);
+    if (Number.isFinite(t)) return t;
+  }
+  if (/^\d{2}-\d{2}$/.test(raw)) {
+    const yearMatch = String(row.title || "").match(/(19|20)\d{2}/);
+    const year = yearMatch ? yearMatch[0] : "";
+    if (year) {
+      const t = Date.parse(`${year}-${raw}T00:00:00Z`);
+      if (Number.isFinite(t)) return t;
+    }
+  }
+  const fallback = Date.parse(String(row.created_at || ""));
+  return Number.isFinite(fallback) ? fallback : 0;
+};
+
 const toInputDate = (value = "") => {
   const raw = String(value || "").slice(0, 10);
   return /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : "";
@@ -236,9 +254,8 @@ const loadRecent = async () => {
       .limit(500),
     supabase
       .from("gallery_posts")
-      .select("id,title,content,date_text,author,source_url,created_at")
-      .order("created_at", { ascending: false })
-      .limit(20),
+      .select("id,title,content,date_text,author,source_url,source_present_num,created_at")
+      .limit(1000),
     supabase
       .from("members")
       .select("id,name,role,track,email,sort_order,created_at")
@@ -276,7 +293,17 @@ const loadRecent = async () => {
       : `<div style="width:72px;height:54px;border-radius:4px;background:#1a2035;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#556;text-align:center;">No<br>image</div>`;
     return `<div style="display:flex;gap:0.8rem;align-items:flex-start;">${thumb}<div style="min-width:0;flex:1;"><h4 style="margin:0 0 0.25rem;font-size:0.9rem;">${num}${esc(x.title || "")}</h4><p style="margin:0;font-size:0.8rem;">${esc(x.journal || "")} · ${esc(x.year || "")} · Cited ${esc(x.citations ?? 0)}</p>${renderActionButtons("publication", x.id)}</div></div>`;
   });
-  renderRecent(galRecentListEl, gals || [], (x) => {
+  const sortedGalleries = (gals || [])
+    .slice()
+    .sort((a, b) => {
+      const timeDiff = toGallerySortTimestamp(b) - toGallerySortTimestamp(a);
+      if (timeDiff !== 0) return timeDiff;
+      const spnDiff = asInt(String(b.source_present_num || ""), -1) - asInt(String(a.source_present_num || ""), -1);
+      if (spnDiff !== 0) return spnDiff;
+      return String(b.id || "").localeCompare(String(a.id || ""));
+    });
+
+  renderRecent(galRecentListEl, sortedGalleries, (x) => {
     const preview = String(x.content || "").trim().slice(0, 120);
     return `<h4>${esc(x.title || "")}</h4><p>${esc(x.date_text || "")} · ${esc(x.author || "")}</p><p>${esc(preview || "No content")}</p>${renderActionButtons("gallery", x.id)}`;
   });
