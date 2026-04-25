@@ -269,6 +269,7 @@ target as (
     ) as rn
   from matched m
   where m.has_legacy_date = false
+    and m.legacy_id is not null
 ),
 updated as (
   update public.gallery_posts g
