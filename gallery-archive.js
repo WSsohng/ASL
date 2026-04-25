@@ -48,6 +48,12 @@
     const t = Date.parse(String(v || ""));
     return Number.isFinite(t) ? t : 0;
   };
+  const toDateOrder = (v) => {
+    const raw = String(v || "").trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return 0;
+    const t = Date.parse(`${raw}T00:00:00Z`);
+    return Number.isFinite(t) ? t : 0;
+  };
 
   const isPlaceholderTitle = (value = "") => {
     const t = String(value || "").trim().toLowerCase();
@@ -77,13 +83,15 @@
         images: Array.isArray(row.images) ? row.images.filter(Boolean) : []
       }))
       .sort((a, b) => {
-        const timeDiff = toTime(b.created_at) - toTime(a.created_at);
-        if (timeDiff !== 0) return timeDiff;
+        const dateDiff = toDateOrder(b.date) - toDateOrder(a.date);
+        if (dateDiff !== 0) return dateDiff;
         const aNum = toOptionalInt(a.source_present_num);
         const bNum = toOptionalInt(b.source_present_num);
         if (aNum !== null && bNum !== null && bNum !== aNum) return bNum - aNum;
         if (aNum !== null && bNum === null) return -1;
         if (aNum === null && bNum !== null) return 1;
+        const timeDiff = toTime(b.created_at) - toTime(a.created_at);
+        if (timeDiff !== 0) return timeDiff;
         return String(b.id || "").localeCompare(String(a.id || ""));
       });
 
