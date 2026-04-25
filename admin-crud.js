@@ -110,24 +110,6 @@ const normalizeLegacyDate = (value = "") => {
   return v;
 };
 
-const toGallerySortTimestamp = (row = {}) => {
-  const raw = String(row.date_text || "").trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    const t = Date.parse(`${raw}T00:00:00Z`);
-    if (Number.isFinite(t)) return t;
-  }
-  if (/^\d{2}-\d{2}$/.test(raw)) {
-    const yearMatch = String(row.title || "").match(/(19|20)\d{2}/);
-    const year = yearMatch ? yearMatch[0] : "";
-    if (year) {
-      const t = Date.parse(`${year}-${raw}T00:00:00Z`);
-      if (Number.isFinite(t)) return t;
-    }
-  }
-  const fallback = Date.parse(String(row.created_at || ""));
-  return Number.isFinite(fallback) ? fallback : 0;
-};
-
 const toInputDate = (value = "") => {
   const raw = String(value || "").slice(0, 10);
   return /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : "";
@@ -296,10 +278,10 @@ const loadRecent = async () => {
   const sortedGalleries = (gals || [])
     .slice()
     .sort((a, b) => {
-      const timeDiff = toGallerySortTimestamp(b) - toGallerySortTimestamp(a);
-      if (timeDiff !== 0) return timeDiff;
       const spnDiff = asInt(String(b.source_present_num || ""), -1) - asInt(String(a.source_present_num || ""), -1);
       if (spnDiff !== 0) return spnDiff;
+      const timeDiff = Date.parse(String(b.created_at || "")) - Date.parse(String(a.created_at || ""));
+      if (Number.isFinite(timeDiff) && timeDiff !== 0) return timeDiff;
       return String(b.id || "").localeCompare(String(a.id || ""));
     });
 
