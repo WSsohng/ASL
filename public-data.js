@@ -104,6 +104,7 @@
       }
       grouped[key].push({
         id: row.id || "",
+        seq_no: Number.isFinite(Number(row.seq_no)) ? Number(row.seq_no) : 0,
         title: row.title || "",
         journal: row.journal || "",
         authors: row.authors || "",
@@ -121,7 +122,15 @@
       });
     });
     Object.keys(grouped).forEach((key) => {
-      grouped[key].sort((a, b) => numericSuffix(a.source_key) - numericSuffix(b.source_key));
+      grouped[key].sort((a, b) => {
+        const aManual = !String(a.source_key || "").trim();
+        const bManual = !String(b.source_key || "").trim();
+        /* Manually added entries (no legacy source_key) sit on top, newest first */
+        if (aManual !== bManual) return aManual ? -1 : 1;
+        if (aManual && bManual) return (b.seq_no || 0) - (a.seq_no || 0);
+        /* Legacy entries keep their original imported order */
+        return numericSuffix(a.source_key) - numericSuffix(b.source_key);
+      });
     });
     return grouped;
   };
@@ -233,7 +242,7 @@
         try {
           const rows = await fetchAll(
             "publications",
-            "id,title,year,journal,authors,authors_marked,doi,citations,impact_factor,graphical_abstract_url,pdf_url,source_key,source_year_group"
+            "id,seq_no,title,year,journal,authors,authors_marked,doi,citations,impact_factor,graphical_abstract_url,pdf_url,source_key,source_year_group"
           );
           const imageMaps = localPayload ? localPublicationImageMap(localPayload) : null;
           return toPublicationPayload(rows, imageMaps);
