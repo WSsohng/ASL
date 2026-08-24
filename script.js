@@ -142,17 +142,13 @@ const toLocalThumbPath = (rawUrl = "") => {
   return `./assets/gallery/thumbs/${base}.webp`;
 };
 
-const toGalleryThumbUrl = (rawUrl = "", width = 920) => {
+const toGalleryThumbUrl = (rawUrl = "") => {
   const url = String(rawUrl || "").trim();
   if (!url) return "./assets/publication-placeholder.svg";
+  /* Local webp thumbs exist for legacy imported images; storage objects are web-sized */
   const localThumb = toLocalThumbPath(url);
   if (localThumb) return localThumb;
-  if (!url.includes("/storage/v1/object/public/")) return url;
-  const rendered = url.includes("/storage/v1/render/image/public/")
-    ? url
-    : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
-  const sep = rendered.includes("?") ? "&" : "?";
-  return `${rendered}${sep}width=${width}&format=webp`;
+  return url;
 };
 
 const setupGalleryPreview = async () => {
@@ -200,7 +196,7 @@ const setupGalleryPreview = async () => {
     grid.innerHTML = rows
       .map((row) => {
         const original = row?.images?.[0] || row?.thumbnail || "./assets/publication-placeholder.svg";
-        const thumb = toGalleryThumbUrl(original, 860);
+        const thumb = toGalleryThumbUrl(original);
         const title = escHtml(row?.title || "ASL Gallery");
         return `
           <figure>
@@ -644,8 +640,31 @@ if (memberCarousel) {
     return near || null;
   };
 
+  const METRICS_STORE_KEY = "asl_author_metrics_v1";
+  const METRICS_TTL_MS = 12 * 60 * 60 * 1000;
+  const readStoredMetrics = (authorName) => {
+    try {
+      const store = JSON.parse(sessionStorage.getItem(METRICS_STORE_KEY) || "{}");
+      const entry = store[authorName];
+      if (entry && Date.now() - entry.at < METRICS_TTL_MS) return entry.value;
+    } catch {}
+    return null;
+  };
+  const writeStoredMetrics = (authorName, value) => {
+    try {
+      const store = JSON.parse(sessionStorage.getItem(METRICS_STORE_KEY) || "{}");
+      store[authorName] = { at: Date.now(), value };
+      sessionStorage.setItem(METRICS_STORE_KEY, JSON.stringify(store));
+    } catch {}
+  };
+
   const fetchAuthorMetrics = async (authorName) => {
     if (metricCache.has(authorName)) return metricCache.get(authorName);
+    const stored = readStoredMetrics(authorName);
+    if (stored) {
+      metricCache.set(authorName, stored);
+      return stored;
+    }
     const override = getAuthorOverride(authorName);
     if (override) {
       metricCache.set(authorName, override);
@@ -720,6 +739,7 @@ if (memberCarousel) {
           "Hanyang University"
       };
       metricCache.set(authorName, metrics);
+      writeStoredMetrics(authorName, metrics);
       return metrics;
     } catch {
       metricCache.set(authorName, fallback);

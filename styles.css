@@ -1095,6 +1095,14 @@ h2 {
   background: transparent;
 }
 
+.pub-search-row {
+  margin: 0 0 1rem;
+}
+
+.pub-search-row .gallery-search {
+  width: min(420px, 100%);
+}
+
 .pub-years {
   display: flex;
   flex-wrap: wrap;
@@ -2431,6 +2439,9 @@ h2 {
     -ms-overflow-style: none;
     white-space: nowrap;
     padding-bottom: 0.15rem;
+    /* Right-edge fade hints that more menu items can be scrolled */
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
   }
 
   .nav::-webkit-scrollbar {

@@ -153,7 +153,39 @@ const resetMemberFormState = () => {
   setSubmitLabels();
 };
 
-const uploadFileAndGetPublicUrl = async (bucket, file, folderPrefix) => {
+const IMAGE_MAX_DIMENSION = 2000;
+const IMAGE_JPEG_QUALITY = 0.85;
+
+/* Resize/re-encode oversized photos in the browser so originals (often 10MB+)
+   never reach storage. GIFs are skipped to preserve animation. */
+const compressImageFile = async (file) => {
+  const type = String(file?.type || "");
+  if (!type.startsWith("image/") || type === "image/gif" || type === "image/svg+xml") return file;
+  if (file.size < 400 * 1024) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, IMAGE_MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+    const width = Math.round(bitmap.width * scale);
+    const height = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, width, height);
+    ctx.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close();
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", IMAGE_JPEG_QUALITY));
+    if (!blob || blob.size >= file.size) return file;
+    const newName = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+    return new File([blob], newName, { type: "image/jpeg" });
+  } catch {
+    return file;
+  }
+};
+
+const uploadFileAndGetPublicUrl = async (bucket, rawFile, folderPrefix) => {
+  const file = await compressImageFile(rawFile);
   const safeName = `${Date.now()}-${file.name}`.replace(/[^\w.\-]/g, "_");
   const objectPath = `${folderPrefix}/${safeName}`;
   const { error: uploadError } = await supabase.storage.from(bucket).upload(objectPath, file, {

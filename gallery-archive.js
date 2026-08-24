@@ -109,35 +109,18 @@
     return `./assets/gallery/thumbs/${base}.webp`;
   };
 
-  const toLocalOriginalPath = (rawUrl = "") => {
-    const url = String(rawUrl || "").trim();
-    if (!url) return "";
-    const marker = "/gallery/imported/";
-    const idx = url.indexOf(marker);
-    if (idx === -1) return "";
-    const rel = url.slice(idx + marker.length);
-    return `./assets/gallery/imported/${rel}`;
-  };
-
-  const toGalleryThumbUrl = (rawUrl = "", width = 900) => {
+  const toGalleryThumbUrl = (rawUrl = "") => {
     const url = String(rawUrl || "").trim();
     if (!url) return FALLBACK_IMG;
+    /* Local webp thumbs exist for legacy imported images; storage objects are web-sized */
     const localThumb = toLocalThumbPath(url);
     if (localThumb) return localThumb;
-    if (!url.includes("/storage/v1/object/public/")) return url;
-    const rendered = url.includes("/storage/v1/render/image/public/")
-      ? url
-      : url.replace("/storage/v1/object/public/", "/storage/v1/render/image/public/");
-    const sep = rendered.includes("?") ? "&" : "?";
-    return `${rendered}${sep}width=${width}&format=webp`;
+    return url;
   };
 
   const toGalleryFullUrl = (rawUrl = "") => {
     const url = String(rawUrl || "").trim();
-    if (!url) return FALLBACK_IMG;
-    const localOriginal = toLocalOriginalPath(url);
-    if (localOriginal) return localOriginal;
-    return url;
+    return url || FALLBACK_IMG;
   };
 
   const getTotalPages = () => Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
@@ -179,8 +162,8 @@
       .map((row, idx) => {
         const cover = row.images[0] || FALLBACK_IMG;
         const cover2 = row.images[1] || "";
-        const coverThumb = toGalleryThumbUrl(cover, 920);
-        const coverThumb2 = cover2 ? toGalleryThumbUrl(cover2, 760) : "";
+        const coverThumb = toGalleryThumbUrl(cover);
+        const coverThumb2 = cover2 ? toGalleryThumbUrl(cover2) : "";
         const title = row.title || `ASL Gallery #${esc(row.id)}`;
         const meta = getDisplayAuthor(row.author);
         const ordinal = start + idx + 1;
@@ -273,7 +256,12 @@
   const applyFilter = () => {
     const q = String(searchEl.value || "").trim().toLowerCase();
     filteredRows = q
-      ? allRows.filter((row) => row.title.toLowerCase().includes(q))
+      ? allRows.filter(
+          (row) =>
+            row.title.toLowerCase().includes(q) ||
+            row.content.toLowerCase().includes(q) ||
+            row.author.toLowerCase().includes(q)
+        )
       : [...allRows];
     currentPage = 1;
     if (!q) renderCoverage();

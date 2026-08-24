@@ -17,7 +17,10 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="canonical" href="https://wssohng.github.io/ASL/intern.html" />
+    <meta property="og:url" content="https://wssohng.github.io/ASL/intern.html" />
     <link rel="icon" type="image/svg+xml" href="./assets/asl-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
     <style>
       .intern-wrap {
@@ -275,6 +278,11 @@
             ></textarea>
           </div>
 
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <label for="internWebsite">Website</label>
+            <input id="internWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div class="intern-submit-row">
             <button class="btn btn-contrast" type="submit" id="internSubmitBtn">지원하기</button>
             <span id="internStatus" class="intern-status"></span>
@@ -310,9 +318,25 @@
         statusEl.className = "intern-status" + (type ? ` is-${type}` : "");
       };
 
+      const FORM_OPENED_AT = Date.now();
+      const SUBMIT_COOLDOWN_KEY = "asl_intern_last_submit";
+      const SUBMIT_COOLDOWN_MS = 5 * 60 * 1000;
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form));
+
+        /* Spam guards: hidden honeypot field, minimum fill time, resubmit cooldown */
+        if (String(data.website || "").trim()) return;
+        if (Date.now() - FORM_OPENED_AT < 5000) {
+          setStatus("입력 내용을 확인한 뒤 다시 제출해 주세요.", "error");
+          return;
+        }
+        const lastSubmit = Number(localStorage.getItem(SUBMIT_COOLDOWN_KEY) || 0);
+        if (Date.now() - lastSubmit < SUBMIT_COOLDOWN_MS) {
+          setStatus("이미 제출되었습니다. 잠시 후 다시 시도해 주세요.", "error");
+          return;
+        }
 
         const required = ["name", "student_id", "phone", "email", "period", "motivation"];
         for (const key of required) {
@@ -360,6 +384,7 @@
           return;
         }
 
+        localStorage.setItem(SUBMIT_COOLDOWN_KEY, String(Date.now()));
         form.style.display = "none";
         successBox.classList.add("is-visible");
         setStatus("");

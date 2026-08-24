@@ -27,7 +27,10 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="canonical" href="https://wssohng.github.io/ASL/publication.html" />
+    <meta property="og:url" content="https://wssohng.github.io/ASL/publication.html" />
     <link rel="icon" type="image/svg+xml" href="./assets/asl-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -60,6 +63,16 @@
           <p class="eyebrow">Publications</p>
           <h1 class="archive-title-single-line">Publication Archive</h1>
         </div>
+      </div>
+
+      <div class="pub-search-row">
+        <input
+          id="pubSearch"
+          class="gallery-search"
+          type="search"
+          placeholder="Search title, journal, author..."
+          aria-label="Search publications"
+        />
       </div>
 
       <div id="pubFilter" class="pub-years" aria-label="Publication years"></div>
@@ -607,8 +620,33 @@
             filterEl.addEventListener("click", (e) => {
               const btn = e.target.closest("button[data-year]");
               if (!btn) return;
+              if (searchEl) searchEl.value = "";
               setActive(btn.dataset.year);
             });
+
+            const searchEl = document.getElementById("pubSearch");
+            const getActiveYear = () =>
+              filterEl.querySelector("button.is-active")?.dataset.year || years[0];
+            const runSearch = () => {
+              const q = String(searchEl.value || "").trim().toLowerCase();
+              if (!q) {
+                setActive(getActiveYear());
+                return;
+              }
+              const matches = [];
+              years.forEach((year) => {
+                (allData[year] || []).forEach((item) => {
+                  const haystack = `${item.title || ""} ${item.journal || ""} ${getDisplayAuthors(item)}`.toLowerCase();
+                  if (haystack.includes(q)) matches.push(item);
+                });
+              });
+              if (!matches.length) {
+                catalogEl.innerHTML = `<p class="publication-authors">No publications matched "${esc(q)}".</p>`;
+                return;
+              }
+              renderEntries(`Search · ${matches.length} result${matches.length > 1 ? "s" : ""}`, matches.slice(0, 120));
+            };
+            if (searchEl) searchEl.addEventListener("input", runSearch);
 
             catalogEl.addEventListener("click", (e) => {
               const chip = e.target.closest(".author-chip[data-author]");
