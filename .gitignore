@@ -17,3 +17,7 @@ assets/og-prof-illustrated-v4.jpg
 assets/og-prof-illustrated-v5.jpg
 assets/og-prof-illustrated-minimal-v1.jpg
 .vercel
+
+# Raw gallery originals (kept locally as archive, served from Supabase)
+assets/gallery/imported/
+backups/
