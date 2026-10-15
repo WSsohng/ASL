@@ -21,6 +21,7 @@ set search_path = public
 as $$
 declare
   notify_url text;
+  anon_key text;
   timeout_ms integer;
   webhook_secret text;
   headers jsonb;
@@ -32,6 +33,8 @@ begin
     return new;
   end if;
 
+  -- intern-notify keeps JWT verification on, so the call carries the public anon key.
+  anon_key := current_setting('app.settings.intern_notify_anon_key', true);
   timeout_ms := coalesce(nullif(current_setting('app.settings.intern_notify_timeout_ms', true), '')::integer, 5000);
   webhook_secret := (
     select decrypted_secret
@@ -41,6 +44,9 @@ begin
   );
 
   headers := jsonb_build_object('Content-Type', 'application/json');
+  if anon_key is not null and anon_key <> '' then
+    headers := headers || jsonb_build_object('Authorization', 'Bearer ' || anon_key, 'apikey', anon_key);
+  end if;
   if webhook_secret is not null and webhook_secret <> '' then
     headers := headers || jsonb_build_object('x-webhook-secret', webhook_secret);
   end if;

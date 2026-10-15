@@ -31,26 +31,63 @@ const normalizeRecipients = (rows: Array<{ email?: string | null }> | null, fall
   return [...set];
 };
 
+type Application = {
+  id: string;
+  name: string | null;
+  student_id: string | null;
+  phone: string | null;
+  email: string | null;
+  period: string | null;
+  motivation: string | null;
+  submitted_at: string | null;
+};
+
+const formatKst = (iso: string | null) => {
+  if (!iso) return "";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    dateStyle: "long",
+    timeStyle: "short"
+  }).format(date);
+};
+
+const field = (value: string | null) => String(value || "").trim() || "(미입력)";
+
 const sendViaResend = async (params: {
   apiKey: string;
   from: string;
   to: string[];
-  applicantName: string;
+  application: Application;
   adminUrl: string;
 }) => {
-  const safeName = params.applicantName || "이름 미입력";
+  const app = params.application;
+  const safeName = String(app.name || "").trim() || "이름 미입력";
+  const applicantEmail = String(app.email || "").trim();
   const text = [
-    "신규 지원이 접수되었습니다.",
-    `지원자 이름: ${safeName}`,
-    params.adminUrl ? `관리자 페이지: ${params.adminUrl}` : "관리자 페이지에서 상세 확인"
-  ].join("\n");
+    "ASL 연구실에 신규 인턴 지원이 접수되었습니다.",
+    "",
+    `접수 시각: ${field(formatKst(app.submitted_at))}`,
+    `이름: ${field(app.name)}`,
+    `학번 / 소속: ${field(app.student_id)}`,
+    `연락처: ${field(app.phone)}`,
+    `이메일: ${field(app.email)}`,
+    `희망 기간: ${field(app.period)}`,
+    "",
+    "[지원 동기]",
+    field(app.motivation),
+    "",
+    params.adminUrl ? `관리자 페이지: ${params.adminUrl}` : ""
+  ].join("\n").trim();
 
-  const payload = {
+  const payload: Record<string, unknown> = {
     from: params.from,
     to: params.to,
     subject: `ASL 신규 인턴 지원 - ${safeName}`,
     text
   };
+  if (applicantEmail.includes("@")) payload.reply_to = applicantEmail;
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -95,14 +132,27 @@ Deno.serve(async (req) => {
   }
 
   const record = await parseRecord(req);
-  const applicantName = String(record?.name || "").trim();
-  if (!applicantName) {
-    return json(400, { error: "Invalid payload: name is required" });
+  const applicationId = String(record?.id || "").trim();
+  if (!applicationId) {
+    return json(400, { error: "Invalid payload: id is required" });
   }
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false }
   });
+
+  const { data: application, error: applicationError } = await supabase
+    .from("intern_applications")
+    .select("id,name,student_id,phone,email,period,motivation,submitted_at")
+    .eq("id", applicationId)
+    .maybeSingle();
+
+  if (applicationError) {
+    return json(500, { error: `Application query failed: ${applicationError.message}` });
+  }
+  if (!application) {
+    return json(404, { error: "Application not found" });
+  }
 
   const { data, error } = await supabase
     .from("notification_recipients")
@@ -124,7 +174,7 @@ Deno.serve(async (req) => {
       apiKey: resendApiKey,
       from: fromEmail,
       to: recipients,
-      applicantName,
+      application: application as Application,
       adminUrl
     });
     return json(200, { ok: true, sent: recipients.length });

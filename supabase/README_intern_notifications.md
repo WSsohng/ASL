@@ -1,7 +1,8 @@
 # Intern Notification Setup Guide
 
-This project sends a lightweight notification email when a new intern application is submitted.
-The email contains only the applicant name.
+This project sends a notification email when a new intern application is submitted.
+The email contains the full application (name, student ID, phone, email, period, motivation),
+and its reply-to is set to the applicant's email.
 
 ## 1) Apply database schema and policies
 
@@ -60,6 +61,9 @@ alter database postgres set app.settings.intern_notify_url =
   'https://<project-ref>.supabase.co/functions/v1/intern-notify';
 
 alter database postgres set app.settings.intern_notify_timeout_ms = '5000';
+
+-- intern-notify is deployed with JWT verification on; the trigger sends the public anon key.
+alter database postgres set app.settings.intern_notify_anon_key = '<anon key from admin-config.js>';
 ```
 
 ## 5) Domain authentication
@@ -86,8 +90,8 @@ Recipients are stored in `public.notification_recipients` with channel `intern_a
 2. Submit a test application from `intern.html`.
 3. Confirm recipient inbox gets a notification with:
    - Subject: `ASL 신규 인턴 지원 - {name}`
-   - Body includes applicant name only.
-4. Confirm no phone/email/motivation content is included in the email.
+   - Body includes every application field and the full motivation.
+4. Confirm replying to the email goes to the applicant.
 5. Disable all recipients and re-test fallback behavior.
 6. Check function logs for failures or retries.
 
