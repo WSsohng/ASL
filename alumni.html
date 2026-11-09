@@ -338,7 +338,7 @@
                 const careerHtml = career ? `<p class="alumni-career">${esc(career)}</p>` : "";
                 const emailHtml = email
                   ? `<a class="alumni-email" href="mailto:${esc(email)}">${esc(email)}</a>`
-                  : '<p class="alumni-email alumni-email-empty">No public email listed</p>';
+                  : "";
 
                 return `
                   <article class="alumni-item" data-member-name="${esc(name)}">

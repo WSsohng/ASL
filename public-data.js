@@ -264,10 +264,18 @@
         try {
           const rows = await fetchAll(
             "members",
-            "id,name,name_ko,role,email,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,openalex_id",
+            "id,name,name_ko,role,career,research,track,image_url,scopus_id,scopus_url,sort_order,source_image,source_section,openalex_id",
             "sort_order.asc.nullslast,created_at.asc"
           );
-          return toMemberPayload(rows);
+          // Only current members and faculty have a public email; alumni emails are not served.
+          let emailById = new Map();
+          try {
+            const emails = await fetchAll("members_public_email", "id,email");
+            emailById = new Map(emails.map((row) => [row.id, row.email]));
+          } catch {
+            // Members still render without emails if this lookup fails.
+          }
+          return toMemberPayload(rows.map((row) => ({ ...row, email: emailById.get(row.id) || "" })));
         } catch {
           // fallback
         }
